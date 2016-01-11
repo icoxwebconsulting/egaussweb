@@ -1,17 +1,33 @@
+# app/config/security.yml
 security:
+    access_denied_url:    ~ # Example: /foo/error403
+
+    # strategy can be: none, migrate, invalidate
+    session_fixation_strategy:  migrate
+    hide_user_not_found:  true
+    always_authenticate_before_granting:  false
+    erase_credentials:    true
+    access_decision_manager:
+        strategy:             affirmative
+        allow_if_all_abstain:  false
+        allow_if_equal_granted_denied:  true
+
+
     encoders:
-        BackendBundle\Entity\User: {algorithm: sha512, encode_as_base64: true, iterations: 10}
+        # Examples:
+        BackendBundle\Entity\User:
+            algorithm:           sha512
+            encode_as_base64:    true
+            iterations:          5000
 
-    role_hierarchy:
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-        ROLE_ADMIN: [ROLE_SUPERVISOR,ROLE_INSPECTOR,ROLE_ALLOWED_TO_SWITCH]
-        ROLE_INSPECTOR: [ROLE_SUPERVISOR,ROLE_ALLOWED_TO_SWITCH]
 
-    providers:
+    providers:            # Required
+
         users:
             entity: { class: BackendBundle\Entity\User, property: username }
 
-    firewalls:
+    firewalls:            # Required
+        # Examples:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -35,9 +51,12 @@ security:
                 target: _admin_login
 
 
-
     access_control:
         - { path: ^/*, roles: [IS_AUTHENTICATED_ANONYMOUSLY]}
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: [ROLE_ADMIN]}
 
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN: [ROLE_SUPERVISOR,ROLE_INSPECTOR,ROLE_ALLOWED_TO_SWITCH]
+        ROLE_INSPECTOR: [ROLE_SUPERVISOR,ROLE_ALLOWED_TO_SWITCH]

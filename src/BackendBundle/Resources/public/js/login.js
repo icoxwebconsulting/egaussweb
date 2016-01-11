@@ -95,16 +95,24 @@ $(document).ready(function() {
     });
 
     submit.on('click', function(event) {
-        event.preventDefault();
+        var flag = 0;
         if (username.val() == '') {
+            flag --;
             udiv.attr('errr','');
         } else {
+            flag++;
             udiv.removeAttr('errr');
         }
         if(password.val() == '') {
+            flag --;
             pdiv.attr('errr','');
         } else {
+            flag++;
             pdiv.removeAttr('errr');
         }
+        if(flag>1)
+        document.getElementById("login-form").submit();
+
+
     });
 });

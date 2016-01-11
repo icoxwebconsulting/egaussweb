@@ -1,0 +1,45 @@
+ {%extends "::base.html.twig"%}
+
+
+ {%block body%}
+
+     <div id="breadcrumbs-wrapper" class="grey lighten-3">
+
+         <div class="container">
+             <div class="row">
+                 <div class="col s12 m12 l12">
+                     <h5 class="breadcrumbs-title">Crear Misi&oacute;n y Visi&oacute;n</h5>
+                     <ol class="breadcrumb">
+                         <li><a href="{{ path("dashboard") }}">Panel de Administraci&oacute;n</a>
+                         </li>
+                         <li><a href="#">P&aacute;ginas</a>
+                         </li>
+                         <li class="active">Crear Misi&oacute;n y Visi&oacute;n</li>
+                     </ol>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+ <div class="container">
+
+     <div class="col s12 m12 l6">
+         <div class="card-panel">
+             <h4 class="header2">Ingrese los datos para el registro.</h4>
+             <div class="row">
+                 <form class="col s12"  action="{{path('_mision_vision_create')}}" method="post" enctype="multipart/form-data">
+                     {{ form_widget(form) }}
+                     <div class="input-field col s12">
+                         <button name="action" type="submit" class="btn cyan waves-effect waves-light center">Guardar
+                             <i class="mdi-content-save right"></i>
+                         </button>
+                     </div>
+
+                 </form>
+             </div>
+         </div>
+     </div>
+     </div>
+    
+
+ {%endblock body%}

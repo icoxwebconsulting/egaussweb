@@ -1,14 +1,23 @@
 <?php
+/**
+ * Created by IntelliJ IDEA.
+ * User: diole
+ * Date: 09/01/16
+ * Time: 01:54 PM
+ */
 
 namespace BackendBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\UserRepository")
@@ -247,10 +256,9 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function setPassword($password)
     {
-        $confg = Yaml::parse(__DIR__ . '/../../../../app/config/security.yml');
-        $params = $confg['security']['encoders'][get_class($this)];
+
         $encode = new MessageDigestPasswordEncoder(
-            $params['algorithm'], true, $params['iterations']
+            'sha512', true, '5000'
         );
 
         $this->password = $encode->encodePassword($password, $this->salt);
@@ -436,4 +444,3 @@ class User implements AdvancedUserInterface, \Serializable
         $this->id = unserialize($data);
     }
 }
-

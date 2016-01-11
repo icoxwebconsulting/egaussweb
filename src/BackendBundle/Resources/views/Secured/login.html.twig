@@ -1,1 +1,60 @@
 {%extends "::base_login.html.twig"%}
+{% block body %}
+    <header class="blue-grey darken-4">
+        <span>Panel de Administraci&oacute;n</span>
+
+    </header>
+    {#<img src="{{asset("bundles/backend/images/eGauss_logo_head.png") }}"/>#}
+    <div class="login">
+        <div class="photo">
+
+        </div>
+
+        {%if error%}
+            <div class="alert alert-danger">
+                <h6>Usuario o contrase&ntilde;a incorrecto.</h6>
+            </div>
+        {%endif%}
+        <form action="{{path('_admin_security_check')}}" id="login-form" method="post">
+            <div id="u" class="form-group">
+                <input id="username" spellcheck=false class="form-control" name="_username" type="text" size="18" alt="login" required="">
+                <span class="form-highlight"></span>
+                <span class="form-bar"></span>
+                <label for="username" class="float-label">Usuario</label>
+                <erroru>
+                    Campo requerido
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24h-24z" fill="none"/>
+                            <path d="M1 21h22l-11-19-11 19zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                        </svg>
+                    </i>
+                </erroru>
+            </div>
+            <div id="p" class="form-group">
+                <input id="password" class="form-control" spellcheck=false name="_password" type="password" size="18" alt="login" required="">
+                <span class="form-highlight"></span>
+                <span class="form-bar"></span>
+                <label for="password" class="float-label">Contrse&ntilde;a</label>
+                <errorp>
+                    Campo requerido.
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24h-24z" fill="none"/>
+                            <path d="M1 21h22l-11-19-11 19zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                        </svg>
+                    </i>
+                </errorp>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="rem">
+                <label for="rem">Stay Signed in</label>
+                <button id="submit" type="submit" ripple>Sign in</button>
+            </div>
+        </form>
+        <footer>&copy; Egaussweb - Powered by ICOX</footer>
+    </div>
+
+
+
+{% endblock %}

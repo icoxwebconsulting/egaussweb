@@ -31,7 +31,7 @@ body header {
     width: 100%;
     height: 80px;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
-    background: rgb(4, 145, 214);
+    background: rgb(38, 50, 56);
     font-size: 30px;
     font-weight: 300;
     color: rgb(242, 251, 253);
@@ -396,4 +396,9 @@ footer a:focus {
     background: rgba(255, 255, 255, 0.3);
     pointer-events: none;
     border-radius: 100%;
+}
+
+.alert-danger{
+    color: red;
+    text-align: center;
 }
