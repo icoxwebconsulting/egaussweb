@@ -50,7 +50,7 @@ class DondeEstamos
     protected $temp;
 
     /**
-     * @Assert\File(maxSize ="4M")
+     * @Assert\File(maxSize ="4M",mimeTypes = {"image/jpg","image/png","image/gif","image/jpeg"})
      * @Assert\NotBlank
      */
     protected $foto;

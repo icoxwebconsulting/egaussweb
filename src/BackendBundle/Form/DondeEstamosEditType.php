@@ -3,10 +3,11 @@
 namespace BackendBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DondeEstamosType extends AbstractType
+class DondeEstamosEditType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -19,7 +20,7 @@ class DondeEstamosType extends AbstractType
             ->add('urlvideo')
             ->add('latitud')
             ->add('longitud')
-            ->add('foto')
+            ->add('foto',FileType::class, array('label' => 'Foto','required'=>false))
             ->add('direccion')
         ;
     }
