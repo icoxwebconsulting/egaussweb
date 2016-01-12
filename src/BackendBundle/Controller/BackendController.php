@@ -246,5 +246,62 @@ class BackendController extends Controller
 
     }
 
+    /**
+     * @Route("/videos_grid", name="_videos_grid")
+     * @Template()
+     */
+    public function gridVideosAction() {
+        return $this->_datatable()->execute();
+    }
+
+
+    /**
+     * @Route("/videos", name="_videos")
+     * @Template()
+     * @return array
+     */
+    public function videosAction() {
+        $this->_datatable();
+        return $this->render('BackendBundle:Videos:index.html.twig');
+    }
+
+    private function _datatable() {
+        return $this->get('datatable')
+            ->setEntity("BackendBundle:Video", "entity")
+            ->setFields(array('Titulo' => 'entity.name',
+                'URL' => 'entity.url'
+            ))
+            ->setOrder("entity.id", "desc")
+            ->setSearch(true)
+            ->setHasAction(true)
+            ->setMultiple(
+                array(
+                    'delete' => array(
+                        'title' => 'Delete',
+                        'route' => '_video_delete'
+                    )
+                )
+            );
+    }
+
+    /**
+     * @Route("/videos_delete", name="_videos_delete")
+     * @Template()
+     * @return array
+     */
+    public function videosDeleteAction() {
+        $this->_datatable();
+        return $this->render('LaborBundle:Operation:index.html.twig');
+    }
+    /**
+     * @Route("/videos_edit", name="_videos_edit")
+     * @Template()
+     * @return array
+     */
+    public function videosEditAction() {
+        $this->_datatable();
+        return $this->render('LaborBundle:Operation:index.html.twig');
+    }
+
 
 }

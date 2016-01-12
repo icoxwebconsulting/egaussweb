@@ -1,0 +1,299 @@
+{% block main %}
+    <script type="text/javascript">
+        require(['jquery', 'datatables', 'datatables_inc', 'toastr', 'bootstrap', 'datatables_bootstrap'
+        ], function($, datatables, datatables_inc, toastr, bootstrap, datatables_bootstrap
+                ) {
+    function getId() { return "{{id}}"; };
+                function getWrapper() { return  "#{{id}}_wrapper"; };
+                var s = getWrapper();
+                var multiple = {% if multiple %} true {% else %} false{% endif %};
+            var multiple_rawhtml = '';            {% if multiple %}
+                            var multiple_rawhtml = '<div class="form-inline"><div class="form-group">\
+                        <label class="dataTables_multiple sr-only">Actions</label>\
+                        \
+                            <select name="dataTables[select]" class="form-control" >\
+            {% for key,item in multiple %}\
+                                   <option value="{{ path(item.route) }}">{{item.title}}</option>\
+            {% endfor %}\
+                            </select>\
+                            <button class="btn-datatable-multiple btn btn-primary " >Execute</button>\
+                        \
+                    </div></div>';            {% endif %}
+                                    var $js_conf = {{ js_conf | raw }};
+                                    var $js = {};
+                                    for (key in $js_conf) {
+                            if ($js_conf.hasOwnProperty(key)) {
+                            eval (' $js["' + key + '"] = ' + $js_conf[key] + ' ; ');
+                            }
+                            }
+                            var $options = {{ js | raw }};
+                                    var $opts = {};
+                                    for (key in $options) {
+                            if ($options.hasOwnProperty(key)) {
+                            $opts[key] = $options[key];
+                                    try{
+                                    var type = typeof (eval (' tmp = ' + $options[key] + ' ; '));
+                                            if (type == 'object' || type == 'function'){
+                                    eval (' $opts["' + key + '"] = ' + $options[key] + ' ; ');
+                                    }
+                                    } catch (e){ }
+                            }
+                            }
+                            $options = $opts;
+                                var $aoColumnDefs = new Array();            {% if multiple %}
+                                            $aoColumnDefs.push({ 'bSortable': false, 'aTargets': [ 0 ] });            {% endif %}
+        {% if action and not action_twig %}
+                                                            $aoColumnDefs.push({
+                                                            "fnRender": function (oObj) {
+                                                            var $edit_url = strtr(
+                                                                    "{{ path(edit_route , { 'id': "xx" }) }}",
+                                                            { "xx": oObj.aData[{{fields|length}}] }
+                                                            );
+                                                                    var $show_url = strtr(
+                                                                            "{{ path(show_route , { 'id': "xx" }) }}",
+                                                                    { "xx": oObj.aData[{{fields|length}}] }
+                                                                    );
+                                                                    var $link_edit = "<a  style='float:right; margin-right:10px' action='ajax' class='dialog' title='{{ 'ali.common.edit'|trans()}}'";
+                                                                    $link_edit += "href='" + $edit_url + "'>";
+                                                                    $link_edit += "<i class='fa fa-pencil'></i></a>";
+                                                                    var $delete_url = strtr(
+                                                                            "{{ path(delete_route, { 'id': "xx" }) }}",
+                                                                    { "xx": oObj.aData[{{fields|length}}] }
+                                                                    );
+                                                                    var $link_delete = "<a  style='float:right; margin-right:10px' action='delete' class='dialog' title='{{ 'ali.common.delete'|trans()}}'";
+                                                                    $link_delete += "href='" + $delete_url + "'>";
+                                                                    $link_delete += "<i class='fa fa-trash fg-red'></i></a>";
+                                                                    var $link_show = "<a  style='float:right; margin-right:10px' action='ajax' title='{{ 'ali.common.show'|trans()}}'";
+                                                                    $link_show += "href='" + $show_url + "'>";
+                                                                    $link_show += "<i class='fa fa-search'></i></a>";
+                                                                    var $out = $link_delete + " " + $link_edit + " " + $link_show;
+                                                                    if (oObj.aData[{{fields|length}} - 1] == null)
+                                                            {
+                                                            $out = "<div style='float:right'>{{ 'ali.common.no_action'|trans() }}</div>";
+                                                            }
+                                                            return $out
+                                                            },
+                                                                    "aTargets": [ multiple ? {{fields|length}} : ({{fields|length}} - 1)  ]
+                                                            });
+                                                            $("#{{id}}").on('click', 'a[action=delete]', function(e) {
+                                                    e.preventDefault();
+                                                            if (confirm('Are you sure ?')) {
+                                                    $.ajax({
+                                                    type: 'POST',
+                                                            dataType: 'json',
+                                                            url: $(this).attr('href'),
+                                                            success: function(response) {
+                                                            console.info(response);
+                                                                    if (response.success) {
+                                                            $('#' + getId()).dataTable().fnDeleteRow($('tr#' + response.id)[0], function() {
+                                                            toastr.success(response.message);
+                                                            });
+                                                            } else {
+                                                            toastr.error(response.message);
+                                                            }
+                                                            }
+                                                    });
+                                                    }
+                                                    });
+
+        {% endif %}
+                                                            var $defaults = {
+                                                            "bJQueryUI": false,
+                                                                    "responsive": true,
+                                                                    "sPaginationType": "full_numbers",
+                                                                    "aLengthMenu": [[25, 50, 100, 250, 500], [25, 50, 100, 250, 500]],
+                                                                    "iDisplayLength": 25,
+                                                                    "bServerSide": true,
+                                                                    "bProcessing": true,
+                                                                    "sAjaxSource": null,
+                                                                "bPaginate": true,                {% if sort %}
+                                                                                        "aaSorting": [[{{sort[0]}}, "{{sort[1]}}" ]],            {% endif %}
+                                                                                                            "bLengthChange": true,
+                                                                                                            "aoColumnDefs": $aoColumnDefs,
+                                                                                                            "fnDrawCallback": function(oSettings) {
+                                                                                                            var s = getWrapper();
+                                                                                                                    //Limpiando los rows
+                                                                                                                    var length = $(s).find('.row').length;
+                                                                                                                    if (length == 0) {
+                                                                                                            // Poniendo en la misma linea el length y los filtros
+                                                                                                            $(s).prepend('<div class="row"><div id="example_length" class="col-sm-6"></div>' +
+                                                                                                                    '<div id="example_filter" class="col-sm-6"></div></div>');
+                                                                                                                    var length = $(s + ' .dataTables_length');
+                                                                                                                    var filter = $(s + ' .dataTables_filter');
+                                                                                                                    $(s + ' #example_length').append(length);
+                                                                                                                    $(s + ' #example_filter').append(filter);
+                                                                                                                    // Agregando el div de acciones multiples
+                                                                                                                    $(s).prepend('<div class="row" style="margin-bottom:20px;"><div id="multiple_actions" class="col-sm-6"></div>' +
+                                                                                                                    '<div  class="col-sm-6"></div></div>');
+                                                                                                                    $(s + ' #multiple_actions').prepend(multiple_rawhtml);
+                                                                                                            }
+
+
+                                                                                                            // Agregando las clases de bootstrap a los controles
+                                                                                                            $(s + ' #example_length select').addClass('form-control');
+                                                                                                                    var search_input = $(s + ' #example_filter input');
+                                                                                                                    search_input.attr('placeholder', '')
+                                                                                                                    search_input.addClass('form-control input-small')
+                                                                                                                    search_input.css('width', '250px')
+                                                                                                                    //.addClass('form-control').css('width', '150px');
+
+                                                                                                                    /*if( multiple && $('.dataTables_multiple',$(s)).length==0){
+                                                                                                                     $(s+' .dataTables_length').prepend(multiple_rawhtml);
+                                                                                                                     }*/
+                                                                                                            },
+                                                                                                            "bSort": true,
+                                                                                                            "bFilter": {% if search %} true {% else %} false{% endif %},
+                                                                                                            "oLanguage": {
+                                                                                                            "sProcessing":     '{{ 'ali.common.sProcessing' | trans() }}',
+                                                                                                                    "sLengthMenu":     '{{ 'ali.common.sLengthMenu' | trans() }}',
+                                                                                                                    "sZeroRecords":    '{{ 'ali.common.sZeroRecords' | trans() }}',
+                                                                                                                    "sInfo":           '{{ 'ali.common.sInfo' | trans() }}',
+                                                                                                                    "sInfoEmpty":      '{{ 'ali.common.sInfoEmpty' | trans() }}',
+                                                                                                                    "sInfoFiltered":   '{{ 'ali.common.sInfoFiltered' | trans() }}',
+                                                                                                                    "sInfoPostFix":    '{{ 'ali.common.sInfoPostFix' | trans() }}',
+                                                                                                                    "sSearch":         '{{ 'ali.common.sSearch' | trans() }}',
+                                                                                                                    "sLoadingRecords": '{{ 'ali.common.sLoadingRecords' | trans() }}',
+                                                                                                                    "sUrl":            "",
+                                                                                                                    "oPaginate": {
+                                                                                                                    "sFirst":    '{{ 'ali.common.sFirst' | trans() }}',
+                                                                                                                            "sPrevious": '{{ 'ali.common.sPrevious' | trans() }}',
+                                                                                                                            "sNext":     '{{ 'ali.common.sNext' | trans() }}',
+                                                                                                                            "sLast":     '{{ 'ali.common.sLast' | trans() }}'
+                                                                                                                    }
+                                                                                                            },
+                                                                                                            "bAutoWidth" : false,
+                                                                                                    };
+                                                                                                    $.extend($defaults, $js);
+                                                                                                    $.extend($defaults, $options);
+                                                                                                    $('#{{id}}').trigger('datatables_init', $defaults);
+                                                                                                    eval("var " + "oTable_" + '{{id}}'.split('-').join('_') + "  = $('#{{id}}').dataTable($defaults)");
+                                                                                                    $(s).on('click', '.button-delete:parent', function(e){
+                                                                                            if (!confirm('{{ 'ali.common.confirm_delete'|trans()  }}')) {
+                                                                                            return false;
+                                                                                            }
+                                                                                            $(this).parents('form:eq(0)').submit();
+                                                                                            });
+                                                                                                    if (multiple === true) {
+                                                                                            var chbox = 'input:checkbox[name="dataTables[actions][]"]';
+                                                                                                    var chbox_all = 'input:checkbox[name="datatable_action_all"]';
+                                                                                                    $(s).on('click', '.btn-datatable-multiple:not(.search_init)', function(e){
+                                                                                            if ($('input:focus', $(s)).length > 0){
+                                                                                            return false;
+                                                                                            }
+                                                                                            e.preventDefault();
+                                                                                                    if ($(chbox + ':checked').length > 0){
+                                                                                            if (!confirm('Are you sure ?')) {
+                                                                                            return false;
+                                                                                            }
+                                                                                            var form = $(this).parents('form:eq(0)');
+                                                                                                    var action = $('select[name="dataTables[select]"]', $(s)).val();
+                                                                                                    $.ajax({
+                                                                                                    type: "POST",
+                                                                                                            url: action,
+                                                                                                            dataType: "json",
+                                                                                                            data: form.serialize(),
+                                                                                                            success: function(msg) {
+                                                                                                            $('#' + getId()).dataTable().fnDraw();
+                                                                                                                    if (msg.success)
+                                                                                                                    toastr.success(msg.message);
+                                                                                                                    else
+                                                                                                                    toastr.error(msg.message);
+                                                                                                            },
+                                                                                                            beforeSend: function() {//modal de bootstrap
+                                                                                                            $('#notificationModal').html($("#loader").html());
+                                                                                                                    //$('#notificationModal').foundation('reveal', 'open');
+                                                                                                            }
+                                                                                                    });
+                                                                                            } else {
+                                                                                            alert('Select at least one element please');
+                                                                                            }
+                                                                                            });
+                                                                                                    $(s).on('click', chbox_all, function(e){
+                                                                                            if ($(this).is(':checked')) {
+                                                                                            $(chbox, $(s)).attr("checked", false).click();
+                                                                                            } else {
+                                                                                            $(chbox, $(s)).attr("checked", true).click();
+                                                                                            }
+                                                                                            });
+                                                                                            }
+
+        {% if search %}
+                // $(".dataTables_filter").remove();
+                var search_selector = "#{{id}} input[searchable=true]";
+                        $(search_selector).keypress(function (event) {
+                var index = $(this).attr('index');
+                        var oTable = eval('oTable_{{id}}'.split('-').join('_'));
+                        if (event.keyCode == '13') {
+                oTable.fnFilter(
+                        this.value,
+                        oTable.oApi._fnVisibleToColumnIndex(
+                                oTable.fnSettings(),
+                                index
+                                )
+                        );
+                }
+                }).each(function (i) {
+                this.initVal = this.value;
+                }).focus(function () {
+                if (this.className == "search_init form-control"){
+                this.className = "";
+                        this.value = "";
+                }
+                }).blur(function (i) {
+                if (this.value == ""){
+                this.className = "search_init form-control";
+                        this.value = this.initVal;
+                }
+            });            {% endif %}
+                    });
+    </script>
+    {% if multiple %}
+        <form name="frm-{{id}}" id="form{{id}}">
+        {% endif %}
+        <table class="display table table-bordered " id="{{id}}">
+            <thead>
+                <tr>
+                    {% if multiple %}
+                        <th width="1%" ><input style="float: left" type="checkbox" name="datatable_action_all" /></th>
+                        {% endif %}
+                        {% for label,key in fields %}
+                            {% if label != '_identifier_' %}
+                            <th>{{ label|trans }}</th>
+                            {% endif %}
+                        {% endfor %}
+                        {% if action %}
+                        <th>{{ 'ali.common.action'|trans()  }}</th>
+                        {% endif %}
+                </tr>
+            </thead>
+            {% if search and not multiple %}
+                {% set i = 0 %}
+                <tfoot>
+                    <tr>
+                        {% if multiple   %}
+                            <th></th>
+                            {% endif %}
+                            {% for label,key in fields %}
+                                {% if label != '_identifier_' %}
+                                    {% if search_fields is not empty %}
+                                        {% if i in search_fields %}
+                                        <td><input index="{{i}}" searchable="true" type="text" placeholder="{{ 'ali.common.search'|trans() }}" class="search_init form-control" /></td>
+                                        {% else %}
+                                        <td></td>
+                                    {% endif %}
+                                {% else %}
+                                    <td><input index="{{i}}" searchable="true" type="text" placeholder="{{ 'ali.common.search'|trans() }}" class="search_init form-control" /></td>
+                                    {% endif %}
+                                {% elseif label == '_identifier_'and action and not action_twig %}
+                                <td></td>
+                            {% endif %}
+                            {% set i = i+1 %}
+                        {% endfor %}
+                    </tr>
+                </tfoot>
+            {% endif %}
+        </table>
+        {% if multiple %}
+        </form>
+    {% endif %}
+{% endblock  %}
