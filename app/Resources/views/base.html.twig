@@ -12,7 +12,7 @@
         <link href="{{asset('bundles/backend/css/backend.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/vendor/prism/prism.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" type="text/css" />
-
+        <link href="{{ asset('assets/vendor/jquery/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
@@ -65,10 +65,8 @@
                         </div>
                         <div class="col col s8 m8 l8">
                             <ul id="profile-dropdown" class="dropdown-content">
-                                <li><a href="#"><i class="mdi-action-face-unlock"></i> Perfil</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li><a href="{{ path('_admin_logout') }}"><i class="mdi-hardware-keyboard-tab"></i> Salir</a>
+
+                                <li><a href="{{ path('_admin_logout') }}"><i class="mdi-hardware-keyboard-tab load"></i> Salir</a>
                                 </li>
 
                             </ul>
@@ -85,15 +83,15 @@
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-insert-comment"></i> Noticias</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="form-elements.html">eGauss Holding</a>
+                                    <li><a href="#">eGauss Holding</a>
                                     </li>
-                                    <li><a href="form-layouts.html">eGauss Innovation</a>
+                                    <li><a href="#">eGauss Innovation</a>
                                     </li>
-                                    <li><a href="form-layouts.html">Techtrans</a>
+                                    <li><a href="#">Techtrans</a>
                                     </li>
-                                    <li><a href="form-layouts.html">H4DM</a>
+                                    <li><a href="#">H4DM</a>
                                     </li>
-                                    <li><a href="form-layouts.html">Fondos de Inversión</a>
+                                    <li><a href="#">Fondos de Inversión</a>
                                     </li>
                                 </ul>
                             </div>
@@ -101,19 +99,19 @@
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-social-pages"></i> P&aacute;ginas</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="{{ path('_mision_vision') }}">Misi&oacute;n y Visi&oacute;n</a>
+                                    <li><a href="{{ path('_mision_vision') }}" class="load">Misi&oacute;n y Visi&oacute;n</a>
                                     </li>
-                                    <li><a href="{{ path('_donde_estamos') }}">Donde estamos</a>
+                                    <li><a href="{{ path('_donde_estamos') }}" class="load">Donde estamos</a>
                                     </li>
-                                    <li><a href="page-blog-1.html">Quienes somos</a>
+                                    <li><a href="#" >Quienes somos</a>
                                     </li>
-                                    <li><a href="page-blog-2.html">eGauss Innovation</a>
+                                    <li><a href="#">eGauss Innovation</a>
                                     </li>
-                                    <li><a href="page-404.html">Techtrans</a>
+                                    <li><a href="#">Techtrans</a>
                                     </li>
-                                    <li><a href="page-500.html">Club de Inversores</a>
+                                    <li><a href="#">Club de Inversores</a>
                                     </li>
-                                    <li><a href="page-blank.html">Fondos de Inversión</a>
+                                    <li><a href="#">Fondos de Inversión</a>
                                     </li>
                                 </ul>
                             </div>
@@ -122,7 +120,7 @@
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-image-image"></i> Videos</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="{{ path('_videos') }}">Administrar videos</a>
+                                    <li><a href="{{ path('_videos') }}" class="load">Administrar videos</a>
                                     </li>
                                 </ul>
                             </div>
@@ -130,9 +128,9 @@
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-account-circle"></i> Administraci&oacute;n</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="user-profile-page.html">Gestionar usuarios</a>
+                                    <li><a href="#">Gestionar usuarios</a>
                                     </li>
-                                    <li><a href="user-register.html">Gestionar roles</a>
+                                    <li><a href="#">Gestionar roles</a>
                                     </li>
                                 </ul>
                             </div>
@@ -159,141 +157,7 @@
 
 {% endblock %}
         </section>
-            <aside id="right-sidebar-nav">
-                <ul id="chat-out" class="side-nav rightside-navigation">
-                    <li class="li-hover">
-                        <a href="#" data-activates="chat-out" class="chat-close-collapse right"><i class="mdi-navigation-close"></i></a>
-                        <div id="right-search" class="row">
-                            <form class="col s12">
-                                <div class="input-field">
-                                    <i class="mdi-action-search prefix"></i>
-                                    <input id="icon_prefix" type="text" class="validate">
-                                    <label for="icon_prefix">Search</label>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                    <li class="li-hover">
-                        <ul class="chat-collapsible" data-collapsible="expandable">
-                            <li>
-                                <div class="collapsible-header teal white-text active"><i class="mdi-social-whatshot"></i>Recent Activity</div>
-                                <div class="collapsible-body recent-activity">
-                                    <div class="recent-activity-list chat-out-list row">
-                                        <div class="col s3 recent-activity-list-icon"><i class="mdi-action-add-shopping-cart"></i>
-                                        </div>
-                                        <div class="col s9 recent-activity-list-text">
-                                            <a href="#">just now</a>
-                                            <p>Jim Doe Purchased new equipments for zonal office.</p>
-                                        </div>
-                                    </div>
-                                    <div class="recent-activity-list chat-out-list row">
-                                        <div class="col s3 recent-activity-list-icon"><i class="mdi-device-airplanemode-on"></i>
-                                        </div>
-                                        <div class="col s9 recent-activity-list-text">
-                                            <a href="#">Yesterday</a>
-                                            <p>Your Next flight for USA will be on 15th August 2015.</p>
-                                        </div>
-                                    </div>
-                                    <div class="recent-activity-list chat-out-list row">
-                                        <div class="col s3 recent-activity-list-icon"><i class="mdi-action-settings-voice"></i>
-                                        </div>
-                                        <div class="col s9 recent-activity-list-text">
-                                            <a href="#">5 Days Ago</a>
-                                            <p>Natalya Parker Send you a voice mail for next conference.</p>
-                                        </div>
-                                    </div>
-                                    <div class="recent-activity-list chat-out-list row">
-                                        <div class="col s3 recent-activity-list-icon"><i class="mdi-action-store"></i>
-                                        </div>
-                                        <div class="col s9 recent-activity-list-text">
-                                            <a href="#">Last Week</a>
-                                            <p>Jessy Jay open a new store at S.G Road.</p>
-                                        </div>
-                                    </div>
-                                    <div class="recent-activity-list chat-out-list row">
-                                        <div class="col s3 recent-activity-list-icon"><i class="mdi-action-settings-voice"></i>
-                                        </div>
-                                        <div class="col s9 recent-activity-list-text">
-                                            <a href="#">5 Days Ago</a>
-                                            <p>Natalya Parker Send you a voice mail for next conference.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header light-blue white-text active"><i class="mdi-editor-attach-money"></i>Sales Repoart</div>
-                                <div class="collapsible-body sales-repoart">
-                                    <div class="sales-repoart-list  chat-out-list row">
-                                        <div class="col s8">Target Salse</div>
-                                        <div class="col s4"><span id="sales-line-1"></span>
-                                        </div>
-                                    </div>
-                                    <div class="sales-repoart-list chat-out-list row">
-                                        <div class="col s8">Payment Due</div>
-                                        <div class="col s4"><span id="sales-bar-1"></span>
-                                        </div>
-                                    </div>
-                                    <div class="sales-repoart-list chat-out-list row">
-                                        <div class="col s8">Total Delivery</div>
-                                        <div class="col s4"><span id="sales-line-2"></span>
-                                        </div>
-                                    </div>
-                                    <div class="sales-repoart-list chat-out-list row">
-                                        <div class="col s8">Total Progress</div>
-                                        <div class="col s4"><span id="sales-bar-2"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header red white-text"><i class="mdi-action-stars"></i>Favorite Associates</div>
-                                <div class="collapsible-body favorite-associates">
-                                    <div class="favorite-associate-list chat-out-list row">
-                                        <div class="col s4"><img src="images/avatar.jpg" alt="" class="circle responsive-img online-user valign profile-image">
-                                        </div>
-                                        <div class="col s8">
-                                            <p>Eileen Sideways</p>
-                                            <p class="place">Los Angeles, CA</p>
-                                        </div>
-                                    </div>
-                                    <div class="favorite-associate-list chat-out-list row">
-                                        <div class="col s4"><img src="images/avatar.jpg" alt="" class="circle responsive-img online-user valign profile-image">
-                                        </div>
-                                        <div class="col s8">
-                                            <p>Zaham Sindil</p>
-                                            <p class="place">San Francisco, CA</p>
-                                        </div>
-                                    </div>
-                                    <div class="favorite-associate-list chat-out-list row">
-                                        <div class="col s4"><img src="images/avatar.jpg" alt="" class="circle responsive-img offline-user valign profile-image">
-                                        </div>
-                                        <div class="col s8">
-                                            <p>Renov Leongal</p>
-                                            <p class="place">Cebu City, Philippines</p>
-                                        </div>
-                                    </div>
-                                    <div class="favorite-associate-list chat-out-list row">
-                                        <div class="col s4"><img src="images/avatar.jpg" alt="" class="circle responsive-img online-user valign profile-image">
-                                        </div>
-                                        <div class="col s8">
-                                            <p>Weno Carasbong</p>
-                                            <p>Tokyo, Japan</p>
-                                        </div>
-                                    </div>
-                                    <div class="favorite-associate-list chat-out-list row">
-                                        <div class="col s4"><img src="images/avatar.jpg" alt="" class="circle responsive-img offline-user valign profile-image">
-                                        </div>
-                                        <div class="col s8">
-                                            <p>Nusja Nawancali</p>
-                                            <p class="place">Bangkok, Thailand</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </aside>
+
     </div>
     <!-- END WRAPPER -->
 
@@ -318,6 +182,7 @@
     <script src="{{asset('assets/vendor/materialize/js/materialize.min.js')}}"></script>
     <script src="{{asset('assets/vendor/prism/prism.js')}}"></script>
     <script src="{{asset('assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/jquery/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{asset('bundles/backend/js/backend.js')}}"></script>
 {% endblock %}
 </body>

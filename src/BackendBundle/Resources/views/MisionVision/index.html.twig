@@ -28,12 +28,12 @@
 
                     {% if entity is not defined %}
 
-                    <p class="caption">Oppss! Aún no haz creado la p&aacute;gina Misi&oacute;n y Visi&oacute;n. Hazlo r&aacute;pido  <a class="btn waves-effect waves-light red darken-4" href="{{ path('_mision_vision_new') }}"><i class="mdi-content-add"></i> Crear</a></p>
+                    <p class="caption">Oppss! Aún no haz creado la p&aacute;gina Misi&oacute;n y Visi&oacute;n. Hazlo r&aacute;pido  <a class="btn waves-effect waves-light red darken-4 load" href="{{ path('_mision_vision_new') }}"><i class="mdi-content-add"></i> Crear</a></p>
 
 
                     {% else %}
                         <div class="section">
-                            <a class="btn waves-effect waves-light red darken-4 right" href="{{ path('_mision_vision_edit', {'id': entity.id}) }}"><i class="mdi-content-backspace"></i> Modificar</a>
+                            <a class="btn waves-effect waves-light red darken-4 right load" href="{{ path('_mision_vision_edit', {'id': entity.id}) }}"><i class="mdi-content-backspace"></i> Modificar</a>
                         </div>
                         <div class="section">
                             <h5>Titulo</h5>

@@ -25,6 +25,12 @@ class Video
     /**
      * @ORM\Column(type="string", length=512, nullable=false)
      */
+    protected $titulo;
+
+
+    /**
+     * @ORM\Column(type="string", length=512, nullable=false)
+     */
     protected $url;
 
     /**
@@ -89,5 +95,29 @@ class Video
     public function getInhomepage()
     {
         return $this->inhomepage;
+    }
+
+    /**
+     * Set titulo
+     *
+     * @param string $titulo
+     *
+     * @return Video
+     */
+    public function setTitulo($titulo)
+    {
+        $this->titulo = $titulo;
+
+        return $this;
+    }
+
+    /**
+     * Get titulo
+     *
+     * @return string
+     */
+    public function getTitulo()
+    {
+        return $this->titulo;
     }
 }

@@ -4,22 +4,11 @@
 
                 <!--breadcrumbs start-->
                 <div id="breadcrumbs-wrapper" class=" grey lighten-3">
-                    <!-- Search for small screen -->
-                    <div class="header-search-wrapper grey hide-on-large-only">
-                        <i class="mdi-action-search active"></i>
-                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
-                    </div>
                     <div class="container">
                         <div class="row">
                             <div class="col s12 m12 l12">
-                                <h5 class="breadcrumbs-title">Buttons</h5>
-                                <ol class="breadcrumb">
-                                    <li><a href="index.html">Dashboard</a>
-                                    </li>
-                                    <li><a href="#">UI Elements</a>
-                                    </li>
-                                    <li class="active">Buttons</li>
-                                </ol>
+                                <a href="{{ path("dashboard") }}"><h5 class="breadcrumbs-title">Panel de Administraci&oacute;n</h5></a>
+
                             </div>
                         </div>
                     </div>
@@ -29,228 +18,17 @@
 
                 <!--start container-->
                 <div class="container">
-                    <p class="caption">There are 3 main button types described in material design. Raised Button, Floating circular action button & Flat buttons.
-                    <div class="divider"></div>
-                    <!--Raised Button-->
-                    <div id="raised-buttons" class="section">
-                        <h4 class="header">Raised Button</h4>
-                        <div class="row">
-                            <div class="col s12 m4 l3">
-                                <p>The raised button is a standard button that signify actions and seek to give depth to a mostly flat page. The floating circular action button is meant for very important functions. Flat buttons are usually used within elements that already have depth like cards or modals.</p>
-                            </div>
-                            <div class="col s12 m8 l9">
-                                <a class="waves-effect waves-light  btn">button</a>
-                                <a class="waves-effect waves-light  btn"><i class="mdi-action-3d-rotation left"></i>button</a>
-                                <a class="waves-effect waves-light  btn"><i class="mdi-action-backup right"></i>button</a>
 
-                                <ul id="dropdown1" class="dropdown-content">
-                                    <li><a href="#!" class="-text">one<span class="badge">1</span></a>
-                                    </li>
-                                    <li><a href="#!" class="-text">two<span class="new badge ">2</span></a>
-                                    </li>
-                                    <li><a href="#!" class="-text">three</a>
-                                    </li>
-                                </ul>
-                                <a class="btn dropdown-button waves-effect waves-light " href="#!" data-activates="dropdown1">Dropdown<i class="mdi-navigation-arrow-drop-down right"></i></a>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="divider"></div>
-                    <!--Flat Buttton-->
-                    <div id="flat-button" class="section">
-                        <div class="row">
-                            <div class="col s12 m4 l3">
-                                <h4 class="header">Flat Button</h4>
-                            </div>
-                            <div class="col s12 m8 l9">
-                                <a class="btn-flat waves-effect">Button</a>
-                                <a class="btn-flat waves-effect pink accent-2 white-text"><i class="mdi-communication-comment left"></i>Button</a>
-                                <a class="btn-flat waves-effect pink accent-2 white-text"><i class="mdi-communication-email right"></i>Button</a>
-                                <a class="btn-flat dropdown-button waves-effect pink accent-2 white-text" href="#!" data-activates="dropdown2">Dropdown<i class="mdi-navigation-arrow-drop-down right"></i></a>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="divider"></div>
-                    <!--Floating Buttton-->
-                    <div id="floating-button" class="section">
-                        <div class="row">
-                            <div class="col s12 m4 l3">
-                                <h4 class="header">Floating Button</h4>
-                            </div>
-                            <div class="col s12 m8 l9">
-                                <div class="row">
-                                    <div class="col s12 m4 center">
-                                        <a class="btn-floating btn-large waves-effect waves-light "><i class="mdi-content-add"></i></a>
-                                        <a class="btn-floating waves-effect waves-light "><i class="mdi-content-clear"></i></a>
-                                        <p>Raised</p>
-                                    </div>
-                                    <div class="col s12 m4 center">
-                                        <a class="btn-floating btn-large btn-flat waves-effect waves-light pink accent-2 white-text"><i class="mdi-content-content-copy"></i></a>
-                                        <a class="btn-floating btn-flat waves-effect waves-light pink accent-2 white-text"><i class="mdi-content-content-cut"></i></a>
-                                        <p>Default</p>
-                                    </div>
-                                    <div class="col s12 m4 center">
-                                        <ul id="dropdown1" class="dropdown-content">
-                                            <li><a href="#!" class="-text">one</a>
-                                            </li>
-                                            <li><a href="#!" class="-text">two</a>
-                                            </li>
-                                            <li><a href="#!" class="-text">three</a>
-                                            </li>
-                                        </ul>
-                                        <a class="dropdown-button btn-floating btn-large waves-effect waves-light " href="#!" data-activates="dropdown2"><i class="mdi-editor-vertical-align-bottom"></i></a>
-                                        <ul id="dropdown2" class="dropdown-content">
-                                            <li><a href="#!" class="-text">.zip</a>
-                                            </li>
-                                            <li><a href="#!" class="-text">.tar</a>
-                                            </li>
-                                            <li><a href="#!" class="-text">.exe</a>
-                                            </li>
-                                        </ul>
-                                        <a class="dropdown-button btn-floating btn-flat waves-effect waves-light  pink accent-2 white-text" href="#!" data-activates="dropdown2"><i class="mdi-file-cloud-download"></i></a>
-                                        <p>Dropdown</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="divider"></div>
-                    <!--Submit Button-->
-                    <div id="submit-button" class="section">
-                        <h4 class="header">Submit Button</h4>
-                        <div class="row">
-                            <div class="col s12 m4 l3">
-                                <p>When you use a button to submit a form, instead of using a input tag, use a button tag with a type submit</p>
-                            </div>
-                            <div class="col s12 m8 l9">
-                                <button class="btn waves-effect waves-light " type="submit" name="action">Submit</button>
-                                <button class="btn waves-effect waves-light " type="submit" name="action">Reply
-                                    <i class="mdi-content-reply left"></i>
-                                </button>
-                                <button class="btn waves-effect waves-light " type="submit" name="action">Send
-                                    <i class="mdi-content-send right"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!--Larger Button Size-->
-                    <div class="divider"></div>
-                    <div id="larger-button" class="section">
-                        <h4 class="header">Larger Button</h4>
-                        <div class="row">
-                            <div class="col s12 m4 l3">
-                                <p>This button has a larger height for buttons that need more attention.</p>
-                            </div>
-                            <div class="col s12 m8 l9">
-                                <a class="waves-effect waves-light btn-large ">Button</a>
-                                <a class="waves-effect waves-light btn-large "><i class="mdi-device-airplanemode-on left"></i>button</a>
-                                <a class="waves-effect waves-light btn-large "><i class="mdi-editor-border-color right"></i>button</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="divider"></div>
-                    <!--Fixed Action Button-->
-                    <div id="fixed-action-button" class="section">
-                        <h4 class="header">Fixed Action Button</h4>
-                        <div class="row">
-                            <div class="col s12 m12 l12">
-                                <p>If you want a fixed floating action button, you can add multiple actions that will appear on hover. <strong>Our demo is in the bottom righthand corner of the page</strong>.</p>
-                                <div class="fixed-action-btn">
-                                    <a class="btn-floating btn-large red">
-                                        <i class="large mdi-editor-mode-edit"></i>
-                                    </a>
-                                    <ul>
-                                        <li><a class="btn-floating red"><i class="large mdi-editor-insert-chart"></i></a>
-                                        </li>
-                                        <li><a class="btn-floating yellow darken-1"><i class="large mdi-editor-format-quote"></i></a>
-                                        </li>
-                                        <li><a class="btn-floating green"><i class="large mdi-editor-publish"></i></a>
-                                        </li>
-                                        <li><a class="btn-floating blue"><i class="large mdi-editor-attach-file"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="divider"></div>
-                    <!--Disabled Button Size-->
-                    <div id="disabled-button" class="section">
-                        <h4 class="header">Disabled Button</h4>
-                        <div class="row">
-                            <div class="col s12 m4 l3">
-                                <p>This style can be applied to all button types.</p>
-                            </div>
-                            <div class="col s12 m8 l9">
-
-                                <a class="btn disabled">Button</a>
-                                <a class="btn-flat disabled">Button</a>
-                                <a class="btn-floating disabled"><i class="mdi-content-add"></i></a>
-                                <a class="btn-large disabled">Button</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="divider"></div>
-                    <!--Button colors-->
-                    <div id="button-colors" class="section">
-                        <div class="row">
-                            <div class="col s12 m4 l3">
-                                <h4 class="header">Button Colors</h4>
-                            </div>
-                            <div class="col s12 m8 l9">
-                                <div class="row">
-                                    <div class="col s12 m3 l3 center">
-                                        <p><a class="btn waves-effect waves-light indigo">button</a></p>
-                                        <p><a class="btn waves-effect waves-light blue">button</a></p>
-                                        <p><a class="btn waves-effect waves-light  deep-purple">button</a></p>
-                                        <p><a class="btn waves-effect waves-light light-blue darken-4">button</a></p>
-                                        <p><a class="btn waves-effect waves-light  cyan darken-2">button</a></p>
-                                        <p><a class="btn waves-effect waves-light teal">button</a></p>
-                                    </div>
-                                    <div class="col s12 m3 l3 center">
-                                        <p><a class="btn btn-large waves-effect waves-light red darken-4">button</a></p>
-                                        <p><a class="btn btn-large waves-effect waves-light light-green darken-4">button</a></p>
-                                        <p><a class="btn btn-large waves-effect waves-light lime darken-4">button</a></p>
-                                        <p><a class="btn btn-large waves-effect waves-light yellow darken-4">button</a></p>
-                                        <p><a class="btn btn-large waves-effect waves-light purple darken-4">button</a></p>
-                                        <p></p>
-                                    </div>
-                                    <div class="col s12 m3 l3 center">
-                                        <p><a class="btn-floating waves-effect waves-light orange"><i class="mdi-content-clear"></i></a></p>
-                                        <p><a class="btn-floating waves-effect waves-light deep-orange"><i class="mdi-content-clear"></i></a></p>
-                                        <p><a class="btn-floating waves-effect waves-light brown"><i class="mdi-content-clear"></i></a></p>
-                                        <p><a class="btn-floating waves-effect waves-light grey"><i class="mdi-content-clear"></i></a></p>
-                                        <p><a class="btn-floating waves-effect waves-light blue-grey"><i class="mdi-content-clear"></i></a></p>
-                                        <p><a class="btn-floating waves-effect waves-light red"><i class="mdi-content-clear"></i></a></p>
-                                    </div>
-                                    <div class="col s12 m3 l3 center">
-                                        <p><a class="btn-floating btn-large waves-effect waves-light pink"><i class="mdi-content-add"></i></a></p>
-                                        <p><a class="btn-floating btn-large waves-effect waves-light purple"><i class="mdi-content-add"></i></a></p>
-                                        <p><a class="btn-floating btn-large waves-effect waves-light green accent-3"><i class="mdi-content-add"></i></a></p>
-                                        <p><a class="btn-floating btn-large waves-effect waves-light yellow darken-4"><i class="mdi-content-add"></i></a></p>
-                                        <p><a class="btn-floating btn-large waves-effect waves-light orange darken-4"><i class="mdi-content-add"></i></a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!--end container-->
 
 
             <!-- END CONTENT -->
 
-            <!-- //////////////////////////////////////////////////////////////////////////// -->
-            <!-- START RIGHT SIDEBAR NAV-->
-
-            <!-- LEFT RIGHT SIDEBAR NAV-->
 
 
 {%endblock body%}

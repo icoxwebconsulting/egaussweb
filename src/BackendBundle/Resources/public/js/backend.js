@@ -27,33 +27,12 @@ $(function() {
             $(this).parent('div').removeClass('header-search-wrapper-focus');
         });
 
-    // Check first if any of the task is checked
-    $('#task-card input:checkbox').each(function() {
-        checkbox_check(this);
-    });
-
-    // Task check box
-    $('#task-card input:checkbox').change(function() {
-        checkbox_check(this);
-    });
-
-    // Check Uncheck function
-    function checkbox_check(el){
-        if (!$(el).is(':checked')) {
-            $(el).next().css('text-decoration', 'none'); // or addClass
-        } else {
-            $(el).next().css('text-decoration', 'line-through'); //or addClass
-        }
-    }
 
     /*----------------------
      * Plugin initialization
      ------------------------*/
 
-    // Materialize Slider
-    $('.slider').slider({
-        full_width: true
-    });
+
 
     // Materialize Dropdown
     $('.dropdown-button').dropdown({
@@ -66,13 +45,6 @@ $(function() {
         belowOrigin: true // Displays dropdown below the button
     });
 
-    // Materialize Tabs
-    $('.tab-demo').show().tabs();
-    $('.tab-demo-active').show().tabs();
-
-    // Materialize Parallax
-    $('.parallax').parallax();
-    $('.modal-trigger').leanModal();
 
     // Materialize scrollSpy
     $('.scrollspy').scrollSpy();
@@ -228,22 +200,30 @@ $(function() {
     }
 
     //LINE CHART WITH AREA IN SIDEBAR
-    new Chartist.Line('#ct2-chart', {
-        labels: [1, 2, 3, 4, 5, 6, 7, 8],
-        series: [
-            [5, 9, 7, 8, 5, 3, 5, 4]
-        ]
-    }, {
-        low: 0,
-        showArea: true
+
+    $('#data-table').DataTable({
+        "language": {
+            "zeroRecords": "No hay datos para mostrar",
+            "info": "Mostrando _PAGE_ pagina de _PAGES_",
+            "infoEmpty": "No existen registros",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search": "Buscar",
+            "paginate": {
+                "first":      "Primero",
+                "last":       "Ultimo",
+                "next":       "Siguiente",
+                "previous":   "Anterior"
+            },
+        }
     });
 
-    //Trending chart for small screen
-    if(window_width <= 480){
-        $("#trending-line-chart").attr({
-            height: '200'
-        });
-    }
+    $(".load").on("click", function(){
+        $('body').removeClass('loaded');
+    })
 
+    if($(".toats").length>0){
+        var $toastContent = $('.toats').attr("message");
+        Materialize.toast($toastContent, 5000);
+    }
 
 }); // end of document ready

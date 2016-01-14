@@ -1984,6 +1984,15 @@ footer.page-footer {
   color: red;
 }
 
+.dataTables_length{
+  display: none;
+}
+
+.dataTables_filter label{
+  font-size: 1rem !important;
+  color: #263238 !important;
+}
+
 /*=================================================================================
     Media Queries
 ====================================================================================*/

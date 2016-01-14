@@ -4,13 +4,16 @@ namespace BackendBundle\Controller;
 
 use BackendBundle\Entity\DondeEstamos;
 use BackendBundle\Entity\MisionVision;
+use BackendBundle\Entity\Video;
 use BackendBundle\Form\DondeEstamosEditType;
 use BackendBundle\Form\DondeEstamosType;
 use BackendBundle\Form\MisionVisionEditType;
 use BackendBundle\Form\MisionVisionType;
+use BackendBundle\Form\VideoType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -247,61 +250,148 @@ class BackendController extends Controller
     }
 
     /**
-     * @Route("/videos_grid", name="_videos_grid")
-     * @Template()
-     */
-    public function gridVideosAction() {
-        return $this->_datatable()->execute();
-    }
-
-
-    /**
      * @Route("/videos", name="_videos")
      * @Template()
      * @return array
      */
     public function videosAction() {
-        $this->_datatable();
-        return $this->render('BackendBundle:Videos:index.html.twig');
-    }
-
-    private function _datatable() {
-        return $this->get('datatable')
-            ->setEntity("BackendBundle:Video", "entity")
-            ->setFields(array('Titulo' => 'entity.name',
-                'URL' => 'entity.url'
-            ))
-            ->setOrder("entity.id", "desc")
-            ->setSearch(true)
-            ->setHasAction(true)
-            ->setMultiple(
-                array(
-                    'delete' => array(
-                        'title' => 'Delete',
-                        'route' => '_video_delete'
-                    )
-                )
-            );
+        $dm = $this->getDoctrine()->getManager();
+        $videos = $dm->getRepository('BackendBundle:Video')->findAll();
+        return $this->render('BackendBundle:Videos:index.html.twig', array("entities"=> $videos));
     }
 
     /**
-     * @Route("/videos_delete", name="_videos_delete")
+     * @Route("/videos_new", name="_videos_new")
      * @Template()
      * @return array
      */
-    public function videosDeleteAction() {
-        $this->_datatable();
-        return $this->render('LaborBundle:Operation:index.html.twig');
-    }
-    /**
-     * @Route("/videos_edit", name="_videos_edit")
-     * @Template()
-     * @return array
-     */
-    public function videosEditAction() {
-        $this->_datatable();
-        return $this->render('LaborBundle:Operation:index.html.twig');
+    public function videosNewAction() {
+        $document = new Video();
+        $form = $this->createForm(VideoType::class, $document);
+        return $this->render("BackendBundle:Videos:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
     }
 
+    /**
+     * @Route("/videos_create", name="_videos_create")
+     * @Method("POST")
+     */
+    public function videosCreateAction(Request $request)
+    {
+        $document = new Video();
+        $form = $this->createForm(VideoType::class, $document);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+            $videos = $em->getRepository('BackendBundle:Video')->findAll();
+            return $this->render("BackendBundle:Videos:index.html.twig", array("entities"=> $videos));
+        } else {
+            $err = $form->getErrors(true, true)[0];
+            return $this->render("BackendBundle:Videos:new.html.twig", array("entity" => $document, 'form' => $form->createView(), "error" => $err->getMessage()));
+
+
+        }
+
+
+    }
+
+
+
+    /**
+     * @Route("/videos_delete/{id}", name="_videos_delete")
+     * @Template()
+     */
+    public function videosDeleteAction($id) {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Video')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Video.');
+        }
+        try{
+            $dm->remove($document);
+            $dm->flush();
+        }
+        catch(Exception $e){
+            $videos = $dm->getRepository('BackendBundle:Video')->findAll();
+            return $this->render('BackendBundle:Videos:index.html.twig', array("entities"=> $videos,"error"=>$e->getMessage()));
+
+
+        }
+        finally{
+            $videos = $dm->getRepository('BackendBundle:Video')->findAll();
+            return $this->render('BackendBundle:Videos:index.html.twig', array("entities"=> $videos,"message"=>"Video eliminado satisfactoriamente."));
+        }
+
+
+    }
+
+
+
+    /**
+     * @Route("/videos_edit/{id}", name="_videos_edit")
+     * @Template()
+     */
+    public function editVideosAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Video')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Video.');
+        }
+
+        $form = $this->createForm(VideoType::class, $document);
+
+        return $this->render("BackendBundle:Videos:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/videos_update/{id}", name="_videos_update")
+     * @Method("POST")
+     */
+    public function updateVideosAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Video')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Video.');
+        }
+
+        $editForm = $this->createForm(VideoType::class, $document);
+        $editForm->handleRequest($request);
+
+
+
+        try{
+            $dm->persist($document);
+            $dm->flush();
+        }
+        catch(Exception $e){
+            $videos = $dm->getRepository('BackendBundle:Video')->findAll();
+            return $this->render('BackendBundle:Videos:index.html.twig', array("entities"=> $videos,"error"=>$e->getMessage()));
+
+
+        }
+        finally{
+            $videos = $dm->getRepository('BackendBundle:Video')->findAll();
+            return $this->render('BackendBundle:Videos:index.html.twig', array("entities"=> $videos,"message"=>"Video modificado satisfactoriamente."));
+        }
+
+
+
+    }
 
 }
