@@ -249,6 +249,7 @@ class BackendController extends Controller
 
     }
 
+
     /**
      * @Route("/videos", name="_videos")
      * @Template()
@@ -392,6 +393,18 @@ class BackendController extends Controller
 
 
 
+    }
+
+
+    /**
+     * @Route("/consejo_administracion", name="_consejo_administracion")
+     * @Template()
+     * @return array
+     */
+    public function consejoAdministracionAction() {
+        $dm = $this->getDoctrine()->getManager();
+        $videos = $dm->getRepository('BackendBundle:Video')->findAll();
+        return $this->render('BackendBundle:Videos:index.html.twig', array("entities"=> $videos));
     }
 
 }

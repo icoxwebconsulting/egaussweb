@@ -14,7 +14,7 @@ $(function() {
     $(window).load(function() {
         setTimeout(function() {
             $('body').addClass('loaded');
-        }, 200);
+        }, 100);
     });
 
 
@@ -225,5 +225,7 @@ $(function() {
         var $toastContent = $('.toats').attr("message");
         Materialize.toast($toastContent, 5000);
     }
+
+    $('.modal-trigger').leanModal();
 
 }); // end of document ready
