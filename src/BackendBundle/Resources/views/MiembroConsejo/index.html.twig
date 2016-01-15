@@ -4,13 +4,13 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 m12 l12">
-                    <h5 class="breadcrumbs-title">Administrar Videos</h5>
+                    <h5 class="breadcrumbs-title">Consejo de Administraci&oacute;n</h5>
                     <ol class="breadcrumb">
                         <li><a href="{{ path("dashboard") }}">Panel de Administraci&oacute;n</a>
                         </li>
-                        <li><a href="#">Videos</a>
+                        <li><a href="#">Consejo de Administraci&oacute;n</a>
                         </li>
-                        <li class="active">Administrar Videos</li>
+                        <li class="active">Gestionar miembros</li>
                     </ol>
                 </div>
             </div>
@@ -32,8 +32,8 @@
             <table cellspacing="0" class="responsive-table display" id="data-table" width="100%">
                 <thead>
                 <tr>
-                    <th>Titulo</th>
-                    <th>URL</th>
+                    <th>Nombre y Apellidos</th>
+                    <th>URL Linkedin</th>
                     <th>Visible en Homepage</th>
                     <th>Acciones</th>
                 </tr>
@@ -87,6 +87,21 @@
     </div>
 
     <script>
+        $('#data-table').DataTable({
+            "language": {
+                "zeroRecords": "No hay datos para mostrar",
+                "info": "Mostrando _PAGE_ pagina de _PAGES_",
+                "infoEmpty": "No existen registros",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "search": "Buscar",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+            }
+        });
         $(".ajaxify").on("click", function(e){
             $('.preloader-wrapper').addClass('active');
             var url = $(this).attr("url");

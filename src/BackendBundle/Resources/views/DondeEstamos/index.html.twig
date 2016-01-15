@@ -1,6 +1,3 @@
-{%extends "::base.html.twig"%}
-{%block body%}
-
 
                 <!--breadcrumbs start-->
                 <div id="breadcrumbs-wrapper" class="grey lighten-3">
@@ -28,12 +25,12 @@
 
                     {% if entity is not defined %}
 
-                    <p class="caption">Oppss! Aún no haz creado la p&aacute;gina Donde Estamos. Hazlo r&aacute;pido  <a class="btn waves-effect waves-light red darken-4 load" href="{{ path('_donde_estamos_new') }}"><i class="mdi-content-add"></i> Crear</a></p>
+                    <p class="caption">Oppss! Aún no haz creado la p&aacute;gina Donde Estamos. Hazlo r&aacute;pido  <a class="btn waves-effect waves-light red darken-4 ajaxify" href="#" url="{{ path('_donde_estamos_new') }}"><i class="mdi-content-add"></i> Crear</a></p>
 
 
                     {% else %}
                         <div class="section">
-                            <a class="btn waves-effect waves-light red darken-4 right load" href="{{ path('_donde_estamos_edit', {'id': entity.id}) }}"><i class="mdi-content-backspace"></i> Modificar</a>
+                            <a class="btn waves-effect waves-light red darken-4 right ajaxify" href="#" url="{{ path('_donde_estamos_edit', {'id': entity.id}) }}"><i class="mdi-content-backspace"></i> Modificar</a>
                         </div>
                         <div class="section">
                             <h5>Titulo</h5>
@@ -82,17 +79,13 @@
 
                     <div class="divider"></div>
                 </div>
-                <!--end container-->
+<script>
+    $(".ajaxify").on("click", function(e){
+        $('.preloader-wrapper').addClass('active');
+        var url = $(this).attr("url");
+        $("#main-wrapper").load(url,function() {
+            $('.preloader-wrapper').removeClass('active');
+        });
 
-
-            <!-- END CONTENT -->
-
-            <!-- //////////////////////////////////////////////////////////////////////////// -->
-            <!-- START RIGHT SIDEBAR NAV-->
-
-            <!-- LEFT RIGHT SIDEBAR NAV-->
-
-
-{%endblock body%}
-{%block js%}
-{% endblock %}
+    })
+</script>

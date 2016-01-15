@@ -1,7 +1,3 @@
- {%extends "::base.html.twig"%}
-
-
- {%block body%}
 
      <div id="breadcrumbs-wrapper" class="grey lighten-3">
 
@@ -40,6 +36,28 @@
          </div>
      </div>
      </div>
-    
 
- {%endblock body%}
+     <script>
+         var options = {
+             beforeSubmit:  showRequest,
+             success:       showResponse
+         };
+
+         function showRequest(){
+             $('.preloader-wrapper').addClass('active');
+         }
+         function showResponse(responseText, statusText, xhr, $form)  {
+             $('.preloader-wrapper').removeClass('active');
+             var obj = jQuery.parseJSON(responseText);
+             if(obj.status){
+                 var url = "{{ path("_donde_estamos") }}";
+                 $("#main-wrapper").load(url);
+                 Materialize.toast(obj.message, 1000);
+             }
+             else{
+                 Materialize.toast(obj.message, 1000);
+             }
+
+         }
+         $('#form').ajaxForm(options);
+     </script>

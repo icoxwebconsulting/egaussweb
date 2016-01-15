@@ -37,6 +37,19 @@
                 </ul>
 
                 <ul class="right hide-on-med-and-down">
+                    <li>
+                        <div class="preloader-wrapper">
+                            <div class="spinner-layer spinner-red-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div><div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                     <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen"><i class="mdi-action-settings-overscan"></i></a>
                     </li>
 
@@ -99,9 +112,9 @@
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-social-pages"></i> P&aacute;ginas</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="{{ path('_mision_vision') }}" class="load">Misi&oacute;n y Visi&oacute;n</a>
+                                    <li><a url="{{ path('_mision_vision') }}" href="#" class="ajaxify">Misi&oacute;n y Visi&oacute;n</a>
                                     </li>
-                                    <li><a href="{{ path('_donde_estamos') }}" class="load">Donde estamos</a>
+                                    <li><a url="{{ path('_donde_estamos') }}" href="#" class="ajaxify">Donde estamos</a>
                                     </li>
                                     <li><a href="#" >Quienes somos</a>
                                     </li>
@@ -120,7 +133,7 @@
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-image-image"></i> Videos</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="{{ path('_videos') }}" class="load">Administrar videos</a>
+                                    <li><a url="{{ path('_videos') }}" href="#" class="ajaxify">Administrar videos</a>
                                     </li>
                                 </ul>
                             </div>
@@ -128,7 +141,7 @@
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-account-child"></i> Consejo de Administraci&oacute;n</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="{{ path("_consejo_administracion") }}" class="load">Gestionar miembros</a>
+                                    <li><a href="#" url="{{ path("_consejo_administracion") }}" class="ajaxify">Gestionar miembros</a>
                                     </li>
                                 </ul>
                             </div>
@@ -150,10 +163,13 @@
 
         <!-- START CONTENT -->
         <section id="content">
-{% block body %}
+            <div id="main-wrapper">
+                {% block body %}
+
+                {% endblock %}
+            </div>
 
 
-{% endblock %}
         </section>
 
     </div>
@@ -177,6 +193,7 @@
 </footer>
 {% block javascripts %}
     <script src="{{asset('assets/vendor/jquery/jquery-2.1.4.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/jquery/jquery.form.min.js')}}"></script>
     <script src="{{asset('assets/vendor/materialize/js/materialize.min.js')}}"></script>
     <script src="{{asset('assets/vendor/prism/prism.js')}}"></script>
     <script src="{{asset('assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>

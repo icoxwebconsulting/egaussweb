@@ -228,4 +228,13 @@ $(function() {
 
     $('.modal-trigger').leanModal();
 
+    $(".ajaxify").on("click", function(e){
+        $('.preloader-wrapper').addClass('active');
+        var url = $(this).attr("url");
+        $("#main-wrapper").load(url,function() {
+            $('.preloader-wrapper').removeClass('active');
+        });
+
+    })
+
 }); // end of document ready

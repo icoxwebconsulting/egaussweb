@@ -1,7 +1,4 @@
- {%extends "::base.html.twig"%}
 
-
- {%block body%}
 
      <div id="breadcrumbs-wrapper" class="grey lighten-3">
 
@@ -27,7 +24,7 @@
          <div class="card-panel">
              <h4 class="header2">Ingrese los datos para el registro.</h4>
              <div class="row">
-                 <form class="col s12" id="frmData"  action="{{path('_donde_estamos_update', {'id':entity.id})}}" method="post" enctype="multipart/form-data">
+                 <form class="col s12" id="form"  action="{{path('_donde_estamos_update', {'id':entity.id})}}" method="post" enctype="multipart/form-data">
                      {{ form_widget(form) }}
                      <div class="input-field col s12">
                          <button name="action" type="submit" class="btn cyan waves-effect waves-light center load">Guardar
@@ -40,6 +37,29 @@
          </div>
      </div>
      </div>
-    
 
- {%endblock body%}
+     <script>
+         var options = {
+             beforeSubmit:  showRequest,
+             success:       showResponse
+         };
+
+         function showRequest(){
+             $('.preloader-wrapper').addClass('active');
+         }
+         function showResponse(responseText, statusText, xhr, $form)  {
+             $('.preloader-wrapper').removeClass('active');
+             var obj = jQuery.parseJSON(responseText);
+             if(obj.status){
+                 var url = "{{ path("_videos") }}";
+                 $("#main-wrapper").load(url);
+                 Materialize.toast(obj.message, 1000);
+             }
+             else{
+                 Materialize.toast(obj.message, 1000);
+             }
+
+         }
+         $('#form').ajaxForm(options);
+     </script>
+    

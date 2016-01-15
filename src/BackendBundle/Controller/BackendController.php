@@ -70,11 +70,11 @@ class BackendController extends Controller
             $em->persist($document);
             $em->flush();
 
-            return $this->render("BackendBundle:MisionVision:index.html.twig", array("entity" => $document));
-        }else {
-            $err = $form->getErrors(true, true)[0];
-            return $this->render("BackendBundle:MisionVision:new.html.twig", array("entity" => $document, 'form' => $form->createView(), "error" => $err->getMessage()));
-
+            echo json_encode(array("status" => true, "message" => "Página modificada satisfactoriamente."));
+            die;
+        } else {
+            echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            die;
 
         }
 
@@ -132,10 +132,17 @@ class BackendController extends Controller
 
         $editForm = $this->createForm(MisionVisionEditType::class, $document);
         $editForm->handleRequest($request);
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status" => true, "message" => "Pagina modificada satisfactoriamente."));
+            die;
 
-        $dm->persist($document);
-        $dm->flush();
-        return $this->render("BackendBundle:MisionVision:index.html.twig", array("entity" => $document));
+        } catch (\Exception $e) {
+            echo json_encode(array("status" => false, "message" => $e->getMessage()));
+            die;
+
+        }
 
 
     }
@@ -177,12 +184,12 @@ class BackendController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($document);
             $em->flush();
+            echo json_encode(array("status" => true, "message" => "Pagina modificada satisfactoriamente."));
+            die;
 
-            return $this->render("BackendBundle:DondeEstamos:index.html.twig", array("entity" => $document));
         } else {
-            $err = $form->getErrors(true, true)[0];
-            return $this->render("BackendBundle:DondeEstamos:new.html.twig", array("entity" => $document, 'form' => $form->createView(), "error" => $err->getMessage()));
-
+            echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            die;
 
         }
 
@@ -241,11 +248,17 @@ class BackendController extends Controller
 
         $editForm = $this->createForm(DondeEstamosEditType::class, $document);
         $editForm->handleRequest($request);
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status" => true, "message" => "Página modificada satisfactoriamente."));
+            die;
 
-        $dm->persist($document);
-        $dm->flush();
-        return $this->render("BackendBundle:DondeEstamos:index.html.twig", array("entity" => $document));
+        } catch (\Exception $e) {
+            echo json_encode(array("status" => false, "message" => $e->getMessage()));
+            die;
 
+        }
 
     }
 
@@ -255,10 +268,11 @@ class BackendController extends Controller
      * @Template()
      * @return array
      */
-    public function videosAction() {
+    public function videosAction()
+    {
         $dm = $this->getDoctrine()->getManager();
         $videos = $dm->getRepository('BackendBundle:Video')->findAll();
-        return $this->render('BackendBundle:Videos:index.html.twig', array("entities"=> $videos));
+        return $this->render('BackendBundle:Videos:index.html.twig', array("entities" => $videos));
     }
 
     /**
@@ -266,7 +280,8 @@ class BackendController extends Controller
      * @Template()
      * @return array
      */
-    public function videosNewAction() {
+    public function videosNewAction()
+    {
         $document = new Video();
         $form = $this->createForm(VideoType::class, $document);
         return $this->render("BackendBundle:Videos:new.html.twig", array(
@@ -289,50 +304,46 @@ class BackendController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($document);
             $em->flush();
-            $videos = $em->getRepository('BackendBundle:Video')->findAll();
-            return $this->render("BackendBundle:Videos:index.html.twig", array("entities"=> $videos));
-        } else {
-            $err = $form->getErrors(true, true)[0];
-            return $this->render("BackendBundle:Videos:new.html.twig", array("entity" => $document, 'form' => $form->createView(), "error" => $err->getMessage()));
+            echo json_encode(array("status"=> true, "message"=> "Video registrado satisfactoriamente."));
+            die;
 
+        } else {
+            echo json_encode(array("status"=> false, "message"=> "Los datos que envía son incorrectos."));
+            die;
 
         }
 
 
     }
-
 
 
     /**
      * @Route("/videos_delete/{id}", name="_videos_delete")
      * @Template()
      */
-    public function videosDeleteAction($id) {
+    public function videosDeleteAction($id)
+    {
         $dm = $this->getDoctrine()->getManager();
 
         $document = $dm->getRepository('BackendBundle:Video')->find($id);
 
         if (!$document) {
-            throw $this->createNotFoundException('No se pudo encontrar el Video.');
+            echo json_encode(array("status"=> false, "message"=> "No se encontró el Video que quiere eliminar."));
+            die;
         }
-        try{
+        try {
             $dm->remove($document);
             $dm->flush();
-        }
-        catch(Exception $e){
-            $videos = $dm->getRepository('BackendBundle:Video')->findAll();
-            return $this->render('BackendBundle:Videos:index.html.twig', array("entities"=> $videos,"error"=>$e->getMessage()));
+            echo json_encode(array("status"=> true, "message"=> "Video eliminado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
 
-
-        }
-        finally{
-            $videos = $dm->getRepository('BackendBundle:Video')->findAll();
-            return $this->render('BackendBundle:Videos:index.html.twig', array("entities"=> $videos,"message"=>"Video eliminado satisfactoriamente."));
         }
 
 
     }
-
 
 
     /**
@@ -375,22 +386,15 @@ class BackendController extends Controller
         $editForm->handleRequest($request);
 
 
-
-        try{
+        try {
             $dm->persist($document);
             $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Video modificado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+           echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
         }
-        catch(Exception $e){
-            $videos = $dm->getRepository('BackendBundle:Video')->findAll();
-            return $this->render('BackendBundle:Videos:index.html.twig', array("entities"=> $videos,"error"=>$e->getMessage()));
-
-
-        }
-        finally{
-            $videos = $dm->getRepository('BackendBundle:Video')->findAll();
-            return $this->render('BackendBundle:Videos:index.html.twig', array("entities"=> $videos,"message"=>"Video modificado satisfactoriamente."));
-        }
-
 
 
     }
@@ -401,10 +405,11 @@ class BackendController extends Controller
      * @Template()
      * @return array
      */
-    public function consejoAdministracionAction() {
+    public function consejoAdministracionAction()
+    {
         $dm = $this->getDoctrine()->getManager();
-        $videos = $dm->getRepository('BackendBundle:Video')->findAll();
-        return $this->render('BackendBundle:Videos:index.html.twig', array("entities"=> $videos));
+        $miembros= $dm->getRepository('BackendBundle:MiembroConsejo')->findAll();
+        return $this->render('BackendBundle:MiembroConsejo:index.html.twig', array("entities" => $miembros));
     }
 
 }
