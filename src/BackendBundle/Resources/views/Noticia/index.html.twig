@@ -54,8 +54,8 @@
                     <td>{{ entity.link }}</td>
 
                     <td>
-                        <a class="btn-floating waves-effect waves-light grey action" href="#" url="{{ path("_noticia_edit", {"id": entity.id, "owner": owner}) }}"><i class="mdi-editor-mode-edit"></i></a>
-                        <a class="btn-floating waves-effect waves-light red delete" href="#" url="{{ path("_noticia_delete", {"id": entity.id}) }}"><i class="mdi-content-clear"></i></a>
+                        <a class="tooltipped btn-floating waves-effect waves-light grey action" data-position="top" data-delay="50" data-tooltip="Modificar" href="#" url="{{ path("_noticia_edit", {"id": entity.id, "owner": owner}) }}"><i class="mdi-editor-mode-edit"></i></a>
+                        <a class="tooltipped btn-floating waves-effect waves-light red delete" data-position="top" data-delay="50" data-tooltip="Eliminar" href="#" url="{{ path("_noticia_delete", {"id": entity.id}) }}"><i class="mdi-content-clear"></i></a>
 
 
                     </td>
@@ -72,6 +72,8 @@
     </div>
 
     <script>
+
+        $('.tooltipped').tooltip({delay: 10});
         $('#data-table').DataTable({
             "language": {
                 "zeroRecords": "No hay datos para mostrar",
@@ -88,6 +90,7 @@
             }
         });
         $(".action").on("click", function(e){
+            $('.tooltipped').tooltip('remove');
             $('.preloader-wrapper').addClass('active');
             var url = $(this).attr("url");
             $("#main-wrapper").load(url,function() {

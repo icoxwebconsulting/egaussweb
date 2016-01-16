@@ -378,6 +378,26 @@ class BackendController extends Controller
     }
 
     /**
+     * @Route("/videos_show/{id}", name="_videos_show")
+     * @Template()
+     */
+    public function showVideosAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Video')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Video.');
+        }
+
+
+        return $this->render("BackendBundle:Videos:show.html.twig", array(
+            'entity' => $document
+        ));
+    }
+
+    /**
      * @Route("/videos_update/{id}", name="_videos_update")
      * @Method("POST")
      */

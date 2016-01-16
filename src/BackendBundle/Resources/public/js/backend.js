@@ -18,22 +18,6 @@ $(function() {
     });
 
 
-    // Search class for focus
-    $('.header-search-input').focus(
-        function(){
-            $(this).parent('div').addClass('header-search-wrapper-focus');
-        }).blur(
-        function(){
-            $(this).parent('div').removeClass('header-search-wrapper-focus');
-        });
-
-
-    /*----------------------
-     * Plugin initialization
-     ------------------------*/
-
-
-
     // Materialize Dropdown
     $('.dropdown-button').dropdown({
         inDuration: 300,
@@ -44,9 +28,6 @@ $(function() {
         gutter: 0, // Spacing from edge
         belowOrigin: true // Displays dropdown below the button
     });
-
-
-
 
     // Materialize scrollSpy
     $('.scrollspy').scrollSpy();

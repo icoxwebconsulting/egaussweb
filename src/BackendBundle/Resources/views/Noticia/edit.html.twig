@@ -26,8 +26,11 @@
                          {{ form_widget(form) }}
                          <div class="input-field col s12" style="margin-top: 5%;">
                              <button name="action" type="submit" class="btn cyan waves-effect waves-light center load">Guardar
-                                 <i class="mdi-content-save right"></i>
+
                              </button>
+                             <a name="cancel"  class="action btn grey waves-effect waves-light center" href="#" url="{{ path("_noticia") }}">Cancelar
+
+                             </a>
                          </div>
 
                      </form>
@@ -36,6 +39,16 @@
          </div>
      </div>
 <script>
+    $('.tooltipped').tooltip({delay: 10});
+    $(".action").on("click", function(e){
+        $('.tooltipped').tooltip('remove');
+        $('.preloader-wrapper').addClass('active');
+        var url = $(this).attr("url");
+        $("#main-wrapper").load(url,function() {
+            $('.preloader-wrapper').removeClass('active');
+        });
+
+    })
     var options = {
         beforeSubmit:  showRequest,
         success:       showResponse
