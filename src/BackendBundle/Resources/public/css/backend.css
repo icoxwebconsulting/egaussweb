@@ -869,11 +869,11 @@ h5.breadcrumbs-header {
   margin: 10px 0 12px 0;
 }
 #profile-card .card-profile-image {
-  width: 70px;
-  position: absolute;
-  top: 110px;
-  z-index: 1;
   cursor: pointer;
+  position: absolute;
+  top: 15%;
+  width: 17%;
+  z-index: 1;
 }
 #profile-card .btn-move-up {
   position: relative;

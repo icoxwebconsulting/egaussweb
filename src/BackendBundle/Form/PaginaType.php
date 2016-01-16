@@ -3,6 +3,7 @@
 namespace BackendBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +18,10 @@ class PaginaType extends AbstractType
         $builder
             ->add('titulo')
             ->add('path')
-            ->add('texto')
+            ->add('texto',TextareaType::class,array(
+                'label' => 'Texto',
+                'attr'  => array('class' => 'materialize-textarea')
+            ))
         ;
     }
     

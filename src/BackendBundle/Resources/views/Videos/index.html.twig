@@ -27,7 +27,7 @@
         {% if error is defined %}
             <div class="toats" message="{{ error }}"> </div>
         {% endif %}
-        <p><a class="btn waves-effect waves-light indigo ajaxify" href="#" url="{{ path("_videos_new") }}">Registrar</a></p>
+        <p><a class="btn waves-effect waves-light indigo action" href="#" url="{{ path("_videos_new") }}">Registrar</a></p>
         <div class="dataTables_wrapper">
             <table cellspacing="0" class="responsive-table display" id="data-table" width="100%">
                 <thead>
@@ -59,7 +59,7 @@
                             <label for="myCheckbox_{{ entity.id }}"></label></td>
                     {% endif %}
                     <td>
-                        <a class="btn-floating waves-effect waves-light grey ajaxify" href="#" url="{{ path("_videos_edit", {"id": entity.id}) }}"><i class="mdi-editor-mode-edit"></i></a>
+                        <a class="btn-floating waves-effect waves-light grey action" href="#" url="{{ path("_videos_edit", {"id": entity.id}) }}"><i class="mdi-editor-mode-edit"></i></a>
                         <a class="btn-floating waves-effect waves-light red delete" href="#" url="{{ path("_videos_delete", {"id": entity.id}) }}"><i class="mdi-content-clear"></i></a>
                         <a class="btn-floating waves-effect waves-light blue modal-trigger" href="#modal{{ entity.id }}"><i class="mdi-action-visibility"></i></a>
                         <div id="modal{{ entity.id }}" class="modal">
@@ -87,7 +87,7 @@
     </div>
 
     <script>
-        $(".ajaxify").on("click", function(e){
+        $(".action").on("click", function(e){
             $('.preloader-wrapper').addClass('active');
             var url = $(this).attr("url");
             $("#main-wrapper").load(url,function() {
@@ -110,4 +110,20 @@
                 }
             })
         })
+
+        $('#data-table').DataTable({
+            "language": {
+                "zeroRecords": "No hay datos para mostrar",
+                "info": "Mostrando _PAGE_ pagina de _PAGES_",
+                "infoEmpty": "No existen registros",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "search": "Buscar",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+            }
+        });
     </script>

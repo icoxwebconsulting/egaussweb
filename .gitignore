@@ -1,3 +1,4 @@
+/web/bundles
 /.idea
 /app/config/parameters.yml
 /nbproject/*
@@ -17,6 +18,15 @@
 /web/app_dev.php
 /web/.htaccess
 /web/config.php
+/.idea/workspace.xml
+/.idea/uiDesigner.xml
+/.idea/misc.xml
+/.idea/.name
+/.idea/encodings.xml
+/.idea/modules.xml
+/.idea/compiler.xml
+/.idea/dbnavigator.xml
+/.idea/vcs.xml
 /web/apple-touch-icon.png
 !/var/sessions
 /var/sessions/*

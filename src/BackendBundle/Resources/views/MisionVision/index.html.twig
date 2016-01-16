@@ -30,7 +30,7 @@
 
                     {% else %}
                         <div class="section">
-                            <a class="btn waves-effect waves-light red darken-4 right ajaxify" href="#" url="{{ path('_mision_vision_edit', {'id': entity.id}) }}"><i class="mdi-content-backspace"></i> Modificar</a>
+                            <a class="btn waves-effect waves-light red darken-4 right action" href="#" url="{{ path('_mision_vision_edit', {'id': entity.id}) }}"><i class="mdi-content-backspace"></i> Modificar</a>
                         </div>
                         <div class="section">
                             <h5>Titulo</h5>
@@ -61,7 +61,7 @@
                 </div>
 
                 <script>
-                    $(".ajaxify").on("click", function(e){
+                    $(".action").on("click", function(e){
                         $('.preloader-wrapper').addClass('active');
                         var url = $(this).attr("url");
                         $("#main-wrapper").load(url,function() {

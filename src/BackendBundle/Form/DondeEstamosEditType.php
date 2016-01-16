@@ -4,6 +4,7 @@ namespace BackendBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,7 +22,10 @@ class DondeEstamosEditType extends AbstractType
             ->add('latitud')
             ->add('longitud')
             ->add('foto',FileType::class, array('label' => 'Foto','required'=>false))
-            ->add('direccion')
+            ->add('direccion',TextareaType::class,array(
+                'label' => 'Dirección',
+                'attr'  => array('class' => 'materialize-textarea')
+            ))
         ;
     }
     

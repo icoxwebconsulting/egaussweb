@@ -3,12 +3,18 @@
 namespace BackendBundle\Controller;
 
 use BackendBundle\Entity\DondeEstamos;
+use BackendBundle\Entity\MiembroConsejo;
 use BackendBundle\Entity\MisionVision;
+use BackendBundle\Entity\Noticia;
 use BackendBundle\Entity\Video;
 use BackendBundle\Form\DondeEstamosEditType;
 use BackendBundle\Form\DondeEstamosType;
+use BackendBundle\Form\MiembroConsejoEditType;
+use BackendBundle\Form\MiembroConsejoType;
 use BackendBundle\Form\MisionVisionEditType;
 use BackendBundle\Form\MisionVisionType;
+use BackendBundle\Form\NoticiaEditType;
+use BackendBundle\Form\NoticiaType;
 use BackendBundle\Form\VideoType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -399,6 +405,8 @@ class BackendController extends Controller
 
     }
 
+    /*Consejo de Administración*/
+
 
     /**
      * @Route("/consejo_administracion", name="_consejo_administracion")
@@ -410,6 +418,300 @@ class BackendController extends Controller
         $dm = $this->getDoctrine()->getManager();
         $miembros= $dm->getRepository('BackendBundle:MiembroConsejo')->findAll();
         return $this->render('BackendBundle:MiembroConsejo:index.html.twig', array("entities" => $miembros));
+    }
+
+
+    /**
+     * @Route("/consejo_administracion_new", name="_consejo_administracion_new")
+     * @Template()
+     * @return array
+     */
+    public function consejoAdministracionNewAction()
+    {
+        $document = new MiembroConsejo();
+        $form = $this->createForm(MiembroConsejoType::class, $document);
+        return $this->render("BackendBundle:MiembroConsejo:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/consejo_administracion_create", name="_consejo_administracion_create")
+     * @Method("POST")
+     */
+    public function consejoAdministracionCreateAction(Request $request)
+    {
+        $document = new MiembroConsejo();
+        $form = $this->createForm(MiembroConsejoType::class, $document);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+            echo json_encode(array("status"=> true, "message"=> "Miembro del Consejo registrado satisfactoriamente."));
+            die;
+
+        } else {
+            echo json_encode(array("status"=> false, "message"=> "Los datos que envía son incorrectos."));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/consejo_administracion_delete/{id}", name="_consejo_administracion_delete")
+     * @Template()
+     */
+    public function consejoAdministracionDeleteAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:MiembroConsejo')->find($id);
+
+        if (!$document) {
+            echo json_encode(array("status"=> false, "message"=> "No se encontró el Miembro del Consejo que quiere eliminar."));
+            die;
+        }
+        try {
+            $dm->remove($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Miembro del Consejo eliminado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/consejo_administracion_edit/{id}", name="_consejo_administracion_edit")
+     * @Template()
+     */
+    public function editconsejoAdministracionAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:MiembroConsejo')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Video.');
+        }
+
+        $form = $this->createForm(MiembroConsejoEditType::class, $document);
+
+        return $this->render("BackendBundle:MiembroConsejo:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/consejo_administracion_update/{id}", name="_consejo_administracion_update")
+     * @Method("POST")
+     */
+    public function updateconsejoAdministracionAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:MiembroConsejo')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Video.');
+        }
+
+        $editForm = $this->createForm(MiembroConsejoEditType::class, $document);
+        $editForm->handleRequest($request);
+
+
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Miembro de Consejo modificado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+        }
+
+
+    }
+    /**
+     * @Route("/consejo_administracion_show/{id}", name="_consejo_administracion_show")
+     */
+    public function showconsejoAdministracionAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:MiembroConsejo')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Miembro del Consejo.');
+        }
+
+        return $this->render('BackendBundle:MiembroConsejo:show.html.twig', array("entity" => $document));
+
+
+    }
+    /**
+     * @Route("/noticia/{owner}", name="_noticia")
+     * @Template()
+     * @return array
+     */
+    public function noticiaAction($owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:Noticia')->findBy(array("owner"=> $owner));
+        return $this->render('BackendBundle:Noticia:index.html.twig', array("entities" => $miembros, "owner"=> $owner));
+    }
+
+
+    /**
+     * @Route("/noticia_new/{owner}", name="_noticia_new")
+     * @Template()
+     * @return array
+     */
+    public function noticiaNewAction($owner)
+    {
+        $document = new Noticia();
+        $form = $this->createForm(NoticiaType::class, $document);
+        return $this->render("BackendBundle:Noticia:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            'owner' => $owner
+        ));
+    }
+
+    /**
+     * @Route("/noticia_create/{owner}", name="_noticia_create")
+     * @Method("POST")
+     */
+    public function noticiaCreateAction(Request $request, $owner)
+    {
+        $document = new Noticia();
+        $form = $this->createForm(NoticiaType::class, $document);
+        $form->handleRequest($request);
+
+
+            $document->setOwner($owner);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+            echo json_encode(array("status"=> true, "message"=> "Noticia registrada satisfactoriamente."));
+            die;
+
+
+
+
+    }
+
+
+    /**
+     * @Route("/noticia_delete/{id}", name="_noticia_delete")
+     * @Template()
+     */
+    public function noticiaDeleteAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Noticia')->find($id);
+
+        if (!$document) {
+            echo json_encode(array("status"=> false, "message"=> "No se encontró la Noticia que quiere eliminar."));
+            die;
+        }
+        try {
+            $dm->remove($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Noticia eliminada satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/noticia_edit/{id}/{owner}", name="_noticia_edit")
+     * @Template()
+     */
+    public function editnoticiaAction($id, $owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Noticia')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Noticia.');
+        }
+
+        $form = $this->createForm(NoticiaEditType::class, $document);
+
+        return $this->render("BackendBundle:Noticia:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            "owner"=> $owner
+        ));
+    }
+
+    /**
+     * @Route("/noticia_update/{id}", name="_noticia_update")
+     * @Method("POST")
+     */
+    public function updatenoticiaAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Noticia')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Noticia.');
+        }
+
+        $editForm = $this->createForm(NoticiaEditType::class, $document);
+        $editForm->handleRequest($request);
+
+
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Noticia modificada satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+        }
+
+
+    }
+    /**
+     * @Route("/noticia_show/{id}", name="_noticia_show")
+     */
+    public function shownoticiaAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Noticia')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Noticia.');
+        }
+
+        return $this->render('BackendBundle:Noticia:show.html.twig', array("entity" => $document));
+
+
     }
 
 }

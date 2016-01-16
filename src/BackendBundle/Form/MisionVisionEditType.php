@@ -3,6 +3,7 @@
 namespace BackendBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -19,7 +20,10 @@ class MisionVisionEditType extends AbstractType
             ->add('titulo')
             ->add('urlvideo',null, array("label"=> 'URL Video'))
             ->add('presentacion',FileType::class, array('label' => 'Archivo de Presentación','required'=>false))
-            ->add('texto',null, array("label"=> 'Texto'))
+            ->add('texto',TextareaType::class,array(
+                'label' => 'Texto',
+                'attr'  => array('class' => 'materialize-textarea')
+            ))
         ;
     }
     

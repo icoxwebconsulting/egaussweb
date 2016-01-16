@@ -3,6 +3,7 @@
 namespace BackendBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,6 +19,10 @@ class MiembroConsejoType extends AbstractType
             ->add('name')
             ->add('firstname')
             ->add('lastname')
+            ->add('descripcion',TextareaType::class,array(
+                'label' => 'Descripción',
+                'attr'  => array('class' => 'materialize-textarea')
+            ))
             ->add('url_linkedin')
             ->add('foto')
         ;

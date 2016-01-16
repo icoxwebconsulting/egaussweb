@@ -7,12 +7,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * MiembroConsejo
+ * Noticia
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="miembro_consejo")
- * @ORM\Entity(repositoryClass="BackendBundle\Repository\MiembroConsejoRepository")
+ * @ORM\Table(name="noticia")
+ * @ORM\Entity(repositoryClass="BackendBundle\Repository\NoticiaRepository")
  */
-class MiembroConsejo
+class Noticia
 {
     /**
      * @var int
@@ -24,29 +24,29 @@ class MiembroConsejo
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
-     */
-    protected $name;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    protected $firstname;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    protected $lastname;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    protected $url_linkedin;
-
-    /**
      * @ORM\Column(type="text")
      */
-    protected $descripcion;
+    protected $texto;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $link;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $owner;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $titular;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $fecha;
 
 
     /**
@@ -63,6 +63,11 @@ class MiembroConsejo
     protected $foto;
 
 
+    public function __construct() {
+        $this->fecha = new \DateTime("now");
+    }
+
+
     /**
      * Get id
      *
@@ -73,101 +78,6 @@ class MiembroConsejo
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return MiembroConsejo
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set firstname
-     *
-     * @param string $firstname
-     *
-     * @return MiembroConsejo
-     */
-    public function setFirstname($firstname)
-    {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    /**
-     * Get firstname
-     *
-     * @return string
-     */
-    public function getFirstname()
-    {
-        return $this->firstname;
-    }
-
-    /**
-     * Set lastname
-     *
-     * @param string $lastname
-     *
-     * @return MiembroConsejo
-     */
-    public function setLastname($lastname)
-    {
-        $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    /**
-     * Get lastname
-     *
-     * @return string
-     */
-    public function getLastname()
-    {
-        return $this->lastname;
-    }
-
-    /**
-     * Set urlLinkedin
-     *
-     * @param string $urlLinkedin
-     *
-     * @return MiembroConsejo
-     */
-    public function setUrlLinkedin($urlLinkedin)
-    {
-        $this->url_linkedin = $urlLinkedin;
-
-        return $this;
-    }
-
-    /**
-     * Get urlLinkedin
-     *
-     * @return string
-     */
-    public function getUrlLinkedin()
-    {
-        return $this->url_linkedin;
-    }
 
     /**
      * Sets foto.
@@ -191,7 +101,7 @@ class MiembroConsejo
     }
 
     protected function getUploadDir() {
-        return 'uploads/miembroconsejo/' . $this->id;
+        return 'uploads/noticias/' . $this->id;
     }
 
     public function getAbsolutePath() {
@@ -285,26 +195,122 @@ class MiembroConsejo
     }
 
     /**
-     * Set descripcion
+     * Set texto
      *
-     * @param string $descripcion
+     * @param string $texto
      *
-     * @return MiembroConsejo
+     * @return Noticia
      */
-    public function setDescripcion($descripcion)
+    public function setTexto($texto)
     {
-        $this->descripcion = $descripcion;
+        $this->texto = $texto;
 
         return $this;
     }
 
     /**
-     * Get descripcion
+     * Get texto
      *
      * @return string
      */
-    public function getDescripcion()
+    public function getTexto()
     {
-        return $this->descripcion;
+        return $this->texto;
+    }
+
+    /**
+     * Set link
+     *
+     * @param string $link
+     *
+     * @return Noticia
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
+    /**
+     * Get link
+     *
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * Set owner
+     *
+     * @param string $owner
+     *
+     * @return Noticia
+     */
+    public function setOwner($owner)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return string
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * Set titular
+     *
+     * @param string $titular
+     *
+     * @return Noticia
+     */
+    public function setTitular($titular)
+    {
+        $this->titular = $titular;
+
+        return $this;
+    }
+
+    /**
+     * Get titular
+     *
+     * @return string
+     */
+    public function getTitular()
+    {
+        return $this->titular;
+    }
+
+    /**
+     * Set fecha
+     *
+     * @param \DateTime $fecha
+     *
+     * @return Noticia
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return \DateTime
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
     }
 }
