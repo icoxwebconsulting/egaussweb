@@ -6,6 +6,7 @@ use BackendBundle\Entity\DondeEstamos;
 use BackendBundle\Entity\MiembroConsejo;
 use BackendBundle\Entity\MisionVision;
 use BackendBundle\Entity\Noticia;
+use BackendBundle\Entity\QuienesSomos;
 use BackendBundle\Entity\Video;
 use BackendBundle\Form\DondeEstamosEditType;
 use BackendBundle\Form\DondeEstamosType;
@@ -15,6 +16,8 @@ use BackendBundle\Form\MisionVisionEditType;
 use BackendBundle\Form\MisionVisionType;
 use BackendBundle\Form\NoticiaEditType;
 use BackendBundle\Form\NoticiaType;
+use BackendBundle\Form\QuienesSomosEditType;
+use BackendBundle\Form\QuienesSomosType;
 use BackendBundle\Form\VideoType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -711,6 +714,121 @@ class BackendController extends Controller
 
         return $this->render('BackendBundle:Noticia:show.html.twig', array("entity" => $document));
 
+
+    }
+
+
+    /*Quienes Somos*/
+    /*
+     * Quienes Somos
+     */
+    /**
+     * @Route("/quienes_somos", name="_quienes_somos")
+     * @Template()
+     */
+    public function quienesSomosAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:QuienesSomos");
+        $entities = $repo->findAll();
+
+        if (count($entities) > 0)
+            return $this->render("BackendBundle:QuienesSomos:index.html.twig", array("entity" => $entities[0]));
+        else
+            return $this->render("BackendBundle:QuienesSomos:index.html.twig");
+
+    }
+
+    /**
+     * @Route("/quienes_somos_create", name="_quienes_somos_create")
+     * @Method("POST")
+     */
+    public function quienesSomosCreateAction(Request $request)
+    {
+        $document = new QuienesSomos();
+        $form = $this->createForm(QuienesSomosType::class, $document);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+            echo json_encode(array("status" => true, "message" => "Pagina modificada satisfactoriamente."));
+            die;
+
+        } else {
+            echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            die;
+
+        }
+
+
+    }
+
+    /**
+     * @Route("/quienes_somos_new", name="_quienes_somos_new")
+     * @Template()
+     */
+    public function newQuienesSomosAction()
+    {
+        $document = new QuienesSomos();
+        $form = $this->createForm(QuienesSomosType::class, $document);
+        return $this->render("BackendBundle:QuienesSomos:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/quienes_somos_edit/{id}", name="_quienes_somos_edit")
+     * @Template()
+     */
+    public function editQuienesSomosAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:QuienesSomos')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la página.');
+        }
+
+        $form = $this->createForm(QuienesSomosEditType::class, $document);
+
+        return $this->render("BackendBundle:QuienesSomos:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/quienes_somos_update/{id}", name="_quienes_somos_update")
+     * @Method("POST")
+     */
+    public function updateQuienesSomosAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:QuienesSomos')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('Unable to find Operation document.');
+        }
+
+        $editForm = $this->createForm(QuienesSomosEditType::class, $document);
+        $editForm->handleRequest($request);
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status" => true, "message" => "Página modificada satisfactoriamente."));
+            die;
+
+        } catch (\Exception $e) {
+            echo json_encode(array("status" => false, "message" => $e->getMessage()));
+            die;
+
+        }
 
     }
 
