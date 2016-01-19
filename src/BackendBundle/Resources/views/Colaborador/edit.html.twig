@@ -4,13 +4,10 @@
          <div class="container">
              <div class="row">
                  <div class="col s12 m12 l12">
-                     <h5 class="breadcrumbs-title">Modificar Miembro del Consejo de Administraci&oacute;n</h5>
+                     <h5 class="breadcrumbs-title">Colaboradores</h5>
                      <ol class="breadcrumb">
                          <li><a href="{{ path("dashboard") }}">Panel de Administraci&oacute;n</a>
                          </li>
-                         <li><a href="#">Consejo de Administraci&oacute;n</a>
-                         </li>
-                         <li class="active">Modificar Miembro del Consejo de Administraci&oacute;n</li>
                      </ol>
                  </div>
              </div>
@@ -22,13 +19,13 @@
          <div class="col s12 m12 l6">
              <div class="card-panel">
                  <div class="row">
-                     <form class="col s12" id="form"  action="{{path('_consejo_administracion_update', {'id': entity.id})}}" method="post">
+                     <form class="col s12" id="form"  action="{{path('_colaboradores_update', {'id': entity.id})}}" method="post">
                          {{ form_widget(form) }}
                          <div class="input-field col s12" style="margin-top: 5%;">
                              <button name="action" type="submit" class="btn cyan waves-effect waves-light center load">Guardar
 
                              </button>
-                             <a name="cancel"  class="action btn grey waves-effect waves-light center" href="#" url="{{ path("_consejo_administracion") }}">Cancelar
+                             <a name="cancel"  class="action btn grey waves-effect waves-light center" href="#" url="{{ path("_colaboradores") }}">Cancelar
 
                              </a>
                          </div>
@@ -61,7 +58,7 @@
         $('.preloader-wrapper').removeClass('active');
         var obj = jQuery.parseJSON(responseText);
         if(obj.status){
-            var url = "{{ path("_consejo_administracion") }}";
+            var url = "{{ path("_colaboradores") }}";
             $("#main-wrapper").load(url);
             Materialize.toast(obj.message, 1000);
         }

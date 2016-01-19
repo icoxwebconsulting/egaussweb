@@ -2,20 +2,27 @@
 
 namespace BackendBundle\Controller;
 
+use BackendBundle\Entity\Colaborador;
 use BackendBundle\Entity\DondeEstamos;
+use BackendBundle\Entity\Global2016;
 use BackendBundle\Entity\MiembroConsejo;
 use BackendBundle\Entity\MisionVision;
 use BackendBundle\Entity\Noticia;
+use BackendBundle\Entity\QueEsGlobal;
 use BackendBundle\Entity\QuienesSomos;
 use BackendBundle\Entity\Video;
+use BackendBundle\Form\ColaboradorEditType;
+use BackendBundle\Form\ColaboradorType;
 use BackendBundle\Form\DondeEstamosEditType;
 use BackendBundle\Form\DondeEstamosType;
+use BackendBundle\Form\Global2016Type;
 use BackendBundle\Form\MiembroConsejoEditType;
 use BackendBundle\Form\MiembroConsejoType;
 use BackendBundle\Form\MisionVisionEditType;
 use BackendBundle\Form\MisionVisionType;
 use BackendBundle\Form\NoticiaEditType;
 use BackendBundle\Form\NoticiaType;
+use BackendBundle\Form\QueEsGlobalType;
 use BackendBundle\Form\QuienesSomosEditType;
 use BackendBundle\Form\QuienesSomosType;
 use BackendBundle\Form\VideoType;
@@ -738,7 +745,6 @@ class BackendController extends Controller
     }
 
 
-    /*Quienes Somos*/
     /*
      * Quienes Somos
      */
@@ -851,5 +857,397 @@ class BackendController extends Controller
         }
 
     }
+
+/*Que es Gobal*/
+
+    /**
+     * @Route("/que_es_global", name="_que_es_global")
+     * @Template()
+     */
+    public function queEsGlobalAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:QueEsGlobal");
+        $entities = $repo->findAll();
+
+        if (count($entities) > 0)
+            return $this->render("BackendBundle:QueEsGlobal:index.html.twig", array("entity" => $entities[0]));
+        else
+            return $this->render("BackendBundle:QueEsGlobal:index.html.twig");
+
+    }
+
+    /**
+     * @Route("/que_es_global_create", name="_que_es_global_create")
+     * @Method("POST")
+     */
+    public function queEsGlobalCreateAction(Request $request)
+    {
+
+        $document = new QueEsGlobal();
+        $form = $this->createForm(QueEsGlobalType::class, $document);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+
+            echo json_encode(array("status" => true, "message" => "Página creada satisfactoriamente."));
+            die;
+        } else {
+            echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            die;
+
+        }
+
+    }
+
+    /**
+     * @Route("/que_es_global_new", name="_que_es_global_new")
+     * @Template()
+     */
+    public function newQueEsGlobalAction()
+    {
+        $document = new QueEsGlobal();
+        $form = $this->createForm(QueEsGlobalType::class, $document);
+        return $this->render("BackendBundle:QueEsGlobal:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/que_es_global_edit/{id}", name="_que_es_global_edit")
+     * @Template()
+     */
+    public function editQueEsGlobalAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:QueEsGlobal')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la página.');
+        }
+
+        $form = $this->createForm(QueEsGlobalType::class, $document);
+
+        return $this->render("BackendBundle:QueEsGlobal:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/que_es_global_update/{id}", name="_que_es_global_update")
+     * @Method("POST")
+     */
+    public function updateQueEsGlobalAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:QueEsGlobal')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la pagina solicitada.');
+        }
+
+        $editForm = $this->createForm(QueEsGlobalType::class, $document);
+        $editForm->handleRequest($request);
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status" => true, "message" => "Pagina modificada satisfactoriamente."));
+            die;
+
+        } catch (\Exception $e) {
+            echo json_encode(array("status" => false, "message" => $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+    
+    
+    
+    /*Global 2016*/
+
+    /**
+     * @Route("/global2016", name="_global2016")
+     * @Template()
+     */
+    public function global2016Action()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Global2016");
+        $entities = $repo->findAll();
+
+        if (count($entities) > 0)
+            return $this->render("BackendBundle:Global2016:index.html.twig", array("entity" => $entities[0]));
+        else
+            return $this->render("BackendBundle:Global2016:index.html.twig");
+
+    }
+
+    /**
+     * @Route("/global2016_create", name="_global2016_create")
+     * @Method("POST")
+     */
+    public function global2016CreateAction(Request $request)
+    {
+
+        $document = new Global2016();
+        $form = $this->createForm(Global2016Type::class, $document);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+
+            echo json_encode(array("status" => true, "message" => "Página creada satisfactoriamente."));
+            die;
+        } else {
+            echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            die;
+
+        }
+
+    }
+
+    /**
+     * @Route("/global2016_new", name="_global2016_new")
+     * @Template()
+     */
+    public function newGlobal2016Action()
+    {
+        $document = new Global2016();
+        $form = $this->createForm(Global2016Type::class, $document);
+        return $this->render("BackendBundle:Global2016:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/global2016_edit/{id}", name="_global2016_edit")
+     * @Template()
+     */
+    public function editGlobal2016Action($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Global2016')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la página.');
+        }
+
+        $form = $this->createForm(Global2016Type::class, $document);
+
+        return $this->render("BackendBundle:Global2016:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/global2016_update/{id}", name="_global2016_update")
+     * @Method("POST")
+     */
+    public function updateGlobal2016Action(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Global2016')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la pagina solicitada.');
+        }
+
+        $editForm = $this->createForm(Global2016Type::class, $document);
+        $editForm->handleRequest($request);
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status" => true, "message" => "Pagina modificada satisfactoriamente."));
+            die;
+
+        } catch (\Exception $e) {
+            echo json_encode(array("status" => false, "message" => $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+
+
+
+
+    /*Colaboradores*/
+
+
+    /**
+     * @Route("/colaboradores", name="_colaboradores")
+     * @Template()
+     * @return array
+     */
+    public function colaboradoresAction()
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:Colaborador')->findAll();
+        return $this->render('BackendBundle:Colaborador:index.html.twig', array("entities" => $miembros));
+    }
+
+
+    /**
+     * @Route("/colaboradores_new", name="_colaboradores_new")
+     * @Template()
+     * @return array
+     */
+    public function colaboradoresNewAction()
+    {
+        $document = new Colaborador();
+        $form = $this->createForm(ColaboradorType::class, $document);
+        return $this->render("BackendBundle:Colaborador:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/colaboradores_create", name="_colaboradores_create")
+     * @Method("POST")
+     */
+    public function colaboradoresCreateAction(Request $request)
+    {
+        $document = new Colaborador();
+        $form = $this->createForm(ColaboradorType::class, $document);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+            echo json_encode(array("status"=> true, "message"=> "Colaborador registrado satisfactoriamente."));
+            die;
+
+        } else {
+            echo json_encode(array("status"=> false, "message"=> "Los datos que envía son incorrectos."));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/colaboradores_delete/{id}", name="_colaboradores_delete")
+     * @Template()
+     */
+    public function colaboradoresDeleteAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Colaborador')->find($id);
+
+        if (!$document) {
+            echo json_encode(array("status"=> false, "message"=> "No se encontró el Colaborador que quiere eliminar."));
+            die;
+        }
+        try {
+            $dm->remove($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Colaborador eliminado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/colaboradores_edit/{id}", name="_colaboradores_edit")
+     * @Template()
+     */
+    public function editcolaboradoresAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Colaborador')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Video.');
+        }
+
+        $form = $this->createForm(ColaboradorEditType::class, $document);
+
+        return $this->render("BackendBundle:Colaborador:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/colaboradores_update/{id}", name="_colaboradores_update")
+     * @Method("POST")
+     */
+    public function updatecolaboradoresAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Colaborador')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Video.');
+        }
+
+        $editForm = $this->createForm(ColaboradorEditType::class, $document);
+        $editForm->handleRequest($request);
+
+
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Colaborador modificado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+        }
+
+
+    }
+    /**
+     * @Route("/colaboradores_show/{id}", name="_colaboradores_show")
+     */
+    public function showcolaboradoresAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Colaborador')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Colaborador.');
+        }
+
+        return $this->render('BackendBundle:Colaborador:show.html.twig', array("entity" => $document));
+
+
+    }
+    
+    
+    
+    
 
 }
