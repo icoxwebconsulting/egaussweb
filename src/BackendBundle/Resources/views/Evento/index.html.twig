@@ -1,50 +1,38 @@
-    <!--breadcrumbs start-->
-    <div id="breadcrumbs-wrapper" class="grey lighten-3">
 
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m12 l12">
-                    <h5 class="breadcrumbs-title">Colaboradores</h5>
-                    <ol class="breadcrumb">
-                        <li><a href="{{ path("dashboard") }}">Panel de Administraci&oacute;n</a>
-                        </li>
-                        <li class="active">Colaboradores</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--breadcrumbs end-->
 
 
     <!--start container-->
     <div class="container">
-        <p><a class="btn waves-effect waves-light indigo action" href="#" url="{{ path("_colaboradores_new") }}">Registrar</a></p>
+        <p><a class="btn waves-effect waves-light indigo actiontab" href="#" url="{{ path("_evento_new", {"owner": owner}) }}">Registrar</a></p>
         <div class="dataTables_wrapper">
             <table cellspacing="0" class="responsive-table display" id="data-table" width="100%">
                 <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Descripci&oacute;n</th>
+                    <th>Nommbre</th>
+                    <th>Fecha</th>
+                    <th>Link</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
                     <th>Nombre</th>
-                    <th>Descripci&oacute;n</th>
+                    <th>Fecha</th>
+                    <th>Link</th>
                     <th>Acciones</th>
                 </tr>
                 </tfoot>
                 <tbody>
                 {% for entity in entities %}
                 <tr>
-                    <td>{{ entity.name }}</td>
-                    <td>{{ entity.descripcion | slice(0,50) }}</td>
+                    <td>{{ entity.nombre }}</td>
+                    <td>{{ entity.fecha | date("Y-m-d") }}</td>
+                    <td>{{ entity.link }}</td>
+
                     <td>
-                        <a class="tooltipped btn-floating waves-effect waves-light grey action" data-position="top" data-delay="50" data-tooltip="Modificar" href="#" url="{{ path("_colaboradores_edit", {"id": entity.id}) }}"><i class="mdi-editor-mode-edit"></i></a>
-                        <a class="tooltipped btn-floating waves-effect waves-light red delete" data-position="top" data-delay="50" data-tooltip="Eliminar" href="#" url="{{ path("_colaboradores_delete", {"id": entity.id}) }}"><i class="mdi-content-clear"></i></a>
-                        <a class="tooltipped btn-floating waves-effect waves-light blue action" data-position="top" data-delay="50" data-tooltip="Ver" href="#" url="{{ path("_colaboradores_show", {"id": entity.id}) }}"><i class="mdi-action-visibility"></i></a>
+                        <a class="tooltipped btn-floating waves-effect waves-light grey actiontab" data-position="top" data-delay="50" data-tooltip="Modificar" href="#" url="{{ path("_evento_edit", {"id": entity.id, "owner": owner}) }}"><i class="mdi-editor-mode-edit"></i></a>
+                        <a class="tooltipped btn-floating waves-effect waves-light red deletetab" data-position="top" data-delay="50" data-tooltip="Eliminar" href="#" url="{{ path("_evento_delete", {"id": entity.id}) }}"><i class="mdi-content-clear"></i></a>
+
 
                     </td>
 
@@ -60,6 +48,7 @@
     </div>
 
     <script>
+
         $('.tooltipped').tooltip({delay: 10});
         $('#data-table').DataTable({
             "language": {
@@ -76,18 +65,17 @@
                 },
             }
         });
-        $(".action").on("click", function(e){
+        $(".actiontab").on("click", function(e){
             $('.tooltipped').tooltip('remove');
             $('.preloader-wrapper').addClass('active');
             var url = $(this).attr("url");
-            $("#main-wrapper").load(url,function() {
+            $("#evento").load(url,function() {
                 $('.preloader-wrapper').removeClass('active');
             });
 
         })
 
-        $(".delete").on("click", function(){
-            $('.tooltipped').tooltip('remove');
+        $(".deletetab").on("click", function(){
             $('.preloader-wrapper').addClass('active');
             var url = $(this).attr("url");
             $.ajax({
@@ -95,7 +83,7 @@
                 success: function(data){
                     var obj = jQuery.parseJSON(data);
                     Materialize.toast(obj.message, 1000);
-                    $("#main-wrapper").load("{{ path('_colaboradores') }}",function() {
+                    $("#evento").load("{{ path('_evento', {"owner": owner}) }}",function() {
                         $('.preloader-wrapper').removeClass('active');
                     });
                 }

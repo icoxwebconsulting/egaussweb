@@ -1,0 +1,59 @@
+
+
+ <div class="container">
+
+     <div class="col s12 m12 l6">
+         <div class="card-panel">
+             <h4 class="header2">Ingrese los datos para el registro.</h4>
+             <div class="row">
+                 <form class="col s12" id="form" action="{{path('_evento_create', {"owner": owner})}}" method="post">
+
+                     {{ form_widget(form) }}
+                     <div class="input-field col s12" style="margin-top: 5%;">
+                         <button name="action" type="submit" class="btn cyan waves-effect waves-light center">Guardar
+
+                         </button>
+                         <a name="cancel"  class="actiontab btn grey waves-effect waves-light center" href="#" url="{{ path("_evento", {"owner": owner}) }}">Cancelar
+
+                         </a>
+                     </div>
+
+                 </form>
+             </div>
+         </div>
+     </div>
+     </div>
+ <script>
+     $('.tooltipped').tooltip({delay: 10});
+     $(".actiontab").on("click", function(e){
+         $('.tooltipped').tooltip('remove');
+         $('.preloader-wrapper').addClass('active');
+         var url = $(this).attr("url");
+         $("#evento").load(url,function() {
+             $('.preloader-wrapper').removeClass('active');
+         });
+
+     })
+     var options = {
+         beforeSubmit:  showRequest,
+         success:       showResponse
+     };
+
+     function showRequest(){
+         $('.preloader-wrapper').addClass('active');
+     }
+     function showResponse(responseText, statusText, xhr, $form)  {
+         $('.preloader-wrapper').removeClass('active');
+         var obj = jQuery.parseJSON(responseText);
+         if(obj.status){
+             var url = "{{ path("_evento", {"owner": owner}) }}";
+             $("#evento").load(url);
+             Materialize.toast(obj.message, 1000);
+         }
+         else{
+             Materialize.toast(obj.message, 1000);
+         }
+
+     }
+     $('#form').ajaxForm(options);
+ </script>

@@ -20,12 +20,11 @@
 
     <!--start container-->
     <div class="container">
-        <p><a class="btn waves-effect waves-light indigo action" href="#" url="{{ path("_colaboradores_new") }}">Registrar</a> <a class="waves-effect waves-light btn action" href="#" url="{{ path("_colaboradores") }}">Atr&aacute;s</a></p>
-        <div class="row">
+         <div class="row">
             <div class="col s12">
                 <ul class="tabs">
                     <li class="tab col s12"><a class="active" href="#datos">Datos del Colaborador</a></li>
-                    <li class="tab col s12"><a href="#evento">Evento del Colaborador</a></li>
+                    <li class="tab col s12"><a href="#evento">Eventos del Colaborador</a></li>
                     <li class="tab col s12"><a href="#video">Videos del Colaborador</a></li>
                 </ul>
             </div>
@@ -35,9 +34,11 @@
 
                 </div>
                 <h5 class="card-title activator grey-text text-darken-4">{{ entity.name }}</h5>
-                <p><i class="mdi-content-text-format cyan-text text-darken-2"></i> {{ entity.descripcion }}</p>
+                <p><i class="cyan-text text-darken-2"></i> {{ entity.descripcion }}</p>
             </div>
-            <div id="evento" class="col s12">Test 2</div>
+            <div id="evento" class="col s12">
+                {{ render(controller('BackendBundle:Backend:evento', { 'owner': entity.id })) }}
+            </div>
             <div id="video" class="col s12">Test 4</div>
         </div>
         <div class="divider"></div>

@@ -4,6 +4,7 @@ namespace BackendBundle\Controller;
 
 use BackendBundle\Entity\Colaborador;
 use BackendBundle\Entity\DondeEstamos;
+use BackendBundle\Entity\Evento;
 use BackendBundle\Entity\Global2016;
 use BackendBundle\Entity\MiembroConsejo;
 use BackendBundle\Entity\MisionVision;
@@ -15,6 +16,8 @@ use BackendBundle\Form\ColaboradorEditType;
 use BackendBundle\Form\ColaboradorType;
 use BackendBundle\Form\DondeEstamosEditType;
 use BackendBundle\Form\DondeEstamosType;
+use BackendBundle\Form\EventoEditType;
+use BackendBundle\Form\EventoType;
 use BackendBundle\Form\Global2016Type;
 use BackendBundle\Form\MiembroConsejoEditType;
 use BackendBundle\Form\MiembroConsejoType;
@@ -591,6 +594,9 @@ class BackendController extends Controller
 
 
     }
+    
+    /*Noticias*/
+    
     /**
      * @Route("/noticia/{owner}", name="_noticia")
      * @Template()
@@ -1242,6 +1248,163 @@ class BackendController extends Controller
         }
 
         return $this->render('BackendBundle:Colaborador:show.html.twig', array("entity" => $document));
+
+
+    }
+
+
+
+    /*Eventos*/
+
+    /**
+     * @Route("/evento/{owner}", name="_evento")
+     * @Template()
+     * @return array
+     */
+    public function eventoAction($owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:Evento')->findBy(array("owner"=> $owner));
+        return $this->render('BackendBundle:Evento:index.html.twig', array("entities" => $miembros, "owner"=> $owner));
+    }
+
+
+    /**
+     * @Route("/evento_new/{owner}", name="_evento_new")
+     * @Template()
+     * @return array
+     */
+    public function eventoNewAction($owner)
+    {
+        $document = new Evento();
+        $form = $this->createForm(EventoType::class, $document);
+        return $this->render("BackendBundle:Evento:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            'owner' => $owner
+        ));
+    }
+
+    /**
+     * @Route("/evento_create/{owner}", name="_evento_create")
+     * @Method("POST")
+     */
+    public function eventoCreateAction(Request $request, $owner)
+    {
+        $document = new Evento();
+        $form = $this->createForm(EventoType::class, $document);
+        $form->handleRequest($request);
+
+
+        $document->setOwner($owner);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($document);
+        $em->flush();
+        echo json_encode(array("status"=> true, "message"=> "Evento registrado satisfactoriamente."));
+        die;
+
+
+
+
+    }
+
+
+    /**
+     * @Route("/evento_delete/{id}", name="_evento_delete")
+     * @Template()
+     */
+    public function eventoDeleteAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Evento')->find($id);
+
+        if (!$document) {
+            echo json_encode(array("status"=> false, "message"=> "No se encontró la Evento que quiere eliminar."));
+            die;
+        }
+        try {
+            $dm->remove($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Evento eliminado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/evento_edit/{id}/{owner}", name="_evento_edit")
+     * @Template()
+     */
+    public function editeventoAction($id, $owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Evento')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Evento.');
+        }
+
+        $form = $this->createForm(EventoEditType::class, $document);
+
+        return $this->render("BackendBundle:Evento:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            "owner"=> $owner
+        ));
+    }
+
+    /**
+     * @Route("/evento_update/{id}", name="_evento_update")
+     * @Method("POST")
+     */
+    public function updateeventoAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Evento')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Evento.');
+        }
+
+        $editForm = $this->createForm(EventoEditType::class, $document);
+        $editForm->handleRequest($request);
+
+
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Evento modificado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+        }
+
+
+    }
+    /**
+     * @Route("/evento_show/{id}", name="_evento_show")
+     */
+    public function showeventoAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Evento')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Evento.');
+        }
+
+        return $this->render('BackendBundle:Evento:show.html.twig', array("entity" => $document));
 
 
     }
