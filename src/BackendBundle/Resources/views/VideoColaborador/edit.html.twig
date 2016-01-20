@@ -1,0 +1,61 @@
+
+     
+
+     <div class="container">
+
+         <div class="col s12 m12 l6">
+             <a name="atras"  class="actionvideo waves-effect waves-light btn" href="#" url="{{ path("_video_colaborador",{"owner": owner}) }}">Atras
+
+             </a>
+             <div class="card-panel">
+                 <div class="row">
+                     <form class="col s12" id="formvideo"  action="{{path('_video_colaborador_update', {'id': entity.id})}}" method="post">
+                         {{ form_widget(form) }}
+                         <div class="input-field col s12" style="margin-top: 5%;">
+                             <button name="action" type="submit" class="btn  waves-effect waves-light center load">Guardar
+
+                             </button>
+                             <a name="cancel"  class="actionvideo btn grey waves-effect waves-light center" href="#" url="{{ path("_video_colaborador",{"owner": owner}) }}">Cancelar
+
+                             </a>
+                         </div>
+
+                     </form>
+                 </div>
+             </div>
+         </div>
+     </div>
+<script>
+    $('.tooltipped').tooltip({delay: 10});
+    $(".actionvideo").on("click", function(e){
+        $('.tooltipped').tooltip('remove');
+        $('.preloader-wrapper').addClass('active');
+        var url = $(this).attr("url");
+        $("#video_colaborador_tab").load(url,function() {
+            $('.preloader-wrapper').removeClass('active');
+        });
+
+    })
+    var options = {
+        beforeSubmit:  showRequest,
+        success:       showResponse
+    };
+
+    function showRequest(){
+        $('.preloader-wrapper').addClass('active');
+    }
+    function showResponse(responseText, statusText, xhr, $form)  {
+        $('.preloader-wrapper').removeClass('active');
+        var obj = jQuery.parseJSON(responseText);
+        if(obj.status){
+            var url = "{{ path("_video_colaborador", {"owner": owner}) }}";
+            $("#video_colaborador_tab").load(url);
+            Materialize.toast(obj.message, 1000);
+        }
+        else{
+            Materialize.toast(obj.message, 1000);
+        }
+
+    }
+    $('#formvideo').ajaxForm(options);
+</script>

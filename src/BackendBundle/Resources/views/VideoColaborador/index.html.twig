@@ -3,35 +3,32 @@
 
     <!--start container-->
     <div class="container">
-        <p><a class="btn waves-effect waves-light indigo actiontab" href="#" url="{{ path("_evento_new", {"owner": owner}) }}">Registrar</a></p>
+        <p><a class="btn waves-effect waves-light indigo actionvideo" href="#" url="{{ path("_video_colaborador_new", {"owner": owner}) }}">Registrar</a></p>
         <div class="dataTables_wrapper">
-            <table cellspacing="0" class="responsive-table display" id="data-table" width="100%">
+            <table cellspacing="0" class="responsive-table display" id="data-table-video" width="100%">
                 <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Fecha</th>
-                    <th>Link</th>
+                    <th>Titulo</th>
+                    <th>Url</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Fecha</th>
-                    <th>Link</th>
+                    <th>Titulo</th>
+                    <th>Url</th>
                     <th>Acciones</th>
                 </tr>
                 </tfoot>
                 <tbody>
                 {% for entity in entities %}
                 <tr>
-                    <td>{{ entity.nombre }}</td>
-                    <td>{{ entity.fecha | date("Y-m-d") }}</td>
-                    <td>{{ entity.link }}</td>
+                    <td>{{ entity.titulo }}</td>
+                    <td>{{ entity.url }}</td>
 
                     <td>
-                        <a class="tooltipped btn-floating waves-effect waves-light grey actiontab" data-position="top" data-delay="50" data-tooltip="Modificar" href="#" url="{{ path("_evento_edit", {"id": entity.id, "owner": owner}) }}"><i class="mdi-editor-mode-edit"></i></a>
-                        <a class="tooltipped btn-floating waves-effect waves-light red deletetab" data-position="top" data-delay="50" data-tooltip="Eliminar" href="#" url="{{ path("_evento_delete", {"id": entity.id}) }}"><i class="mdi-content-clear"></i></a>
+                        <a class="tooltipped btn-floating waves-effect waves-light grey actionvideo" data-position="top" data-delay="50" data-tooltip="Modificar" href="#" url="{{ path("_video_colaborador_edit", {"id": entity.id, "owner": owner}) }}"><i class="mdi-editor-mode-edit"></i></a>
+                        <a class="tooltipped btn-floating waves-effect waves-light red deletevideo" data-position="top" data-delay="50" data-tooltip="Eliminar" href="#" url="{{ path("_video_colaborador_delete", {"id": entity.id}) }}"><i class="mdi-content-clear"></i></a>
 
 
                     </td>
@@ -50,7 +47,7 @@
     <script>
 
         $('.tooltipped').tooltip({delay: 10});
-        $('#data-table').DataTable({
+        $('#data-table-video').DataTable({
             "language": {
                 "zeroRecords": "No hay datos para mostrar",
                 "info": "Mostrando _PAGE_ pagina de _PAGES_",
@@ -65,17 +62,18 @@
                 },
             }
         });
-        $(".actiontab").on("click", function(e){
+        $(".actionvideo").on("click", function(e){
             $('.tooltipped').tooltip('remove');
             $('.preloader-wrapper').addClass('active');
             var url = $(this).attr("url");
-            $("#evento").load(url,function() {
+            $("#video_colaborador_tab").load(url,function() {
                 $('.preloader-wrapper').removeClass('active');
             });
 
         })
 
-        $(".deletetab").on("click", function(){
+        $(".deletevideo").on("click", function(){
+            $('.tooltipped').tooltip('remove');
             $('.preloader-wrapper').addClass('active');
             var url = $(this).attr("url");
             $.ajax({
@@ -83,7 +81,7 @@
                 success: function(data){
                     var obj = jQuery.parseJSON(data);
                     Materialize.toast(obj.message, 1000);
-                    $("#evento").load("{{ path('_evento', {"owner": owner}) }}",function() {
+                    $("#video_colaborador_tab").load("{{ path('_video_colaborador', {"owner": owner}) }}",function() {
                         $('.preloader-wrapper').removeClass('active');
                     });
                 }

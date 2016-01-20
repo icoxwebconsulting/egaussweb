@@ -21,6 +21,23 @@ class VideoColaborador
      */
     private $id;
 
+    /**
+     * @ORM\Column(type="string", length=512, nullable=false)
+     */
+    protected $titulo;
+
+
+    /**
+     * @ORM\Column(type="string", length=512, nullable=false)
+     */
+    protected $url;
+
+
+    /**
+     * @ORM\Column(type="string", length=512, nullable=false)
+     */
+    protected $owner;
+
 
     /**
      * Get id
@@ -31,5 +48,76 @@ class VideoColaborador
     {
         return $this->id;
     }
-}
 
+    /**
+     * Set titulo
+     *
+     * @param string $titulo
+     *
+     * @return VideoColaborador
+     */
+    public function setTitulo($titulo)
+    {
+        $this->titulo = $titulo;
+
+        return $this;
+    }
+
+    /**
+     * Get titulo
+     *
+     * @return string
+     */
+    public function getTitulo()
+    {
+        return $this->titulo;
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     *
+     * @return VideoColaborador
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set owner
+     *
+     * @param string $owner
+     *
+     * @return VideoColaborador
+     */
+    public function setOwner($owner)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return string
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+}

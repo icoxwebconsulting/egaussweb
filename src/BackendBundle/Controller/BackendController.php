@@ -12,6 +12,7 @@ use BackendBundle\Entity\Noticia;
 use BackendBundle\Entity\QueEsGlobal;
 use BackendBundle\Entity\QuienesSomos;
 use BackendBundle\Entity\Video;
+use BackendBundle\Entity\VideoColaborador;
 use BackendBundle\Form\ColaboradorEditType;
 use BackendBundle\Form\ColaboradorType;
 use BackendBundle\Form\DondeEstamosEditType;
@@ -28,6 +29,7 @@ use BackendBundle\Form\NoticiaType;
 use BackendBundle\Form\QueEsGlobalType;
 use BackendBundle\Form\QuienesSomosEditType;
 use BackendBundle\Form\QuienesSomosType;
+use BackendBundle\Form\VideoColaboradorType;
 use BackendBundle\Form\VideoType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -1405,6 +1407,157 @@ class BackendController extends Controller
         }
 
         return $this->render('BackendBundle:Evento:show.html.twig', array("entity" => $document));
+
+
+    }
+
+
+    /*VideoColaboradors*/
+
+    /**
+     * @Route("/video_colaborador/{owner}", name="_video_colaborador")
+     * @Template()
+     * @return array
+     */
+    public function video_colaboradorAction($owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:VideoColaborador')->findBy(array("owner"=> $owner));
+        return $this->render('BackendBundle:VideoColaborador:index.html.twig', array("entities" => $miembros, "owner"=> $owner));
+    }
+
+
+    /**
+     * @Route("/video_colaborador_new/{owner}", name="_video_colaborador_new")
+     * @Template()
+     * @return array
+     */
+    public function video_colaboradorNewAction($owner)
+    {
+        $document = new VideoColaborador();
+        $form = $this->createForm(VideoColaboradorType::class, $document);
+        return $this->render("BackendBundle:VideoColaborador:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            'owner' => $owner
+        ));
+    }
+
+    /**
+     * @Route("/video_colaborador_create/{owner}", name="_video_colaborador_create")
+     * @Method("POST")
+     */
+    public function video_colaboradorCreateAction(Request $request, $owner)
+    {
+        $document = new VideoColaborador();
+        $form = $this->createForm(VideoColaboradorType::class, $document);
+        $form->handleRequest($request);
+
+        $document->setOwner($owner);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($document);
+        $em->flush();
+        echo json_encode(array("status"=> true, "message"=> "Video registrado satisfactoriamente."));
+        die;
+    }
+
+
+    /**
+     * @Route("/video_colaborador_delete/{id}", name="_video_colaborador_delete")
+     * @Template()
+     */
+    public function video_colaboradorDeleteAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:VideoColaborador')->find($id);
+
+        if (!$document) {
+            echo json_encode(array("status"=> false, "message"=> "No se encontró la VideoColaborador que quiere eliminar."));
+            die;
+        }
+        try {
+            $dm->remove($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Video eliminado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/video_colaborador_edit/{id}/{owner}", name="_video_colaborador_edit")
+     * @Template()
+     */
+    public function editvideo_colaboradorAction($id, $owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:VideoColaborador')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Video.');
+        }
+
+        $form = $this->createForm(VideoColaboradorType::class, $document);
+
+        return $this->render("BackendBundle:VideoColaborador:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            "owner"=> $owner
+        ));
+    }
+
+    /**
+     * @Route("/video_colaborador_update/{id}", name="_video_colaborador_update")
+     * @Method("POST")
+     */
+    public function updatevideo_colaboradorAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:VideoColaborador')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Video.');
+        }
+
+        $editForm = $this->createForm(VideoColaboradorType::class, $document);
+        $editForm->handleRequest($request);
+
+
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Video modificado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+        }
+
+
+    }
+    /**
+     * @Route("/video_colaborador_show/{id}", name="_video_colaborador_show")
+     */
+    public function showvideo_colaboradorAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:VideoColaborador')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Video.');
+        }
+
+        return $this->render('BackendBundle:VideoColaborador:show.html.twig', array("entity" => $document));
 
 
     }

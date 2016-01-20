@@ -39,7 +39,9 @@
             <div id="evento" class="col s12">
                 {{ render(controller('BackendBundle:Backend:evento', { 'owner': entity.id })) }}
             </div>
-            <div id="video" class="col s12">Test 4</div>
+            <div id="video_colaborador_tab" class="col s12">
+                {{ render(controller('BackendBundle:Backend:video_colaborador', { 'owner': entity.id })) }}
+            </div>
         </div>
         <div class="divider"></div>
     </div>
