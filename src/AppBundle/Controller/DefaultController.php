@@ -13,7 +13,9 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-
-        return $this->render("AppBundle:App:index.html.twig");
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Video");
+        $videos = $repo->findBy(array("inhomepage"=> true));
+        return $this->render("AppBundle:App:index.html.twig", array("videos"=> $videos ));
     }
 }
