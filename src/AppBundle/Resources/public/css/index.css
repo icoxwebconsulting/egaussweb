@@ -1,0 +1,789 @@
+
+body, .ui-widget-content {
+    color: rgb(135, 135, 135);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+
+p {
+    line-height: 1.3em;
+}
+
+blockquote, body, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
+    margin: 0px;
+    border: medium none;
+    padding: 0px;
+}
+
+li {
+    list-style: outside none none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+    width: auto;
+}
+
+.Wrapper-center {
+    margin: 0px auto;
+    max-width: 958px;
+    padding: 0px 5px;
+}
+
+#header {
+    height: 120px;
+    position: relative;
+    z-index: 660;
+}
+
+#header .eGauss-Logo {
+    position: absolute;
+    right: 5px;
+    top: 13px;
+    z-index: 200;
+}
+
+.wrapperCenter {
+    margin: 0px auto 25px;
+    max-width: 958px;
+    padding: 0px 5px;
+}
+
+#mainNav {
+    border-bottom: 1px solid rgb(199, 199, 199);
+    height: 28px;
+    position: relative;
+}
+
+#mainNav li {
+    border-right: 1px solid rgb(199, 199, 199);
+    float: left;
+    font-size: 14px;
+    height: 26px;
+    position: relative;
+}
+
+#mainNav li.firstItem {
+    border-left: 1px solid rgb(199, 199, 199);
+    margin-left: 0px;
+}
+
+#mainNav li .btnNav:hover {
+    cursor: pointer;
+}
+
+#mainNav li .btnNav, #mainNav li .btnHome {
+    color: rgb(135, 135, 135);
+    display: block;
+    float: left;
+    padding: 5px 16px;
+    text-transform: uppercase;
+}
+
+#mainNav li .btnNav .btnHome {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#mainNav li a.btnNav:hover {
+    text-decoration: none;
+}
+
+#mainNav li a.btnNav span.btnHome {
+    background: transparent url('../images/picto_home.gif') no-repeat scroll 50% 0px;
+    display: block;
+    height: 16px;
+    width: 15px;
+}
+
+.homeicon {
+    left: -9999px;
+    position: absolute;
+    text-indent: -9999px;
+    display: none;
+}
+
+#mainNav li div.subNav {
+    display: none;
+    left: -1px;
+    min-width: 192px;
+    padding-top: 2px;
+    position: absolute;
+    top: 26px;
+    z-index: 1400;
+}
+
+#mainNav li:hover div.subNav, #mainNav li.is-open div.subNav {
+    display: block;
+}
+
+#mainNav li.firstItem .btnNav {
+    background-image: none ! important;
+}
+
+.title {
+    color: rgb(135, 135, 135);
+}
+
+#mainNav li div.subNav .subNavContent {
+    background: rgb(255, 255, 255) none repeat scroll 0px 0px;
+    border: 1px solid rgb(199, 199, 199);
+    font-size: 12px;
+    padding-bottom: 6px;
+    min-height: 230px;
+}
+
+#mainNav li div.subNav .subNavCol {
+    padding: 7px 0px 3px;
+}
+
+#mainNav li div.subNav .subNav2Col .subNavCol {
+    float: left;
+    width: 49.9999%;
+    padding: 7px 0px 3px;
+}
+
+#mainNav li div.subNav .subNavContent ul li {
+    border-width: 0px;
+    float: none;
+    font-size: 11px;
+    height: auto;
+    margin-left: 0px;
+}
+
+#mainNav li div.subNav .subNavContent ul li::before, #mainNav li div.subNav .subNavContent ul li a::before {
+    display: none;
+}
+
+#mainNav li div.subNav .subNavContent ul li a {
+    background: transparent none repeat scroll 0px center;
+    color: rgb(135, 135, 135);
+    display: block;
+    font-size: 12px;
+    padding: 0px 10px;
+}
+
+#mainNav li div.subNav .subNavContent ul li a:hover {
+    text-decoration: underline;
+}
+
+#mainNav li div.subNav .subNavContent ul.mappingList {
+    margin: 0px 20px;
+}
+
+#mainNav li div.subNav .subNavContent ul.mappingList li {
+    background: transparent url('../images/dot_list_small_grey.gif') no-repeat scroll 0px 11px;
+    padding-bottom: 4px;
+    padding-top: 4px;
+}
+
+#mainNav li div.subNav .subNavContent ul.mappingList li .title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#mainNav li div.subNav .subNavContent ul.mappingList li ul {
+    margin: 0px 0px 0px 11px;
+    padding: 5px 0px 0px;
+}
+
+#mainNav li div.subNav .subNavContent ul.mappingList li ul li {
+    background: transparent url('../images/dot_subnav_n3.png') no-repeat scroll 0px 9px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+
+#mainNav li div.subNav .subNavContent ul.mappingList li ul li .linkMoreDownload {
+    background: transparent none repeat scroll 0px center;
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+a.linkMoreDownload, span.linkMoreDownload {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.linksList {
+    margin: 7px 0px;
+}
+
+.fullWidthWrapper {
+    text-align: center;
+}
+
+#NewsGalleryBox {
+    margin: 0px auto;
+    max-width: 958px;
+    padding: 0px 10px;
+}
+
+.galleryBox {
+    background: transparent url('../images/gallerybox_bg.png') no-repeat scroll 0px 100%;
+    margin: -1px auto 18px;
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+}
+
+.galleryBox .navigationGallery, .jScrollPaneContainer {
+    bottom: 0px;
+    padding-left: 30px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 267px;
+    z-index: 400;
+}
+
+.galleryBox .navigationGallery li {
+    background-color: rgb(238, 238, 238);
+    color: rgb(48, 149, 180);
+    cursor: pointer;
+    display: none;
+    font-size: 13px;
+    height: 25%;
+    padding: 0px;
+    position: relative;
+}
+
+.galleryBox .navigationGallery li .navigationGalleryItem {
+    border-top: 1px solid rgb(255, 255, 255);
+}
+
+.galleryBox .navigationGallery li:first-child .navigationGalleryItem {
+    border-top-width: 0px;
+}
+
+.galleryBox .navigationGallery li:nth-child(-n+4) {
+    display: block;
+}
+
+.galleryBox .navigationGallery li .galleryThumbnail {
+    float: left;
+    overflow: hidden;
+    padding: 14px 0px 0px 3.3707%;
+    width: 25.4681%;
+}
+
+.galleryBox .navigationGallery li .galleryThumbnail img {
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+.galleryBox .navigationGallery li .caption {
+    left: 30.337%;
+    padding: 14px 0px 0px 4.8689%;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+}
+
+.galleryBox .navigationGallery li .caption strong {
+    display: none;
+}
+
+.galleryBox .navigationGallery li.selected {
+    background-color: rgb(226, 51, 55);
+    color: rgb(255, 255, 255);
+    position: relative;
+}
+
+.galleryBox .navigationGallery li.selected::before {
+    background: transparent url('../images/newsgallerybox_selected_ico.png') no-repeat scroll 0px 0px / 100% 100%;
+    bottom: 0px;
+    content: "";
+    display: block;
+    left: -30px;
+    position: absolute;
+    top: 0px;
+    width: 30px;
+}
+
+.lt-ie9 .galleryBox .navigationGallery li.selected::before {
+    background-position: 0px 50%;
+    background-size: auto auto;
+}
+
+.galleryBox .navigationGallery li.selected a {
+    color: rgb(255, 255, 255);
+}
+
+.galleryBox .navigationGallery li a {
+    display: block;
+    color: rgb(135, 135, 135);
+}
+
+.galleryBox .framesGallery {
+    overflow: hidden;
+    position: relative;
+    width: 690px;
+    z-index: 90;
+}
+
+.galleryBox .framesGallery li {
+    display: none;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
+.galleryBox .framesGallery li.selected {
+    display: block;
+    position: relative;
+}
+
+.galleryBox .framesGallery li .frame {
+    position: relative;
+}
+
+.galleryBox .framesGallery li .frame img {
+    height: auto;
+    width: 100%;
+}
+
+.galleryBox .framesGallery li .frame .description p {
+    font-size: 11px;
+    margin: 0px;
+}
+
+.galleryBox .framesGallery li .frame .description p.title {
+    display: none;
+}
+
+.galleryBox .framesGallery li .frame .description p.summary {
+    display: none;
+}
+
+.galleryBox .framesGallery li .frame .description p.supertitle {
+    display: none;
+}
+
+.galleryBox .framesGallery li .frame .description div.seeall {
+    display: none;
+}
+
+.galleryBox .framesGallery li .frame .description div.link a {
+    bottom: 0px;
+    display: block;
+    left: 0px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.twitterWrapper {
+    background: transparent url('../images/line_dot_grey.png') repeat-x scroll 0px 100%;
+    margin: -18px 0px 18px;
+}
+
+.twitterWrapper .twitterWrapperBg {
+    height: 37px;
+    overflow: hidden;
+}
+
+.twitterWrapper .twitterPost {
+    height: 32px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0px;
+}
+
+.twitterWrapper .twitterPost ul {
+    display: block;
+    height: 32px;
+    line-height: 1;
+    list-style: outside none none;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+    position: relative;
+}
+
+.twitterWrapper .twitterPost ul li {
+    background: transparent none repeat scroll 0px center;
+    display: block;
+    height: 19px;
+    left: 0px;
+    list-style: outside none none;
+    padding-top: 13px;
+    position: absolute;
+    top: -999em;
+    white-space: nowrap;
+}
+
+.twitterWrapper .twitterPost a {
+    color: rgb(226, 51, 55);
+}
+
+.twitterWrapper .twitterBtnBox {
+    float: left;
+    width: 64px;
+}
+
+.twitterWrapper .twitterBtnBox a {
+    background: transparent url('../images/twitter_ico_btn.png') no-repeat scroll 10px 0px;
+    display: block;
+    height: 36px;
+    padding-right: 10px;
+    position: relative;
+    width: 54px;
+}
+
+.twitterWrapper .twitterBtnBox a span {
+    position: absolute;
+    text-indent: -10000em;
+}
+
+#videoContentBox {
+    clear: both;
+    overflow: hidden;
+    margin: 35px 0px;
+}
+
+.videoCol1 {
+    float: left;
+    margin: 0px;
+    overflow: hidden;
+    padding-right: 20px;
+    width: 23%;
+}
+
+.videoCol2 {
+    float: left;
+    margin: 0px;
+    overflow: hidden;
+    padding-right: 20px;
+    width: 23%;
+}
+
+.videoCol3 {
+    float: left;
+    margin: 0px;
+    overflow: hidden;
+    padding-right: 20px;
+    width: 23%;
+}
+
+.videoCol4 {
+    float: left;
+    margin: 0px;
+    overflow: hidden;
+    width: 23%;
+}
+
+.videoDescription a {
+    padding-top: 10px;
+    color: rgb(135, 135, 135);
+}
+
+.colsHome {
+    clear: both;
+    overflow: hidden;
+}
+
+.col1Home {
+    float: left;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+    width: 33.3%;
+}
+
+.col2Home {
+    float: left;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+    width: 33.3%;
+}
+
+.col3Home {
+    float: left;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+    width: 33.3%;
+}
+
+.colHomeBody {
+    padding-right: 10px;
+}
+
+.colHomeBox {
+    font-size: 12px;
+    margin-bottom: 18px;
+}
+
+.colHomeBox h2, .colHomeBox .topBorderRadius, h2 {
+    background: transparent url('../images/bloc_title_home.png') no-repeat scroll 100% 100%;
+    color: rgb(226, 51, 55);
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 14px 0px 2px 14px;
+}
+
+.colHomeBox .colHomeWrapper .contentPadding {
+    padding: 0px 14px 1px 0px;
+}
+
+.colHomeWrapper .resultSearchItem {
+    background: transparent none repeat scroll 0px center;
+    clear: both;
+    margin-bottom: 2px;
+    overflow: hidden;
+    padding: 0px;
+}
+
+.resultSearchItem {
+    background: transparent url('../images/line_dot_grey_001.png') repeat-x scroll 0px 100%;
+    color: rgb(115, 124, 130);
+    font-size: 13px;
+    padding: 15px 0px 12px;
+    position: relative;
+}
+
+.colHomeWrapper .resultSearchItem .mediaCol, .resultSearchItem .mediaCol, .resultSearchItem .mediaCol, .resultSearchItem .mediaCol {
+    float: left;
+    width: 68px;
+}
+
+.resultSearchItem .mediaCol {
+    float: left;
+    padding-right: 4.5801%;
+    position: relative;
+    width: 28.8167%;
+    z-index: 100;
+}
+
+.colHomeWrapper .resultSearchItem .containerMedia, .resultSearchItem .containerMedia, .resultSearchItem .containerMedia, .resultSearchItem .containerMedia {
+    margin-top: 2px;
+}
+
+.colHomeBox .colHomeWrapper .containerMedia {
+    margin-bottom: 0px;
+}
+
+.containerMedia {
+    margin: 3px 0px 10px;
+    overflow: hidden;
+}
+
+a, .topic, .siteMap li ul li ul li ul li a, .homeTabContainer li.selected a, .errorPage .errorTitle {
+    color: rgb(70, 155, 182);
+}
+
+.containerMedia img {
+    width: 100%;
+}
+
+.containerMedia img {
+    display: block;
+    max-width: 100%;
+}
+
+.colHomeBox .colHomeWrapper .linksList {
+    margin-top: 2px;
+}
+
+a.linkMoreDownload::before, span.linkMoreDownload::before {
+    background: transparent url('../images/dot_arrow_red.gif') no-repeat scroll 0px 3px;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 2em;
+    width: 12px;
+}
+
+.colHomeWrapper .resultSearchItem .contentCol, .resultSearchItem .contentCol, .resultSearchItem .contentCol, .resultSearchItem .contentCol {
+    float: none;
+    padding-left: 78px;
+    width: auto;
+}
+
+.resultSearchItem .contentCol {
+    position: relative;
+}
+
+.colHomeWrapper .resultSearchItem p, .resultSearchItem p, .resultSearchItem p, .resultSearchItem p {
+    padding-bottom: 3px;
+}
+
+.colHomeBox .colHomeWrapper p {
+    margin: 0px;
+    padding-bottom: 6px;
+}
+
+.resultSearchItem p .date {
+    font-size: 11px;
+}
+
+.date {
+    width: 198px ! important;
+}
+
+.colHomeWrapper .resultSearchItem .title, .resultSearchItem .title, .resultSearchItem .title, .resultSearchItem .title {
+    font-size: 12px;
+    line-height: 1.2em;
+}
+
+.colHomeWrapper .resultSearchItem p, .resultSearchItem p, .resultSearchItem p, .resultSearchItem p {
+    padding-bottom: 3px;
+}
+
+.colHomeWrapper .resultSearchItem .title a, .resultSearchItem .title a, .resultSearchItem .title a, .resultSearchItem .title a {
+    font-size: 12px;
+}
+
+.resultSearchItem .title a {
+    color: rgb(226, 51, 55);
+}
+
+.resultSearchItem .title, .resultSearchItem .title a {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+a, .topic, .siteMap li ul li ul li ul li a, .homeTabContainer li.selected a, .errorPage .errorTitle {
+    color: rgb(82, 82, 83);
+}
+
+.homeBottomNewsBox {
+    font-size: 11px;
+    margin-bottom: 18px;
+}
+
+.homeBottomNewsBox .contentHomeBottomNewsBox {
+    padding: 0px;
+}
+
+#globalContent .quicklinks h2, #globalContent .colHomeBox h2, h2, .homeBottomNewsBox .title {
+    background: transparent url('../images/bloc_title_home.png') no-repeat scroll 100% 100%;
+    color: rgb(226, 51, 55);
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0px 0px 10px;
+    padding: 0px 0px 5px;
+}
+
+#footer {
+    margin: 0px auto;
+    max-width: 958px;
+}
+
+#footer {
+    background: transparent url('../images/footer_bg.png') no-repeat scroll 50% 0px;
+    font-size: 10px;
+    padding: 100px 5px;
+    margin-bottom: 65px;
+}
+
+#footer .eGaussFooter {
+    line-height: 1.5em;
+    padding: 9px 0px 2px;
+}
+
+.footerSuperior {
+    height: auto;
+    margin: 0px auto 55px;
+    max-width: 958px;
+    position: relative;
+}
+
+#footer .socialArea {
+    clear: both;
+    margin-bottom: 7px;
+    overflow: hidden;
+    width: 80%;
+}
+
+#footer .logoArea {
+    position: absolute;
+    right: 0px;
+    top: -10px;
+    float: right;
+}
+
+#footer .socialArea .labelTxt {
+    color: rgb(161, 161, 165);
+    float: left;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    padding-right: 10px;
+}
+
+.btnLinkedin {
+    background: transparent url('../images/linkedin_ico_footer.gif') no-repeat scroll 0px 0px;
+    display: block;
+    float: left;
+    height: 32px;
+    width: 35px;
+    margin-left: 5px;
+}
+
+.btnTwitter {
+    background: transparent url('../images/twitter_ico_footer.gif') no-repeat scroll 0px 0px;
+    display: block;
+    float: left;
+    height: 32px;
+    width: 35px;
+    margin-left: 5px;
+}
+
+.btnYoutube {
+    background: transparent url('../images/youtube_ico_footer.gif') no-repeat scroll 0px 0px;
+    display: block;
+    float: left;
+    height: 32px;
+    width: 35px;
+    margin-left: 5px;
+}
+
+#footer .eGaussFooter {
+    line-height: 1.5em;
+    padding: 9px 0px 2px;
+    margin-bottom: 30px;
+}
+
+#footer .footerSitemap .footerSitemapCol {
+    float: left;
+    padding: 0px 2% 0px 0px;
+    width: 18%;
+}
+
+#footer .footerSitemap .footerSitemapCol ul {
+    margin: 0px;
+    padding-top: 3px;
+    padding-bottom: 15px;
+}
+
+#footer .footerSitemap .footerSitemapCol ul li {
+    padding: 1px 0px;
+}
+
+#footer .footerSitemap .footerSitemapCol p {
+    font-size: 13px;
+    font-weight: bold;
+    padding: 0px 0px 10px;
+}
+
+#footer .footerSitemap .footerSitemapCol a {
+    color: rgb(161, 161, 165);
+    text-transform: uppercase;
+}
