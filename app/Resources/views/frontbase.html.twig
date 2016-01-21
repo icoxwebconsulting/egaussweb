@@ -2,11 +2,11 @@
 <html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml" class="">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
+    <meta name="viewport" content="initial-scale=1.0">
     <title>Egauss Business Holding | Egauss Business Holding I+T</title>
-
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/index.css') }}" media="all">
+    <link href="{{asset('assets/vendor/materialize/css/materialize.css')}}" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
 
@@ -26,9 +26,9 @@
             <li><span class="btnNav">Sobre Global</span>
                 <div style="width: 319.333px;" class="subNav"> <div class="subNavContent subNav1Col">
                         <div class="subNavCol"> <ul class="mappingList">
-                                <li><a href="#"><span class="title">Misión y Visión</span></a></li>
-                                <li><a href="#"><span class="title">Donde estamos</span></a></li>
-                                <li><a href="#"><span class="title">Quienes somos</span></a></li>
+                                <li><a href="{{ path("mision_vision") }}"><span class="title">Misión y Visión</span></a></li>
+                                <li><a href="{{ path("donde_estamos") }}"><span class="title">Donde estamos</span></a></li>
+                                <li><a href="{{ path("quienes_somos") }}"><span class="title">Quienes somos</span></a></li>
                                 <li><a href="#"><span class="title">Estructura Holdings</span></a>
                                     <ul class="linksList">
                                         <li><a class="linkMoreDownload" href="#">eGauss Innovation</a></li>
@@ -44,13 +44,11 @@
             <li><span class="btnNav">Ediciones anteriores</span>
                 <div class="subNav" style="width: 638.667px;">  <div class="subNavContent subNav2Col">
                         <div class="subNavCol"> <ul class="mappingList">
-                                <li><a href="#nuestros-servicios/soluciones/informacion.html"><span class="title">Soluciones</span></a>
-                                    <ul class="linksList">
+                                 <ul class="linksList">
                                         <li><a class="linkMoreDownload" href="#">2013</a></li>
                                         <li><a class="linkMoreDownload" href="#">2014</a></li>
                                         <li><a class="linkMoreDownload" href="#">2015</a></li>
                                     </ul>
-                                </li>
                             </ul> </div>
                     </div> </div>
             </li>
@@ -129,7 +127,7 @@
             <div class="footerSitemapCol footerSitemapCol1">
                 <li><p><a href="#">Sobre Global</a></p>
                     <ul>
-                        <li><a href="#">Misión y Visión</a></li>
+                        <li><a href="{{ path("mision_vision") }}">Misión y Visión</a></li>
                         <li><a href="#">Donde Estamos</a></li>
                         <li><a href="#">Quienes Somos</a></li>
                         <li><a href="#">Estructura Holdings</a></li>
@@ -181,13 +179,16 @@
     </div>
 
 </div>
+{% block javascripts %}
+
 <script src="{{ asset('bundles/app/js/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/vendor/materialize/js/materialize.min.js')}}"></script>
 <script src="{{ asset('bundles/app/js/snap.js')}}" type="text/javascript"></script>
 <script src="{{ asset('bundles/app/js/jquery.marquee.js')}}" type="text/javascript"></script>
 <script src="{{ asset('bundles/app/js/app.js')}}" type="text/javascript"></script>
 <script src="{{ asset('bundles/app/js/jquery-ui.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('bundles/app/js/ajaxcalls.js')}}" type="text/javascript"></script>
 <script language="javascript" type="text/javascript">$(document).ready(function(){eGauss.setHeaderPromo(48688);})</script>
-
+{% endblock %}
 </body>
 </html>

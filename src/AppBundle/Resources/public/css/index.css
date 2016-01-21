@@ -1,3 +1,8 @@
+html, body {
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
 
 body, .ui-widget-content {
     color: rgb(135, 135, 135);
@@ -787,3 +792,54 @@ a, .topic, .siteMap li ul li ul li ul li a, .homeTabContainer li.selected a, .er
     color: rgb(161, 161, 165);
     text-transform: uppercase;
 }
+.top10{
+    margin-top: 1em;
+}
+
+#map {
+    height: 100%;
+}
+
+/*VERTICAL MENU*/
+nav.vertical{
+    position:relative;
+    background:#FFFFFF;
+}
+
+/* ALL UL */
+nav.vertical ul{
+    list-style: none;
+}
+/* ALL LI */
+nav.vertical li{
+    position:relative;
+}
+/* ALL A */
+nav.vertical a{
+    display:block;
+    color:rgb(135, 135, 135);
+    text-decoration:none;
+    transition:0.2s;
+}
+/* ALL A HOVER */
+nav.vertical li:hover > a{
+    background:#778;
+}
+
+/* INNER UL HIDE */
+nav.vertical ul ul{
+    background:rgba(0,0,0,0.1);
+    padding-left:20px;
+    transition: max-height 0.2s ease-out;
+    max-height:0;
+    overflow:hidden;
+}
+/* INNER UL SHOW */
+nav.vertical li:hover > ul{
+    max-height:500px;
+    transition: max-height 0.25s ease-in;
+}
+nav ul li{
+float: none !important;
+padding: 0;
+transition: none !important;}
