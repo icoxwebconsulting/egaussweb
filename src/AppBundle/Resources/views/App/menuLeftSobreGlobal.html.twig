@@ -1,0 +1,38 @@
+<div class="col s3 m12 l3 left">
+    <span class="titlemenu">Sobre Global</span>
+    <div id='cssmenu'>
+
+        <ul>
+            {% if active == "misionvision" %}
+            <li class="active"><a class="waves-effect waves-light" href='{{ path("mision_vision") }}'><span>Misi&oacute;n y Visi&oacute;n</span></a></li>
+            {% else %}
+                <li ><a class="waves-effect waves-light" href='{{ path("mision_vision") }}'><span>Misi&oacute;n y Visi&oacute;n</span></a></li>
+
+            {% endif %}
+
+            {% if active == "dondeestamos" %}
+            <li class="active"><a class="waves-effect waves-light" href='{{ path("donde_estamos") }}'><span>Donde Estamos</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("donde_estamos") }}'><span>Donde Estamos</span></a></li>
+
+            {% endif %}
+
+            {% if active == "quienessomos" %}
+            <li class="active" ><a class="waves-effect waves-light" href='{{ path("quienes_somos") }}'><span>Quienes Somos</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("quienes_somos") }}'><span>Quienes Somos</span></a></li>
+            {% endif %}
+                    <li class='has-sub'><a href='#'><span>Estructura del Holding</span></a>
+                        <ul>
+                            <li><a class="waves-effect waves-light" href='#'><span>Innovation</span></a></li>
+                            <li><a class="waves-effect waves-light" href='#'><span>Techtrans</span></a></li>
+                            <li><a class="waves-effect waves-light" href='#'><span>H4DM</span></a></li>
+                            <li class='last'><a class="waves-effect waves-light" href='#'><span>Fondos de Iversi&oacute;n</span></a></li>
+                        </ul>
+                    </li>
+
+
+        </ul>
+    </div>
+
+</div>

@@ -5,27 +5,9 @@
         <div class="mainContentWrapper">
             <!--Left-->
             <div class="row">
-            <div class="col s3 m12 l3 left">
-                <nav class="vertical">
-                    <ul>
-                        <li><a href="#">Sobre nosotros</a></li>
-                        <li><a href="#">Misi&oacute;n y Visi&oacute;n</a></li>
-                        <li><a href="#">Donde estamos</a></li>
-                        <li><a href="#">Quienes somos</a></li>
-                        <li><a href="#">Estructura del Holdings</a>
-                            <ul>
-                                <li><a href="#">Service 1</a></li>
-                                <li><a href="#">Service 2</a></li>
-                                <li><a href="#">Service 3</a></li>
-                            </ul>
-                        </li>
+            {% include 'AppBundle:App:menuLeftSobreGlobal.html.twig' with {"active":"quienessomos"} %}
 
-                    </ul>
-                </nav>
-
-            </div>
-
-            <div class="col s7 m12 l7 left">
+            <div class="col s7 m12 l6 left">
                     <h6 class="btnNav" style="text-align: left !important; padding: 0.7em !important;">{{ entity.titulo }}</h6>
 
                         <div class="col s12 m12 l12 left">
