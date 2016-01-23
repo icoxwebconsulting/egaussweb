@@ -16,17 +16,8 @@
             </div>
         </div>
     </div>
-    <!--breadcrumbs end-->
 
-
-    <!--start container-->
     <div class="container">
-        {% if message is defined %}
-            <div class="toats" message="{{ message }}"> </div>
-        {% endif %}
-        {% if error is defined %}
-            <div class="toats" message="{{ error }}"> </div>
-        {% endif %}
         <p><a class="btn waves-effect waves-light indigo action" href="#" url="{{ path("_consejo_administracion_new") }}">Registrar</a></p>
         <div class="dataTables_wrapper">
             <table cellspacing="0" class="responsive-table display" id="data-table" width="100%">

@@ -307,4 +307,8 @@ class MiembroConsejo
     {
         return $this->descripcion;
     }
+
+    public function getFullName(){
+        return $this->getName()." ".$this->getFirstname()." ".$this->getLastname();
+    }
 }
