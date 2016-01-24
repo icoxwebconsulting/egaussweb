@@ -7,3 +7,8 @@ services:
     app.mailer:
         class:        BackendBundle\Services\Mailer
         arguments:    ['%app.mailer.transport%']
+
+    twig.extension.intl:
+            class: Twig_Extensions_Extension_Intl
+            tags:
+                - { name: twig.extension }

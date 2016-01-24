@@ -10,17 +10,17 @@
 
             {% endif %}
 
-            {% if active == "dondeestamos" %}
+            {% if active == "global2016" %}
             <li class="active"><a class="waves-effect waves-light" href='{{ path("global2016") }}'><span>Global 2016</span></a></li>
             {% else %}
                 <li><a class="waves-effect waves-light" href='{{ path("global2016") }}'><span>Global 2016</span></a></li>
 
             {% endif %}
 
-            {% if active == "quienessomos" %}
-            <li class="active" ><a class="waves-effect waves-light" href='{{ path("quienes_somos") }}'><span>Quienes Somos</span></a></li>
+            {% if active == "noticias" %}
+            <li class="active" ><a class="waves-effect waves-light" href='{{ path("noticias", {"owner": "Global ImasT"}) }}'><span>Noticias</span></a></li>
             {% else %}
-                <li><a class="waves-effect waves-light" href='{{ path("quienes_somos") }}'><span>Quienes Somos</span></a></li>
+                <li><a class="waves-effect waves-light" href='{{ path("noticias",{"owner": "Global ImasT"}) }}'><span>Noticias</span></a></li>
             {% endif %}
                     <li class='has-sub'><a href='#'><span>Estructura del Holding</span></a>
                         <ul>

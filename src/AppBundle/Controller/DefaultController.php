@@ -77,4 +77,27 @@ class DefaultController extends Controller
 
         return $this->render("AppBundle:App:Global2016.html.twig", array("entity"=> $page[0] ));
     }
+
+    /**
+     * @Route("/noticias/{owner}", name="noticias")
+     */
+    public function noticiasAction(Request $request, $owner)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Noticia");
+        $noticias = $repo->findBy(array("owner"=> $owner));
+
+        return $this->render("AppBundle:App:noticias.html.twig", array("entities"=> $noticias ));
+    }
+    /**
+     * @Route("/noticia/{owner}/{id}", name="noticia")
+     */
+    public function noticiaAction(Request $request, $owner, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Noticia");
+        $noticia = $repo->find($id);
+
+        return $this->render("AppBundle:App:noticia.html.twig", array("entity"=> $noticia ));
+    }
 }

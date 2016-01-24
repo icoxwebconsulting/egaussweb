@@ -1,0 +1,31 @@
+{% extends "::frontbase.html.twig" %}
+{%block body%}
+    <!----------------------------------------------------Centre-------------------------------------------------->
+    <div class="wrapperCenter">
+        <div class="mainContentWrapper">
+            <!--Left-->
+            <div class="row">
+            {% include 'AppBundle:App:menuLeftGlobalImasT.html.twig' with {"active":"noticias"} %}
+
+            <div class="col s7 m12 l6 left">
+            <p class="titlemenupage">{{ entity.titular }}</p>
+
+                                                <p class="justify"><b>Fecha:</b> {{ entity.fecha | date("Y-m-d")  }}</p>
+                                                <p class="justify"><b>Titular:</b> {{ entity.titular }}</p>
+                                                <p class="justify">{{ entity.texto  }}</p>
+
+                                            </div>
+
+
+
+
+
+            </div>
+
+            <div class="col s3 m12 l3">
+            </div>
+            </div>
+        </div>
+        </div>
+
+{%endblock body%}
