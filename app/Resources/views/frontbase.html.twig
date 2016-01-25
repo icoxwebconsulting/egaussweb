@@ -57,10 +57,11 @@
             <li> <span class="btnNav">Noticias</span>
                 <div style="width: 319.333px;" class="subNav"> <div class="subNavContent subNav1Col">
                         <div class="subNavCol"> <ul class="mappingList">
-                                <li><a href="#"><span class="title">Noticias eGauss Holding</span></a></li>
-                                <li><a href="#"><span class="title">Noticias eGauss Innovation</span></a></li>
-                                <li><a href="#"><span class="title">Noticias Global ImasCT</span></a></li>
-                                <li><a href="#"><span class="title">Noticias Techtrans</span></a></li>
+                                <li><a href="{{ path("noticias",{"owner": "eGauss Holding"}) }}"><span class="title">Noticias eGauss Holding</span></a></li>
+                                <li><a href="{{ path("noticias",{"owner": "eGauss Innovation"}) }}"><span class="title">Noticias eGauss Innovation</span></a></li>
+                                <li><a href="{{ path("noticias",{"owner": "Techtrans"}) }}"><span class="title">Noticias Techtrans</span></a></li>
+                                <li><a href="{{ path("noticias",{"owner": "H4DM"}) }}"><span class="title">H4DM</span></a></li>
+                                <li><a href="{{ path("noticias",{"owner": "Fondos de Inversión"}) }}"><span class="title">Fondos de Inversión</span></a></li>
                             </ul> </div>
                     </div></div>
             </li>
@@ -71,8 +72,8 @@
                         <div class="subNavCol"> <ul class="mappingList">
                                 <li><a href="{{ path("que_es_global") }}"><span class="title">¿Qué es Global?</span></a></li>
                                 <li><a href="{{ path("global2016") }}"><span class="title">Global 2016</span></a></li>
-                                <li><a href="#"><span class="title">Noticias Global Imast</span></a></li>
-                                <li><a href="#"><span class="title">Colaboradores</span></a></li>
+                                <li><a href="{{ path("noticias",{"owner": "Global ImasT"}) }}"><span class="title">Noticias Global Imast</span></a></li>
+
                             </ul> </div>
                     </div> </div>
             </li>
@@ -159,9 +160,9 @@
             <div class="footerSitemapCol footerSitemapCol2">
                 <ul><li><p><a href="#careers/careersaltran/innovation-makers.html">Global Imast</a></p>
                         <ul>
-                            <li><a href="#">Que es el Global Imast</a></li>
-                            <li><a href="#">Global 2016</a></li>
-                            <li><a href="#">Noticias Global Imast</a></li>
+                            <li><a href="{{ path("que_es_global") }}">Que es el Global Imast</a></li>
+                            <li><a href="{{ path("global2016") }}">Global 2016</a></li>
+                            <li><a href="{{ path("noticias",{"owner": "Global ImasT"}) }}">Noticias Global Imast</a></li>
                         </ul>
                     </li>
                 </ul>

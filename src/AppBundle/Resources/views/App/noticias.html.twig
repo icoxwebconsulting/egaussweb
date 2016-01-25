@@ -16,12 +16,7 @@
                                                 <img src="{{ asset(entity.getWebPath()) }}" class="responsive-img materialboxed" />
                                             </div>
 
-                                                <p class="justify"> {{ entity.fecha | date('F jS \\a\\t g:ia')|replace({
-                                                        'January'  : 'Enero',
-                                                        'December' : 'Diciembre',
-                                                        'Monday'   : 'Lunes',
-                                                        'Sunday'   : 'Domingo'
-                                                    }) }}</p>
+                                                <p class="justify"> {{ entity.fecha | localizeddate('full', 'medium', 'es') }}</p>
                                                 <p class="justify noticetitle"> {{ entity.titular }}</p>
                                                 <p class="justify">{{ entity.texto | slice(0,200) }}</p>
                                                 <p class="justify alingleft" ><a href="{{ path("noticia", {"owner": "Global ImasT","id": entity.id}) }}">Leer m&aacute;s</a></p>
