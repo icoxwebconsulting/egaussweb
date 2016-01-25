@@ -30,3 +30,7 @@
         </div>
         </div>
 {%endblock body%}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/app/js/menu.js') }}" type="text/javascript"></script>
+{% endblock %}
