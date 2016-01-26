@@ -10,8 +10,8 @@
             <div class="col s7 m12 l6 left">
             <p class="titlemenupage">{{ entity.titular }}</p>
 
-                                                <p class="justify"><b>Fecha:</b> {{ entity.fecha | date("Y-m-d")  }}</p>
-                                                <p class="justify"><b>Titular:</b> {{ entity.titular }}</p>
+                                                <p class="justify"> {{ entity.fecha | localizeddate('full', 'medium', 'es')  }}</p>
+                                                <p class="justify"> {{ entity.titular }}</p>
                                                 <p class="justify">{{ entity.texto  }}</p>
 
                                             </div>

@@ -1,0 +1,76 @@
+
+
+     <div id="breadcrumbs-wrapper" class="grey lighten-3">
+
+         <div class="container">
+             <div class="row">
+                 <div class="col s12 m12 l12">
+                     <h5 class="breadcrumbs-title">Registrar Banner</h5>
+                     <ol class="breadcrumb">
+                         <li><a href="{{ path("dashboard") }}">Panel de Administraci&oacute;n</a>
+                         </li>
+                         <li><a href="#">Administrar Banners</a>
+                         </li>
+                         <li class="active">Registrar Banner</li>
+                     </ol>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+ <div class="container">
+
+     <div class="col s12 m12 l6">
+         <div class="card-panel">
+             <h4 class="header2">Ingrese los datos para el registro.</h4>
+             <div class="row">
+                 <form class="col s12" id="form" action="{{path('_banner_create')}}" method="post">
+                     {{ form_widget(form) }}
+                     <div class="input-field col s12" style="margin-top: 5%;">
+                         <button name="action" type="submit" class="btn cyan waves-effect waves-light center load">Guardar
+
+                         </button>
+                         <a name="cancel"  class="action btn grey waves-effect waves-light center" href="#" url="{{ path("_banner") }}">Cancelar
+
+                         </a>
+                     </div>
+
+                 </form>
+             </div>
+         </div>
+     </div>
+     </div>
+ <script>
+     $('.tooltipped').tooltip({delay: 10});
+     $(".action").on("click", function(e){
+         $('.tooltipped').tooltip('remove');
+         $('.preloader-wrapper').addClass('active');
+         var url = $(this).attr("url");
+         $("#main-wrapper").load(url,function() {
+             $('.preloader-wrapper').removeClass('active');
+         });
+
+     })
+     var options = {
+         beforeSubmit:  showRequest,
+         success:       showResponse
+     };
+
+     function showRequest(){
+         $('.preloader-wrapper').addClass('active');
+     }
+     function showResponse(responseText, statusText, xhr, $form)  {
+         $('.preloader-wrapper').removeClass('active');
+         var obj = jQuery.parseJSON(responseText);
+         if(obj.status){
+             var url = "{{ path("_banner") }}";
+             $("#main-wrapper").load(url);
+             Materialize.toast(obj.message, 1000);
+         }
+         else{
+             Materialize.toast(obj.message, 1000);
+         }
+
+     }
+     $('#form').ajaxForm(options);
+ </script>

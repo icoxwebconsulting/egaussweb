@@ -2,6 +2,7 @@
 
 namespace BackendBundle\Controller;
 
+use BackendBundle\Entity\Banner;
 use BackendBundle\Entity\Colaborador;
 use BackendBundle\Entity\DondeEstamos;
 use BackendBundle\Entity\Evento;
@@ -13,6 +14,8 @@ use BackendBundle\Entity\QueEsGlobal;
 use BackendBundle\Entity\QuienesSomos;
 use BackendBundle\Entity\Video;
 use BackendBundle\Entity\VideoColaborador;
+use BackendBundle\Form\BannerEditType;
+use BackendBundle\Form\BannerType;
 use BackendBundle\Form\ColaboradorEditType;
 use BackendBundle\Form\ColaboradorType;
 use BackendBundle\Form\DondeEstamosEditType;
@@ -1561,6 +1564,168 @@ class BackendController extends Controller
 
 
     }
+
+
+
+    /**
+     * @Route("/banner", name="_banner")
+     * @Template()
+     */
+    public function bannerAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Banner");
+        $entities = $repo->findAll();
+            return $this->render("BackendBundle:Banner:index.html.twig", array("entities" => $entities));
+
+
+    }
+
+    /**
+     * @Route("/banner_create", name="_banner_create")
+     * @Method("POST")
+     */
+    public function bannerCreateAction(Request $request)
+    {
+
+        $document = new Banner();
+        $form = $this->createForm(BannerType::class, $document);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+
+            echo json_encode(array("status" => true, "message" => "Banner registrado satisfactoriamente."));
+            die;
+        } else {
+            echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            die;
+
+        }
+
+    }
+
+    /**
+     * @Route("/banner_new", name="_banner_new")
+     * @Template()
+     */
+    public function newBannerAction()
+    {
+        $document = new Banner();
+        $form = $this->createForm(BannerType::class, $document);
+        return $this->render("BackendBundle:Banner:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/banner_edit/{id}", name="_banner_edit")
+     * @Template()
+     */
+    public function editBannerAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Banner')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Banner.');
+        }
+
+        $form = $this->createForm(BannerEditType::class, $document);
+
+        return $this->render("BackendBundle:Banner:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/banner_update/{id}", name="_banner_update")
+     * @Method("POST")
+     */
+    public function updateBannerAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Banner')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('Unable to find Operation document.');
+        }
+
+        $editForm = $this->createForm(BannerEditType::class, $document);
+        $editForm->handleRequest($request);
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status" => true, "message" => "Banner modificado satisfactoriamente."));
+            die;
+
+        } catch (\Exception $e) {
+            echo json_encode(array("status" => false, "message" => $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+
+    /**
+     * @Route("/banner_delete/{id}", name="_banner_delete")
+     * @Template()
+     */
+    public function bannerDeleteAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Banner')->find($id);
+
+        if (!$document) {
+            echo json_encode(array("status"=> false, "message"=> "No se encontró el Banner que quiere eliminar."));
+            die;
+        }
+        try {
+            $dm->remove($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Banner eliminado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+
+    /**
+     * @Route("/banner_show/{id}", name="_banner_show")
+     * @Template()
+     */
+    public function showBannersAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Banner')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el Banner.');
+        }
+
+
+        return $this->render("BackendBundle:Banner:show.html.twig", array(
+            'entity' => $document
+        ));
+    }
+    
+    
+    
+    
     
     
     

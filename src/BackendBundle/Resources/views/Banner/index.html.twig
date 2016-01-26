@@ -4,13 +4,13 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 m12 l12">
-                    <h5 class="breadcrumbs-title">Noticias</h5>
+                    <h5 class="breadcrumbs-title">Administrar Banner</h5>
                     <ol class="breadcrumb">
                         <li><a href="{{ path("dashboard") }}">Panel de Administraci&oacute;n</a>
                         </li>
-                        <li><a href="#">Noticias</a>
+                        <li><a href="#">Banner</a>
                         </li>
-                        <li class="active">{{ owner }}</li>
+                        <li class="active">Administrar Banner</li>
                     </ol>
                 </div>
             </div>
@@ -21,22 +21,26 @@
 
     <!--start container-->
     <div class="container">
-        <p><a class="btn waves-effect waves-light indigo action" href="#" url="{{ path("_noticia_new", {"owner": owner}) }}">Registrar</a></p>
+        {% if message is defined %}
+            <div class="toats" message="{{ message }}"> </div>
+        {% endif %}
+        {% if error is defined %}
+            <div class="toats" message="{{ error }}"> </div>
+        {% endif %}
+        <p><a class="btn waves-effect waves-light indigo action" href="#" url="{{ path("_banner_new") }}">Registrar</a></p>
         <div class="dataTables_wrapper">
             <table cellspacing="0" class="responsive-table display" id="data-table" width="100%">
                 <thead>
                 <tr>
-                    <th>Titular</th>
-                    <th>Fecha</th>
-                    <th>Link</th>
+                    <th>Titulo</th>
+                    <th>URL</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
-                    <th>Titular</th>
-                    <th>Fecha</th>
-                    <th>Link</th>
+                    <th>Titulo</th>
+                    <th>URL</th>
                     <th>Acciones</th>
                 </tr>
                 </tfoot>
@@ -44,12 +48,11 @@
                 {% for entity in entities %}
                 <tr>
                     <td>{{ entity.titular }}</td>
-                    <td>{{ entity.fecha | date("Y-m-d") }}</td>
                     <td>{{ entity.link }}</td>
-
                     <td>
-                        <a class="tooltipped btn-floating waves-effect waves-light grey action" data-position="top" data-delay="50" data-tooltip="Modificar" href="#" url="{{ path("_noticia_edit", {"id": entity.id, "owner": owner}) }}"><i class="mdi-editor-mode-edit"></i></a>
-                        <a class="tooltipped btn-floating waves-effect waves-light red delete" data-position="top" data-delay="50" data-tooltip="Eliminar" href="#" url="{{ path("_noticia_delete", {"id": entity.id}) }}"><i class="mdi-content-clear"></i></a>
+                        <a class="tooltipped btn-floating waves-effect waves-light grey action" data-position="top" data-delay="50" data-tooltip="Modificar" href="#" url="{{ path("_banner_edit", {"id": entity.id}) }}"><i class="mdi-editor-mode-edit"></i></a>
+                        <a class="tooltipped btn-floating waves-effect waves-light red delete" data-position="top" data-delay="50" data-tooltip="Eliminar" href="#" url="{{ path("_banner_delete", {"id": entity.id}) }}"><i class="mdi-content-clear"></i></a>
+                        <a class="tooltipped btn-floating waves-effect waves-light blue action" data-position="top" data-delay="50" data-tooltip="Ver" href="#" url="{{ path("_banner_show", {"id": entity.id}) }}"><i class="mdi-action-visibility"></i></a>
 
 
                     </td>
@@ -66,8 +69,35 @@
     </div>
 
     <script>
-
         $('.tooltipped').tooltip({delay: 10});
+        $(".action").on("click", function(e){
+            $('.tooltipped').tooltip('remove');
+            $('.preloader-wrapper').addClass('active');
+            var url = $(this).attr("url");
+            $("#main-wrapper").load(url,function() {
+                $('.preloader-wrapper').removeClass('active');
+            });
+
+        })
+
+
+
+        $(".delete").on("click", function(){
+            $('.tooltipped').tooltip('remove');
+            $('.preloader-wrapper').addClass('active');
+            var url = $(this).attr("url");
+            $.ajax({
+                url: url,
+                success: function(data){
+                    var obj = jQuery.parseJSON(data);
+                    Materialize.toast(obj.message, 1000);
+                    $("#main-wrapper").load("{{ path('_banner') }}",function() {
+                        $('.preloader-wrapper').removeClass('active');
+                    });
+                }
+            })
+        })
+
         $('#data-table').DataTable({
             "language": {
                 "zeroRecords": "No hay datos para mostrar",
@@ -83,28 +113,4 @@
                 },
             }
         });
-        $(".action").on("click", function(e){
-            $('.tooltipped').tooltip('remove');
-            $('.preloader-wrapper').addClass('active');
-            var url = $(this).attr("url");
-            $("#main-wrapper").load(url,function() {
-                $('.preloader-wrapper').removeClass('active');
-            });
-
-        })
-
-        $(".delete").on("click", function(){
-            $('.preloader-wrapper').addClass('active');
-            var url = $(this).attr("url");
-            $.ajax({
-                url: url,
-                success: function(data){
-                    var obj = jQuery.parseJSON(data);
-                    Materialize.toast(obj.message, 1000);
-                    $("#main-wrapper").load("{{ path('_noticia', {"owner": owner}) }}",function() {
-                        $('.preloader-wrapper').removeClass('active');
-                    });
-                }
-            })
-        })
     </script>
