@@ -13,84 +13,80 @@
 <div class="site-container snap-content" id="content">
 
     <div class="Wrapper-center">
-        <div id="header">
+        {#<div id="header">
             <div class="eGauss-Logo"> <a href="#"> <img class="png_bg" alt="eGauss" src="{{ asset('bundles/app/images/egauss_logo_head.png')}}"> </a> </div>
-        </div>
+        </div>#}
 
         <!----------------------------------------------------main nav------------------------------------------------------------>
 
+        <div class="row">
+            <div class="col s9">
+                <ul id="mainNav">
+                    <li class="firstItem"><a class="btnNav" href="{{ path("homepage") }}"><span class="btnHome"><span class="homeicon">egaussholding.com</span></span></a></li>
 
-        <ul id="mainNav">
-            <li class="firstItem"><a class="btnNav" href="{{ path("homepage") }}"><span class="btnHome"><span class="homeicon">egaussholding.com</span></span></a></li>
+                    <li><span class="btnNav">Sobre Global</span>
+                        <div style="min-width: 16em;" class="subNav"> <div class="subNavContent subNav1Col">
+                                <div class="subNavCol"> <ul class="mappingList">
+                                        <li><a href="{{ path("mision_vision") }}"><span class="title">Misión y Visión</span></a></li>
+                                        <li><a href="{{ path("donde_estamos") }}"><span class="title">Donde estamos</span></a></li>
+                                        <li><a href="{{ path("quienes_somos") }}"><span class="title">Quienes somos</span></a></li>
+                                        <li><a href="#"><span class="title">Estructura Holdings</span></a>
+                                            <ul class="linksList">
+                                                <li><a class="linkMoreDownload" href="#">eGauss Innovation</a></li>
+                                                <li><a class="linkMoreDownload" href="#">Techtrans</a></li>
+                                                <li><a class="linkMoreDownload" href="#">H4DN</a></li>
+                                                <li><a class="linkMoreDownload" href="#">Fondos de Inversión</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul> </div>
+                            </div></div>
+                    </li>
 
-            <li><span class="btnNav">Sobre Global</span>
-                <div style="width: 319.333px;" class="subNav"> <div class="subNavContent subNav1Col">
-                        <div class="subNavCol"> <ul class="mappingList">
-                                <li><a href="{{ path("mision_vision") }}"><span class="title">Misión y Visión</span></a></li>
-                                <li><a href="{{ path("donde_estamos") }}"><span class="title">Donde estamos</span></a></li>
-                                <li><a href="{{ path("quienes_somos") }}"><span class="title">Quienes somos</span></a></li>
-                                <li><a href="#"><span class="title">Estructura Holdings</span></a>
-                                    <ul class="linksList">
-                                        <li><a class="linkMoreDownload" href="#">eGauss Innovation</a></li>
-                                        <li><a class="linkMoreDownload" href="#">Techtrans</a></li>
-                                        <li><a class="linkMoreDownload" href="#">H4DN</a></li>
-                                        <li><a class="linkMoreDownload" href="#">Fondos de Inversión</a></li>
-                                    </ul>
-                                </li>
-                            </ul> </div>
-                    </div></div>
-            </li>
-
-            <li><span class="btnNav">Ediciones anteriores</span>
-                <div class="subNav" style="width: 638.667px;">  <div class="subNavContent subNav2Col">
-                        <div class="subNavCol"> <ul class="mappingList">
-                                 <ul class="linksList">
-                                        <li><a class="linkMoreDownload" href="#">2013</a></li>
-                                        <li><a class="linkMoreDownload" href="#">2014</a></li>
-                                        <li><a class="linkMoreDownload" href="#">2015</a></li>
-                                    </ul>
-                            </ul> </div>
-                    </div> </div>
-            </li>
-
-
-            <li> <span class="btnNav">Noticias</span>
-                <div style="width: 319.333px;" class="subNav"> <div class="subNavContent subNav1Col">
-                        <div class="subNavCol"> <ul class="mappingList">
-                                <li><a href="{{ path("noticias",{"owner": "eGauss Holding"}) }}"><span class="title">Noticias eGauss Holding</span></a></li>
-                                <li><a href="{{ path("noticias",{"owner": "eGauss Innovation"}) }}"><span class="title">Noticias eGauss Innovation</span></a></li>
-                                <li><a href="{{ path("noticias",{"owner": "Techtrans"}) }}"><span class="title">Noticias Techtrans</span></a></li>
-                                <li><a href="{{ path("noticias",{"owner": "H4DM"}) }}"><span class="title">H4DM</span></a></li>
-                                <li><a href="{{ path("noticias",{"owner": "Fondos de Inversión"}) }}"><span class="title">Fondos de Inversión</span></a></li>
-                            </ul> </div>
-                    </div></div>
-            </li>
+                    <li><span class="btnNav">Ediciones anteriores</span>
+                        <div class="subNav" style="min-width: 14.2em;">  <div class="subNavContent subNav2Col">
+                                <div class="subNavCol"> <ul class="mappingList">
+                                        <ul class="linksList">
+                                            <li><a class="linkMoreDownload" href="#">2013</a></li>
+                                            <li><a class="linkMoreDownload" href="#">2014</a></li>
+                                            <li><a class="linkMoreDownload" href="#">2015</a></li>
+                                        </ul>
+                                    </ul> </div>
+                            </div> </div>
+                    </li>
 
 
-            <li><span class="btnNav">Global ImasT</span>
-                <div style="width: 319.333px;" class="subNav"> <div class="subNavContent subNav1Col">
-                        <div class="subNavCol"> <ul class="mappingList">
-                                <li><a href="{{ path("que_es_global") }}"><span class="title">¿Qué es Global?</span></a></li>
-                                <li><a href="{{ path("global2016") }}"><span class="title">Global 2016</span></a></li>
-                                <li><a href="{{ path("noticias",{"owner": "Global ImasT"}) }}"><span class="title">Noticias Global Imast</span></a></li>
+                    <li> <a href="{{ path("noticias",{"owner": "egauss-holding"}) }}"><span class="btnNav">Noticias</span></a>
+                        <div style="min-width: 16em;" class="subNav"> <div class="subNavContent subNav1Col">
+                                <div class="subNavCol"> <ul class="mappingList">
+                                        <li><a href="{{ path("noticias",{"owner": "egauss-holding"}) }}"><span class="title">Noticias eGauss Holding</span></a></li>
+                                        <li><a href="{{ path("noticias",{"owner": "egauss-innovation"}) }}"><span class="title">Noticias eGauss Innovation</span></a></li>
+                                        <li><a href="{{ path("noticias",{"owner": "techtrans"}) }}"><span class="title">Noticias Techtrans</span></a></li>
+                                        <li><a href="{{ path("noticias",{"owner": "h4dm"}) }}"><span class="title">H4DM</span></a></li>
+                                        <li><a href="{{ path("noticias",{"owner": "fondos-de-inversion"}) }}"><span class="title">Fondos de Inversión</span></a></li>
+                                    </ul> </div>
+                            </div></div>
+                    </li>
 
-                            </ul> </div>
-                    </div> </div>
-            </li>
 
-            <li> <span class="btnNav">Colaboradores</span>
-                {#<div style="width: 319.333px;" class="subNav"> <div class="subNavContent subNav1Col">#}
-                        {#<div class="subNavCol"> <ul class="mappingList">#}
-                                {#<li><a href="#"><span class="title">¿Qué es Global Imast</span></a></li>#}
-                                {#<li><a href="#"><span class="title">Ediciones Anteriores</span></a></li>#}
-                                {#<li><a href="#"><span class="title">Sedes 2015</span></a></li>#}
-                                {#<li><a href="#"><span class="title">Programa 2015</span></a></li>#}
-                                {#<li><a href="#"><span class="title">Noticias Global Imast</span></a></li>#}
-                            {#</ul> </div>#}
-                    {#</div> </div>#}
-            </li>
+                    <li><a href="{{ path("que_es_global") }}"><span class="btnNav">Global ImasT</span></a>
 
-        </ul>
+                    </li>
+
+                    <li class="lilast"> <span class="btnNav">Colaboradores</span>
+
+                    </li>
+
+
+                </ul>
+
+            </div>
+            <div class="col s3">
+                <a href="{{ path("homepage") }}"> <img class="logoheader png_bg responsive-img" alt="eGauss" src="{{ asset('bundles/app/images/egauss_logo_head.png')}}"> </a>
+
+
+            </div>
+        </div>
+
 
     </div>
 </div>
@@ -119,7 +115,7 @@
                 <a class="btnTwitter" target="_top" title="Twitter" href="#"></a>
                 <a class="btnYoutube" target="_top" title="Youtube" href="#"></a>
             </div>
-            <div class="logoArea"><img alt="Altran" src="{{ asset('bundles/app/images/logo_footer.jpg')}}   "></div>
+            <div class="logoArea"><a href="{{ path("homepage") }}" ><img alt="Egauss ImasT" src="{{ asset('bundles/app/images/logo_footer.jpg')}}   "></a></div>
         </div>
 
 

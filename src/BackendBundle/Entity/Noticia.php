@@ -28,6 +28,12 @@ class Noticia
      */
     protected $texto;
 
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $slug;
+
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -65,6 +71,7 @@ class Noticia
 
     public function __construct() {
         $this->fecha = new \DateTime("now");
+        $this->slug = $this->slugify($this->titular);
     }
 
 
@@ -312,5 +319,34 @@ class Noticia
     public function getFecha()
     {
         return $this->fecha;
+    }
+
+    public function slugify ($text) {
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+        return strtolower(preg_replace('/[^A-Za-z0-9-]+/', '-', $text));
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Noticia
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

@@ -1,0 +1,40 @@
+<div class="col s3 m12 l3 left">
+    <span class="titlemenu">Noticias</span>
+    <div id='cssmenu'>
+
+        <ul>
+            {% if active == "egauss-holding" %}
+            <li class="active"><a class="waves-effect waves-light" href='{{ path("noticias", {"owner":"egauss-holding"}) }}'><span>eGauss Holding</span></a></li>
+            {% else %}
+                <li ><a class="waves-effect waves-light" href='{{ path("noticias", {"owner":"egauss-holding"}) }}'><span>eGauss Holding</span></a></li>
+
+            {% endif %}
+
+            {% if active == "egauss-innovation" %}
+            <li class="active"><a class="waves-effect waves-light" href='{{ path("noticias", {"owner":"egauss-innovation"}) }}'><span>eGauss Innovation</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("noticias", {"owner":"egauss-innovation"}) }}'><span>eGauss Innovation</span></a></li>
+
+            {% endif %}
+
+            {% if active == "techtrans" %}
+            <li class="active" ><a class="waves-effect waves-light" href='{{ path("noticias", {"owner":"techtrans"}) }}'><span>Techtrans</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("noticias", {"owner":"techtrans"}) }}'><span>Techtrans</span></a></li>
+            {% endif %}
+
+            {% if active == "h4dm" %}
+            <li class="active" ><a class="waves-effect waves-light" href='{{ path("noticias", {"owner":"h4dm"}) }}'><span>H4DM</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("noticias", {"owner":"h4dm"}) }}'><span>H4DM</span></a></li>
+            {% endif %}
+
+            {% if active == "fondos-de-inversion" %}
+            <li class="active" ><a class="waves-effect waves-light" href='{{ path("noticias", {"owner":"fondos-de-inversion"}) }}'><span>Fondos de Inversión</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("noticias", {"owner":"fondos-de-inversion"}) }}'><span>Fondos de Inversión</span></a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+</div>

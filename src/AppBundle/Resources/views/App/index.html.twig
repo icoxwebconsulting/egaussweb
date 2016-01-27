@@ -152,7 +152,7 @@
                 {% for video in videos %}
                 <div class="videoCol1">
                     <div class="videobox"><iframe style="width: 100%;" src="{{ video.url }}" allowfullscreen="" frameborder="0" height="auto" width="250"></iframe></div>
-                    <div class="videoDescription"><a href="#">{{ video.titulo }}</a></div>
+
                 </div>
                 {% endfor %}
 
@@ -175,7 +175,7 @@
                                 </div>
                                 <div class="col s5 m5 l8">
                                  <p class="justify"> {{ noticia.fecha | date("Y-m-d")  }}</p>
-                                 <a class="justify noticetitleindex" href=" {{ path("noticia", {"owner": noticia.getOwner,"id": noticia.id}) }} "> {{ noticia.titular | slice(0,150) }} ...</a>
+                                 <a class="justify noticetitleindex" href=" {{ path("noticia", {"slug": noticia.slug}) }} "> {{ noticia.titular | slice(0,150) }} ...</a>
                                 </div>
                                 </div>
                                 {% endfor %}

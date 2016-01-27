@@ -89,6 +89,30 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/noticiasglobal/{owner}", name="noticiasglobal")
+     */
+    public function globalImastNoticiasAction(Request $request, $owner)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Noticia");
+        $noticias = $repo->findBy(array("owner"=> $owner));
+
+        return $this->render("AppBundle:App:noticiasglobal.html.twig", array("entities"=> $noticias ));
+    }
+
+    /**
+     * @Route("/noticiasglobal/noticia/{slug}", name="noticiaglobal")
+     */
+    public function globalImastNoticiaAction(Request $request, $slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Noticia");
+        $noticias = $repo->findOneBy(array("slug"=> $slug));
+
+        return $this->render("AppBundle:App:noticiaglobal.html.twig", array("entity"=> $noticias ));
+    }
+
+    /**
      * @Route("/noticias/{owner}", name="noticias")
      */
     public function noticiasAction(Request $request, $owner)
@@ -97,16 +121,16 @@ class DefaultController extends Controller
         $repo = $em->getRepository("BackendBundle:Noticia");
         $noticias = $repo->findBy(array("owner"=> $owner));
 
-        return $this->render("AppBundle:App:noticias.html.twig", array("entities"=> $noticias ));
+        return $this->render("AppBundle:App:noticias.html.twig", array("entities"=> $noticias, "owner"=>$owner ));
     }
     /**
-     * @Route("/noticia/{owner}/{id}", name="noticia")
+     * @Route("/noticia/{slug}", name="noticia")
      */
-    public function noticiaAction(Request $request, $owner, $id)
+    public function noticiaAction(Request $request, $slug)
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository("BackendBundle:Noticia");
-        $noticia = $repo->find($id);
+        $noticia = $repo->findOneBy(array("slug"=>$slug));
 
         return $this->render("AppBundle:App:noticia.html.twig", array("entity"=> $noticia ));
     }

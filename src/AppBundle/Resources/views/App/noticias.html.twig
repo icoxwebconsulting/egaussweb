@@ -5,10 +5,11 @@
         <div class="mainContentWrapper">
             <!--Left-->
             <div class="row">
-            {% include 'AppBundle:App:menuLeftGlobalImasT.html.twig' with {"active":"noticias"} %}
+            {% include 'AppBundle:App:menuLeftNoticias.html.twig' with {"active":owner} %}
 
             <div class="col s7 m12 l9 left">
-                    <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">Noticias</h6>
+                    <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">Noticias {{ owner | upper }}</h6>
+                    {% if entities | length > 0 %}
                     {% for entity in entities %}
                                     <div class="row s12 m12 l12 resultSearchItem">
 
@@ -18,11 +19,17 @@
 
                                                 <p class="justify"> {{ entity.fecha | date("Y-m-d") }}</p>
                                                 <p class="justify noticetitle"> {{ entity.titular }}</p>
-                                                <p class="justify">{{ entity.texto | slice(0,200) }}</p>
-                                                <p class="justify alingleft" ><a href="{{ path("noticia", {"owner": "Global ImasT","id": entity.id}) }}">Leer m&aacute;s</a></p>
+                                                <p class="justify">{{ entity.texto | slice(0,300) }}</p>
+                                        <p class="justify alingleft" ><a class="link" href="{{ path("noticia", {"slug": entity.slug}) }}">Leer m&aacute;s</a></p>
 
                                     </div>
                                 {% endfor %}
+                    {% else %}
+                        <div class="noresult">
+                            <i class="mdi-action-info-outline"></i> No se encontraron resultados
+
+                        </div>
+                        {% endif %}
 
 
 

@@ -643,6 +643,7 @@ class BackendController extends Controller
 
 
             $document->setOwner($owner);
+            $document->setSlug($document->slugify($document->getTitular()));
             $em = $this->getDoctrine()->getManager();
             $em->persist($document);
             $em->flush();
@@ -723,7 +724,7 @@ class BackendController extends Controller
 
         $editForm = $this->createForm(NoticiaEditType::class, $document);
         $editForm->handleRequest($request);
-
+        $document->setSlug($document->slugify($document->getTitular()));
 
         try {
             $dm->persist($document);

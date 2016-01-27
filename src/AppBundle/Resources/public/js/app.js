@@ -1036,7 +1036,7 @@ var MainMenuManager = {
         $(menuItemContainer).removeClass("subNavFullWidth");
         $(subNavContent).addClass(newItemClass);
         calculteWidth = $("#"+this.o.mainNavID).width()/this.o.colMax*mainColNb;
-        $(subNavContent).parent().css("width",calculteWidth);
+        //$(subNavContent).parent().css("width",calculteWidth);
         this.calculatePosition(mainTarget, subNavContent,calculteWidth);
     },
 
