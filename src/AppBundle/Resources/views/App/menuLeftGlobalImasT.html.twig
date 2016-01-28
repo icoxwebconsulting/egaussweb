@@ -9,18 +9,24 @@
                 <li ><a class="waves-effect waves-light" href='{{ path("que_es_global") }}'><span>¿Qué es Global?</span></a></li>
 
             {% endif %}
-
-            {% if active == "global2016" %}
-            <li class="active"><a class="waves-effect waves-light" href='{{ path("global2016") }}'><span>Global 2016</span></a></li>
-            {% else %}
-                <li><a class="waves-effect waves-light" href='{{ path("global2016") }}'><span>Global 2016</span></a></li>
-
-            {% endif %}
+            <li class='has-sub'><a href='#'><span>Ediciones anteriores</span></a>
+                <ul>
+                    <li><a class="waves-effect waves-light" href='#'><span>2013</span></a></li>
+                    <li><a class="waves-effect waves-light" href='#'><span>2014</span></a></li>
+                    <li class='last'><a class="waves-effect waves-light" href='#'><span>2015</span></a></li>
+                </ul>
+            </li>
 
             {% if active == "noticiasglobal" %}
             <li class="active" ><a class="waves-effect waves-light" href='{{ path("noticiasglobal", {"owner": "global-imast"}) }}'><span>Noticias</span></a></li>
             {% else %}
                 <li><a class="waves-effect waves-light" href='{{ path("noticiasglobal",{"owner": "global-imast"}) }}'><span>Noticias</span></a></li>
+            {% endif %}
+            {% if active == "global2016" %}
+                <li class="active"><a class="waves-effect waves-light" href='{{ path("global2016") }}'><span>Global 2016</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("global2016") }}'><span>Global 2016</span></a></li>
+
             {% endif %}
             <li><a class="waves-effect waves-light" href='#'><span>Colaboradores</span></a></li>
         </ul>

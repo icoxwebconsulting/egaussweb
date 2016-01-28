@@ -5,10 +5,9 @@
         <div class="mainContentWrapper">
             <!--Left-->
             <div class="row">
-            {% include 'AppBundle:App:menuLeftNoticias.html.twig' with {"active":owner} %}
+            {% include 'AppBundle:App:menuLeftSoluciones.html.twig' with {"active":owner} %}
 
             <div class="col s7 m12 l6 left top10">
-            <p class="justify"> {{ entity.fecha | date("Y-m-d")  }}</p>
             <h1 class="titlemenupage">{{ entity.titular }}</h1>
             <div class="top10">
                 <div class="col s5">

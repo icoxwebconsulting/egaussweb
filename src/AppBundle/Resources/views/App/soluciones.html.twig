@@ -1,0 +1,47 @@
+{%extends "::frontbase.html.twig"%}
+{%block body%}
+    <!----------------------------------------------------Centre-------------------------------------------------->
+    <div class="wrapperCenter">
+        <div class="mainContentWrapper">
+            <!--Left-->
+            <div class="row">
+            {% include 'AppBundle:App:menuLeftSoluciones.html.twig' with {"active":owner} %}
+
+            <div class="col s7 m12 l9 left">
+                    <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">Soluciones {{ owner | upper }}</h6>
+                    {% if entities | length > 0 %}
+                    {% for entity in entities %}
+                                    <div class="row s12 m12 l12 resultSearchItem">
+
+                                            <div class="col s6 m6 l3" style="margin-top: 1em;">
+                                                <img src="{{ asset(entity.getWebPath()) }}" class="responsive-img materialboxed" />
+                                            </div>
+                                                <p class="justify noticetitle"> {{ entity.titular }}</p>
+                                                <p class="justify">{{ entity.texto | slice(0,300) }}</p>
+                                        <p class="justify alingleft" ><a class="link" href="{{ path("solucion", {"slug": entity.slug}) }}">Leer m&aacute;s</a></p>
+
+                                    </div>
+                                {% endfor %}
+                    {% else %}
+                        <div class="noresult">
+                            <i class="mdi-action-info-outline"></i> No se encontraron resultados
+
+                        </div>
+                        {% endif %}
+
+
+
+
+            </div>
+
+            <div class="col s3 m12 l3">
+            </div>
+            </div>
+        </div>
+        </div>
+
+{%endblock body%}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/app/js/menu.js') }}" type="text/javascript"></script>
+{% endblock %}

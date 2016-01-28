@@ -13,6 +13,8 @@ use BackendBundle\Entity\MisionVision;
 use BackendBundle\Entity\Noticia;
 use BackendBundle\Entity\QueEsGlobal;
 use BackendBundle\Entity\QuienesSomos;
+use BackendBundle\Entity\Servicio;
+use BackendBundle\Entity\Solucion;
 use BackendBundle\Entity\Video;
 use BackendBundle\Entity\VideoColaborador;
 use BackendBundle\Form\BannerEditType;
@@ -35,6 +37,10 @@ use BackendBundle\Form\NoticiaType;
 use BackendBundle\Form\QueEsGlobalType;
 use BackendBundle\Form\QuienesSomosEditType;
 use BackendBundle\Form\QuienesSomosType;
+use BackendBundle\Form\ServicioEditType;
+use BackendBundle\Form\ServicioType;
+use BackendBundle\Form\SolucionEditType;
+use BackendBundle\Form\SolucionType;
 use BackendBundle\Form\VideoColaboradorType;
 use BackendBundle\Form\VideoType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -1838,6 +1844,322 @@ class BackendController extends Controller
             die;
 
         }
+
+    }
+
+
+    /*Servicios*/
+
+    /**
+     * @Route("/servicio/{owner}", name="_servicio")
+     * @Template()
+     * @return array
+     */
+    public function servicioAction($owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:Servicio')->findBy(array("owner"=> $owner));
+        return $this->render('BackendBundle:Servicio:index.html.twig', array("entities" => $miembros, "owner"=> $owner));
+    }
+
+
+    /**
+     * @Route("/servicio_new/{owner}", name="_servicio_new")
+     * @Template()
+     * @return array
+     */
+    public function servicioNewAction($owner)
+    {
+        $document = new Servicio();
+        $form = $this->createForm(ServicioType::class, $document);
+        return $this->render("BackendBundle:Servicio:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            'owner' => $owner
+        ));
+    }
+
+    /**
+     * @Route("/servicio_create/{owner}", name="_servicio_create")
+     * @Method("POST")
+     */
+    public function servicioCreateAction(Request $request, $owner)
+    {
+        $document = new Servicio();
+        $form = $this->createForm(ServicioType::class, $document);
+        $form->handleRequest($request);
+
+
+        $document->setOwner($owner);
+        $document->setSlug($document->slugify($document->getTitular()));
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($document);
+        $em->flush();
+        echo json_encode(array("status"=> true, "message"=> "Servicio registrado satisfactoriamente."));
+        die;
+
+
+
+
+    }
+
+
+    /**
+     * @Route("/servicio_delete/{id}", name="_servicio_delete")
+     * @Template()
+     */
+    public function servicioDeleteAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Servicio')->find($id);
+
+        if (!$document) {
+            echo json_encode(array("status"=> false, "message"=> "No se encontró la Servicio que quiere eliminar."));
+            die;
+        }
+        try {
+            $dm->remove($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Servicio eliminado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/servicio_edit/{id}/{owner}", name="_servicio_edit")
+     * @Template()
+     */
+    public function editservicioAction($id, $owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Servicio')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Servicio.');
+        }
+
+        $form = $this->createForm(ServicioEditType::class, $document);
+
+        return $this->render("BackendBundle:Servicio:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            "owner"=> $owner
+        ));
+    }
+
+    /**
+     * @Route("/servicio_update/{id}", name="_servicio_update")
+     * @Method("POST")
+     */
+    public function updateservicioAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Servicio')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Servicio.');
+        }
+
+        $editForm = $this->createForm(ServicioEditType::class, $document);
+        $editForm->handleRequest($request);
+        $document->setSlug($document->slugify($document->getTitular()));
+
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Servicio modificado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+        }
+
+
+    }
+    /**
+     * @Route("/servicio_show/{id}", name="_servicio_show")
+     */
+    public function showservicioAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Servicio')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Servicio.');
+        }
+
+        return $this->render('BackendBundle:Servicio:show.html.twig', array("entity" => $document));
+
+
+    }
+
+
+
+
+    /*Solucions*/
+
+    /**
+     * @Route("/solucion/{owner}", name="_solucion")
+     * @Template()
+     * @return array
+     */
+    public function solucionAction($owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:Solucion')->findBy(array("owner"=> $owner));
+        return $this->render('BackendBundle:Solucion:index.html.twig', array("entities" => $miembros, "owner"=> $owner));
+    }
+
+
+    /**
+     * @Route("/solucion_new/{owner}", name="_solucion_new")
+     * @Template()
+     * @return array
+     */
+    public function solucionNewAction($owner)
+    {
+        $document = new Solucion();
+        $form = $this->createForm(SolucionType::class, $document);
+        return $this->render("BackendBundle:Solucion:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            'owner' => $owner
+        ));
+    }
+
+    /**
+     * @Route("/solucion_create/{owner}", name="_solucion_create")
+     * @Method("POST")
+     */
+    public function solucionCreateAction(Request $request, $owner)
+    {
+        $document = new Solucion();
+        $form = $this->createForm(SolucionType::class, $document);
+        $form->handleRequest($request);
+
+
+        $document->setOwner($owner);
+        $document->setSlug($document->slugify($document->getTitular()));
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($document);
+        $em->flush();
+        echo json_encode(array("status"=> true, "message"=> "Solucion registrado satisfactoriamente."));
+        die;
+
+
+
+
+    }
+
+
+    /**
+     * @Route("/solucion_delete/{id}", name="_solucion_delete")
+     * @Template()
+     */
+    public function solucionDeleteAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Solucion')->find($id);
+
+        if (!$document) {
+            echo json_encode(array("status"=> false, "message"=> "No se encontró la Solucion que quiere eliminar."));
+            die;
+        }
+        try {
+            $dm->remove($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Solucion eliminado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/solucion_edit/{id}/{owner}", name="_solucion_edit")
+     * @Template()
+     */
+    public function editsolucionAction($id, $owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Solucion')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Solucion.');
+        }
+
+        $form = $this->createForm(SolucionEditType::class, $document);
+
+        return $this->render("BackendBundle:Solucion:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            "owner"=> $owner
+        ));
+    }
+
+    /**
+     * @Route("/solucion_update/{id}", name="_solucion_update")
+     * @Method("POST")
+     */
+    public function updatesolucionAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Solucion')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Solucion.');
+        }
+
+        $editForm = $this->createForm(SolucionEditType::class, $document);
+        $editForm->handleRequest($request);
+        $document->setSlug($document->slugify($document->getTitular()));
+
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Solucion modificado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+        }
+
+
+    }
+    /**
+     * @Route("/solucion_show/{id}", name="_solucion_show")
+     */
+    public function showsolucionAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Solucion')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Solucion.');
+        }
+
+        return $this->render('BackendBundle:Solucion:show.html.twig', array("entity" => $document));
+
 
     }
     

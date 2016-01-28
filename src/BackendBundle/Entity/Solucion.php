@@ -7,12 +7,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Servicio
+ * Solucion
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="servicio")
- * @ORM\Entity(repositoryClass="BackendBundle\Repository\ServicioRepository")
+ * @ORM\Table(name="solucion")
+ * @ORM\Entity(repositoryClass="BackendBundle\Repository\SolucionRepository")
  */
-class Servicio
+class Solucion
 {
     /**
      * @var int
@@ -22,6 +22,7 @@ class Servicio
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
 
     /**
      * @ORM\Column(type="text")
@@ -104,7 +105,7 @@ class Servicio
     }
 
     protected function getUploadDir() {
-        return 'uploads/servicios/' . $this->id;
+        return 'uploads/solucion/' . $this->id;
     }
 
     public function getAbsolutePath() {

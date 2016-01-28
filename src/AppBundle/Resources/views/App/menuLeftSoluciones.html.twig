@@ -1,0 +1,41 @@
+<div class="col s3 m12 l3 left">
+    <span class="titlemenu">Soluciones</span>
+    <div id='cssmenu'>
+
+        <ul>
+            {% if active == "informacion" %}
+            <li class="active"><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"informacion"}) }}'><span>Información</span></a></li>
+            {% else %}
+                <li ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"informacion"}) }}'><span>Información</span></a></li>
+
+            {% endif %}
+
+            {% if active == "intelligent-systems" %}
+            <li class="active"><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"intelligent-systems"}) }}'><span>Intelligent Systems</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"intelligent-systems"}) }}'><span>Intelligent Systems</span></a></li>
+
+            {% endif %}
+
+            {% if active == "lifecycle-experience" %}
+            <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"lifecycle-experience"}) }}'><span>Lifecycle Experience</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"lifecycle-experience"}) }}'><span>Lifecycle Experience</span></a></li>
+            {% endif %}
+
+            {% if active == "information-systems" %}
+            <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"information-systems"}) }}'><span>Information Systems</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"information-systems"}) }}'><span>Information Systems</span></a></li>
+            {% endif %}
+
+            {% if active == "mechanical-engineering" %}
+            <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"mechanical-engineering"}) }}'><span>Mechanical Engineering</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"mechanical-engineering"}) }}'><span>Mechanical Engineering</span></a></li>
+            {% endif %}
+
+        </ul>
+    </div>
+
+</div>

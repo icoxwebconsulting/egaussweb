@@ -143,6 +143,54 @@ class DefaultController extends Controller
         $repo = $em->getRepository("BackendBundle:Noticia");
         $noticia = $repo->findOneBy(array("slug"=>$slug));
 
-        return $this->render("AppBundle:App:noticia.html.twig", array("entity"=> $noticia ));
+        return $this->render("AppBundle:App:noticia.html.twig", array("entity"=> $noticia, "owner"=>$noticia->getOwner() ));
+    }
+
+    /**
+     * @Route("/servicios/{owner}", name="servicios")
+     */
+    public function serviciosAction(Request $request, $owner)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Servicio");
+        $noticias = $repo->findBy(array("owner"=> $owner));
+
+        return $this->render("AppBundle:App:servicios.html.twig", array("entities"=> $noticias, "owner"=>$owner ));
+    }
+
+    /**
+     * @Route("/servicio/{slug}", name="servicio")
+     */
+    public function servicioAction(Request $request, $slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Servicio");
+        $noticia = $repo->findOneBy(array("slug"=>$slug));
+
+        return $this->render("AppBundle:App:servicio.html.twig", array("entity"=> $noticia, "owner"=>$noticia->getOwner() ));
+    }
+
+    /**
+     * @Route("/soluciones/{owner}", name="soluciones")
+     */
+    public function solucionesAction(Request $request, $owner)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Solucion");
+        $noticias = $repo->findBy(array("owner"=> $owner));
+
+        return $this->render("AppBundle:App:soluciones.html.twig", array("entities"=> $noticias, "owner"=>$owner ));
+    }
+
+    /**
+     * @Route("/solucion/{slug}", name="solucion")
+     */
+    public function solucionAction(Request $request, $slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Solucion");
+        $noticia = $repo->findOneBy(array("slug"=>$slug));
+
+        return $this->render("AppBundle:App:solucion.html.twig", array("entity"=> $noticia, "owner"=>$noticia->getOwner() ));
     }
 }

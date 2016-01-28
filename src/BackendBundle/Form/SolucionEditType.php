@@ -3,11 +3,12 @@
 namespace BackendBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ServicioType extends AbstractType
+class SolucionEditType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -21,7 +22,7 @@ class ServicioType extends AbstractType
                 'label' => 'Texto',
                 'attr'  => array('class' => 'materialize-textarea')
             ))
-            ->add('foto')
+            ->add('foto',FileType::class, array('label' => 'Foto','required'=>false))
         ;
     }
     
@@ -31,7 +32,7 @@ class ServicioType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackendBundle\Entity\Servicio'
+            'data_class' => 'BackendBundle\Entity\Solucion'
         ));
     }
 }
