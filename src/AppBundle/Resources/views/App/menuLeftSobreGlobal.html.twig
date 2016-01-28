@@ -24,10 +24,27 @@
             {% endif %}
                     <li class='has-sub'><a href='#'><span>Estructura del Holding</span></a>
                         <ul>
-                            <li><a class="waves-effect waves-light" href='#'><span>eGauss Innovation</span></a></li>
-                            <li><a class="waves-effect waves-light" href='#'><span>Techtrans</span></a></li>
-                            <li><a class="waves-effect waves-light" href='#'><span>H4DN</span></a></li>
-                            <li class='last'><a class="waves-effect waves-light" href='#'><span>Fondos de Iversi&oacute;n</span></a></li>
+                            {% if active == "egauss-innovation" %}
+                            <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"egauss-innovation"}) }}'><span>eGauss Innovation</span></a></li>
+                            {% else %}
+                                <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"egauss-innovation"}) }}'><span>eGauss Innovation</span></a></li>
+                             {% endif %}
+                            {% if active == "techtrans" %}
+                            <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"techtrans"}) }}'><span>Techtrans</span></a></li>
+                            {% else %}
+                                <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"techtrans"}) }}'><span>Techtrans</span></a></li>
+                             {% endif %}
+                            {% if active == "h4dn" %}
+                            <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"h4dn"}) }}'><span>H4DN</span></a></li>
+                            {% else %}
+                                <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"h4dn"}) }}'><span>H4DN</span></a></li>
+                            {% endif %}
+                            {% if active == "fondos-de-inversion" %}
+                            <li class='active last'><a class="waves-effect waves-light" href='{{ path("_estructura", {"owner":"fondos-de-inversion"}) }}'><span>Fondos de Iversi&oacute;n</span></a></li>
+                            {% else %}
+                                <li class='last'><a class="waves-effect waves-light" href='{{ path("_estructura", {"owner":"fondos-de-inversion"}) }}'><span>Fondos de Iversi&oacute;n</span></a></li>
+
+                            {% endif %}
                         </ul>
                     </li>
         </ul>

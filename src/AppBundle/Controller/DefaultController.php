@@ -193,4 +193,14 @@ class DefaultController extends Controller
 
         return $this->render("AppBundle:App:solucion.html.twig", array("entity"=> $noticia, "owner"=>$noticia->getOwner() ));
     }
+
+    /**
+     * @Route("/estructura/{owner}", name="estructura")
+     */
+    public function estructuraAction(Request $request, $owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $entity= $dm->getRepository('BackendBundle:Estructura')->findOneBy(array("owner"=> $owner));
+        return $this->render("AppBundle:App:estructura.html.twig", array("entity"=> $entity, "owner"=>$entity->getOwner() ));
+    }
 }

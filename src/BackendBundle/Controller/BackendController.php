@@ -6,6 +6,7 @@ use BackendBundle\Entity\Banner;
 use BackendBundle\Entity\Colaborador;
 use BackendBundle\Entity\DondeEstamos;
 use BackendBundle\Entity\Ecosistema;
+use BackendBundle\Entity\Estructura;
 use BackendBundle\Entity\Evento;
 use BackendBundle\Entity\Global2016;
 use BackendBundle\Entity\MiembroConsejo;
@@ -25,6 +26,8 @@ use BackendBundle\Form\DondeEstamosEditType;
 use BackendBundle\Form\DondeEstamosType;
 use BackendBundle\Form\EcosistemaEditType;
 use BackendBundle\Form\EcosistemaType;
+use BackendBundle\Form\EstructuraEditType;
+use BackendBundle\Form\EstructuraType;
 use BackendBundle\Form\EventoEditType;
 use BackendBundle\Form\EventoType;
 use BackendBundle\Form\Global2016Type;
@@ -2159,6 +2162,165 @@ class BackendController extends Controller
         }
 
         return $this->render('BackendBundle:Solucion:show.html.twig', array("entity" => $document));
+
+
+    }
+    /*Estructuras*/
+
+    /**
+     * @Route("/estructura/{owner}", name="_estructura")
+     * @Template()
+     * @return array
+     */
+    public function estructuraAction($owner)
+    {
+
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:Estructura')->findBy(array("owner"=> $owner));
+        if (count($miembros) > 0)
+            return $this->render("BackendBundle:Estructura:index.html.twig", array("entity" => $miembros[0], "owner"=>$owner));
+        else
+            return $this->render("BackendBundle:Estructura:index.html.twig", array( "owner"=>$owner));
+    }
+
+
+    /**
+     * @Route("/estructura_new/{owner}", name="_estructura_new")
+     * @Template()
+     * @return array
+     */
+    public function estructuraNewAction($owner)
+    {
+        $document = new Estructura();
+        $form = $this->createForm(EstructuraType::class, $document);
+        return $this->render("BackendBundle:Estructura:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            'owner' => $owner
+        ));
+    }
+
+    /**
+     * @Route("/estructura_create/{owner}", name="_estructura_create")
+     * @Method("POST")
+     */
+    public function estructuraCreateAction(Request $request, $owner)
+    {
+        $document = new Estructura();
+        $form = $this->createForm(EstructuraType::class, $document);
+        $form->handleRequest($request);
+
+
+        $document->setOwner($owner);
+        $document->setSlug($document->slugify($document->getTitular()));
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($document);
+        $em->flush();
+        echo json_encode(array("status"=> true, "message"=> "Estructura registrada satisfactoriamente."));
+        die;
+
+
+
+
+    }
+
+
+    /**
+     * @Route("/estructura_delete/{id}", name="_estructura_delete")
+     * @Template()
+     */
+    public function estructuraDeleteAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Estructura')->find($id);
+
+        if (!$document) {
+            echo json_encode(array("status"=> false, "message"=> "No se encontró la Estructura que quiere eliminar."));
+            die;
+        }
+        try {
+            $dm->remove($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Estructura eliminada satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/estructura_edit/{id}/{owner}", name="_estructura_edit")
+     * @Template()
+     */
+    public function editestructuraAction($id, $owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Estructura')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Estructura.');
+        }
+
+        $form = $this->createForm(EstructuraEditType::class, $document);
+
+        return $this->render("BackendBundle:Estructura:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            "owner"=> $owner
+        ));
+    }
+
+    /**
+     * @Route("/estructura_update/{id}", name="_estructura_update")
+     * @Method("POST")
+     */
+    public function updateestructuraAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Estructura')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Estructura.');
+        }
+
+        $editForm = $this->createForm(EstructuraEditType::class, $document);
+        $editForm->handleRequest($request);
+        $document->setSlug($document->slugify($document->getTitular()));
+
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Estructura modificada satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+        }
+
+
+    }
+    /**
+     * @Route("/estructura_show/{id}", name="_estructura_show")
+     */
+    public function showestructuraAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Estructura')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Estructura.');
+        }
+
+        return $this->render('BackendBundle:Estructura:show.html.twig', array("entity" => $document));
 
 
     }
