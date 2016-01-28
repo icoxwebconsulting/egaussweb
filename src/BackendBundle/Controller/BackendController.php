@@ -5,6 +5,7 @@ namespace BackendBundle\Controller;
 use BackendBundle\Entity\Banner;
 use BackendBundle\Entity\Colaborador;
 use BackendBundle\Entity\DondeEstamos;
+use BackendBundle\Entity\Ecosistema;
 use BackendBundle\Entity\Evento;
 use BackendBundle\Entity\Global2016;
 use BackendBundle\Entity\MiembroConsejo;
@@ -20,6 +21,8 @@ use BackendBundle\Form\ColaboradorEditType;
 use BackendBundle\Form\ColaboradorType;
 use BackendBundle\Form\DondeEstamosEditType;
 use BackendBundle\Form\DondeEstamosType;
+use BackendBundle\Form\EcosistemaEditType;
+use BackendBundle\Form\EcosistemaType;
 use BackendBundle\Form\EventoEditType;
 use BackendBundle\Form\EventoType;
 use BackendBundle\Form\Global2016Type;
@@ -1722,6 +1725,120 @@ class BackendController extends Controller
         return $this->render("BackendBundle:Banner:show.html.twig", array(
             'entity' => $document
         ));
+    }
+
+
+    /*
+     * Ecosistema
+     */
+    /**
+     * @Route("/ecosistema", name="_ecosistema")
+     * @Template()
+     */
+    public function ecosistemaAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Ecosistema");
+        $entities = $repo->findAll();
+
+        if (count($entities) > 0)
+            return $this->render("BackendBundle:Ecosistema:index.html.twig", array("entity" => $entities[0]));
+        else
+            return $this->render("BackendBundle:Ecosistema:index.html.twig");
+
+    }
+
+    /**
+     * @Route("/ecosistema_create", name="_ecosistema_create")
+     * @Method("POST")
+     */
+    public function ecosistemaCreateAction(Request $request)
+    {
+        $document = new Ecosistema();
+        $form = $this->createForm(EcosistemaType::class, $document);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+            echo json_encode(array("status" => true, "message" => "Pagina modificada satisfactoriamente."));
+            die;
+
+        } else {
+            echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            die;
+
+        }
+
+
+    }
+
+    /**
+     * @Route("/ecosistema_new", name="_ecosistema_new")
+     * @Template()
+     */
+    public function newEcosistemaAction()
+    {
+        $document = new Ecosistema();
+        $form = $this->createForm(EcosistemaType::class, $document);
+        return $this->render("BackendBundle:Ecosistema:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/ecosistema_edit/{id}", name="_ecosistema_edit")
+     * @Template()
+     */
+    public function editEcosistemaAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Ecosistema')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la página.');
+        }
+
+        $form = $this->createForm(EcosistemaEditType::class, $document);
+
+        return $this->render("BackendBundle:Ecosistema:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/ecosistema_update/{id}", name="_ecosistema_update")
+     * @Method("POST")
+     */
+    public function updateEcosistemaAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Ecosistema')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('Unable to find Operation document.');
+        }
+
+        $editForm = $this->createForm(EcosistemaEditType::class, $document);
+        $editForm->handleRequest($request);
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status" => true, "message" => "Página modificada satisfactoriamente."));
+            die;
+
+        } catch (\Exception $e) {
+            echo json_encode(array("status" => false, "message" => $e->getMessage()));
+            die;
+
+        }
+
     }
     
     

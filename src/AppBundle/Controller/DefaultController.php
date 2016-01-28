@@ -89,6 +89,17 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/ecosistema-egauss", name="ecosistemaegauss")
+     */
+    public function ecosistemaEgaussAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Ecosistema");
+        $page = $repo->findAll();
+        return $this->render("AppBundle:App:ecosistemaEgauss.html.twig", array("entity"=> $page[0] ));
+    }
+
+    /**
      * @Route("/noticiasglobal/{owner}", name="noticiasglobal")
      */
     public function globalImastNoticiasAction(Request $request, $owner)
