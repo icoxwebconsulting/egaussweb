@@ -25,8 +25,12 @@ class DefaultController extends Controller
         //$noticias = $repo->findBy(array(),array(),0,10);
         $banners = $repo->findBannersLimit(4);
 
+        $repo = $em->getRepository("BackendBundle:Colaborador");
+        //$noticias = $repo->findBy(array(),array(),0,10);
+        $colaboradores = $repo->findColaboradoresLimit(4);
 
-        return $this->render("AppBundle:App:index.html.twig", array("videos"=> $videos, "noticias"=> $noticias, "banners"=> $banners ));
+
+        return $this->render("AppBundle:App:index.html.twig", array("videos"=> $videos, "noticias"=> $noticias, "banners"=> $banners, "colaboradores"=> $colaboradores ));
     }
 
     /**

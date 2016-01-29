@@ -175,7 +175,7 @@
                                 </div>
                                 <div class="col s5 m5 l8">
                                  <p class="justify"> {{ noticia.fecha | date("Y-m-d")  }}</p>
-                                 <a class="justify noticetitleindex" href=" {{ path("noticia", {"slug": noticia.slug}) }} "> {{ noticia.titular | slice(0,150) }} ...</a>
+                                 <a class="justify noticetitleindex" href=" {{ path("noticia", {"slug": noticia.slug}) }} "> {{ noticia.titular | slice(0,100) }} ...</a>
                                 </div>
                                 </div>
                                 {% endfor %}
@@ -204,7 +204,16 @@
                             <p class="title">Colaboradores</p>
                             <div class="contentHomeBottomNewsBox  png_bg">
                                 <div class="colsHome">
-
+                                    {% for entity in colaboradores %}
+                                <div class="row">
+                                <div class="col s3 m3 l4">
+                                <img class="responsive-img materialboxed" src="{{ asset(entity.getWebPath) }}"/>
+                                </div>
+                                <div class="col s5 m5 l8">
+                                 <a class="justify noticetitleindex" href=" {{ path("colaborador", {"slug": entity.slug}) }} "> {{ entity.name | slice(0,100) }}</a>
+                                </div>
+                                </div>
+                                {% endfor %}
                                 </div>
                             </div>
                         </div>
