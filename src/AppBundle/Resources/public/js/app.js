@@ -17,6 +17,15 @@ $(document).ready(function(){
 
     $('ul.tabs').tabs();
 
+    $('.collapsible').collapsible();
+
+
+    $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15 // Creates a dropdown of 15 years to control year
+    });
+
+
 
     //RFLEX TOGGLE HELP
     $(".rflex .candidateBoard .form-input-help .ico-help").click(function(){

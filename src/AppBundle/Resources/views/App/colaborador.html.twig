@@ -11,19 +11,20 @@
                     <div class="video-container top10">
                         <iframe width="150" height="100" src="{{ entity.urlvideo }}" frameborder="0" allowfullscreen></iframe>
                     </div>
-                    <div class="row">
+
+                    <div class="row top10">
                        <div class="col s12">
-                        <ul class="tabs">
-                            <li class="tab col s12"><a class="active" href="#colaboradordatos">{{ entity.name }}</a></li>
-                            <li class="tab col s12"><a href="#colaboradorevento">Eventos</a></li>
-                            <li class="tab col s12"><a href="#video_colaborador_tab">Videos</a></li>
+                        <ul class="tabs z-depth-1">
+                            <li class="tab col s12"><a class="active waves-effect waves-red" href="#colaboradordatos">{{ entity.name }}</a></li>
+                            <li class="tab col s12"><a class="waves-effect waves-red" href="#colaboradorevento">Eventos</a></li>
+                            <li class="tab col s12"><a class="waves-effect waves-red" href="#video_colaborador_tab">Videos</a></li>
                         </ul>
                     </div>
                     <div id="colaboradordatos" class="col s12">
-                        <div class="col s3">
-                            <img class="circle responsive-img activator card-profile-image" alt="" src="{{ asset(entity.webPath) }}">
+                        <div class="col s3 top10">
+                            <img class="responsive-img activator card-profile-image" alt="" src="{{ asset(entity.webPath) }}">
                         </div>
-                        <h5 class="card-title activator grey-text text-darken-4">{{ entity.name }}</h5>
+                        <h5 class="card-title activator grey-text text-darken-4 top10" style="text-align: left; color: #e23337 !important;">{{ entity.name }}</h5>
                         <p class="justify"> {{ entity.descripcion }}</p>
                     </div>
                     <div id="colaboradorevento" class="col s12">

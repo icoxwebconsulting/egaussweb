@@ -1046,4 +1046,8 @@ a, .topic, .siteMap li ul li ul li ul li a, .homeTabContainer li.selected a, .er
     color: #e23337 !important;
 }
 
+.input-field .prefix.active{
+    color: #e23337 !important;
+}
+
 

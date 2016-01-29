@@ -9,7 +9,64 @@
 
             <div class="col s7 m12 l9 left">
                     <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">Noticias {{ owner | upper }}</h6>
-                    {% if entities | length > 0 %}
+
+
+                <ul data-collapsible="accordion" class="accordion collapsible collapsible-accordion">
+                    <li class="">
+                        <div class="collapsible-header waves-effect waves-red" style="text-align: left; color: #e23337 !important;"><i class="mdi-action-search prefix"></i> Buscar</div>
+                        <div class="collapsible-body" style="display: none;">
+                            <form action="#">
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <i class="mdi-action-perm-contact-cal prefix"></i>
+                                        <input type="date" class="datepicker" class="validate" id="fecha">
+                                        <label for="icon_prefix3" class="">Fecha</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <i class="mdi-communication-business prefix"></i>
+                                        <input type="tel" class="validate" id="universidad">
+                                        <label for="icon_telephone" class="">Universidad</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <i class="mdi-communication-location-on prefix"></i>
+                                        <input type="text" class="validate" id="ciudad">
+                                        <label for="icon_prefix3" class="">Ciudad</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <i class="mdi-av-explicit prefix"></i>
+                                        <input type="tel" class="validate" id="empresa">
+                                        <label for="icon_telephone" class="">Empresa</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <i class="mdi-action-language prefix"></i>
+                                        <input type="text" class="validate" id="tecnologia">
+                                        <label for="icon_prefix3" class="">Tecnolog&iacute;a</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <i class="mdi-action-account-box prefix"></i>
+                                        <input type="tel" class="validate" id="cientifico">
+                                        <label for="icon_telephone" class="">Cient&iacute;fico</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <button name="action" type="submit" class="btn cyan waves-effect waves-light center">Buscar
+                                            <i class="mdi-action-search right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+
+
+
+                {% if entities | length > 0 %}
                     {% for entity in entities %}
                                     <div class="row s12 m12 l12 resultSearchItem">
 
