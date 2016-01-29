@@ -1042,4 +1042,8 @@ a, .topic, .siteMap li ul li ul li ul li a, .homeTabContainer li.selected a, .er
     text-align: justify;
 }
 
+.tabs .tab a {
+    color: #e23337 !important;
+}
+
 

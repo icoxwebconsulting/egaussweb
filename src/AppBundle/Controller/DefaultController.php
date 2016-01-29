@@ -73,7 +73,9 @@ class DefaultController extends Controller
         $repo = $em->getRepository("BackendBundle:QueEsGlobal");
         $page = $repo->findAll();
 
-        return $this->render("AppBundle:App:queEsGlobal.html.twig", array("entity"=> $page[0] ));
+        $colaboradores= $em->getRepository('BackendBundle:Colaborador')->findAll();
+
+        return $this->render("AppBundle:App:queEsGlobal.html.twig", array("entity"=> $page[0], "colaboradores"=>$colaboradores ));
     }
 
     /**
@@ -84,8 +86,8 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository("BackendBundle:Global2016");
         $page = $repo->findAll();
-
-        return $this->render("AppBundle:App:Global2016.html.twig", array("entity"=> $page[0] ));
+        $colaboradores= $em->getRepository('BackendBundle:Colaborador')->findAll();
+        return $this->render("AppBundle:App:Global2016.html.twig", array("entity"=> $page[0],"colaboradores"=>$colaboradores ));
     }
 
     /**
@@ -107,8 +109,8 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository("BackendBundle:Noticia");
         $noticias = $repo->findBy(array("owner"=> $owner));
-
-        return $this->render("AppBundle:App:noticiasglobal.html.twig", array("entities"=> $noticias ));
+        $colaboradores= $em->getRepository('BackendBundle:Colaborador')->findAll();
+        return $this->render("AppBundle:App:noticiasglobal.html.twig", array("entities"=> $noticias,"colaboradores"=>$colaboradores  ));
     }
 
     /**
@@ -119,8 +121,8 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository("BackendBundle:Noticia");
         $noticias = $repo->findOneBy(array("slug"=> $slug));
-
-        return $this->render("AppBundle:App:noticiaglobal.html.twig", array("entity"=> $noticias ));
+        $colaboradores= $em->getRepository('BackendBundle:Colaborador')->findAll();
+        return $this->render("AppBundle:App:noticiaglobal.html.twig", array("entity"=> $noticias, "colaboradores"=>$colaboradores  ));
     }
 
     /**
@@ -202,5 +204,48 @@ class DefaultController extends Controller
         $dm = $this->getDoctrine()->getManager();
         $entity= $dm->getRepository('BackendBundle:Estructura')->findOneBy(array("owner"=> $owner));
         return $this->render("AppBundle:App:estructura.html.twig", array("entity"=> $entity, "owner"=>$entity->getOwner() ));
+    }
+
+    /**
+     * @Route("/colaboradores/", name="colaboradores")
+     */
+    public function colaboradoresAction(Request $request)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $entity= $dm->getRepository('BackendBundle:Colaborador')->findAll();
+        return $this->render("AppBundle:App:colaboradores.html.twig", array("entity"=> $entity));
+    }
+
+    /**
+     * @Route("/colaborador/{slug}", name="colaborador")
+     */
+    public function colaboradorAction(Request $request, $slug)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $entity= $dm->getRepository('BackendBundle:Colaborador')->findOneBy(array("slug"=>$slug));
+        $colaboradores= $dm->getRepository('BackendBundle:Colaborador')->findAll();
+        return $this->render("AppBundle:App:colaborador.html.twig", array("entity"=> $entity, "colaboradores"=> $colaboradores));
+    }
+
+    /**
+     * @Route("/evento/{owner}", name="evento")
+     * @return array
+     */
+    public function eventoAction($owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:Evento')->findBy(array("owner"=> $owner));
+        return $this->render('AppBundle:App:eventos.html.twig', array("entities" => $miembros, "owner"=> $owner));
+    }
+
+    /**
+     * @Route("/videocolaborador/{owner}", name="videocolaborador")
+     * @return array
+     */
+    public function videoColaboradorAction($owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:VideoColaborador')->findBy(array("owner"=> $owner));
+        return $this->render('AppBundle:App:videoscolaborador.html.twig', array("entities" => $miembros, "owner"=> $owner));
     }
 }

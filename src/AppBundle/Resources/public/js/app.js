@@ -15,6 +15,8 @@ var isAndroid = ua.indexOf("android") > -1;
 
 $(document).ready(function(){
 
+    $('ul.tabs').tabs();
+
 
     //RFLEX TOGGLE HELP
     $(".rflex .candidateBoard .form-input-help .ico-help").click(function(){

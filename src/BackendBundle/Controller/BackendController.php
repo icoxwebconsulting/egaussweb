@@ -1156,6 +1156,7 @@ class BackendController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $document->setSlug($document->slugify($document->getName()));
             $em->persist($document);
             $em->flush();
             echo json_encode(array("status"=> true, "message"=> "Colaborador registrado satisfactoriamente."));
@@ -1238,7 +1239,7 @@ class BackendController extends Controller
 
         $editForm = $this->createForm(ColaboradorEditType::class, $document);
         $editForm->handleRequest($request);
-
+        $document->setSlug($document->slugify($document->getName()));
 
         try {
             $dm->persist($document);

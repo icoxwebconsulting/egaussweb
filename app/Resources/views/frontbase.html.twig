@@ -4,8 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="initial-scale=1.0">
     <title>Egauss Business Holding | Egauss Business Holding I+T</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/index.css') }}" media="all">
     <link href="{{asset('assets/vendor/materialize/css/materialize.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/index.css') }}" media="all">
 
 </head>
 <body>
@@ -211,11 +211,12 @@
 {% block javascripts %}
 
 <script src="{{ asset('bundles/app/js/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/app/js/jquery-ui.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/vendor/materialize/js/materialize.min.js')}}"></script>
 <script src="{{ asset('bundles/app/js/snap.js')}}" type="text/javascript"></script>
 <script src="{{ asset('bundles/app/js/jquery.marquee.js')}}" type="text/javascript"></script>
 <script src="{{ asset('bundles/app/js/app.js')}}" type="text/javascript"></script>
-<script src="{{ asset('bundles/app/js/jquery-ui.min.js')}}" type="text/javascript"></script>
+
 <script src="{{ asset('bundles/app/js/ajaxcalls.js')}}" type="text/javascript"></script>
 <script language="javascript" type="text/javascript">$(document).ready(function(){eGauss.setHeaderPromo(48688);})</script>
 {% endblock %}

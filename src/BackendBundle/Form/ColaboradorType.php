@@ -17,6 +17,7 @@ class ColaboradorType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('urlvideo')
             ->add('descripcion',TextareaType::class,array(
                 'label' => 'Texto',
                 'attr'  => array('class' => 'materialize-textarea')
