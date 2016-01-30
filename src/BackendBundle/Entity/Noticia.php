@@ -54,6 +54,36 @@ class Noticia
      */
     protected $fecha;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $created_at;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $empresa;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $tecnologia;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $ciudad;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $cientifico;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $universidad;
+
 
     /**
      * @var string $path
@@ -70,7 +100,7 @@ class Noticia
 
 
     public function __construct() {
-        $this->fecha = new \DateTime("now");
+        $this->created_at = new \DateTime("now");
         $this->slug = $this->slugify($this->titular);
     }
 
@@ -348,5 +378,149 @@ class Noticia
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Noticia
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set empresa
+     *
+     * @param string $empresa
+     *
+     * @return Noticia
+     */
+    public function setEmpresa($empresa)
+    {
+        $this->empresa = $empresa;
+
+        return $this;
+    }
+
+    /**
+     * Get empresa
+     *
+     * @return string
+     */
+    public function getEmpresa()
+    {
+        return $this->empresa;
+    }
+
+    /**
+     * Set tecnologia
+     *
+     * @param string $tecnologia
+     *
+     * @return Noticia
+     */
+    public function setTecnologia($tecnologia)
+    {
+        $this->tecnologia = $tecnologia;
+
+        return $this;
+    }
+
+    /**
+     * Get tecnologia
+     *
+     * @return string
+     */
+    public function getTecnologia()
+    {
+        return $this->tecnologia;
+    }
+
+    /**
+     * Set ciudad
+     *
+     * @param string $ciudad
+     *
+     * @return Noticia
+     */
+    public function setCiudad($ciudad)
+    {
+        $this->ciudad = $ciudad;
+
+        return $this;
+    }
+
+    /**
+     * Get ciudad
+     *
+     * @return string
+     */
+    public function getCiudad()
+    {
+        return $this->ciudad;
+    }
+
+    /**
+     * Set cientifico
+     *
+     * @param string $cientifico
+     *
+     * @return Noticia
+     */
+    public function setCientifico($cientifico)
+    {
+        $this->cientifico = $cientifico;
+
+        return $this;
+    }
+
+    /**
+     * Get cientifico
+     *
+     * @return string
+     */
+    public function getCientifico()
+    {
+        return $this->cientifico;
+    }
+
+    /**
+     * Set universidad
+     *
+     * @param string $universidad
+     *
+     * @return Noticia
+     */
+    public function setUniversidad($universidad)
+    {
+        $this->universidad = $universidad;
+
+        return $this;
+    }
+
+    /**
+     * Get universidad
+     *
+     * @return string
+     */
+    public function getUniversidad()
+    {
+        return $this->universidad;
     }
 }

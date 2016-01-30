@@ -15,40 +15,65 @@
                     <li class="">
                         <div class="collapsible-header waves-effect waves-red" style="text-align: left; color: #e23337 !important;"><i class="mdi-action-search prefix"></i> Buscar</div>
                         <div class="collapsible-body" style="display: none;">
-                            <form action="#">
+                            <form action="{{ path("noticiasfilter", {"owner": owner}) }}" method="post">
                                 <div class="row">
                                     <div class="input-field col s6">
                                         <i class="mdi-action-perm-contact-cal prefix"></i>
-                                        <input type="date" class="datepicker" class="validate" id="fecha">
+                                        {% if filtrofecha is defined and filtrofecha | length > 0 %}
+                                        <input type="date" class="datepicker" class="validate" name="fecha" value="{{ filtrofecha }}">
+                                        {% else %}
+                                        <input type="date" class="datepicker" class="validate" name="fecha">
+                                        {% endif %}
                                         <label for="icon_prefix3" class="">Fecha</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <i class="mdi-communication-business prefix"></i>
-                                        <input type="tel" class="validate" id="universidad">
+                                        {% if filtrouniversidad is defined and filtrouniversidad | length > 0 %}
+                                        <input type="tel" class="validate" name="universidad" value="{{ filtrouniversidad }}">
+                                        {% else %}
+                                        <input type="tel" class="validate" name="universidad">
+                                        {% endif %}
                                         <label for="icon_telephone" class="">Universidad</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s6">
                                         <i class="mdi-communication-location-on prefix"></i>
-                                        <input type="text" class="validate" id="ciudad">
+                                        {% if filtrociudad is defined and filtrociudad | length > 0 %}
+                                        <input type="text" class="validate" name="ciudad" value="{{ filtrociudad }}">
+                                        {% else %}
+                                        <input type="text" class="validate" name="ciudad">
+                                        {% endif %}
                                         <label for="icon_prefix3" class="">Ciudad</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <i class="mdi-av-explicit prefix"></i>
-                                        <input type="tel" class="validate" id="empresa">
+                                        {% if filtroempresa is defined and filtroempresa | length > 0 %}
+                                        <input type="tel" class="validate" id="empresa" name="empresa" value="{{ filtroempresa }}">
+                                        {% else %}
+                                            <input type="tel" class="validate" id="empresa" name="empresa" >
+                                        {% endif %}
+
                                         <label for="icon_telephone" class="">Empresa</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s6">
                                         <i class="mdi-action-language prefix"></i>
-                                        <input type="text" class="validate" id="tecnologia">
+                                        {% if filtrotecnologia is defined and filtrotecnologia | length > 0 %}
+                                        <input type="text" class="validate" name="tecnologia">
+                                        {% else %}
+                                        <input type="text" class="validate" name="tecnologia">
                                         <label for="icon_prefix3" class="">Tecnolog&iacute;a</label>
+                                        {% endif %}
                                     </div>
                                     <div class="input-field col s6">
                                         <i class="mdi-action-account-box prefix"></i>
-                                        <input type="tel" class="validate" id="cientifico">
+                                        {% if filtrocientifico is defined and filtrocientifico | length > 0 %}
+                                        <input type="tel" class="validate" name="cientifico" value="{{ filtrocientifico }}">
+                                        {% else %}
+                                        <input type="tel" class="validate" name="cientifico">
+                                        {% endif %}
                                         <label for="icon_telephone" class="">Cient&iacute;fico</label>
                                     </div>
                                 </div>

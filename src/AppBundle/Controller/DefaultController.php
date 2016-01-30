@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -134,13 +135,9 @@ class DefaultController extends Controller
      */
     public function noticiasAction(Request $request, $owner)
     {
-//        $em = $this->getDoctrine()->getManager();
-//        $repo = $em->getRepository("BackendBundle:Noticia");
-//        $noticias = $repo->findBy(array("owner"=> $owner));
-
 
         $em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT a FROM BackendBundle:Noticia a";
+        $dql   = "SELECT a FROM BackendBundle:Noticia a WHERE a.owner='$owner'";
         $query = $em->createQuery($dql);
 
         $paginator  = $this->get('knp_paginator');
@@ -151,6 +148,79 @@ class DefaultController extends Controller
         );
 
         return $this->render("AppBundle:App:noticias.html.twig", array('pagination' => $pagination, "owner"=>$owner ));
+    }
+
+    /**
+     * @Route("/noticias/{owner}/busqueda", name="noticiasfilter")
+     * @Method("POST")
+     */
+    public function noticiasFilterAction(Request $request, $owner)
+    {
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT a FROM BackendBundle:Noticia a WHERE a.owner='$owner'";
+        $empresa=null;
+        $cientifico=null;
+        $universidad=null;
+        $tecnologia=null;
+        $ciudad=null;
+        $fecha=null;
+
+        $filtros = null;
+        if($request->get("empresa") != null){
+            $value = $request->get("empresa");
+            $filtros.=" a.empresa like '$value%'";
+        }
+        if($request->get("ciudad") != null){
+            $ciudad = $request->get("ciudad");
+            if($filtros != null)
+            $filtros.=" or a.ciudad like '$ciudad%'";
+            else
+                $filtros.=" a.ciudad like '$ciudad%'";
+        }
+        if($request->get("universidad") != null){
+            $universidad = $request->get("universidad");
+            if($filtros != null)
+            $filtros.=" or a.universidad like '$universidad%'";
+            else
+                $filtros.=" a.universidad like '$universidad%'";
+        }
+        if($request->get("tecnologia") != null){
+            $tecnologia = $request->get("tecnologia");
+            if($filtros != null)
+            $filtros.=" or a.tecnologia like '$tecnologia%'";
+            else
+                $filtros.=" a.tecnologia like '$tecnologia%'";
+        }
+        if($request->get("cientifico") != null){
+            $cientifico = $request->get("cientifico");
+            if($filtros != null)
+            $filtros.=" or a.cientifico like '$cientifico%'";
+            else
+                $filtros.=" a.cientifico like '$cientifico%'";
+
+        }
+        if($request->get("fecha") != null){
+            $fecha = $request->get("fecha");
+            if($filtros != null)
+            $filtros.=" or a.fecha = '$fecha'";
+            else
+                $filtros.=" a.fecha = '$fecha'";
+        }
+
+        if($filtros!= null){
+            $dql.= "and ($filtros)";
+        }
+
+        $query = $em->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
+
+        return $this->render("AppBundle:App:noticias.html.twig", array('pagination' => $pagination, "owner"=>$owner, "filtroempresa"=> $empresa, "filtrociudad"=>$ciudad, "filtrocientifico"=> $cientifico, "filtrotecnologia"=> $tecnologia, "filtrofecha"=> $fecha, "filtrouniversidad"=> $universidad ));
     }
     /**
      * @Route("/noticia/{slug}", name="noticia")
