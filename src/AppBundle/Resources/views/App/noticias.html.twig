@@ -66,8 +66,8 @@
 
 
 
-                {% if entities | length > 0 %}
-                    {% for entity in entities %}
+                {% if pagination | length > 0 %}
+                    {% for entity in pagination %}
                                     <div class="row s12 m12 l12 resultSearchItem">
 
                                             <div class="col s6 m6 l3" style="margin-top: 1em;">
@@ -81,6 +81,9 @@
 
                                     </div>
                                 {% endfor %}
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
                     {% else %}
                         <div class="noresult">
                             <i class="mdi-action-info-outline"></i> No se encontraron resultados

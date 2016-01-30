@@ -1050,4 +1050,8 @@ a, .topic, .siteMap li ul li ul li ul li a, .homeTabContainer li.selected a, .er
     color: #e23337 !important;
 }
 
+.pagination li.active {
+    color: #fff;
+}
+
 

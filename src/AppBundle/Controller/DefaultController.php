@@ -134,11 +134,23 @@ class DefaultController extends Controller
      */
     public function noticiasAction(Request $request, $owner)
     {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository("BackendBundle:Noticia");
-        $noticias = $repo->findBy(array("owner"=> $owner));
+//        $em = $this->getDoctrine()->getManager();
+//        $repo = $em->getRepository("BackendBundle:Noticia");
+//        $noticias = $repo->findBy(array("owner"=> $owner));
 
-        return $this->render("AppBundle:App:noticias.html.twig", array("entities"=> $noticias, "owner"=>$owner ));
+
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT a FROM BackendBundle:Noticia a";
+        $query = $em->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
+
+        return $this->render("AppBundle:App:noticias.html.twig", array('pagination' => $pagination, "owner"=>$owner ));
     }
     /**
      * @Route("/noticia/{slug}", name="noticia")
@@ -251,5 +263,27 @@ class DefaultController extends Controller
         $dm = $this->getDoctrine()->getManager();
         $miembros= $dm->getRepository('BackendBundle:VideoColaborador')->findBy(array("owner"=> $owner));
         return $this->render('AppBundle:App:videoscolaborador.html.twig', array("entities" => $miembros, "owner"=> $owner));
+    }
+
+
+    /**
+     * @Route("/listnoticias", name="listnoticias")
+     * @return array
+     */
+    public function listAction(Request $request)
+    {
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT a FROM BackendBundle:Noticia a";
+        $query = $em->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
+
+        // parameters to template
+        return $this->render('AppBundle:App:list.html.twig', array('pagination' => $pagination));
     }
 }
