@@ -7,7 +7,7 @@
             <div class="row">
                 {% include 'AppBundle:App:menuLeftGlobalImasT.html.twig' with {"active":"noticiasglobal"} %}
 
-                <div class="col s7 m12 l9 left">
+                <div class="col s7 m12 l6 left">
                     <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">Noticias Global ImasT</h6>
                     {% if entities | length > 0 %}
                         {% for entity in entities %}
@@ -37,6 +37,7 @@
                 </div>
 
                 <div class="col s3 m12 l3">
+                    {% include "AppBundle:App:twitter.html.twig" %}
                 </div>
             </div>
         </div>
