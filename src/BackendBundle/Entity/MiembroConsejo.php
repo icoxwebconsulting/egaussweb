@@ -39,7 +39,7 @@ class MiembroConsejo
     protected $lastname;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     protected $url_linkedin;
 
@@ -309,6 +309,6 @@ class MiembroConsejo
     }
 
     public function getFullName(){
-        return $this->getName()." ".$this->getFirstname()." ".$this->getLastname();
+        return $this->getName();
     }
 }
