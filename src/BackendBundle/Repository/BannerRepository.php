@@ -15,6 +15,19 @@ class BannerRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder("l")
             ->select('n')
             ->from("BackendBundle:Banner", "n")
+            ->where("n.sitio_web ='Egauss Holding'")
+            ->setFirstResult(0) ->setMaxResults($limit)
+            ->orderBy('n.fecha', 'DESC')
+            ->getQuery();
+
+        return $qb->getResult();
+
+    }
+    public function findBannersLimitGlobal($limit){
+        $qb = $this->createQueryBuilder("l")
+            ->select('n')
+            ->from("BackendBundle:Banner", "n")
+            ->where("n.sitio_web ='Global ImasT'")
             ->setFirstResult(0) ->setMaxResults($limit)
             ->orderBy('n.fecha', 'DESC')
             ->getQuery();

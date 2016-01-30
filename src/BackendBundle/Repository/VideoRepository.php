@@ -10,4 +10,29 @@ namespace BackendBundle\Repository;
  */
 class VideoRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findVideosLimit($limit){
+        $qb = $this->createQueryBuilder("l")
+            ->select('n')
+            ->from("BackendBundle:Video", "n")
+            ->where("n.sitio_web ='Egauss Holding'")
+            ->andWhere("n.inhomepage = '1'")
+            ->setFirstResult(0) ->setMaxResults($limit)
+            ->getQuery();
+
+        return $qb->getResult();
+
+    }
+    public function findVideosGlobalLimit($limit){
+        $qb = $this->createQueryBuilder("l")
+            ->select('n')
+            ->from("BackendBundle:Video", "n")
+            ->where("n.sitio_web ='Global ImasT'")
+            ->andWhere("n.inhomepage = '1'")
+            ->setFirstResult(0) ->setMaxResults($limit)
+            ->getQuery();
+
+        return $qb->getResult();
+
+    }
 }

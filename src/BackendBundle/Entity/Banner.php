@@ -39,6 +39,11 @@ class Banner
     protected $titular;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $sitio_web;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected $fecha;
@@ -285,5 +290,29 @@ class Banner
     public function getFecha()
     {
         return $this->fecha;
+    }
+
+    /**
+     * Set sitioWeb
+     *
+     * @param string $sitioWeb
+     *
+     * @return Banner
+     */
+    public function setSitioWeb($sitioWeb)
+    {
+        $this->sitio_web = $sitioWeb;
+
+        return $this;
+    }
+
+    /**
+     * Get sitioWeb
+     *
+     * @return string
+     */
+    public function getSitioWeb()
+    {
+        return $this->sitio_web;
     }
 }

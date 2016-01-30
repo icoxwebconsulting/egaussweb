@@ -3,6 +3,7 @@
 namespace BackendBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,6 +18,11 @@ class BannerType extends AbstractType
     {
         $builder
             ->add('titular')
+            ->add('sitio_web', ChoiceType::class, array(
+                'choices'  => array(
+                    'Egauss Holding' => "Egauss Holding",
+                    'Global ImasT' => "Global ImasT",
+                )))
             ->add('link')
             ->add('texto',TextareaType::class,array(
                 'label' => 'Texto',

@@ -16,7 +16,29 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository("BackendBundle:Video");
-        $videos = $repo->findBy(array("inhomepage"=> true));
+        $videos = $repo->findVideosLimit(4);
+
+        $repo = $em->getRepository("BackendBundle:Noticia");
+        $noticias = $repo->findNoticiasLimit(4);
+
+        $repo = $em->getRepository("BackendBundle:Banner");
+        $banners = $repo->findBannersLimit(4);
+
+        $repo = $em->getRepository("BackendBundle:Colaborador");
+        $colaboradores = $repo->findColaboradoresLimit(4);
+
+
+        return $this->render("AppBundle:App:index.html.twig", array("videos"=> $videos, "noticias"=> $noticias, "banners"=> $banners, "colaboradores"=> $colaboradores ));
+    }
+
+    /**
+     * @Route("/global-imast", name="global-imast")
+     */
+    public function indexGlobalImasTAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Video");
+        $videos = $repo->findVideosGlobalLimit(4);
 
         $repo = $em->getRepository("BackendBundle:Noticia");
         //$noticias = $repo->findBy(array(),array(),0,10);
@@ -24,14 +46,14 @@ class DefaultController extends Controller
 
         $repo = $em->getRepository("BackendBundle:Banner");
         //$noticias = $repo->findBy(array(),array(),0,10);
-        $banners = $repo->findBannersLimit(4);
+        $banners = $repo->findBannersLimitGlobal(4);
 
         $repo = $em->getRepository("BackendBundle:Colaborador");
         //$noticias = $repo->findBy(array(),array(),0,10);
         $colaboradores = $repo->findColaboradoresLimit(4);
 
 
-        return $this->render("AppBundle:App:index.html.twig", array("videos"=> $videos, "noticias"=> $noticias, "banners"=> $banners, "colaboradores"=> $colaboradores ));
+        return $this->render("AppBundle:App:index_globalimast.html.twig", array("videos"=> $videos, "noticias"=> $noticias, "banners"=> $banners, "colaboradores"=> $colaboradores ));
     }
 
     /**
@@ -298,8 +320,8 @@ class DefaultController extends Controller
     public function colaboradoresAction(Request $request)
     {
         $dm = $this->getDoctrine()->getManager();
-        $entity= $dm->getRepository('BackendBundle:Colaborador')->findAll();
-        return $this->render("AppBundle:App:colaboradores.html.twig", array("entity"=> $entity));
+        $colaboradores= $dm->getRepository('BackendBundle:Colaborador')->findAll();
+        return $this->render("AppBundle:App:colaboradores.html.twig", array(  "colaboradores"=> $colaboradores, "entity"=> $colaboradores[0]));
     }
 
     /**
@@ -311,6 +333,17 @@ class DefaultController extends Controller
         $entity= $dm->getRepository('BackendBundle:Colaborador')->findOneBy(array("slug"=>$slug));
         $colaboradores= $dm->getRepository('BackendBundle:Colaborador')->findAll();
         return $this->render("AppBundle:App:colaborador.html.twig", array("entity"=> $entity, "colaboradores"=> $colaboradores));
+    }
+
+    /**
+     * @Route("/colaborador/informacion/{slug}", name="colaboradorinfo")
+     */
+    public function colaboradorInfoAction(Request $request, $slug)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $entity= $dm->getRepository('BackendBundle:Colaborador')->findOneBy(array("slug"=>$slug));
+        $colaboradores= $dm->getRepository('BackendBundle:Colaborador')->findAll();
+        return $this->render("AppBundle:App:colaboradores.html.twig", array("entity"=> $entity, "colaboradores"=> $colaboradores));
     }
 
     /**

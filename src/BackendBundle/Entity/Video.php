@@ -27,6 +27,11 @@ class Video
      */
     protected $titulo;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $sitio_web;
+
 
     /**
      * @ORM\Column(type="string", length=512, nullable=false)
@@ -119,5 +124,29 @@ class Video
     public function getTitulo()
     {
         return $this->titulo;
+    }
+
+    /**
+     * Set sitioWeb
+     *
+     * @param string $sitioWeb
+     *
+     * @return Video
+     */
+    public function setSitioWeb($sitioWeb)
+    {
+        $this->sitio_web = $sitioWeb;
+
+        return $this;
+    }
+
+    /**
+     * Get sitioWeb
+     *
+     * @return string
+     */
+    public function getSitioWeb()
+    {
+        return $this->sitio_web;
     }
 }

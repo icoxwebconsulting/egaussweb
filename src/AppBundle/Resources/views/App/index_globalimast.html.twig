@@ -1,0 +1,165 @@
+{%extends "::frontbase_globalimast.html.twig"%}
+{%block body%}
+    <div id="c48688" class="csc-default">
+            <div id="NewsGalleryBox">
+                <div class="whiteAlphaRounded png_bg">
+                    <div class="galleryBox withSroll" id="headerPromo">
+                        <ul class="framesGallery">
+                        {% if banners | length > 0 %}
+                        {% for banner in banners %}
+                        {% if loop.index == 1 %}
+                        <li style="z-index: 400;" itempos="{{ loop.index }}" class="selected">
+                        {% else %}
+                         <li style="z-index: 400;" itempos="{{ loop.index }}">
+                         {% endif %}
+                                <div class="frame">
+                                    <a href="{{ banner.link }}"><img alt="" thumbsrc="{{ asset(banner.getWebPath)}}" src="{{ asset(banner.getWebPath)}}" border="0" height="300" width="690"></a>
+                                    <div class="description png_bg">
+                                        <p class="supertitle"></p>
+                                        <p class="title"><a href="{{ banner.link }}">{{ banner.titular }}</a></p>
+                                        <p class="summary"><a href="{{ banner.link }}">{{ banner.texto | slice(0,500) }}</a></p>
+                                        <div class="seeall"></div>
+                                        <div class="link"><a href="{{ banner.link }}"><span></span></a></div>
+                                        <div class="link"><a href="{{ banner.link }}"><span></span></a></div>
+                                        <div class="link"><a href="{{ banner.link }}"><span></span></a></div></div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                        {% endif %}
+
+                        </ul>
+
+                        <ul class="navigationGallery">
+                        {% if banners | length > 0 %}
+                        {% for banner in banners %}
+                            <li class=""> <div class="navigationGalleryItem">
+                                    <div class="galleryThumbnail"><a href="{{ banner.link }}"><img alt="innovation matters" src="{{ asset(banner.getWebPath)}}"></a></div>
+                                    <div class="caption"><a href="{{ banner.link }}"><strong></strong></a><a href="{{ banner.link }}">{{ banner.titular }}</a></div>
+                                </div> </li>
+                        {% endfor %}
+                        {% endif %}
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!----------------------------------------------------Centre-------------------------------------------------->
+    <div class="wrapperCenter">
+        <div class="mainContentWrapper">
+
+            <!----------------------------------------Aqui va el espacio de Twitter--------------------------------------->
+            <div class="tx-cw-twitter">
+                <div class="twitterWrapper">
+                    <div class="twitterWrapperBg">
+                        <div class="twitterBtnBox"><a href="https://twitter.com/egaussholding" target="_top" class="twitterWrapperBtn"><span>Twitter</span></a></div>
+                        <div class="twitterPost">  <ul id="tweets">
+                                <li class="" style="top: 32px; left: 0px;">Las fotos más espectaculares de la superficie de la Tierra tomadas desde el espacio
+                                    <a target="_top" title="buff.ly/1LrgtlZ" href="http://t.co/3NAyIj2gLE">buff.ly/1LrgtlZ</a>
+                                    Vía <a target="_top" title="MUY Interesante" href="http://twitter.com/muyinteresante">@muyinteresante</a></li>
+
+                                <li class="" style="top: 32px; left: 0px;">El Índice Altran representa el potencial innovador y tecnológico de los países de la UE
+                                    <a target="_top" title="buff.ly/1LfYUHE" href="http://t.co/S2yMpChkah">buff.ly/1LfYUHE</a>
+                                    <a target="_top" href="http://twitter.com/search?q=%23%C3%8DndiceAltran&amp;src=hash">#ÍndiceAltran</a></li>
+
+                                <li class="" style="top: 32px; left: 0px;">Te presentamos las claves que han llevado al grupo Altran a estar dónde está
+                                    <a target="_top" title="buff.ly/1LfYxNa" href="http://t.co/XhYeAKfNa3">buff.ly/1LfYxNa</a>
+                                    <a target="_top" href="http://twitter.com/search?q=%23Altran360&amp;src=hash">#Altran360</a></li>
+
+                                <li class="" style="top: 32px; left: 0px;">Conoce Innovation Matters, la nueva revista online del grupo Altran, especializada en ciencia y tecnología
+                                    <a target="_top" title="buff.ly/1OAvJCX" href="http://t.co/PnqBSpEk5l">buff.ly/1OAvJCX</a></li>
+
+                                <li class="marquee-showing" style="top: 0px; left: 0px;">La NASA acaba de publicar un video de Júpiter en alta definición y es sencillamente fascinante
+                                    <a target="_top" title="buff.ly/1LdI6AZ" href="http://t.co/EMFr45YclZ">buff.ly/1LdI6AZ</a>
+                                    Vía <a target="_top" title="Batanga Media" href="http://twitter.com/batanga">@batanga</a></li>
+
+                            </ul> </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--------------------------------------------------- Videos HOME ----------------------------------------------------->
+            <div id="videoContentBox">
+                {% if videos | length > 0 %}
+                {% for video in videos %}
+                <div class="videoCol1">
+                    <div class="videobox"><iframe style="width: 100%;" src="{{ video.url }}" allowfullscreen="" frameborder="0" height="auto" width="250"></iframe></div>
+
+                </div>
+                {% endfor %}
+                {% endif %}
+
+
+            </div>
+            <!------------------------------------------------ Secciones Inferior ------------------------------------------------->
+
+            <div class="colsHome">
+                <!---------- Col1 ---------->
+                <div class="col1Home">
+                    <div class="colHomeBody">
+                        <div class="homeBottomNewsBox">
+                            <p class="title">Noticias del Global</p>
+                            <div class="contentHomeBottomNewsBox  png_bg">
+                                <div class="colsHome">
+                                {% for noticia in noticias %}
+                                <div class="row">
+                                <div class="col s3 m3 l4">
+                                <img class="responsive-img materialboxed" src="{{ asset(noticia.getWebPath) }}"/>
+                                </div>
+                                <div class="col s5 m5 l8">
+                                 <p class="justify"> {{ noticia.fecha | date("Y-m-d")  }}</p>
+                                 <a class="justify noticetitleindex" href=" {{ path("noticia", {"slug": noticia.slug}) }} "> {{ noticia.titular | slice(0,100) }} ...</a>
+
+                                </div>
+                                </div>
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------- Col2 ---------->
+                <div class="col2Home">
+                    <div class="colHomeBody">
+                        <div class="homeBottomNewsBox">
+                            <p class="title">Global 2016</p>
+                            <div class="contentHomeBottomNewsBox  png_bg">
+                                <div class="colsHome">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------- Col3 ---------->
+                <div class="col3Home">
+                    <div class="colHomeBody">
+                        <div class="homeBottomNewsBox">
+                            <p class="title">Colaboradores</p>
+                            <div class="contentHomeBottomNewsBox  png_bg">
+                                <div class="colsHome">
+                                    {% for entity in colaboradores %}
+                                <div class="row">
+                                <div class="col s3 m3 l4">
+                                <img class="responsive-img materialboxed" src="{{ asset(entity.getWebPath) }}"/>
+                                </div>
+                                <div class="col s5 m5 l8">
+                                 <a class="justify noticetitleindex" href=" {{ path("colaborador", {"slug": entity.slug}) }} "> {{ entity.name | slice(0,100) }}</a>
+                                 <p class="justify">{{ entity.descripcion | slice(0,80)  }} ...</p>
+                                </div>
+                                </div>
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!------->
+        </div>
+{%endblock body%}
+{%block js%}
+{% endblock %}

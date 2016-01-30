@@ -32,6 +32,12 @@
 
                      </div>
                      <div>
+                         {{ form_label(form.sitio_web) }}
+                         {{ form_errors(form.sitio_web) }}
+                         {{ form_widget(form.sitio_web) }}
+
+                     </div>
+                     <div>
 
                          {{ form_label(form.url) }}
                          {{ form_errors(form.url) }}
@@ -91,4 +97,5 @@
 
      }
      $('#form').ajaxForm(options);
+     $('select').material_select();
  </script>
