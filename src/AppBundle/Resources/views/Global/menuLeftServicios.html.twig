@@ -1,0 +1,46 @@
+<div class="col s3 m12 l3 left">
+    <span class="titlemenu">Servicios</span>
+    <div id='cssmenu'>
+
+        <ul>
+            {% if active == "aeroespacio-y-defensa" %}
+            <li class="active"><a class="waves-effect waves-light" href='{{ path("servicios", {"owner":"aeroespacio-y-defensa"}) }}'><span>Aeroespacio y Defensa</span></a></li>
+            {% else %}
+                <li ><a class="waves-effect waves-light" href='{{ path("servicios", {"owner":"aeroespacio-y-defensa"}) }}'><span>Aeroespacio y Defensa</span></a></li>
+
+            {% endif %}
+
+            {% if active == "sector-publico" %}
+            <li class="active"><a class="waves-effect waves-light" href='{{ path("servicios", {"owner":"sector-publico"}) }}'><span>Sector Público</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("servicios", {"owner":"sector-publico"}) }}'><span>Sector Público</span></a></li>
+
+            {% endif %}
+
+            {% if active == "automocion-infraestructura-y-transporte" %}
+            <li class="active" ><a class="waves-effect waves-light" href='{{ path("servicios", {"owner":"automocion-infraestructura-y-transporte"}) }}'><span>Automoción, Infraestructura y Transporte</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("servicios", {"owner":"automocion-infraestructura-y-transporte"}) }}'><span>Automoción, Infraestructura y Transporte</span></a></li>
+            {% endif %}
+
+            {% if active == "biotecnologia-farmacia-y-salud" %}
+            <li class="active" ><a class="waves-effect waves-light" href='{{ path("servicios", {"owner":"biotecnologia-farmacia-y-salud"}) }}'><span>Biotecnología, Farmacia y Salud</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("servicios", {"owner":"biotecnologia-farmacia-y-salud"}) }}'><span>Biotecnología, Farmacia y Salud</span></a></li>
+            {% endif %}
+
+            {% if active == "energia-e-industria" %}
+            <li class="active" ><a class="waves-effect waves-light" href='{{ path("servicios", {"owner":"energia-e-industria"}) }}'><span>Energía e Industria</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("servicios", {"owner":"energia-e-industria"}) }}'><span>Energía e Industria</span></a></li>
+            {% endif %}
+
+            {% if active == "ferroviario" %}
+            <li class="active" ><a class="waves-effect waves-light" href='{{ path("servicios", {"owner":"ferroviario"}) }}'><span>Ferroviario</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("servicios", {"owner":"ferroviario"}) }}'><span>Ferroviario</span></a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+</div>

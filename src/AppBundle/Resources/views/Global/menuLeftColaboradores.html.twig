@@ -1,0 +1,18 @@
+<div class="col s3 m12 l3 left">
+    <span class="titlemenu">Colaboradores</span>
+    <div id='cssmenu'>
+                <ul>
+                    {% for colaborador in colaboradores %}
+                        {% if colaborador.slug == entity.slug %}
+                        <li class="active"><a class="waves-effect waves-light" href='{{ path("colaboradorinfo", {"slug": colaborador.slug}) }}'><span>{{ colaborador.name }}</span></a></li>
+                        {% else %}
+                            <li ><a class="waves-effect waves-light" href='{{ path("colaboradorinfo", {"slug": colaborador.slug}) }}'><span>{{ colaborador.name }}</span></a></li>
+
+                        {% endif %}
+                    {% endfor %}
+
+                </ul>
+        </ul>
+
+</div>
+</div>

@@ -31,30 +31,7 @@ class DefaultController extends Controller
         return $this->render("AppBundle:App:index.html.twig", array("videos"=> $videos, "noticias"=> $noticias, "banners"=> $banners, "colaboradores"=> $colaboradores ));
     }
 
-    /**
-     * @Route("/global-imast", name="global-imast")
-     */
-    public function indexGlobalImasTAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository("BackendBundle:Video");
-        $videos = $repo->findVideosGlobalLimit(4);
 
-        $repo = $em->getRepository("BackendBundle:Noticia");
-        //$noticias = $repo->findBy(array(),array(),0,10);
-        $noticias = $repo->findNoticiasLimit(4);
-
-        $repo = $em->getRepository("BackendBundle:Banner");
-        //$noticias = $repo->findBy(array(),array(),0,10);
-        $banners = $repo->findBannersLimitGlobal(4);
-
-        $repo = $em->getRepository("BackendBundle:Colaborador");
-        //$noticias = $repo->findBy(array(),array(),0,10);
-        $colaboradores = $repo->findColaboradoresLimit(4);
-
-
-        return $this->render("AppBundle:App:index_globalimast.html.twig", array("videos"=> $videos, "noticias"=> $noticias, "banners"=> $banners, "colaboradores"=> $colaboradores ));
-    }
 
     /**
      * @Route("/mision_vision", name="mision_vision")

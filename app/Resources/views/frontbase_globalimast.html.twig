@@ -21,22 +21,8 @@
                 <ul id="mainNav">
                     <li class="firstItem"><a class="btnNav" href="{{ path("global-imast") }}"><span class="btnHome"><span class="homeicon">globalimast.com</span></span></a></li>
 
-                    <li><a href="{{ path("que_es_global") }}"><span class="btnNav">Sobre Global</span></a>
-                        {#<div style="min-width: 16em;" class="subNav"> <div class="subNavContent subNav1Col">#}
-                                {#<div class="subNavCol"> <ul class="mappingList">#}
-                                        {#<li><a href="{{ path("mision_vision") }}"><span class="title">Misión y Visión</span></a></li>#}
-                                        {#<li><a href="{{ path("donde_estamos") }}"><span class="title">Donde estamos</span></a></li>#}
-                                        {#<li><a href="{{ path("quienes_somos") }}"><span class="title">Quienes somos</span></a></li>#}
-                                        {#<li><a href="#"><span class="title">Estructura Holdings</span></a>#}
-                                            {#<ul class="linksList">#}
-                                                {#<li><a class="linkMoreDownload" href="{{ path("estructura", {"owner":"egauss-innovation"}) }}">eGauss Innovation</a></li>#}
-                                                {#<li><a class="linkMoreDownload" href="{{ path("estructura", {"owner":"techtrans"}) }}">Techtrans</a></li>#}
-                                                {#<li><a class="linkMoreDownload" href="{{ path("estructura", {"owner":"h4dm"}) }}">H4DM</a></li>#}
-                                                {#<li><a class="linkMoreDownload" href="{{ path("_estructura", {"owner":"fondos-de-inversion"}) }}">Fondos de Inversión</a></li>#}
-                                            {#</ul>#}
-                                        {#</li>#}
-                                    {#</ul> </div>#}
-                            {#</div></div>#}
+                    <li><a href="{{ path("globalimast_que_es_global") }}"><span class="btnNav">Sobre Global</span></a>
+
                     </li>
                     <li><span class="btnNav">Ediciones anteriores</span>
                         <div style="min-width: 16em;" class="subNav"> <div class="subNavContent subNav2Col" style="min-height: 100px !important;">
@@ -51,7 +37,7 @@
                     </li>
 
 
-                    <li> <a href="{{ path("noticias",{"owner": "global-imast"}) }}"><span class="btnNav">Noticias</span></a>
+                    <li> <a href="{{ path("globalimast_noticiasglobal",{"owner": "global-imast"}) }}"><span class="btnNav">Noticias</span></a>
                         {#<div style="min-width: 18em;" class="subNav"> <div class="subNavContent subNav1Col">#}
                                 {#<div class="subNavCol"> <ul class="mappingList">#}
                                         {#<li><a href="{{ path("noticias",{"owner": "global-imast"}) }}"><span class="title">Noticias Global ImasT</span></a></li>#}
@@ -60,11 +46,11 @@
                     </li>
 
 
-                    <li><a href="{{ path("global2016") }}"><span class="btnNav">Global 2016</span></a>
+                    <li><a href="{{ path("globalimast_global2016") }}"><span class="btnNav">Global 2016</span></a>
 
                     </li>
 
-                    <li class="lilast"><a href="{{ path("colaboradores") }}"> <span class="btnNav">Colaboradores</span></a>
+                    <li class="lilast"><a href="{{ path("globalimast_colaboradores") }}"> <span class="btnNav">Colaboradores</span></a>
 
                     </li>
 
@@ -113,51 +99,32 @@
 
             <div class="footerSitemapCol footerSitemapCol1">
                 <ul>
-                <li><p><a href="#">Sobre Nosotros</a></p>
-                    <ul>
-                        <li><a href="{{ path("mision_vision") }}">Misión y Visión</a></li>
-                        <li><a href="{{ path("donde_estamos") }}">Donde Estamos</a></li>
-                        <li><a href="{{ path("quienes_somos") }}">Quienes Somos</a></li>
-                        <li><a href="#">Estructura Holdings</a></li>
-                    </ul>
+                <li><p><a href="{{ path("globalimast_que_es_global") }}">Sobre Global</a></p>
+
                 </li></ul>
             </div>
 
             <div class="footerSitemapCol footerSitemapCol1">
                 <ul>
-                <li><p><a href="#">Nuestros Servicios</a></p>
+                <li><p><a href="#">Ediciones anteriores</a></p>
                     <ul >
-                        <li><a  href="{{ path("servicios", {"owner":"aeroespacio-y-defensa"}) }}">Aeroespacio y Defensa</a></li>
-                        <li><a  href="{{ path("servicios", {"owner":"sector-publico"}) }}">Sector Público</a></li>
-                        <li><a  href="{{ path("servicios", {"owner":"automocion-infraestructura-y-transporte"}) }}">Automoción, Infraestructura y Transporte</a></li>
-                        <li><a  href="{{ path("servicios", {"owner":"biotecnologia-farmacia-y-salud"}) }}">Biotecnología, Farmacia y Salud</a></li>
-                        <li><a  href="{{ path("servicios", {"owner":"energia-e-industria"}) }}">Energía e Industria</a></li>
-                        <li><a  href="{{ path("servicios", {"owner":"ferroviario"}) }}">Ferroviario</a></li>
-                    </ul>
+                        <li><a  href="#">2013</a></li>
+                        <li><a  href="#">2014</a></li>
+                        <li><a  href="#">2015</a></li>
+                        </ul>
                 </li>
                     </ul>
             </div>
 
             <div class="footerSitemapCol footerSitemapCol2">
-                <ul><li><p><a href="#">Noticias</a></p>
-                        <ul>
-                            <li><a href="{{ path("noticias",{"owner": "egauss-holding"}) }}"><span class="title">Noticias eGauss Holding</span></a></li>
-                            <li><a href="{{ path("noticias",{"owner": "egauss-innovation"}) }}"><span class="title">Noticias eGauss Innovation</span></a></li>
-                            <li><a href="{{ path("noticias",{"owner": "techtrans"}) }}"><span class="title">Noticias Techtrans</span></a></li>
-                            <li><a href="{{ path("noticias",{"owner": "h4dm"}) }}"><span class="title">Noticias H4DM</span></a></li>
-                            <li><a href="{{ path("noticias",{"owner": "fondos-de-inversion"}) }}"><span class="title">Noticias Fondos de Inversión</span></a></li>
-                            <li><a href="{{ path("noticias",{"owner": "global-imast"}) }}"><span class="title">Noticias Global ImasT</span></a></li>
-                        </ul>
+                <ul><li><p><a href="{{ path("globalimast_noticiasglobal" , {"owner":"global-imast"}) }}">Noticias</a></p>
+
                     </li></ul>
             </div>
 
             <div class="footerSitemapCol footerSitemapCol2">
-                <ul><li><p><a href="{{ path("que_es_global") }}">Global Imast</a></p>
-                        {#<ul>
-                            <li><a href="{">Que es el Global Imast</a></li>
-                            <li><a href="{{ path("global2016") }}">Global 2016</a></li>
-                            <li><a href="{{ path("noticias",{"owner": "Global ImasT"}) }}">Noticias Global Imast</a></li>
-                        </ul>#}
+                <ul><li><p><a href="{{ path("globalimast_global2016") }}">Global 2016</a></p>
+
                     </li>
                 </ul>
             </div>
@@ -165,7 +132,7 @@
             <div class="footerSitemapCol footerSitemapCol2">
                 <ul>
                     <li>
-                        <p><a href="{{ path("ecosistemaegauss") }}">Ecosistema Egauss</a></p>
+                        <p><a href="{{ path("globalimast_colaboradores") }}">Colaboradores</a></p>
                     </li>
                 </ul>
             </div>

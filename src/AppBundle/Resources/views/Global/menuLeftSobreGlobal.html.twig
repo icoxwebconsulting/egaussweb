@@ -1,0 +1,53 @@
+<div class="col s3 m12 l3 left">
+    <span class="titlemenu">Sobre Global</span>
+    <div id='cssmenu'>
+
+        <ul>
+            {% if active == "misionvision" %}
+            <li class="active"><a class="waves-effect waves-light" href='{{ path("mision_vision") }}'><span>Misi&oacute;n y Visi&oacute;n</span></a></li>
+            {% else %}
+                <li ><a class="waves-effect waves-light" href='{{ path("mision_vision") }}'><span>Misi&oacute;n y Visi&oacute;n</span></a></li>
+
+            {% endif %}
+
+            {% if active == "dondeestamos" %}
+            <li class="active"><a class="waves-effect waves-light" href='{{ path("donde_estamos") }}'><span>Donde Estamos</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("donde_estamos") }}'><span>Donde Estamos</span></a></li>
+
+            {% endif %}
+
+            {% if active == "quienessomos" %}
+            <li class="active" ><a class="waves-effect waves-light" href='{{ path("quienes_somos") }}'><span>Quienes Somos</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("quienes_somos") }}'><span>Quienes Somos</span></a></li>
+            {% endif %}
+                    <li class='has-sub'><a href='#'><span>Estructura del Holding</span></a>
+                        <ul>
+                            {% if active == "egauss-innovation" %}
+                            <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"egauss-innovation"}) }}'><span>eGauss Innovation</span></a></li>
+                            {% else %}
+                                <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"egauss-innovation"}) }}'><span>eGauss Innovation</span></a></li>
+                             {% endif %}
+                            {% if active == "techtrans" %}
+                            <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"techtrans"}) }}'><span>Techtrans</span></a></li>
+                            {% else %}
+                                <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"techtrans"}) }}'><span>Techtrans</span></a></li>
+                             {% endif %}
+                            {% if active == "h4dm" %}
+                            <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"h4dm"}) }}'><span>H4DM</span></a></li>
+                            {% else %}
+                                <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"h4dm"}) }}'><span>H4DM</span></a></li>
+                            {% endif %}
+                            {% if active == "fondos-de-inversion" %}
+                            <li class='active last'><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"fondos-de-inversion"}) }}'><span>Fondos de Iversi&oacute;n</span></a></li>
+                            {% else %}
+                                <li class='last'><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"fondos-de-inversion"}) }}'><span>Fondos de Iversi&oacute;n</span></a></li>
+
+                            {% endif %}
+                        </ul>
+                    </li>
+        </ul>
+    </div>
+
+</div>

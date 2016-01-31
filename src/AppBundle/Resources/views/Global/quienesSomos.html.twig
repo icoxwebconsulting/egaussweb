@@ -1,0 +1,59 @@
+{% extends "::frontbase_globalimast.html.twig" %}
+{%block body%}
+    <!----------------------------------------------------Centre-------------------------------------------------->
+    <div class="wrapperCenter">
+        <div class="mainContentWrapper">
+            <!--Left-->
+            <div class="row">
+            {% include 'AppBundle:Global:menuLeftSobreGlobal.html.twig' with {"active":"quienessomos"} %}
+
+            <div class="col s7 m12 l6 left">
+                    <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">{{ entity.titulo }}</h6>
+
+                        <div class="col s12 m12 l12 left">
+                            <img class="responsive-img materialboxed" src="{{ asset(entity.getWebPath) }}">
+                        </div>
+
+
+                        <div class="col s12 m12 l12 left">
+                            <h6 class="btnNav" style="text-align: left !important; padding: 0.7em !important;">Nuestro Consejo de Administraci&oacute;n</h6>
+                            {% for member in members %}
+
+                                    <div class="row s12 m12 l12">
+                                        <div class="card">
+                                            <div class="row" style="margin-bottom: 0px !important;">
+                                                <div class="col s6 m6 l2 left">
+                                                    <img src="{{ asset(member.getWebPath()) }}" class="responsive-img materialboxed" />
+                                                </div>
+                                                <div class="col s6 m6 l6 left">
+                                                    <h6 class="btnNav top10" style="text-align: left !important;">{{ member.getFullName()  }}</h6>
+                                                </div>
+                                                <div class="col s6 m6 l2 right top10">
+                                                    <a href="{{ member.urlLinkedin }}"><i class="iconLinkedin right-align"></i></a>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="card-content">
+                                                <p class="justify">{{ member.getDescripcion() }}</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                        </div>
+
+            </div>
+
+            <div class="col s3 m12 l3">
+            </div>
+            </div>
+        </div>
+        </div>
+
+{%endblock body%}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/app/js/menu.js') }}" type="text/javascript"></script>
+{% endblock %}

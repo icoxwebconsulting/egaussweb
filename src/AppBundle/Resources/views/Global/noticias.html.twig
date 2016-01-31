@@ -1,0 +1,135 @@
+{% extends "::frontbase_globalimast.html.twig" %}
+{%block body%}
+    <!----------------------------------------------------Centre-------------------------------------------------->
+    <div class="wrapperCenter">
+        <div class="mainContentWrapper">
+            <!--Left-->
+            <div class="row">
+            {% include 'AppBundle:Global:menuLeftNoticias.html.twig' with {"active":owner} %}
+
+            <div class="col s7 m12 l6 left">
+                    <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">Noticias {{ owner | upper }}</h6>
+
+
+                <ul data-collapsible="accordion" class="accordion collapsible collapsible-accordion">
+                    <li class="">
+                        <div class="collapsible-header waves-effect waves-red" style="text-align: left; color: #e23337 !important;"><i class="mdi-action-search prefix"></i> Buscar</div>
+                        <div class="collapsible-body" style="display: none;">
+                            <form action="{{ path("noticiasfilter", {"owner": owner}) }}" method="post">
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <i class="mdi-action-perm-contact-cal prefix"></i>
+                                        {% if filtrofecha is defined and filtrofecha | length > 0 %}
+                                        <input type="date" class="datepicker" class="validate" name="fecha" value="{{ filtrofecha }}">
+                                        {% else %}
+                                        <input type="date" class="datepicker" class="validate" name="fecha">
+                                        {% endif %}
+                                        <label for="icon_prefix3" class="">Fecha</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <i class="mdi-communication-business prefix"></i>
+                                        {% if filtrouniversidad is defined and filtrouniversidad | length > 0 %}
+                                        <input type="tel" class="validate" name="universidad" value="{{ filtrouniversidad }}">
+                                        {% else %}
+                                        <input type="tel" class="validate" name="universidad">
+                                        {% endif %}
+                                        <label for="icon_telephone" class="">Universidad</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <i class="mdi-communication-location-on prefix"></i>
+                                        {% if filtrociudad is defined and filtrociudad | length > 0 %}
+                                        <input type="text" class="validate" name="ciudad" value="{{ filtrociudad }}">
+                                        {% else %}
+                                        <input type="text" class="validate" name="ciudad">
+                                        {% endif %}
+                                        <label for="icon_prefix3" class="">Ciudad</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <i class="mdi-av-explicit prefix"></i>
+                                        {% if filtroempresa is defined and filtroempresa | length > 0 %}
+                                        <input type="tel" class="validate" id="empresa" name="empresa" value="{{ filtroempresa }}">
+                                        {% else %}
+                                            <input type="tel" class="validate" id="empresa" name="empresa" >
+                                        {% endif %}
+
+                                        <label for="icon_telephone" class="">Empresa</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <i class="mdi-action-language prefix"></i>
+                                        {% if filtrotecnologia is defined and filtrotecnologia | length > 0 %}
+                                        <input type="text" class="validate" name="tecnologia">
+                                        {% else %}
+                                        <input type="text" class="validate" name="tecnologia">
+                                        <label for="icon_prefix3" class="">Tecnolog&iacute;a</label>
+                                        {% endif %}
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <i class="mdi-action-account-box prefix"></i>
+                                        {% if filtrocientifico is defined and filtrocientifico | length > 0 %}
+                                        <input type="tel" class="validate" name="cientifico" value="{{ filtrocientifico }}">
+                                        {% else %}
+                                        <input type="tel" class="validate" name="cientifico">
+                                        {% endif %}
+                                        <label for="icon_telephone" class="">Cient&iacute;fico</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <button name="action" type="submit" class="btn cyan waves-effect waves-light center">Buscar
+                                            <i class="mdi-action-search right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+
+
+
+                {% if pagination | length > 0 %}
+                    {% for entity in pagination %}
+                                    <div class="row s12 m12 l12 resultSearchItem">
+
+                                            <div class="col s6 m6 l3" style="margin-top: 1em;">
+                                                <img src="{{ asset(entity.getWebPath()) }}" class="responsive-img materialboxed" />
+                                            </div>
+
+                                                <p class="justify"> {{ entity.fecha | date("Y-m-d") }}</p>
+                                                <p class="justify noticetitle"> {{ entity.titular }}</p>
+                                                <p class="justify">{{ entity.texto | slice(0,300) }}</p>
+                                        <p class="justify alingleft" ><a class="link" href="{{ path("noticia", {"slug": entity.slug}) }}">Leer m&aacute;s</a></p>
+
+                                    </div>
+                                {% endfor %}
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                    {% else %}
+                        <div class="noresult">
+                            <i class="mdi-action-info-outline"></i> No se encontraron resultados
+
+                        </div>
+                        {% endif %}
+
+
+
+
+            </div>
+
+            <div class="col s3 m12 l3">
+                {% include "AppBundle:Global:twitter.html.twig" %}
+            </div>
+            </div>
+        </div>
+        </div>
+
+{%endblock body%}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/app/js/menu.js') }}" type="text/javascript"></script>
+{% endblock %}
