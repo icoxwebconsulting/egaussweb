@@ -21,4 +21,15 @@ class NoticiaRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getResult();
 
     }
+    public function findNoticiasGlobalLimit($limit){
+        $qb = $this->createQueryBuilder("l")
+            ->select('n')
+            ->from("BackendBundle:Noticia", "n")
+            ->where("n.owner = 'global-imast'")
+            ->setFirstResult(0) ->setMaxResults($limit)
+            ->getQuery();
+
+        return $qb->getResult();
+
+    }
 }

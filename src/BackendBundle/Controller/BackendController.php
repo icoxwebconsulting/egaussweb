@@ -6,9 +6,11 @@ use BackendBundle\Entity\Banner;
 use BackendBundle\Entity\Colaborador;
 use BackendBundle\Entity\DondeEstamos;
 use BackendBundle\Entity\Ecosistema;
+use BackendBundle\Entity\EdicionAnterior;
 use BackendBundle\Entity\Estructura;
 use BackendBundle\Entity\Evento;
 use BackendBundle\Entity\Global2016;
+use BackendBundle\Entity\Imagen;
 use BackendBundle\Entity\MiembroConsejo;
 use BackendBundle\Entity\MisionVision;
 use BackendBundle\Entity\Noticia;
@@ -26,11 +28,13 @@ use BackendBundle\Form\DondeEstamosEditType;
 use BackendBundle\Form\DondeEstamosType;
 use BackendBundle\Form\EcosistemaEditType;
 use BackendBundle\Form\EcosistemaType;
+use BackendBundle\Form\EdicionAnteriorType;
 use BackendBundle\Form\EstructuraEditType;
 use BackendBundle\Form\EstructuraType;
 use BackendBundle\Form\EventoEditType;
 use BackendBundle\Form\EventoType;
 use BackendBundle\Form\Global2016Type;
+use BackendBundle\Form\ImagenType;
 use BackendBundle\Form\MiembroConsejoEditType;
 use BackendBundle\Form\MiembroConsejoType;
 use BackendBundle\Form\MisionVisionEditType;
@@ -2322,6 +2326,337 @@ class BackendController extends Controller
         }
 
         return $this->render('BackendBundle:Estructura:show.html.twig', array("entity" => $document));
+
+
+    }
+
+
+
+
+
+
+
+    /**
+     * @Route("/edicion", name="_edicion")
+     * @Template()
+     * @return array
+     */
+    public function edicionAction()
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $edicion = $dm->getRepository('BackendBundle:EdicionAnterior')->findAll();
+        return $this->render('BackendBundle:EdicionAnterior:index.html.twig', array("entities" => $edicion));
+    }
+
+    /**
+     * @Route("/edicion_new", name="_edicion_new")
+     * @Template()
+     * @return array
+     */
+    public function edicionNewAction()
+    {
+        $document = new EdicionAnterior();
+        $form = $this->createForm(EdicionAnteriorType::class, $document);
+        return $this->render("BackendBundle:EdicionAnterior:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/edicion_create", name="_edicion_create")
+     * @Method("POST")
+     */
+    public function edicionCreateAction(Request $request)
+    {
+        $document = new EdicionAnterior();
+        $form = $this->createForm(EdicionAnteriorType::class, $document);
+        $form->handleRequest($request);
+        $document->setSlug($document->slugify($document->getTitulo()));
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+            echo json_encode(array("status"=> true, "message"=> "EdicionAnterior registrado satisfactoriamente."));
+            die;
+
+        } else {
+            echo json_encode(array("status"=> false, "message"=> "Los datos que envía son incorrectos."));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/edicion_delete/{id}", name="_edicion_delete")
+     * @Template()
+     */
+    public function edicionDeleteAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:EdicionAnterior')->find($id);
+
+        if (!$document) {
+            echo json_encode(array("status"=> false, "message"=> "No se encontró el EdicionAnterior que quiere eliminar."));
+            die;
+        }
+        try {
+            $dm->remove($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "EdicionAnterior eliminado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/edicion_edit/{id}", name="_edicion_edit")
+     * @Template()
+     */
+    public function editEdicionAnteriorAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:EdicionAnterior')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el EdicionAnterior.');
+        }
+
+        $form = $this->createForm(EdicionAnteriorType::class, $document);
+
+        return $this->render("BackendBundle:EdicionAnterior:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/edicion_show/{id}", name="_edicion_show")
+     * @Template()
+     */
+    public function showEdicionAnteriorAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:EdicionAnterior')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el EdicionAnterior.');
+        }
+
+
+        return $this->render("BackendBundle:EdicionAnterior:show.html.twig", array(
+            'entity' => $document
+        ));
+    }
+
+    /**
+     * @Route("/edicion_update/{id}", name="_edicion_update")
+     * @Method("POST")
+     */
+    public function updateEdicionAnteriorAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:EdicionAnterior')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar el EdicionAnterior.');
+        }
+
+        $editForm = $this->createForm(EdicionAnteriorType::class, $document);
+        $editForm->handleRequest($request);
+        $document->setSlug($document->slugify($document->getTitulo()));
+
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "EdicionAnterior modificado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/imagenes/{owner}/{entityid}", name="_imagenes")
+     * @Template()
+     * @return array
+     */
+    public function imagenesAction($owner, $entityid)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:Imagen')->findBy(array("owner"=> $owner));
+        return $this->render('BackendBundle:Imagen:show.html.twig', array("entities" => $miembros, "owner"=> $owner, "entityid"=> $entityid));
+    }
+
+
+
+
+    /**
+     * @Route("/imagen/{owner}", name="_imagen")
+     * @Template()
+     * @return array
+     */
+    public function imagenAction($owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:Imagen')->findBy(array("owner"=> $owner));
+        return $this->render('BackendBundle:Imagen:index.html.twig', array("entities" => $miembros, "owner"=> $owner));
+    }
+
+
+    /**
+     * @Route("/imagen_new/{owner}/entity/{entityid}", name="_imagen_new")
+     * @Template()
+     * @return array
+     */
+    public function imagenNewAction($owner, $entityid)
+    {
+        $document = new Imagen();
+        $form = $this->createForm(ImagenType::class, $document);
+        return $this->render("BackendBundle:Imagen:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            'owner' => $owner,
+            'entityid' => $entityid
+        ));
+    }
+
+    /**
+     * @Route("/imagen_create/{owner}", name="_imagen_create")
+     * @Method("POST")
+     */
+    public function imagenCreateAction(Request $request, $owner)
+    {
+        $document = new Imagen();
+        $form = $this->createForm(ImagenType::class, $document);
+        $form->handleRequest($request);
+
+
+        $document->setOwner($owner);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($document);
+        $em->flush();
+        echo json_encode(array("status"=> true, "message"=> "Imagen registrada satisfactoriamente."));
+        die;
+
+
+
+
+    }
+
+
+    /**
+     * @Route("/imagen_delete/{id}", name="_imagen_delete")
+     * @Template()
+     */
+    public function imagenDeleteAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Imagen')->find($id);
+
+        if (!$document) {
+            echo json_encode(array("status"=> false, "message"=> "No se encontró la Imagen que quiere eliminar."));
+            die;
+        }
+        try {
+            $dm->remove($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Imagen eliminada satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/imagen_edit/{id}/{owner}", name="_imagen_edit")
+     * @Template()
+     */
+    public function editimagenAction($id, $owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Imagen')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Imagen.');
+        }
+
+        $form = $this->createForm(ImagenEditType::class, $document);
+
+        return $this->render("BackendBundle:Imagen:edit.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            "owner"=> $owner
+        ));
+    }
+
+    /**
+     * @Route("/imagen_update/{id}", name="_imagen_update")
+     * @Method("POST")
+     */
+    public function updateimagenAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Imagen')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Imagen.');
+        }
+
+        $editForm = $this->createForm(ImagenEditType::class, $document);
+        $editForm->handleRequest($request);
+
+        try {
+            $dm->persist($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Imagen modificada satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+        }
+
+
+    }
+    /**
+     * @Route("/imagen_show/{id}", name="_imagen_show")
+     */
+    public function showimagenAction(Request $request, $id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:Imagen')->find($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('No se pudo encontrar la Imagen.');
+        }
+
+        return $this->render('BackendBundle:Imagen:show.html.twig', array("entity" => $document));
 
 
     }

@@ -27,8 +27,11 @@ class DefaultController extends Controller
         $repo = $em->getRepository("BackendBundle:Colaborador");
         $colaboradores = $repo->findColaboradoresLimit(4);
 
+        $repo = $em->getRepository("BackendBundle:Global2016");
+        $global2016 = $repo->findAll();
 
-        return $this->render("AppBundle:App:index.html.twig", array("videos"=> $videos, "noticias"=> $noticias, "banners"=> $banners, "colaboradores"=> $colaboradores ));
+
+        return $this->render("AppBundle:App:index.html.twig", array("videos"=> $videos, "noticias"=> $noticias, "banners"=> $banners, "colaboradores"=> $colaboradores, "global2016"=> $global2016[0] ));
     }
 
 
@@ -343,6 +346,26 @@ class DefaultController extends Controller
         $dm = $this->getDoctrine()->getManager();
         $miembros= $dm->getRepository('BackendBundle:VideoColaborador')->findBy(array("owner"=> $owner));
         return $this->render('AppBundle:App:videoscolaborador.html.twig', array("entities" => $miembros, "owner"=> $owner));
+    }
+
+
+    /**
+     * @Route("/edicion-anterior/{anio}", name="edicionanterior")
+     * @return array
+     */
+    public function edicionAnteriorAction($anio)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $imagenes = null;
+        $edicion= $dm->getRepository('BackendBundle:EdicionAnterior')->findOneBy(array("anio"=> $anio));
+        $colaboradores= $dm->getRepository('BackendBundle:Colaborador')->findAll();
+
+        if($edicion != null){
+        $imagenes= $dm->getRepository('BackendBundle:Imagen')->findBy(array("owner"=> $edicion->generaOwner()));
+        return $this->render('AppBundle:App:edicionanterior.html.twig', array("entity" => $edicion, "imagenes"=> $imagenes, "colaboradores"=> $colaboradores, "anio"=> $anio));
+        }
+        else
+            return $this->render('AppBundle:App:edicionanterior.html.twig', array("colaboradores"=> $colaboradores, "anio"=> $anio));
     }
 
 

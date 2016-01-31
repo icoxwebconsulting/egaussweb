@@ -1,0 +1,62 @@
+{% extends "::frontbase_globalimast.html.twig" %}
+{%block body%}
+    <!----------------------------------------------------Centre-------------------------------------------------->
+    <div class="wrapperCenter">
+        <div class="mainContentWrapper">
+            <!--Left-->
+            <div class="row">
+            {% include 'AppBundle:Global:menuLeftGlobalImasT.html.twig' with {"active":anio} %}
+
+            {% if entity is defined %}
+
+            <div class="col s7 m12 l6 left top10">
+                <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">{{ entity.titulo }}</h6>
+                <div class="col s12 m12 l12 ">
+                    <p style="text-align: justify;" >{{ entity.descripcion }}</p>
+                </div>
+                 <div class="col s12 m12 l12">
+                <div class="video-container top10">
+                    <iframe width="150" height="100" src="{{ entity.urlvideo }}" frameborder="0" allowfullscreen></iframe>
+                </div>
+                </div>
+
+            </div>
+                <div class="col s7 m12 l3 top10">
+                    {% if imagenes | length > 0 %}
+                        {% for imagen in imagenes %}
+                            <div class="col s12">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="{{ asset(imagen.webPath) }}" class="responsive-img" alt="{{ imagen.descripcion }}">
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    {% else %}
+                        <h5 class="errorTitle">No se han cargado imágenes</h5>
+                    {% endif %}
+            </div>
+
+
+            </div>
+        </div>
+        </div>
+        {% else %}
+        <div class="noresult">
+                            <h6 style="text-align: left; padding: 1em; color: #e23337 !important;"><i class="mdi-action-info-outline"></i> No se encontraron resultados</h6>
+
+                        </div>
+        {% endif %}
+
+{%endblock body%}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/app/js/menu.js') }}" type="text/javascript"></script>
+    <script>
+        $( document ).ready(function() {
+            $('#cssmenu li#edicion>a').click();})
+
+    </script>
+{% endblock %}
