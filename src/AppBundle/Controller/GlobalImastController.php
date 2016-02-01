@@ -21,19 +21,19 @@ class GlobalImastController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository("BackendBundle:Video");
-        $videos = $repo->findVideosGlobalLimit(4);
+        $videos = $repo->findVideosGlobalLimit((int) 10);
 
         $repo = $em->getRepository("BackendBundle:Noticia");
         //$noticias = $repo->findBy(array(),array(),0,10);
-        $noticias = $repo->findNoticiasGlobalLimit(4);
+        $noticias = $repo->findNoticiasGlobalLimit((int) 10);
 
         $repo = $em->getRepository("BackendBundle:Banner");
         //$noticias = $repo->findBy(array(),array(),0,10);
-        $banners = $repo->findBannersLimitGlobal(4);
+        $banners = $repo->findBannersLimitGlobal((int) 10);
 
         $repo = $em->getRepository("BackendBundle:Colaborador");
         //$noticias = $repo->findBy(array(),array(),0,10);
-        $colaboradores = $repo->findColaboradoresLimit(4);
+        $colaboradores = $repo->findColaboradoresLimit((int) 10);
 
         $repo = $em->getRepository("BackendBundle:Global2016");
         $global2016 = $repo->findAll();

@@ -16,16 +16,16 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository("BackendBundle:Video");
-        $videos = $repo->findVideosLimit(4);
+        $videos = $repo->findVideosLimit((int) 10);
 
         $repo = $em->getRepository("BackendBundle:Noticia");
-        $noticias = $repo->findNoticiasLimit(4);
+        $noticias = $repo->findNoticiasLimit((int) 10);
 
         $repo = $em->getRepository("BackendBundle:Banner");
-        $banners = $repo->findBannersLimit(4);
+        $banners = $repo->findBannersLimit((int) 10);
 
         $repo = $em->getRepository("BackendBundle:Colaborador");
-        $colaboradores = $repo->findColaboradoresLimit(4);
+        $colaboradores = $repo->findColaboradoresLimit((int) 10);
 
         $repo = $em->getRepository("BackendBundle:Global2016");
         $global2016 = $repo->findAll();

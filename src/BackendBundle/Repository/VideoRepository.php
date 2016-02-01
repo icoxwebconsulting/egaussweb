@@ -15,9 +15,10 @@ class VideoRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder("l")
             ->select('n')
             ->from("BackendBundle:Video", "n")
-            ->where("n.sitio_web ='Egauss Holding'")
+            ->where("n.sitio_web like 'Egauss Holding'")
             ->andWhere("n.inhomepage = '1'")
-            ->setFirstResult(0) ->setMaxResults($limit)
+//            ->setFirstResult(0)
+//            ->setMaxResults($limit)
             ->getQuery();
 
         return $qb->getResult();
@@ -27,9 +28,10 @@ class VideoRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder("l")
             ->select('n')
             ->from("BackendBundle:Video", "n")
-            ->where("n.sitio_web ='Global ImasT'")
+            ->where("n.sitio_web like 'Global ImasT'")
             ->andWhere("n.inhomepage = '1'")
-            ->setFirstResult(0) ->setMaxResults($limit)
+//            ->setFirstResult(0)
+//                ->setMaxResults($limit)
             ->getQuery();
 
         return $qb->getResult();

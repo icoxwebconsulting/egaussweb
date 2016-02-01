@@ -16,7 +16,7 @@ class BannerRepository extends \Doctrine\ORM\EntityRepository
             ->select('n')
             ->from("BackendBundle:Banner", "n")
             ->where("n.sitio_web ='Egauss Holding'")
-            ->setFirstResult(0) ->setMaxResults($limit)
+//            ->setFirstResult(0) ->setMaxResults($limit)
             ->orderBy('n.fecha', 'DESC')
             ->getQuery();
 
@@ -28,7 +28,7 @@ class BannerRepository extends \Doctrine\ORM\EntityRepository
             ->select('n')
             ->from("BackendBundle:Banner", "n")
             ->where("n.sitio_web ='Global ImasT'")
-            ->setFirstResult(0) ->setMaxResults($limit)
+//            ->setFirstResult(0) ->setMaxResults($limit)
             ->orderBy('n.fecha', 'DESC')
             ->getQuery();
 
