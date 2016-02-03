@@ -42,7 +42,7 @@
                 <p style="text-align: justify;" >{{ entity.texto }}</p>
                 <h5>Video</h5>
                 <div class="video-container">
-                    <iframe width="150" height="100" src="{{ entity.urlvideo }}" frameborder="0" allowfullscreen></iframe>
+                    {{ entity.urlvideo | raw }}
                 </div>
             </div>
             <div class="col s12 m12 l4">

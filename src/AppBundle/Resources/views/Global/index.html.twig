@@ -85,7 +85,7 @@
                 {% if videos | length > 0 %}
                 {% for video in videos %}
                 <div class="videoCol1">
-                    <div class="videobox"><iframe style="width: 100%;" src="{{ video.url }}" allowfullscreen="" frameborder="0" height="auto" width="250"></iframe></div>
+                    <div class="videobox">{{ entity.video | raw }}</div>
 
                 </div>
                 {% endfor %}

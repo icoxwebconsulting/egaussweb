@@ -25,7 +25,7 @@
              <div class="card-panel">
 
                  <div class="video-container">
-                     <iframe width="853" height="480" src="{{ entity.url }}" frameborder="0" allowfullscreen></iframe>
+                     {{ entity.url | raw }}
                  </div>
 
              </div>

@@ -3,7 +3,7 @@
     {% for entity in entities %}
             <div class="col s6 m6 l4">
                 <div class="video-container">
-                    <iframe width="150" height="100" src="{{ entity.url }}" frameborder="0" allowfullscreen></iframe>
+                    {{ entity.url | raw }}
                 </div>
             </div>
 

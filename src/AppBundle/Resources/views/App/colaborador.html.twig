@@ -9,7 +9,7 @@
 
                 <div class="col s7 m12 l9 top10">
                     <div class="video-container top10">
-                        <iframe width="150" height="100" src="{{ entity.urlvideo }}" frameborder="0" allowfullscreen></iframe>
+                        {{ entity.urlvideo | raw }}
                     </div>
 
                     <div class="row top10">
