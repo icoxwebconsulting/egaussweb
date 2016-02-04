@@ -483,6 +483,7 @@ a.linkMoreDownload, span.linkMoreDownload {
     overflow: hidden;
     padding: 0 0.5em 0 0;
     width: 18em;
+    height:18em;
 }
 
 .videoCol2 {
@@ -491,6 +492,7 @@ a.linkMoreDownload, span.linkMoreDownload {
     overflow: hidden;
     padding-right: 20px;
     width: 23%;
+    height: 23%;
 }
 
 .videoCol3 {
@@ -499,6 +501,7 @@ a.linkMoreDownload, span.linkMoreDownload {
     overflow: hidden;
     padding-right: 20px;
     width: 23%;
+    height: 23%;
 }
 
 .videoCol4 {
@@ -506,6 +509,7 @@ a.linkMoreDownload, span.linkMoreDownload {
     margin: 0px;
     overflow: hidden;
     width: 23%;
+    height: 23%;
 }
 
 .videoDescription a {
