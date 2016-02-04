@@ -81,7 +81,7 @@
             <div id="videoContentBox">
                 {% for video in videos %}
                 <div class="videoCol1">
-                    <div class="videobox">{{ entity.video | raw }}</div>
+                    <div class="videobox">{{ video.url | raw }}</div>
 
                 </div>
                 {% endfor %}
