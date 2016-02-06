@@ -1,6 +1,7 @@
 <?php
 
 namespace BackendBundle\Repository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * ColaboradorRepository
@@ -12,13 +13,14 @@ class ColaboradorRepository extends \Doctrine\ORM\EntityRepository
 {
 
     public function findColaboradoresLimit($limit){
-        $qb = $this->createQueryBuilder("l")
-            ->select('n')
-            ->from("BackendBundle:Colaborador", "n")
-            ->setFirstResult(0) ->setMaxResults($limit)
-            ->getQuery();
-
-        return $qb->getResult();
+        $em = $this->getEntityManager();
+        $qb = new QueryBuilder($em);
+        $qb->add('select', 'u')
+            ->add('from', 'BackendBundle:Colaborador u')
+            ->setFirstResult( 0 )
+            ->setMaxResults( $limit );
+        $query = $qb->getQuery();
+        return $query->getResult();
 
     }
 }
