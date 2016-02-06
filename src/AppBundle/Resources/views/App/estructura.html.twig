@@ -12,7 +12,7 @@
                 {% if entities | length > 0 %}
                     {% for entity in entities %}
                                     <div class="row resultSearchItem">
-                                    <div class="col s6 m12 l9">
+                                    <div class="col s6 m12 l8">
                                             <div class="col s6 m6 l3" style="margin-top: 1em;">
                                                 <img src="{{ asset(entity.getWebPath()) }}" class="responsive-img materialboxed" />
                                             </div>
@@ -21,7 +21,7 @@
                                         <p class="justify alingleft" ><a class="link" href="{{ path("estructura_detalle", {"slug": entity.slug}) }}">Leer m&aacute;s</a></p>
 
                                     </div>
-                        <div class="col s3 m12 l3">
+                        <div class="col s3 m12 l4">
                             <div class="video-container top10">
                                 {{ entity.urlvideo | raw }}
                             </div>
