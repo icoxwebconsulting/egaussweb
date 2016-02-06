@@ -290,8 +290,18 @@ class DefaultController extends Controller
     public function estructuraAction(Request $request, $owner)
     {
         $dm = $this->getDoctrine()->getManager();
-        $entity= $dm->getRepository('BackendBundle:Estructura')->findOneBy(array("owner"=> $owner));
-        return $this->render("AppBundle:App:estructura.html.twig", array("entity"=> $entity, "owner"=>$entity->getOwner() ));
+        $entity= $dm->getRepository('BackendBundle:Estructura')->findBy(array("owner"=> $owner));
+        return $this->render("AppBundle:App:estructura.html.twig", array("entities"=> $entity, "owner"=>$owner ));
+    }
+
+    /**
+     * @Route("/estructura_detalle/{slug}", name="estructura_detalle")
+     */
+    public function estructuraDetalleAction(Request $request, $slug)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $entity= $dm->getRepository('BackendBundle:Estructura')->findOneBy(array("slug"=> $slug));
+        return $this->render("AppBundle:App:estructura_detail.html.twig", array("entity"=> $entity, "owner"=>$entity->getOwner()));
     }
 
     /**

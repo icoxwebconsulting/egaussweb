@@ -23,6 +23,7 @@ class EstructuraType extends AbstractType
                 'attr'  => array('class' => 'materialize-textarea')
             ))
             ->add('foto')
+            ->add('presentacion')
         ;
     }
     

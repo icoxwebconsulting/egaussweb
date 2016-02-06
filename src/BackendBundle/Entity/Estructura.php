@@ -62,11 +62,26 @@ class Estructura
     protected $path;
     protected $temp;
 
+
+    /**
+     * @var string $path
+     * @ORM\Column(name="pathpresentacion", type="string", nullable=true)
+     */
+    protected $pathpresentacion;
+    protected $temppresentacion;
+
     /**
      * @Assert\File(maxSize ="4M",mimeTypes = {"image/jpg","image/png","image/gif","image/jpeg"})
      * @Assert\NotBlank
      */
     protected $foto;
+
+
+    /**
+     * @Assert\File(maxSize ="4M")
+     * @Assert\NotBlank
+     */
+    protected $presentacion;
 
 
     public function __construct() {
@@ -101,6 +116,23 @@ class Estructura
         }
     }
 
+    /**
+     * Sets foto.
+     *
+     * @param UploadedFile $foto
+     */
+    public function setPresentacion(UploadedFile $presentacion = null) {
+        $this->presentacion = $presentacion;
+        // check if we have an old foto path
+        if (isset($this->path)) {
+            // store the old name to delete after the update
+            $this->temp = $this->path;
+            $this->path = null;
+        } else {
+            $this->path = 'initial';
+        }
+    }
+
     protected function getUploadRootDir() {
         return __DIR__.'/../../../web/'.$this->getUploadDir();
     }
@@ -125,6 +157,22 @@ class Estructura
         return null === $this->path ? null : $this->getUploadDir() . '/crop_' . $this->path;
     }
 
+    public function getAbsolutePathPresentacion() {
+        return null === $this->pathpresentacion ? null : $this->getUploadRootDir() . '/' . $this->pathpresentacion;
+    }
+
+    public function getWebPathPresentacion() {
+        return null === $this->pathpresentacion ? null : $this->getUploadDir() . '/' . $this->pathpresentacion;
+    }
+
+    public function getAbsoluteCropPathPresentacion() {
+        return null === $this->pathpresentacion ? null : $this->getUploadRootDir() . '/crop_' . $this->pathpresentacion;
+    }
+
+    public function getThumbnailPresentacion() {
+        return null === $this->pathpresentacion ? null : $this->getUploadDir() . '/crop_' . $this->pathpresentacion;
+    }
+
     /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
@@ -134,6 +182,10 @@ class Estructura
             $fotoname = sha1(uniqid(mt_rand(), true));
             $this->path = $fotoname . '.' . $this->getFoto()->guessExtension();
         }
+        if (NULL !== $this->presentacion) {
+            $fotoname = sha1(uniqid(mt_rand(), true));
+            $this->pathpresentacion = $fotoname . '.' . $this->getPresentacion()->guessExtension();
+        }
     }
 
     /**
@@ -141,7 +193,7 @@ class Estructura
      * @ORM\PostUpdate()
      */
     public function upload() {
-        if (null === $this->getFoto()) {
+        if (null === $this->getFoto() && null === $this->getPresentacion() ) {
             return;
         }
         if (isset($this->temp)) {
@@ -154,6 +206,17 @@ class Estructura
         }
         $this->getFoto()->move($this->getUploadRootDir(), $this->path);
         $this->foto = null;
+
+        if (isset($this->temppresentacion)) {
+            try {
+                unlink($this->getUploadRootDir() . '/' . $this->temppresentacion);
+            } catch (\Exception $e) {
+                //nada
+            }
+            $this->temppresentacion = null;
+        }
+        $this->getPresentacion()->move($this->getUploadRootDir(), $this->pathpresentacion);
+        $this->presentacion = null;
     }
 
     /**
@@ -161,6 +224,14 @@ class Estructura
      */
     public function removeUpload() {
         if ($foto = $this->getAbsolutePath()) {
+            try {
+                unlink($foto);
+            } catch (\Exception $e) {
+                //ignore
+            }
+        }
+
+        if ($foto = $this->getAbsolutePathPresentacion()) {
             try {
                 unlink($foto);
             } catch (\Exception $e) {
@@ -182,12 +253,24 @@ class Estructura
     }
 
     /**
+     * Set path
+     *
+     * @param string $path
+     * @return Document
+     */
+    public function setPathPresentacion($path) {
+        $this->pathpresentacion = $path;
+
+        return $this;
+    }
+
+    /**
      * Get path
      *
      * @return string
      */
-    public function getPath() {
-        return $this->path;
+    public function getPathPresentacion() {
+        return $this->pathpresentacion;
     }
 
     /**
@@ -197,6 +280,10 @@ class Estructura
      */
     public function getFoto() {
         return $this->foto;
+    }
+
+    public function getPresentacion() {
+        return $this->presentacion;
     }
 
     /**

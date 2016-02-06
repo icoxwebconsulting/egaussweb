@@ -24,6 +24,7 @@ class EstructuraEditType extends AbstractType
                 'attr'  => array('class' => 'materialize-textarea')
             ))
             ->add('foto',FileType::class, array('label' => 'Foto','required'=>false))
+            ->add('presentacion',FileType::class, array('label' => 'Presentación','required'=>false))
         ;
     }
     

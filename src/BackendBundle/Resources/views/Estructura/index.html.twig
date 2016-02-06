@@ -1,73 +1,109 @@
+    <!--breadcrumbs start-->
+    <div id="breadcrumbs-wrapper" class="grey lighten-3">
 
-<!--breadcrumbs start-->
-<div id="breadcrumbs-wrapper" class="grey lighten-3">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <h5 class="breadcrumbs-title">Administrar Estructura</h5>
+                    <ol class="breadcrumb">
+                        <li><a href="{{ path("dashboard") }}">Panel de Administraci&oacute;n</a>
+                        </li>
 
-    <div class="container">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <h5 class="breadcrumbs-title">Estructura del Holding</h5>
-                <ol class="breadcrumb">
-                    <li><a href="{{ path("dashboard") }}">Panel de Administraci&oacute;n</a>
-                    </li>
-                    <li><a href="#">Estructura del Holding</a>
-                    </li>
-                    <li class="active">Estructura del Holding - {{ owner | upper }}</li>
-                </ol>
+                        <li class="active">Administrar Estructura - {{ owner | upper }}</li>
+                    </ol>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!--breadcrumbs end-->
+    <!--breadcrumbs end-->
 
 
-<!--start container-->
-<div class="container">
+    <!--start container-->
+    <div class="container">
+        <p><a class="btn waves-effect waves-light indigo action" href="#" url="{{ path("_estructura_new", {"owner": owner}) }}">Registrar</a></p>
+        <div class="dataTables_wrapper">
+            <table cellspacing="0" class="responsive-table display" id="data-table" width="100%">
+                <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>URL Video</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>Titulo</th>
+                    <th>URL Video</th>
+                    <th>Acciones</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.titular }}</td>
+                    <td>{{ entity.urlvideo }}</td>                   
+                    <td>
+                        <a class="tooltipped btn-floating waves-effect waves-light grey action" data-position="top" data-delay="50" data-tooltip="Modificar" href="#" url="{{ path("_estructura_edit", {"id": entity.id, "owner": owner}) }}"><i class="mdi-editor-mode-edit"></i></a>
+                        <a class="tooltipped btn-floating waves-effect waves-light red delete" data-position="top" data-delay="50" data-tooltip="Eliminar" href="#" url="{{ path("_estructura_delete", {"id": entity.id}) }}"><i class="mdi-content-clear"></i></a>
+                        <a class="tooltipped btn-floating waves-effect waves-light blue action" data-position="top" data-delay="50" data-tooltip="Ver" href="#" url="{{ path("_estructura_show", {"id": entity.id}) }}"><i class="mdi-action-visibility"></i></a>
 
-    {% if entity is not defined %}
 
-        <p class="caption">Oppss! Aún no haz creado la p&aacute;gina de la Estructura. Hazlo r&aacute;pido  <a class="btn waves-effect waves-light red darken-4 action" href="#" url="{{ path('_estructura_new', {"owner": owner}) }}"><i class="mdi-content-add"></i> Crear</a></p>
+                    </td>
 
 
-    {% else %}
-        <div class="section">
-            <a class="btn waves-effect waves-light red darken-4 right action" href="#" url="{{ path('_estructura_edit', {'id': entity.id, "owner": owner}) }}"><i class="mdi-content-backspace"></i> Modificar</a>
+                </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+
         </div>
-        <div class="section">
-            <h5>Titulo</h5>
-            <p class="text-accent-1">{{ entity.titular }}</p>
-        </div>
-        <div class="row">
-            <div class="col s12 m12 l8 left">
-                <h5>Texto</h5>
-                <p style="text-align: justify;" >{{ entity.texto }}</p>
-                <h5>Video</h5>
-                <div class="video-container">
-                    {{ entity.urlvideo | raw }}
-                </div>
-            </div>
-            <div class="col s12 m12 l4">
+        <div class="divider"></div>
+    </div>
 
-                <div class="row">
-                    <h5>Foto</h5>
-                    <img class="responsive-img materialboxed" src="{{ asset(entity.getWebPath()) }}" > </img>
+    <script>
+        $('.tooltipped').tooltip({delay: 10});
+        $(".action").on("click", function(e){
+            $('.tooltipped').tooltip('remove');
+            $('.preloader-wrapper').addClass('active');
+            var url = $(this).attr("url");
+            $("#main-wrapper").load(url,function() {
+                $('.preloader-wrapper').removeClass('active');
+            });
 
-                </div>
-            </div>
+        })
 
-        </div>
 
-    {% endif %}
 
-    <div class="divider"></div>
-</div>
+        $(".delete").on("click", function(){
+            $('.tooltipped').tooltip('remove');
+            $('.preloader-wrapper').addClass('active');
+            var url = $(this).attr("url");
+            $.ajax({
+                url: url,
+                success: function(data){
+                    var obj = jQuery.parseJSON(data);
+                    Materialize.toast(obj.message, 1000);
+                    $("#main-wrapper").load("{{ path('_estructura',{"owner": owner}) }}",function() {
+                        $('.preloader-wrapper').removeClass('active');
+                    });
+                }
+            })
+        })
 
-<script>
-    $(".action").on("click", function(e){
-        $('.preloader-wrapper').addClass('active');
-        var url = $(this).attr("url");
-        $("#main-wrapper").load(url,function() {
-            $('.preloader-wrapper').removeClass('active');
+        $('#data-table').DataTable({
+            "language": {
+                "zeroRecords": "No hay datos para mostrar",
+                "info": "Mostrando _PAGE_ pagina de _PAGES_",
+                "infoEmpty": "No existen registros",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "search": "Buscar",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+            }
         });
-
-    })
-</script>
+    </script>

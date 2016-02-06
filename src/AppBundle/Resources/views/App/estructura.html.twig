@@ -1,4 +1,4 @@
-{% extends "::frontbase.html.twig" %}
+{%extends "::frontbase.html.twig"%}
 {%block body%}
     <!----------------------------------------------------Centre-------------------------------------------------->
     <div class="wrapperCenter">
@@ -7,24 +7,47 @@
             <div class="row">
             {% include 'AppBundle:App:menuLeftSobreGlobal.html.twig' with {"active":owner} %}
 
-            <div class="col s7 m12 l6 left top10">
-            <h1 class="titlemenupage">{{ entity.titular }}</h1>
-            <div class="top10">
-                <div class="col s7 m12 l12 left">
-                <p class="justify">{{ entity.texto }}</p>
-                </div>
+            <div class="col s7 m12 l9 left">
+                    <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">Estructura {{ owner | upper }}</h6>
+                {% if entities | length > 0 %}
+                    {% for entity in entities %}
+                                    <div class="row resultSearchItem">
+                                    <div class="col s6 m12 l9">
+                                            <div class="col s6 m6 l3" style="margin-top: 1em;">
+                                                <img src="{{ asset(entity.getWebPath()) }}" class="responsive-img materialboxed" />
+                                            </div>
+                                                <p class="justify noticetitle"> {{ entity.titular }}</p>
+                                                <p class="justify">{{ entity.texto | slice(0,400) }}</p>
+                                        <p class="justify alingleft" ><a class="link" href="{{ path("estructura_detalle", {"slug": entity.slug}) }}">Leer m&aacute;s</a></p>
+
+                                    </div>
+                        <div class="col s3 m12 l3">
+                            <div class="video-container top10">
+                                {{ entity.urlvideo | raw }}
+                            </div>
+                            {% if entity.getWebPathPresentacion() is not null %}
+                            <div class="row top10">
+                                <a class="btn waves-effect waves-light indigo" href="{{ asset(entity.getWebPathPresentacion()) }}" target="_blank">Descargar documentaci&oacute;n</i> </a>
+
+                            </div>
+                            {% endif %}
+                        </div>
+                        </div>
+                                {% endfor %}
+
+                    {% else %}
+                        <div class="noresult">
+                            <h6 style="text-align: left; padding: 1em; color: #e23337 !important;"><i class="mdi-action-info-outline"></i> No se encontraron resultados</h6>
+
+                        </div>
+                        {% endif %}
+
+
+
 
             </div>
-                <div class="col s7 m12 l12">
-            <div class="video-container top10">
-                        {{ entity.urlvideo | raw }}
-                    </div></div>
-            </div>
 
-            <div class="col s3 m12 l3">
-             <img class="responsive-img activator card-profile-image materialboxed" alt="{{ entity.titular }}" src="{{ asset(entity.webPath) }}">
 
-            </div>
             </div>
         </div>
         </div>
@@ -32,12 +55,5 @@
 {%endblock body%}
 {% block javascripts %}
     {{ parent() }}
-
     <script src="{{ asset('bundles/app/js/menu.js') }}" type="text/javascript"></script>
-    <script>
-        $( document ).ready(function() {
-        $('#cssmenu li.has-sub>a').click();})
-
-    </script>
-
 {% endblock %}

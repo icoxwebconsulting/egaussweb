@@ -2183,7 +2183,7 @@ class BackendController extends Controller
         $dm = $this->getDoctrine()->getManager();
         $miembros= $dm->getRepository('BackendBundle:Estructura')->findBy(array("owner"=> $owner));
         if (count($miembros) > 0)
-            return $this->render("BackendBundle:Estructura:index.html.twig", array("entity" => $miembros[0], "owner"=>$owner));
+            return $this->render("BackendBundle:Estructura:index.html.twig", array("entities" => $miembros, "owner"=>$owner));
         else
             return $this->render("BackendBundle:Estructura:index.html.twig", array( "owner"=>$owner));
     }
