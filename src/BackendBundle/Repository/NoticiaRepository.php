@@ -1,6 +1,7 @@
 <?php
 
 namespace BackendBundle\Repository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * NoticiaRepository
@@ -12,24 +13,29 @@ class NoticiaRepository extends \Doctrine\ORM\EntityRepository
 {
 
     public function findNoticiasLimit($limit){
-        $qb = $this->createQueryBuilder("l")
-            ->select('n')
-            ->from("BackendBundle:Noticia", "n")
-            ->setFirstResult(0) ->setMaxResults($limit)
-            ->getQuery();
-
-        return $qb->getResult();
-
+        $em = $this->getEntityManager();
+        $qb = new QueryBuilder($em);
+        $qb->add('select', 'u')
+            ->add('from', 'BackendBundle:Noticia u')
+            ->add('orderBy', 'u.fecha DESC')
+            ->setFirstResult( 0 )
+            ->setMaxResults( $limit );
+        $query = $qb->getQuery();
+        return $query->getResult();
     }
     public function findNoticiasGlobalLimit($limit){
-        $qb = $this->createQueryBuilder("l")
-            ->select('n')
-            ->from("BackendBundle:Noticia", "n")
-            ->where("n.owner = 'global-imast'")
-            ->setFirstResult(0) ->setMaxResults($limit)
-            ->getQuery();
+        $em = $this->getEntityManager();
+        $qb = new QueryBuilder($em);
+        $qb->add('select', 'u')
+            ->add('from', 'BackendBundle:Noticia u')
+            ->where("u.owner = 'global-imast'")
+            ->add('orderBy', 'u.fecha DESC')
+            ->setFirstResult( 0 )
+            ->setMaxResults( $limit );
+        $query = $qb->getQuery();
+        return $query->getResult();
 
-        return $qb->getResult();
+
 
     }
 }

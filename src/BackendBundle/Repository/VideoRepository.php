@@ -1,6 +1,7 @@
 <?php
 
 namespace BackendBundle\Repository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * PaginaRepository
@@ -12,29 +13,30 @@ class VideoRepository extends \Doctrine\ORM\EntityRepository
 {
 
     public function findVideosLimit($limit){
-        $qb = $this->createQueryBuilder("l")
-            ->select('n')
-            ->from("BackendBundle:Video", "n")
-            ->where("n.sitio_web like 'Egauss Holding'")
-            ->andWhere("n.inhomepage = '1'")
-//            ->setFirstResult(0)
-//            ->setMaxResults($limit)
-            ->getQuery();
 
-        return $qb->getResult();
+        $em = $this->getEntityManager();
+        $qb = new QueryBuilder($em);
+        $qb->add('select', 'u')
+            ->add('from', 'BackendBundle:Video u')
+            ->where("u.sitio_web = 'Egauss Holding'")
+            ->andWhere("u.inhomepage = '1'")
+            ->setFirstResult( 0 )
+            ->setMaxResults( $limit );
+        $query = $qb->getQuery();
+        return $query->getResult();
 
     }
     public function findVideosGlobalLimit($limit){
-        $qb = $this->createQueryBuilder("l")
-            ->select('n')
-            ->from("BackendBundle:Video", "n")
-            ->where("n.sitio_web like 'Global ImasT'")
-            ->andWhere("n.inhomepage = '1'")
-//            ->setFirstResult(0)
-//                ->setMaxResults($limit)
-            ->getQuery();
-
-        return $qb->getResult();
+        $em = $this->getEntityManager();
+        $qb = new QueryBuilder($em);
+        $qb->add('select', 'u')
+            ->add('from', 'BackendBundle:Video u')
+            ->where("u.sitio_web = 'Global ImasT'")
+            ->andWhere("u.inhomepage = '1'")
+            ->setFirstResult( 0 )
+            ->setMaxResults( $limit );
+        $query = $qb->getQuery();
+        return $query->getResult();
 
     }
 }

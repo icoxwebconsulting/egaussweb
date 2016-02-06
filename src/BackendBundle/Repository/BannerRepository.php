@@ -1,6 +1,7 @@
 <?php
 
 namespace BackendBundle\Repository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * BannerRepository
@@ -12,27 +13,30 @@ class BannerRepository extends \Doctrine\ORM\EntityRepository
 {
 
     public function findBannersLimit($limit){
-        $qb = $this->createQueryBuilder("l")
-            ->select('n')
-            ->from("BackendBundle:Banner", "n")
-            ->where("n.sitio_web ='Egauss Holding'")
-//            ->setFirstResult(0) ->setMaxResults($limit)
-            ->orderBy('n.fecha', 'DESC')
-            ->getQuery();
-
-        return $qb->getResult();
+        $em = $this->getEntityManager();
+        $qb = new QueryBuilder($em);
+        $qb->add('select', 'u')
+            ->add('from', 'BackendBundle:Banner u')
+            ->where("u.sitio_web = 'Egauss Holding'")
+            ->add('orderBy', 'u.fecha DESC')
+            ->setFirstResult( 0 )
+            ->setMaxResults( $limit );
+        $query = $qb->getQuery();
+        return $query->getResult();
 
     }
     public function findBannersLimitGlobal($limit){
-        $qb = $this->createQueryBuilder("l")
-            ->select('n')
-            ->from("BackendBundle:Banner", "n")
-            ->where("n.sitio_web ='Global ImasT'")
-//            ->setFirstResult(0) ->setMaxResults($limit)
-            ->orderBy('n.fecha', 'DESC')
-            ->getQuery();
 
-        return $qb->getResult();
+        $em = $this->getEntityManager();
+        $qb = new QueryBuilder($em);
+        $qb->add('select', 'u')
+            ->add('from', 'BackendBundle:Banner u')
+            ->where("u.sitio_web = 'Global ImasT'")
+            ->add('orderBy', 'u.fecha DESC')
+            ->setFirstResult( 0 )
+            ->setMaxResults( $limit );
+        $query = $qb->getQuery();
+        return $query->getResult();
 
     }
 }
