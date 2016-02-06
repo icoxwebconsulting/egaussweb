@@ -204,6 +204,7 @@ class Estructura
             }
             $this->temp = null;
         }
+        if($this->getFoto() != null)
         $this->getFoto()->move($this->getUploadRootDir(), $this->path);
         $this->foto = null;
 
@@ -215,6 +216,7 @@ class Estructura
             }
             $this->temppresentacion = null;
         }
+        if($this->getPresentacion() != null)
         $this->getPresentacion()->move($this->getUploadRootDir(), $this->pathpresentacion);
         $this->presentacion = null;
     }
