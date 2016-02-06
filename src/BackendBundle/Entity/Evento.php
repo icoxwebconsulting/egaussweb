@@ -44,6 +44,11 @@ class Evento
     protected $nombre;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $urlvideo;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected $fecha;
@@ -334,5 +339,29 @@ class Evento
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set urlvideo
+     *
+     * @param string $urlvideo
+     *
+     * @return Evento
+     */
+    public function setUrlvideo($urlvideo)
+    {
+        $this->urlvideo = $urlvideo;
+
+        return $this;
+    }
+
+    /**
+     * Get urlvideo
+     *
+     * @return string
+     */
+    public function getUrlvideo()
+    {
+        return $this->urlvideo;
     }
 }

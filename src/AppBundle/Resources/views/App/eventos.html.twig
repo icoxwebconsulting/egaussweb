@@ -2,8 +2,13 @@
     {% for entity in entities %}
         <div class="row s12 m12 l12 resultSearchItem">
 
-            <div class="col s6 m6 l3" style="margin-top: 1em;">
+            <div class="col s6 m6 l4" style="margin-top: 1em;">
                 <img src="{{ asset(entity.getWebPath()) }}" class="responsive-img materialboxed"/>
+                {% if entity.urlvideo is not null %}
+                <div class="video-container top10">
+                    {{ entity.urlvideo | raw }}
+                </div>
+                {% endif %}
             </div>
 
             <p class="justify"> {{ entity.fecha | date("Y-m-d") }}</p>

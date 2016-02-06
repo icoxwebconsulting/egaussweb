@@ -22,6 +22,10 @@ class EventoEditType extends AbstractType
                 'label' => 'Texto',
                 'attr'  => array('class' => 'materialize-textarea')
             ))
+            ->add('urlvideo',TextareaType::class,array(
+                'label' => 'Video',
+                'attr'  => array('class' => 'materialize-textarea')
+            ))
             ->add('link')
             ->add('foto',FileType::class, array('label' => 'Foto','required'=>false))
         ;
