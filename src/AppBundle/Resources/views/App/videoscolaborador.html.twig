@@ -1,12 +1,17 @@
 <div class="row">
 {% if entities | length > 0 %}
     {% for entity in entities %}
-            <div class="col s6 m6 l4">
-                <p class="justify noticetitle">{{ entity.titulo }}</p>
-                <div class="video-container">
-                    {{ entity.url | raw }}
+            <div class="row resultSearchItem">
+                <div class="col s6 m12 l12">
+                    <div class="col s6 m6 l4" style="margin-top: 1em;">
+                        <div class="video-container">
+                            {{ entity.url | raw }}
+                        </div>
+                    </div>
+                    <p class="justify noticetitle"> {{ entity.titulo }}</p>
+                    <p class="justify">{{ entity.descripcion | slice(0,400) }}</p>
                 </div>
-                <p class="justify top10">{{ entity.descripcion }}</p>
+
             </div>
 
 
