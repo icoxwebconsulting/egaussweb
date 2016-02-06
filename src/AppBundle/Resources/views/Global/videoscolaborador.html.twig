@@ -1,20 +1,27 @@
 <div class="row">
-{% if entities | length > 0 %}
-    {% for entity in entities %}
-            <div class="col s6 m6 l4">
-                <div class="video-container">
-                    {{ entity.url | raw }}
+    {% if entities | length > 0 %}
+        {% for entity in entities %}
+            <div class="row resultSearchItem">
+                <div class="col s6 m12 l12">
+                    <div class="col s6 m6 l4" style="margin-top: 1em;">
+                        <div class="video-container">
+                            {{ entity.url | raw }}
+                        </div>
+                    </div>
+                    <p class="justify noticetitle"> {{ entity.titulo }}</p>
+                    <p class="justify">{{ entity.descripcion | slice(0,400) }}</p>
                 </div>
+
             </div>
 
 
-    {% endfor %}
-{% else %}
-    <div class="noresult">
-        <i class="mdi-action-info-outline"></i> No se encontraron resultados
+        {% endfor %}
+    {% else %}
+        <div class="noresult">
+            <i class="mdi-action-info-outline"></i> No se encontraron resultados
 
-    </div>
-{% endif %}
+        </div>
+    {% endif %}
 </div>
 
 
