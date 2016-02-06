@@ -32,6 +32,11 @@ class VideoColaborador
      */
     protected $url;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $descripcion;
+
 
     /**
      * @ORM\Column(type="string", length=512, nullable=false)
@@ -119,5 +124,29 @@ class VideoColaborador
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     *
+     * @return VideoColaborador
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
     }
 }
