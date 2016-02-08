@@ -16,13 +16,13 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository("BackendBundle:Video");
-        $videos = $repo->findVideosLimit((int) 4);
+        $videos = $repo->findVideosLimit(4);
 
         $repo = $em->getRepository("BackendBundle:Noticia");
         $noticias = $repo->findNoticiasLimit(3);
 
         $repo = $em->getRepository("BackendBundle:Banner");
-        $banners = $repo->findBannersLimit((int) 4);
+        $banners = $repo->findBannersLimit(4);
 
         $repo = $em->getRepository("BackendBundle:Colaborador");
         $colaboradores = $repo->findColaboradoresLimit((int) 3);
@@ -398,5 +398,16 @@ class DefaultController extends Controller
 
         // parameters to template
         return $this->render('AppBundle:App:list.html.twig', array('pagination' => $pagination));
+    }
+
+    /**
+     * @Route("/archivos/{owner}", name="archivos")
+     * @return array
+     */
+    public function archivosAction($owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:File')->findBy(array("owner"=> $owner));
+        return $this->render('AppBundle:App:archivos.html.twig', array("entities" => $miembros));
     }
 }

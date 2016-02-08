@@ -34,6 +34,14 @@ class Global2016
     protected $texto;
 
 
+
+    public function __construct()
+    {
+        $this->files = array();
+        $this->documents = array();
+    }
+
+
     /**
      * Get id
      *
@@ -91,4 +99,71 @@ class Global2016
     {
         return $this->texto;
     }
+
+    /**
+     * Add document
+     *
+     * @param \BackendBundle\Entity\File $document
+     *
+     * @return Global2016
+     */
+    public function addDocument(\BackendBundle\Entity\File $document)
+    {
+        $this->documents[] = $document;
+
+        return $this;
+    }
+
+    /**
+     * Remove document
+     *
+     * @param \BackendBundle\Entity\File $document
+     */
+    public function removeDocument(\BackendBundle\Entity\File $document)
+    {
+        $this->documents->removeElement($document);
+    }
+
+    /**
+     * Get documents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
+    }
+
+
+
+/**
+ * @ORM\PostPersist()
+ * @ORM\PostUpdate()
+ */
+public function upload()
+{
+    foreach ($this->documents as $image){
+        $image->upload();
+    }
+}
+
+/**
+ * @ORM\PreRemove()
+ */
+public function preRemoveUpload()
+{
+    foreach ($this->documents as $image){
+        $image->preRemoveUpload();
+    }
+}
+
+/**
+ * @ORM\PostRemove()
+ */
+public function removeUpload()
+{
+    foreach ($this->documents as $image){
+        $image->removeUpload();
+    }
+}
 }

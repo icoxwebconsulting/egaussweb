@@ -1,0 +1,15 @@
+{% if entities | length > 0 %}
+{% for entity in entities %}
+    <div class="row">
+    {% if entity.type == "image/jpeg" or entity.type == "image/jpg" or entity.type == "image/png" or entity.type == "image/gif"  %}
+        <img class="responsive-img materialboxed" src="{{ asset(entity.webPath) }}" alt="{{ entity.nombre }}"/>
+    {% else %}
+            <h6>{{ entity.nombre }}</h6>
+            <a class="btn waves-effect waves-light indigo" href="{{ asset(entity.getWebPath()) }}" target="_blank">Descargar</i> </a>
+
+    {% endif %}
+    </div>
+
+
+{% endfor %}
+{% endif %}

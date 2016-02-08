@@ -1,0 +1,107 @@
+    <!--breadcrumbs start-->
+    <div id="breadcrumbs-wrapper" class="grey lighten-3">
+
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <h5 class="breadcrumbs-title">Administrar Archivos</h5>
+                    <ol class="breadcrumb">
+                        <li><a href="{{ path("dashboard") }}">Panel de Administraci&oacute;n</a>
+                        </li>
+                        <li class="active">Administrar Archivos - {{ owner | upper }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--breadcrumbs end-->
+
+
+    <!--start container-->
+    <div class="container">
+        <p>
+            <a class="btn waves-effect waves-light cyan action" href="#" url="{{ path(url) }}">Regresar</a>
+            <a class="btn waves-effect waves-light indigo action" href="#" url="{{ path("_archivo_new", {"owner":owner, "url": url}) }}">Agregar</a>
+        </p>
+
+        <div class="dataTables_wrapper">
+            <table cellspacing="0" class="responsive-table display" id="data-table" width="100%">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Archivo</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Archivo</th>
+                    <th>Acciones</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.nombre }}</td>
+                    <td>{{ entity.path }}</td>
+                    <td>
+                        <a class="tooltipped btn-floating waves-effect waves-light red delete" data-position="top" data-delay="50" data-tooltip="Eliminar" href="#" url="{{ path("_archivo_delete", {"id": entity.id}) }}"><i class="mdi-content-clear"></i></a>
+                        <a class="tooltipped btn-floating waves-effect waves-light blue" data-position="top" data-delay="50" data-tooltip="Ver" href="{{ asset(entity.webPath) }}" target="_blank" ><i class="mdi-action-visibility"></i></a>
+                     </td>
+
+
+                </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+        <div class="divider"></div>
+    </div>
+
+    <script>
+        $('.tooltipped').tooltip({delay: 10});
+        $(".action").on("click", function(e){
+            $('.tooltipped').tooltip('remove');
+            $('.preloader-wrapper').addClass('active');
+            var url = $(this).attr("url");
+            $("#main-wrapper").load(url,function() {
+                $('.preloader-wrapper').removeClass('active');
+            });
+
+        })
+
+        $(".delete").on("click", function(){
+            $('.tooltipped').tooltip('remove');
+            $('.preloader-wrapper').addClass('active');
+            var url = $(this).attr("url");
+            $.ajax({
+                url: url,
+                success: function(data){
+                    var obj = jQuery.parseJSON(data);
+                    Materialize.toast(obj.message, 1000);
+                    $("#main-wrapper").load("{{ path('_archivos', {"owner": owner, "url": url}) }}",function() {
+                        $('.preloader-wrapper').removeClass('active');
+                    });
+                }
+            })
+        })
+
+        $('#data-table').DataTable({
+            "language": {
+                "zeroRecords": "No hay datos para mostrar",
+                "info": "Mostrando _PAGE_ pagina de _PAGES_",
+                "infoEmpty": "No existen registros",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "search": "Buscar",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+            }
+        });
+    </script>

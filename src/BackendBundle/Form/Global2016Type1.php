@@ -6,9 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-class MisionVisionEditType extends AbstractType
+class Global2016Type extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -18,32 +17,20 @@ class MisionVisionEditType extends AbstractType
     {
         $builder
             ->add('titulo')
-            ->add('urlvideo',null, array("label"=> 'URL Video'))
-            ->add('presentacion',FileType::class, array('label' => 'Archivo de Presentación','required'=>false))
             ->add('texto',TextareaType::class,array(
                 'label' => 'Texto',
                 'attr'  => array('class' => 'materialize-textarea')
             ))
         ;
     }
-
+    
     /**
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackendBundle\Entity\MisionVision'
+            'data_class' => 'BackendBundle\Entity\Global2016'
         ));
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
-        $resolver->setDefaults(array(
-            'data_class' => 'BackendBundle\Entity\MisionVision'
-        ));
-    }
-
-    public function getName() {
-        return 'backendbundle_misionvisionedit';
     }
 }

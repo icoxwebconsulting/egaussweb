@@ -2,6 +2,7 @@
 
 namespace BackendBundle\Controller;
 
+use BackendBundle\Entity\Archivo;
 use BackendBundle\Entity\Banner;
 use BackendBundle\Entity\Colaborador;
 use BackendBundle\Entity\DondeEstamos;
@@ -9,6 +10,7 @@ use BackendBundle\Entity\Ecosistema;
 use BackendBundle\Entity\EdicionAnterior;
 use BackendBundle\Entity\Estructura;
 use BackendBundle\Entity\Evento;
+use BackendBundle\Entity\File;
 use BackendBundle\Entity\Global2016;
 use BackendBundle\Entity\Imagen;
 use BackendBundle\Entity\MiembroConsejo;
@@ -20,6 +22,7 @@ use BackendBundle\Entity\Servicio;
 use BackendBundle\Entity\Solucion;
 use BackendBundle\Entity\Video;
 use BackendBundle\Entity\VideoColaborador;
+use BackendBundle\Form\ArchivoType;
 use BackendBundle\Form\BannerEditType;
 use BackendBundle\Form\BannerType;
 use BackendBundle\Form\ColaboradorEditType;
@@ -33,6 +36,7 @@ use BackendBundle\Form\EstructuraEditType;
 use BackendBundle\Form\EstructuraType;
 use BackendBundle\Form\EventoEditType;
 use BackendBundle\Form\EventoType;
+use BackendBundle\Form\FileType;
 use BackendBundle\Form\Global2016Type;
 use BackendBundle\Form\ImagenType;
 use BackendBundle\Form\MiembroConsejoEditType;
@@ -2660,7 +2664,181 @@ class BackendController extends Controller
 
 
     }
-    
+
+
+    /**
+     * @Route("/archivos/{owner}/{url}", name="_archivos")
+     * @Template()
+     * @return array
+     */
+    public function archivosAction($owner, $url)    {
+
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:File')->findBy(array("owner"=> $owner));
+        return $this->render('BackendBundle:Archivo:index.html.twig', array("entities" => $miembros, "owner"=> $owner, "url"=> $url));
+
+    }
+
+    /**
+     * @Route("/archivo_new/{owner}/{url}", name="_archivo_new")
+     * @Template()
+     * @return array
+     */
+    public function archivoNewAction($owner, $url)
+    {
+        $document = new File();
+        $form = $this->createForm(FileType::class, $document);
+        return $this->render("BackendBundle:Archivo:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            'owner'=> $owner,
+            'url'=> $url
+        ));
+    }
+
+    /**
+     * @Route("/archivo_create/{owner}", name="_archivo_create")
+     * @Method("POST")
+     */
+    public function archivoCreateAction(Request $request, $owner)
+    {
+        $document = new File();
+        $form = $this->createForm(FileType::class, $document);
+        $form->handleRequest($request);
+        $document->setOwner($owner);
+        $data  = $request->files->get($form->getName());
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+            echo json_encode(array("status"=> true, "message"=> "Archivo registrado satisfactoriamente."));
+            die;
+
+        } else {
+            echo json_encode(array("status"=> false, "message"=> "Los datos que envía son incorrectos."));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/archivo_delete/{id}", name="_archivo_delete")
+     * @Template()
+     */
+    public function archivoDeleteAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:File')->find($id);
+
+        if (!$document) {
+            echo json_encode(array("status"=> false, "message"=> "No se encontró el Archivo que quiere eliminar."));
+            die;
+        }
+        try {
+            $dm->remove($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Archivo eliminado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/videopages/{owner}/{url}", name="_videopages")
+     * @Template()
+     * @return array
+     */
+    public function videopagesAction($owner, $url)    {
+
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:VideoColaborador')->findBy(array("owner"=> $owner));
+        return $this->render('BackendBundle:VideoPage:index.html.twig', array("entities" => $miembros, "owner"=> $owner, "url"=> $url));
+
+    }
+
+    /**
+     * @Route("/videopage_new/{owner}/{url}", name="_videopage_new")
+     * @Template()
+     * @return array
+     */
+    public function videopageNewAction($owner, $url)
+    {
+        $document = new VideoColaborador();
+        $form = $this->createForm(VideoColaboradorType::class, $document);
+        return $this->render("BackendBundle:VideoPage:new.html.twig", array(
+            'entity' => $document,
+            'form' => $form->createView(),
+            'owner'=> $owner,
+            'url'=> $url
+        ));
+    }
+
+    /**
+     * @Route("/videopage_create/{owner}", name="_videopage_create")
+     * @Method("POST")
+     */
+    public function videopageCreateAction(Request $request, $owner)
+    {
+        $document = new VideoColaborador();
+        $form = $this->createForm(VideoColaboradorType::class, $document);
+        $form->handleRequest($request);
+        $document->setOwner($owner);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+            echo json_encode(array("status"=> true, "message"=> "Archivo registrado satisfactoriamente."));
+            die;
+
+        } else {
+            echo json_encode(array("status"=> false, "message"=> "Los datos que envía son incorrectos."));
+            die;
+
+        }
+
+
+    }
+
+
+    /**
+     * @Route("/videopage_delete/{id}", name="_videopage_delete")
+     * @Template()
+     */
+    public function videopageDeleteAction($id)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $document = $dm->getRepository('BackendBundle:VideoColaborador')->find($id);
+
+        if (!$document) {
+            echo json_encode(array("status"=> false, "message"=> "No se encontró el Archivo que quiere eliminar."));
+            die;
+        }
+        try {
+            $dm->remove($document);
+            $dm->flush();
+            echo json_encode(array("status"=> true, "message"=> "Archivo eliminado satisfactoriamente."));
+            die;
+        } catch (Exception $e) {
+            echo json_encode(array("status"=> false, "message"=> $e->getMessage()));
+            die;
+
+        }
+
+
+    }
     
     
     

@@ -2,7 +2,9 @@
 
 namespace BackendBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +21,10 @@ class MisionVisionType extends AbstractType
         $builder
             ->add('titulo')
             ->add('urlvideo',null, array("label"=> 'URL Video'))
-            ->add('presentacion',FileType::class, array('label' => 'Archivo de Presentación'))
+            ->add('files',EntityType::class, array('label' => 'Archivo de Presentación', "attr" => array(
+                "multiple" => "multiple",
+                "name" => "files[]",
+            )))
             ->add('texto',TextareaType::class,array(
                 'label' => 'Texto',
                 'attr'  => array('class' => 'materialize-textarea')

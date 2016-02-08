@@ -19,9 +19,7 @@
                         {{ entity.urlvideo | raw }}
                     </div>
                     <div class="row top10">
-                        <h6>Presentaci&oacute;n corporativa</h6>
-                        <a class="btn waves-effect waves-light indigo" href="{{ asset(entity.getWebPath()) }}" target="_blank">Descargar presentaci&oacute;n</i> </a>
-
+                        {{ render(controller('AppBundle:Default:archivos', { 'owner': "mision-vision" })) }}
                     </div>
                 </div>
             </div>

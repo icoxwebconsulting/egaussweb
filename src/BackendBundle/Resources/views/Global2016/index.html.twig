@@ -30,7 +30,8 @@
 
                     {% else %}
                         <div class="section">
-                            <a class="btn waves-effect waves-light red darken-4 right action" href="#" url="{{ path('_global2016_edit', {'id': entity.id}) }}"><i class="mdi-content-backspace"></i> Modificar</a>
+                            <a class="btn waves-effect waves-light red darken-4  action" href="#" url="{{ path('_global2016_edit', {'id': entity.id}) }}"><i class="mdi-content-backspace"></i> Modificar</a>
+                            <a class="btn waves-effect waves-light cyan  action" style="margin-left: 1em !important;" href="#" url="{{ path('_archivos', {'owner': "global2016", 'url': "_global2016"}) }}"><i class="mdi-file-file-upload"></i> Archivos</a>
                         </div>
                         <div class="section">
                             <h5>Titulo</h5>
