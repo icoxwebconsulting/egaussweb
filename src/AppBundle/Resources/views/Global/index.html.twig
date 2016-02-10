@@ -138,18 +138,8 @@
                         <div class="homeBottomNewsBox">
                             <p class="title">Colaboradores</p>
                             <div class="contentHomeBottomNewsBox  png_bg">
-                                <div class="colsHome">
-                                    {% for entity in colaboradores %}
-                                <div class="row">
-                                <div class="col s3 m3 l4">
-                                <img class="responsive-img materialboxed" src="{{ asset(entity.getWebPath) }}"/>
-                                </div>
-                                <div class="col s5 m5 l8">
-                                 <a class="justify noticetitleindex" href=" {{ path("globalimast_colaboradores", {"slug": entity.slug}) }} "> {{ entity.name | slice(0,100) }}</a>
-                                 <p class="justify">{{ entity.descripcion | slice(0,80)  }} ...</p>
-                                </div>
-                                </div>
-                                {% endfor %}
+                                <div class="colsHome" id="colaboradoreshome">
+                                   {{ render(controller('AppBundle:Default:colaboradoresHome')) }}
                                 </div>
                             </div>
                         </div>
@@ -161,4 +151,20 @@
         </div>
 {%endblock body%}
 {%block javascripts%}
+{{ parent() }}
+<script>
+
+function loadColaboradores(){
+ var url = "{{ path("colaboradoreshome") }}";
+$("#colaboradoreshome").load(url,function() {
+         });
+    setTimeout(function(e){
+    loadColaboradores();
+}, 15000);
+
+}
+setTimeout(function(e){
+    loadColaboradores();
+}, 15000);
+</script>
 {% endblock %}
