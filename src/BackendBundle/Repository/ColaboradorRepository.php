@@ -2,6 +2,7 @@
 
 namespace BackendBundle\Repository;
 use Doctrine\ORM\QueryBuilder;
+use AppBundle\DQL\RandFunction;
 
 /**
  * ColaboradorRepository
@@ -14,13 +15,32 @@ class ColaboradorRepository extends \Doctrine\ORM\EntityRepository
 
     public function findColaboradoresLimit($limit){
         $em = $this->getEntityManager();
+        $offset = intval(rand(0, $this->getCount() - 1));
         $qb = new QueryBuilder($em);
         $qb->add('select', 'u')
             ->add('from', 'BackendBundle:Colaborador u')
-            ->setFirstResult( 0 )
+            ->setFirstResult($offset)
             ->setMaxResults( $limit );
         $query = $qb->getQuery();
         return $query->getResult();
 
+    }
+
+    public function getRandomEntities($count = 3)
+    {
+        return  $this->createQueryBuilder('q')
+            ->addSelect('RAND() as HIDDEN rand')
+            ->addOrderBy('rand')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getCount()
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->select('COUNT(i.id)')
+            ->getQuery()->getSingleScalarResult();
+        return $qb;
     }
 }

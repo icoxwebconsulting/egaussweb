@@ -410,4 +410,16 @@ class DefaultController extends Controller
         $miembros= $dm->getRepository('BackendBundle:File')->findBy(array("owner"=> $owner));
         return $this->render('AppBundle:App:archivos.html.twig', array("entities" => $miembros));
     }
+
+
+    /**
+     * @Route("/colaboradoreshome", name="colaboradoreshome")
+     */
+    public function colaboradoresHomeAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("BackendBundle:Colaborador");
+        $colaboradores = $repo->findColaboradoresLimit(3);
+        return $this->render("AppBundle:App:colaboradoreshome.html.twig", array("colaboradores"=> $colaboradores ));
+    }
 }
