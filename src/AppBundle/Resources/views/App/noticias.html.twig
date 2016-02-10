@@ -116,7 +116,7 @@
                     </div>
                     {% else %}
                         <div class="noresult">
-                            <h6 style="text-align: left; padding: 1em; color: #e23337 !important;"><i class="mdi-action-info-outline"></i> No se encontraron resultados</h6>
+                            <h6 style="text-align: left; padding: 1em; color: #e23337 !important;"><i class="mdi-action-info-outline"></i> Estamos trabajando para poner contenidos.</h6>
 
                         </div>
                         {% endif %}
@@ -127,7 +127,12 @@
             </div>
 
             <div class="col s3 m12 l3">
-                {% include "AppBundle:App:twitter.html.twig" %}
+                {% if owner == "h4dm" %}
+                    {% include "AppBundle:App:twitterh4dm.html.twig" %}
+                {% else %}
+                    {% include "AppBundle:App:twitter.html.twig" %}
+                {% endif %}
+
             </div>
             </div>
         </div>

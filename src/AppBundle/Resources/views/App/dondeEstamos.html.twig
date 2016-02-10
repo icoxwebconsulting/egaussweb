@@ -43,11 +43,22 @@
         </div>
     <script>
         var map;
+        var marker;
+        var myLatlng;
         function initMap() {
+            myLatlng = new google.maps.LatLng({{ entity.latitud }},{{entity.longitud }});
+
             map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: {{ entity.latitud }}, lng: {{entity.longitud }} },
-                zoom: 8
+                center: myLatlng,
+                zoom: 16
             });
+            marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: 'eGauss Business Holding I+T'
+            });
+            marker.setMap(map);
+
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQqEJzoGTCkiud3LBXduXMEFfDWrp2Ge8&callback=initMap" async defer></script>

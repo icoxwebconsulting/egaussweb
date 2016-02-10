@@ -1077,4 +1077,9 @@ iframe{
     width: 100% !important;
 }
 
+.socialArea a:hover{
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
 

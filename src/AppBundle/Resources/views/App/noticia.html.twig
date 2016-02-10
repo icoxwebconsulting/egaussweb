@@ -24,9 +24,14 @@
             </div>
             </div>
 
-            <div class="col s3 m12 l3">
-             {% include "AppBundle:App:twitter.html.twig" %}
-            </div>
+                <div class="col s3 m12 l3">
+                    {% if owner == "h4dm" %}
+                        {% include "AppBundle:App:twitterh4dm.html.twig" %}
+                    {% else %}
+                        {% include "AppBundle:App:twitter.html.twig" %}
+                    {% endif %}
+
+                </div>
             </div>
         </div>
         </div>

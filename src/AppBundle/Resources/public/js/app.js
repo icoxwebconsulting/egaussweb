@@ -18,6 +18,7 @@ $(document).ready(function(){
     $('ul.tabs').tabs();
 
     $('.collapsible').collapsible();
+    $('.carousel').carousel();
 
 
     $('.datepicker').pickadate({

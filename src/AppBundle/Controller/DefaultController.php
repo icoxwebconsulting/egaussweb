@@ -25,7 +25,7 @@ class DefaultController extends Controller
         $banners = $repo->findBannersLimit(4);
 
         $repo = $em->getRepository("BackendBundle:Colaborador");
-        $colaboradores = $repo->findColaboradoresLimit((int) 3);
+        $colaboradores = $repo->findColaboradoresLimit(3);
 
         $repo = $em->getRepository("BackendBundle:Global2016");
         $global2016 = $repo->findAll();
