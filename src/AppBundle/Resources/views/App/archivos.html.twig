@@ -3,6 +3,7 @@
     <div class="row">
     {% if entity.type == "image/jpeg" or entity.type == "image/jpg" or entity.type == "image/png" or entity.type == "image/gif"  %}
         <img class="responsive-img materialboxed" src="{{ asset(entity.webPath) }}" alt="{{ entity.nombre }}"/>
+        <h6 class="btnNav" style="text-align: center !important; padding: 0.7em !important;">{{ entity.nombre }}</h6>
     {% else %}
             <h6>{{ entity.nombre }}</h6>
             <a class="btn waves-effect waves-light indigo" href="{{ asset(entity.getWebPath()) }}" target="_blank">Descargar</i> </a>
