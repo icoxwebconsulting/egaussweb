@@ -411,6 +411,17 @@ class DefaultController extends Controller
         return $this->render('AppBundle:App:archivos.html.twig', array("entities" => $miembros));
     }
 
+    /**
+     * @Route("/videos/{owner}", name="archivos")
+     * @return array
+     */
+    public function videosAction($owner)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $miembros= $dm->getRepository('BackendBundle:VideoColaborador')->findBy(array("owner"=> $owner));
+        return $this->render('AppBundle:App:videos.html.twig', array("entities" => $miembros));
+    }
+
 
     /**
      * @Route("/colaboradoreshome", name="colaboradoreshome")

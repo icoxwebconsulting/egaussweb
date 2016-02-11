@@ -36,7 +36,10 @@
                 <div class="video-container top10">
                     {{ entity.urlvideo | raw }}
                 </div>
-
+                {{ render(controller('AppBundle:Default:videos', { 'owner': "donde-estamos" })) }}
+                <div class="row top10">
+                    {{ render(controller('AppBundle:Default:archivos', { 'owner': "donde-estamos" })) }}
+                </div>
             </div>
         </div>
         </div>

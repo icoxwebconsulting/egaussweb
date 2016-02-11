@@ -3,36 +3,108 @@
     <div id='cssmenu'>
 
         <ul>
-            {% if active == "informacion" %}
-            <li class="active"><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"informacion"}) }}'><span>Información</span></a></li>
+            {% if active == "optimizacion-equipos" %}
+                <li class="active"><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"optimizacion-equipos"}) }}'><span>Optimización de equipos y servicios tecnológicos de Centros de Investigación</span></a></li>
             {% else %}
-                <li ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"informacion"}) }}'><span>Información</span></a></li>
+                <li ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"optimizacion-equipos"}) }}'><span>Optimización de equipos y servicios tecnológicos de Centros de Investigación</span></a></li>
 
             {% endif %}
 
-            {% if active == "intelligent-systems" %}
-            <li class="active"><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"intelligent-systems"}) }}'><span>Intelligent Systems</span></a></li>
+            {% if active == "busqueda-equipamiento" %}
+                <li class="active"><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"busqueda-equipamiento"}) }}'><span>Búsqueda de equipamiento tecnológico para empresas</span></a></li>
             {% else %}
-                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"intelligent-systems"}) }}'><span>Intelligent Systems</span></a></li>
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"busqueda-equipamiento"}) }}'><span>Búsqueda de equipamiento tecnológico para empresas</span></a></li>
 
             {% endif %}
 
-            {% if active == "lifecycle-experience" %}
-            <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"lifecycle-experience"}) }}'><span>Lifecycle Experience</span></a></li>
+            {% if active == "webtv" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"webtv"}) }}'><span>WebTV para hoteles y resorts</span></a></li>
             {% else %}
-                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"lifecycle-experience"}) }}'><span>Lifecycle Experience</span></a></li>
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"webtv"}) }}'><span>WebTV para hoteles y resorts</span></a></li>
             {% endif %}
 
-            {% if active == "information-systems" %}
-            <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"information-systems"}) }}'><span>Information Systems</span></a></li>
+            {% if active == "servicios-streaming" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"servicios-streaming"}) }}'><span>Servicios de Streaming y Broadcasting multiplataforma</span></a></li>
             {% else %}
-                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"information-systems"}) }}'><span>Information Systems</span></a></li>
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"servicios-streaming"}) }}'><span>Servicios de Streaming y Broadcasting multiplataforma</span></a></li>
             {% endif %}
 
-            {% if active == "mechanical-engineering" %}
-            <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"mechanical-engineering"}) }}'><span>Mechanical Engineering</span></a></li>
+            {% if active == "estudio-riesgo-sismico" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"estudio-riesgo-sismico"}) }}'><span>Estudio de Riesgo Sísmico</span></a></li>
             {% else %}
-                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"mechanical-engineering"}) }}'><span>Mechanical Engineering</span></a></li>
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"estudio-riesgo-sismico"}) }}'><span>Estudio de Riesgo Sísmico</span></a></li>
+            {% endif %}
+
+            {% if active == "caracterizacion-sismica" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"caracterizacion-sismica"}) }}'><span>Caracterización Sísmica</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"caracterizacion-sismica"}) }}'><span>Caracterización Sísmica</span></a></li>
+            {% endif %}
+
+            {% if active == "tesaruros" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"tesaruros"}) }}'><span>Tesauros para portales de e-commerce</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"tesaruros"}) }}'><span>Tesauros para portales de e-commerce</span></a></li>
+            {% endif %}
+
+            {% if active == "global-innovation" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"global-innovation"}) }}'><span>Global Innovation School, Formación específica en Innovación</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"global-innovation"}) }}'><span>Global Innovation School, Formación específica en Innovación</span></a></li>
+            {% endif %}
+
+            {% if active == "clipping" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"clipping"}) }}'><span>Clipping de prensa</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"clipping"}) }}'><span>Clipping de prensa</span></a></li>
+            {% endif %}
+
+            {% if active == "impresion-3d" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"impresion-3d"}) }}'><span>Impresión 3D</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"impresion-3d"}) }}'><span>Impresión 3D</span></a></li>
+            {% endif %}
+
+            {% if active == "analisis-perfiles" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"analisis-perfiles"}) }}'><span>Análisis de perfiles personales y societarios</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"analisis-perfiles"}) }}'><span>Análisis de perfiles personales y societarios</span></a></li>
+            {% endif %}
+
+            {% if active == "analisis-inversiones" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"analisis-inversiones"}) }}'><span>Análisis de inversiones</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"analisis-inversiones"}) }}'><span>Análisis de inversiones</span></a></li>
+            {% endif %}
+
+            {% if active == "estrategia-implantaciones" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"estrategia-implantaciones"}) }}'><span>Estrategia en implantaciones internacionales</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"estrategia-implantaciones"}) }}'><span>Estrategia en implantaciones internacionales</span></a></li>
+            {% endif %}
+
+            {% if active == "observatorio" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"observatorio"}) }}'><span>Observatorio de Innovación</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"observatorio"}) }}'><span>Observatorio de Innovación</span></a></li>
+            {% endif %}
+
+            {% if active == "analisis-estructura" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"analisis-estructura"}) }}'><span>Análisis de estructura organizacional</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"analisis-estructura"}) }}'><span>Análisis de estructura organizacional</span></a></li>
+            {% endif %}
+
+            {% if active == "realizacion-contenidos" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"realizacion-contenidos"}) }}'><span>Realización de contenidos audiovisuales tecnológicos</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"realizacion-contenidos"}) }}'><span>Realización de contenidos audiovisuales tecnológicos</span></a></li>
+            {% endif %}
+
+            {% if active == "plataforma-inteligencia" %}
+                <li class="active" ><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"plataforma-inteligencia"}) }}'><span>Plataforma de Inteligencia de última generación</span></a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href='{{ path("soluciones", {"owner":"plataforma-inteligencia"}) }}'><span>Plataforma de Inteligencia de última generación</span></a></li>
             {% endif %}
 
         </ul>
