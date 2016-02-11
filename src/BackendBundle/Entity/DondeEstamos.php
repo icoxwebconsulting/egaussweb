@@ -29,7 +29,7 @@ class DondeEstamos
     protected $titulo;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=512, nullable=true)
      */
     protected $urlvideo;
 
