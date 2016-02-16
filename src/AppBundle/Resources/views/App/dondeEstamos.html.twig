@@ -14,11 +14,11 @@
             <div class="col s7 m12 l6 left">
                 <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">{{ entity.titulo }}</h6>
                 </hr>
-
+                    {% if entity.getWebPath is not null %}
                     <div class="col s12 m12 l12 left">
                         <img class="responsive-img materialboxed" src="{{ asset(asset(entity.getWebPath)) }}">
                     </div>
-
+                    {% endif %}
 
 
                     <div class="col s12 m12 l12 left">
