@@ -30,7 +30,9 @@
 
                     {% else %}
                         <div class="section">
-                            <a class="btn waves-effect waves-light red darken-4 right action" href="#" url="{{ path('_que_es_global_edit', {'id': entity.id}) }}"><i class="mdi-content-backspace"></i> Modificar</a>
+                            <a class="btn waves-effect waves-light red darken-4 action" href="#" url="{{ path('_que_es_global_edit', {'id': entity.id}) }}"><i class="mdi-content-backspace"></i> Modificar</a>
+                            <a class="btn waves-effect waves-light cyan  action" style="margin-left: 1em !important;" href="#" url="{{ path('_archivos', {'owner': "que-es-global", 'url': "_que_es_global"}) }}"><i class="mdi-file-file-upload"></i> Archivos</a>
+                            <a class="btn waves-effect waves-light indigo  action" style="margin-left: 1em !important;" href="#" url="{{ path('_videopages', {'owner': "que-es-global", 'url': "_que_es_global"}) }}"><i class="mdi-av-videocam"></i> Videos</a>
                         </div>
                         <div class="section">
                             <h5>Titulo</h5>
