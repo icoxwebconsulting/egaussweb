@@ -8,7 +8,7 @@
             {% include 'AppBundle:App:menuLeftServicios.html.twig' with {"active":owner} %}
 
             <div class="col s7 m12 l9 left">
-                    <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">Servicios {{ owner | upper }}</h6>
+                    <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">Sectores {{ owner | upper }}</h6>
                     {% if entities | length > 0 %}
                     {% for entity in entities %}
                                     <div class="row s12 m12 l12 resultSearchItem">
