@@ -115,7 +115,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository("BackendBundle:Noticia");
-        $noticias = $repo->findBy(array("owner"=> $owner));
+        $noticias = $repo->findBy(array("owner"=> $owner),array('created_at' => 'DESC'));
         $colaboradores= $em->getRepository('BackendBundle:Colaborador')->findAll();
         return $this->render("AppBundle:App:noticiasglobal.html.twig", array("entities"=> $noticias,"colaboradores"=>$colaboradores  ));
     }
@@ -139,7 +139,7 @@ class DefaultController extends Controller
     {
 
         $em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT a FROM BackendBundle:Noticia a WHERE a.owner='$owner'";
+        $dql   = "SELECT a FROM BackendBundle:Noticia a WHERE a.owner='$owner' order by a.created_at DESC";
         $query = $em->createQuery($dql);
 
         $paginator  = $this->get('knp_paginator');
@@ -159,7 +159,7 @@ class DefaultController extends Controller
     public function noticiasFilterAction(Request $request, $owner)
     {
         $em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT a FROM BackendBundle:Noticia a WHERE a.owner='$owner'";
+        $dql   = "SELECT a FROM BackendBundle:Noticia a WHERE a.owner='$owner' order by a.created_at DESC";
         $empresa=null;
         $cientifico=null;
         $universidad=null;
