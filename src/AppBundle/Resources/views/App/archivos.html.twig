@@ -6,7 +6,7 @@
         <h6 class="btnNav" style="text-align: center !important; padding: 0.7em !important;">{{ entity.nombre }}</h6>
     {% else %}
             <h6>{{ entity.nombre }}</h6>
-            <a class="btn waves-effect waves-light indigo" href="{{ asset(entity.getWebPath()) }}" target="_blank">Descargar</i> </a>
+            <a href="{{ asset(entity.getWebPath()) }}" target="_blank"><img src="{{ asset('bundles/app/images/image_pdf.png') }}"/>  </a>
 
     {% endif %}
     </div>
