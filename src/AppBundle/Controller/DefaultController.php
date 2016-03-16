@@ -142,6 +142,7 @@ class DefaultController extends Controller
         $dql   = "SELECT a FROM BackendBundle:Noticia a WHERE a.owner='$owner' order by a.created_at DESC";
         $query = $em->createQuery($dql);
 
+
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
