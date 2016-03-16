@@ -79,7 +79,7 @@ class GlobalImastController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository("BackendBundle:Noticia");
-        $noticias = $repo->findBy(array("owner"=> $owner));
+        $noticias = $repo->findBy(array("owner"=> $owner),array('fecha' => 'DESC'));
         $colaboradores= $em->getRepository('BackendBundle:Colaborador')->findAll();
         return $this->render("AppBundle:Global:noticiasglobal.html.twig", array("entities"=> $noticias,"colaboradores"=>$colaboradores  ));
     }
