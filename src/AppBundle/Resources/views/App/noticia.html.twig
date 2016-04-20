@@ -16,16 +16,18 @@
             <p class="justify"> {{ entity.fecha | date("Y-m-d")  }}</p>
             <br/>
             <h1 class="titlemenupage" style="margin-left: -10px;">{{ entity.titular }}</h1>
-            <br/>
-            <div style="text-align: left !important">
-                <a href="{{ entity.link }}" target="_blanck" style="text-decoration: none; color: #0000F0;">{{ entity.link }}</a>
-            </div>    
             <div class="top10">
                 <div class="col s5">
                 <img class="responsive-img activator card-profile-image materialboxed" alt="{{ entity.titular }}" src="{{ asset(entity.webPath) }}">
 
                 </div>
                 <p class="justify">{{ entity.texto }}</p>
+                {% if entity.link %}
+                <br/>
+                <a href="{{ entity.link }}" target="_blanck" style="text-decoration: none; color: #0000F0;">
+                    + Info
+                </a>    
+                {% endif %}    
             </div>
             </div>
 
