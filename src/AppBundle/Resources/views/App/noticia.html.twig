@@ -15,6 +15,8 @@
             <div class="col s7 m12 l6 left top10">
             <p class="justify"> {{ entity.fecha | date("Y-m-d")  }}</p>
             <h1 class="titlemenupage">{{ entity.titular }}</h1>
+            <br/>
+            <p><a>{{ entity.link }}</a></p>
             <div class="top10">
                 <div class="col s5">
                 <img class="responsive-img activator card-profile-image materialboxed" alt="{{ entity.titular }}" src="{{ asset(entity.webPath) }}">
