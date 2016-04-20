@@ -24,9 +24,11 @@
                 <p class="justify">{{ entity.texto }}</p>
                 {% if entity.link %}
                 <br/>
-                <a href="{{ entity.link }}" target="_blanck" style="text-decoration: none; color: #0000F0;">
-                    + Info
-                </a>    
+                <div style="text-align: left !important">
+                    <a href="{{ entity.link }}" target="_blanck" style="text-decoration: none; color: #0000F0;">
+                        + Info
+                    </a>    
+                </div>          
                 {% endif %}    
             </div>
             </div>
