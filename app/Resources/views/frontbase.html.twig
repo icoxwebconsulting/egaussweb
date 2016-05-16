@@ -28,16 +28,25 @@
                         <div style="min-width: 16em;" class="subNav"> <div class="subNavContent subNav1Col">
                                 <div class="subNavCol"> <ul class="mappingList">
                                         <li><a href="{{ path("mision_vision") }}"><span class="title">Misión y Visión</span></a></li>
-                                        <li><a href="{{ path("donde_estamos") }}"><span class="title">Donde estamos</span></a></li>
                                         <li><a href="{{ path("quienes_somos") }}"><span class="title">Quienes somos</span></a></li>
                                         <li><a href="{{ path("estructura", {"owner":"egauss-innovation"}) }}"><span class="title">Estructura Holdings</span></a>
                                             <ul class="linksList">
+                                                <li><a class="linkMoreDownload" href="{{ path("estructura", {"owner":"egauss-innovation"}) }}">Introducción</a></li>
                                                 <li><a class="linkMoreDownload" href="{{ path("estructura", {"owner":"egauss-innovation"}) }}">eGauss Innovation</a></li>
-                                                <li><a class="linkMoreDownload" href="{{ path("estructura", {"owner":"techtrans"}) }}">Techtrans</a></li>
-                                                <li><a class="linkMoreDownload" href="{{ path("estructura", {"owner":"h4dm"}) }}">H4DM</a></li>
-                                                <li><a class="linkMoreDownload" href="{{ path("_estructura", {"owner":"fondos-de-inversion"}) }}">Fondos de Inversión</a></li>
+                                                <li><a class="linkMoreDownload" href="{{ path("estructura", {"owner":"egauss-innovation"}) }}">eGauss Consulting</a></li>
+                                                    <ul class="linksList">
+                                                        <li><a class="linkMoreDownload" href="{{ path("estructura", {"owner":"techtrans"}) }}">Techtrans</a></li>
+                                                        <li><a class="linkMoreDownload" href="{{ path("estructura", {"owner":"h4dm"}) }}">H4DM</a></li>
+                                                        <li><a class="linkMoreDownload" href="{{ path("estructura", {"owner":"ifi"}) }}">IFI</a></li>
+                                                        <li><a class="linkMoreDownload" href="{{ path("estructura", {"owner":"gis"}) }}">GIS</a></li>
+                                                    </ul>
+                                                <li><a class="linkMoreDownload" href="{{ path("estructura", {"owner":"egauss-innovation"}) }}">eGauss Capital</a></li>
+                                                    <ul class="linksList">
+                                                        <li><a class="linkMoreDownload" href="{{ path("_estructura", {"owner":"fondos-de-inversion"}) }}">Fondos de Inversión</a></li>
+                                                    </ul>
                                             </ul>
                                         </li>
+                                        <li><a href="{{ path("donde_estamos") }}"><span class="title">Donde estamos</span></a></li>
                                     </ul> </div>
                             </div></div>
                     </li>
@@ -52,14 +61,27 @@
 
 
                     <li class="lilast"> <a href="{{ path("noticias",{"owner": "egauss-holding"}) }}"><span class="btnNav">Noticias</span></a>
-                        <div style="min-width: 18em;" class="subNav"> <div class="subNavContent subNav1Col">
+                        <div style="min-width: 16em;" class="subNav"> <div class="subNavContent subNav1Col">
                                 <div class="subNavCol"> <ul class="mappingList">
-                                        <li><a href="{{ path("noticias",{"owner": "egauss-holding"}) }}"><span class="title">Noticias eGauss Holding</span></a></li>
-                                        <li><a href="{{ path("noticias",{"owner": "egauss-innovation"}) }}"><span class="title">Noticias eGauss Innovation</span></a></li>
-                                        <li><a href="{{ path("noticias",{"owner": "techtrans"}) }}"><span class="title">Noticias Techtrans</span></a></li>
+                                        <li><a href="{{ path("noticias",{"owner": "egauss-holding"}) }}"><span class="title">eGauss Holding</span></a></li>
+                                        <li><a href="{{ path("noticias",{"owner": "egauss-innovation"}) }}"><span class="title">eGauss Innovation</span></a></li>
+                                        <li><a href="{{ path("noticias",{"owner": "egauss-innovation"}) }}"><span class="title">eGauss Consulting</span></a>
+                                            <ul class="linksList">
+                                                <li><a class="linkMoreDownload" href="{{ path("noticias",{"owner": "techtrans"}) }}">Techtrans</a></li>
+                                                <li><a class="linkMoreDownload" href="{{ path("noticias",{"owner": "h4dm"}) }}">H4DM</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="{{ path("noticias",{"owner": "fondos-de-inversion"}) }}"><span class="title">eGauss Capital</span></a>
+                                            <ul class="linksList">
+                                                <li><a class="linkMoreDownload" href="{{ path("noticias",{"owner": "fondos-de-inversion"}) }}">Fondos de Inversión</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="{{ path("noticiasglobal",{"owner": "global-imast"}) }}"><span class="title">Global I+T</span></a></li>
+
+                                        <!--<li><a href="{{ path("noticias",{"owner": "techtrans"}) }}"><span class="title">Noticias Techtrans</span></a></li>
                                         <li><a href="{{ path("noticias",{"owner": "h4dm"}) }}"><span class="title">Noticias H4DM</span></a></li>
                                         <li><a href="{{ path("noticias",{"owner": "fondos-de-inversion"}) }}"><span class="title">Noticias Fondos de Inversión</span></a></li>
-                                        <li><a href="{{ path("noticiasglobal",{"owner": "global-imast"}) }}"><span class="title">Noticias Global ImasT</span></a></li>
+                                        <li><a href="{{ path("noticiasglobal",{"owner": "global-imast"}) }}"><span class="title">Noticias Global ImasT</span></a></li>-->
                                     </ul> </div>
                             </div></div>
                     </li>
