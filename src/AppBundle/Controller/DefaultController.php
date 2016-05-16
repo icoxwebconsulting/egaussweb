@@ -160,7 +160,7 @@ class DefaultController extends Controller
     public function noticiasFilterAction(Request $request, $owner)
     {
         $em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT a FROM BackendBundle:Noticia a WHERE a.owner='$owner' order by a.fecha DESC";
+        $dql   = "SELECT a FROM BackendBundle:Noticia a WHERE a.owner='$owner'";
         $empresa=null;
         $cientifico=null;
         $universidad=null;
@@ -211,8 +211,10 @@ class DefaultController extends Controller
         }
 
         if($filtros!= null){
-            $dql.= "and ($filtros)";
+            $dql.= " and ($filtros)";
         }
+
+        $dql.= " order by a.fecha DESC";
 
         $query = $em->createQuery($dql);
 
