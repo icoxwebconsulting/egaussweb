@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 class EdicionAnteriorType extends AbstractType
 {
@@ -23,10 +24,11 @@ class EdicionAnteriorType extends AbstractType
             ->add('titulo')
             ->add('urlvideo')
             ->add('anio', null, array('label' => "Año"))
-            ->add('descripcion',TextareaType::class,array(
+            ->add('descripcion', CKEditorType::class)
+            /*->add('descripcion',TextareaType::class,array(
                 'label' => 'Texto',
                 'attr'  => array('class' => 'materialize-textarea')
-            ))
+            ))*/
         ;
     }
     

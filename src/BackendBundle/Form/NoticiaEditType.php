@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 class NoticiaEditType extends AbstractType
 {
@@ -27,10 +28,11 @@ class NoticiaEditType extends AbstractType
                 'format' => 'yyyy-MM-dd',
                 'attr'  => array('class' => 'datepicker')
             ))
-            ->add('texto',TextareaType::class,array(
+            ->add('texto', CKEditorType::class)
+            /*->add('texto',TextareaType::class,array(
                 'label' => 'Texto',
                 'attr'  => array('class' => 'materialize-textarea')
-            ))
+            ))*/
             ->add('foto',FileType::class, array('label' => 'Foto','required'=>false))
             ->add('link')
             ->add('universidad')

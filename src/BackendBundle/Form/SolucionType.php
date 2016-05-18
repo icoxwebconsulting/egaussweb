@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 class SolucionType extends AbstractType
 {
@@ -17,10 +18,11 @@ class SolucionType extends AbstractType
     {
         $builder
             ->add('titular')
-            ->add('texto',TextareaType::class,array(
+            ->add('texto', CKEditorType::class)
+            /*->add('texto',TextareaType::class,array(
                 'label' => 'Texto',
                 'attr'  => array('class' => 'materialize-textarea')
-            ))
+            ))*/
             ->add('foto')
         ;
     }

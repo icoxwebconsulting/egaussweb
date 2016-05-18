@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 class MisionVisionEditType extends AbstractType
 {
@@ -20,10 +21,17 @@ class MisionVisionEditType extends AbstractType
             ->add('titulo')
             ->add('urlvideo',null, array("label"=> 'URL Video'))
             ->add('presentacion',FileType::class, array('label' => 'Archivo de Presentación','required'=>false))
-            ->add('texto',TextareaType::class,array(
+            //->add('texto', CKEditorType::class, array('input_sync' => true))
+            ->add('texto', CKEditorType::class
+               /* , array(
+                'config_name' => 'my_config_1',
+            )*/
+            )
+
+            /*->add('texto',TextareaType::class,array(
                 'label' => 'Texto',
                 'attr'  => array('class' => 'materialize-textarea')
-            ))
+            ))*/
         ;
     }
 

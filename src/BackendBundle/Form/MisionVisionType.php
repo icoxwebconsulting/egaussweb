@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 class MisionVisionType extends AbstractType
 {
@@ -25,10 +26,11 @@ class MisionVisionType extends AbstractType
                 "multiple" => "multiple",
                 "name" => "files[]",
             )))
-            ->add('texto',TextareaType::class,array(
+            ->add('texto', CKEditorType::class)
+            /*->add('texto',TextareaType::class,array(
                 'label' => 'Texto',
                 'attr'  => array('class' => 'materialize-textarea')
-            ))
+            ))*/
         ;
     }
     

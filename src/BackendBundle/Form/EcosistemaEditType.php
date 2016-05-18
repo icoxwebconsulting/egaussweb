@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 class EcosistemaEditType extends AbstractType
 {
@@ -20,10 +21,11 @@ class EcosistemaEditType extends AbstractType
             ->add('titulo')
             ->add('urlvideo')
             ->add('foto',FileType::class, array('label' => 'Foto','required'=>false))
-            ->add('texto',TextareaType::class,array(
+            ->add('texto', CKEditorType::class)
+            /*->add('texto',TextareaType::class,array(
                 'label' => 'Texto',
                 'attr'  => array('class' => 'materialize-textarea')
-            ))
+            ))*/
         ;
     }
     

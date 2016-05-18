@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 class ColaboradorType extends AbstractType
 {
@@ -18,10 +19,11 @@ class ColaboradorType extends AbstractType
         $builder
             ->add('name')
             ->add('urlvideo')
-            ->add('descripcion',TextareaType::class,array(
+            ->add('descripcion', CKEditorType::class)
+            /*->add('descripcion',TextareaType::class,array(
                 'label' => 'Texto',
                 'attr'  => array('class' => 'materialize-textarea')
-            ))
+            ))*/
             ->add('foto')
         ;
     }
