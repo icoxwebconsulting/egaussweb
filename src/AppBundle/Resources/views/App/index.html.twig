@@ -120,7 +120,7 @@
                             <p class="title">Global 2016</p>
                             <div class="contentHomeBottomNewsBox  png_bg">
                                 <div class="colsHome">
-                                    <p class="justify"> {{ global2016.texto | slice(0,1000) }}</p>
+                                    <p class="justify"> {{ global2016.texto | striptags | slice(0,1000) | raw }}</p>
                                     <p class="justify alingleft" ><a class="link" href="{{ path("global2016") }}">Leer m&aacute;s</a></p>
                                 </div>
                             </div>
