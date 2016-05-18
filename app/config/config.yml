@@ -69,6 +69,26 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+ivory_ck_editor:
+    input_sync: true
+    default_config: default
+    configs:
+        default:
+            toolbar: "my_toolbar_1"
+    toolbars:
+        configs:
+            my_toolbar_1: [ [ "Bold", "Italic", "Underline", "-", "JustifyLeft", "JustifyCenter" ,"JustifyRight", "JustifyBlock", "TextColor", "BGColor" , "-", "Outdent", "Indent", "-", "Blockquote", "Subscript", "Superscript", "Link", "Unlink" ], "/", [ "Styles", "Format", "Font", "FontSize", "NumberedList", "BulletedList", "Table", "HorizontalRule" ] ]
+
+
+#ivory_ck_editor:
+#    input_sync: true
+#    configs:
+#        my_config_1:
+#            toolbar: "my_toolbar_1"
+#    toolbars:
+#            configs:
+#                my_toolbar_1: [ [ "Bold", "Italic", "Underline", "-", "JustifyLeft", "JustifyCenter" ,"JustifyRight", "JustifyBlock", "TextColor", "BGColor" , "-", "Outdent", "Indent", "-", "Blockquote", "Subscript", "Superscript", "Link", "Unlink" ], "/", [ "Styles", "Format", "Font", "FontSize", "NumberedList", "BulletedList", "Table", "HorizontalRule" ] ]
+
 knp_paginator:
     page_range: 3                      # default page range used in pagination control
     default_options:
