@@ -11,7 +11,9 @@
                 <div class="col s7 m12 l6 left">
                     <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">{{ entity.titulo }}</h6>
                     <div class="col s12 m12 l12 left">
-                        <p style="text-align: justify;" >{{ entity.texto | raw }}</p>
+                        <div id="texto">
+                            {{ entity.texto | raw }}
+                        </div>
                     </div>
                 </div>
                 <div class="col s3 m12 l3">
@@ -25,13 +27,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
         </div>
         </div>
 {%endblock body%}

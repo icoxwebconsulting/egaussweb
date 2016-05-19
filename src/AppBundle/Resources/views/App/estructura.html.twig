@@ -22,7 +22,9 @@
                                                 <img src="{{ asset(entity.getWebPath()) }}" class="responsive-img materialboxed" />
                                             </div>
                                                 <p class="justify noticetitle"> {{ entity.titular }}</p>
-                                                <p class="justify">{{ entity.texto | slice(0,400) }}</p>
+                                                <div id="texto">
+                                                    <p class="justify">{{ entity.texto | slice(0,400) }}</p>
+                                                </div>
                                         <p class="justify alingleft" ><a class="link" href="{{ path("estructura_detalle", {"slug": entity.slug}) }}">Leer m&aacute;s</a></p>
 
                                     </div>

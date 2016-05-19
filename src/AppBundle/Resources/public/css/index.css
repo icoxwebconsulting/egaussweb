@@ -10,6 +10,22 @@ body, .ui-widget-content {
     font-size: 13px;
 }
 
+/*#texto,*/
+#texto ul,
+#texto ul li {
+    list-style-type: inherit;
+    margin-left: 15px;
+    padding-top: 5px;
+}
+
+#texto {
+    text-align: justify;
+}
+
+strong {
+    font-weight: 700;
+}
+
 p {
     line-height: 1.3em;
 }
