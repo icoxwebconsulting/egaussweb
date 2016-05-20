@@ -11,7 +11,9 @@
             <h1 class="titlemenupage">{{ entity.titular }}</h1>
             <div class="top10">
                 <div class="col s7 m12 l12 left">
-                <p class="justify">{{ entity.texto }}</p>
+                    <div id="texto">
+                        <p class="justify">{{ entity.texto | raw }}</p>
+                    </div>
                 </div>
 
             </div>
