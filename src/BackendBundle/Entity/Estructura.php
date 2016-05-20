@@ -25,7 +25,7 @@ class Estructura
 
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $texto;
 
@@ -36,7 +36,7 @@ class Estructura
     protected $slug;
 
     /**
-     * @ORM\Column(type="string", length=512)
+     * @ORM\Column(type="string", length=512, nullable=true)
      */
     protected $urlvideo;
 
@@ -48,7 +48,7 @@ class Estructura
     protected $owner;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $titular;
 
@@ -72,14 +72,14 @@ class Estructura
 
     /**
      * @Assert\File(maxSize ="4M",mimeTypes = {"image/jpg","image/png","image/gif","image/jpeg"})
-     * @Assert\NotBlank
+     *
      */
     protected $foto;
 
 
     /**
      * @Assert\File(maxSize ="4M")
-     * @Assert\NotBlank
+     * 
      */
     protected $presentacion;
 
