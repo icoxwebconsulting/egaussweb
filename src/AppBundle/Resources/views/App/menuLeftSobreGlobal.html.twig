@@ -20,9 +20,9 @@
                 <ul>
 
                     {% if active == "egauss-holding" %}
-                        <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"egauss-holding"}) }}'><span>Introducción</span></a></li>
+                        <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"introduction"}) }}'><span>Introducción</span></a></li>
                     {% else %}
-                        <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"egauss-holding"}) }}'><span>Introducción</span></a></li>
+                        <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"introduction"}) }}'><span>Introducción</span></a></li>
                     {% endif %}
                     {% if active == "egauss-innovation" %}
                         <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"egauss-innovation"}) }}'><span>eGauss Innovation</span></a></li>

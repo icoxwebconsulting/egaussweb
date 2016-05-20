@@ -18,6 +18,12 @@ body, .ui-widget-content {
     padding-top: 5px;
 }
 
+#texto li {
+    list-style-type: inherit;
+    margin-left: 25px;
+    padding-top: 5px;
+}
+
 #texto {
     text-align: justify;
 }
