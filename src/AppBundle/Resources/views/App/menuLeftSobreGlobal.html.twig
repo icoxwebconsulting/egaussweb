@@ -19,35 +19,35 @@
             <li class='has-sub'><a href='#'><span>Estructura del Holding</span></a>
                 <ul>
 
-                    {% if active == "egauss-holding" %}
-                        <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"introduction"}) }}'><span>Introducción</span></a></li>
+                    {% if active == "introduction" %}
+                        <li class="active_sub"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"introduction"}) }}'><span>Introducción</span></a></li>
                     {% else %}
                         <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"introduction"}) }}'><span>Introducción</span></a></li>
                     {% endif %}
                     {% if active == "egauss-innovation" %}
-                        <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"egauss-innovation"}) }}'><span>eGauss Innovation</span></a></li>
+                        <li class="active_sub"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"egauss-innovation"}) }}'><span>eGauss Innovation</span></a></li>
                     {% else %}
                         <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"egauss-innovation"}) }}'><span>eGauss Innovation</span></a></li>
                     {% endif %}
                         <li class="has-sub"><a href='#'><span>eGauss Consulting</span></a>
                             <ul>
                                 {% if active == "techtrans" %}
-                                    <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"techtrans"}) }}'><span>Techtrans</span></a></li>
+                                    <li class="active_sub"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"techtrans"}) }}'><span>Techtrans</span></a></li>
                                 {% else %}
                                     <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"techtrans"}) }}'><span>Techtrans</span></a></li>
                                 {% endif %}
                                 {% if active == "h4dm" %}
-                                    <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"h4dm"}) }}'><span>H4DM</span></a></li>
+                                    <li class="active_sub"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"h4dm"}) }}'><span>H4DM</span></a></li>
                                 {% else %}
                                     <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"h4dm"}) }}'><span>H4DM</span></a></li>
                                 {% endif %}
                                 {% if active == "ifi" %}
-                                    <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"ifi"}) }}'><span>IFI</span></a></li>
+                                    <li class="active_sub"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"ifi"}) }}'><span>IFI</span></a></li>
                                 {% else %}
                                     <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"ifi"}) }}'><span>IFI</span></a></li>
                                 {% endif %}
                                 {% if active == "gis" %}
-                                    <li class="active"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"gis"}) }}'><span>GIS</span></a></li>
+                                    <li class="active_sub"><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"gis"}) }}'><span>GIS</span></a></li>
                                 {% else %}
                                     <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"gis"}) }}'><span>GIS</span></a></li>
                                 {% endif %}
@@ -56,7 +56,7 @@
                         <li class="has-sub"><a href='#'><span>eGauss Capital</span></a>
                             <ul>
                                 {% if active == "fondos-de-inversion" %}
-                                    <li class='active'><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"fondos-de-inversion"}) }}'><span>Fondos de Iversi&oacute;n</span></a></li>
+                                    <li class='active_sub'><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"fondos-de-inversion"}) }}'><span>Fondos de Iversi&oacute;n</span></a></li>
                                 {% else %}
                                     <li><a class="waves-effect waves-light" href='{{ path("estructura", {"owner":"fondos-de-inversion"}) }}'><span>Fondos de Inversi&oacute;n</span></a></li>
                                 {% endif %}

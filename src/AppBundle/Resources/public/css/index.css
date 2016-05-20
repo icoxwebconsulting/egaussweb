@@ -982,6 +982,10 @@ a, .topic, .siteMap li ul li ul li ul li a, .homeTabContainer li.selected a, .er
     color: #eeeeee;
     background: rgb(135, 135, 135);
 }
+#cssmenu ul ul li.active_sub > a {
+    color: #eeeeee;
+    background: rgb(165, 165, 165);
+}
 #cssmenu ul ul li:first-child > a {
     box-shadow: none;
 }
