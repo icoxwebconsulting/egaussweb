@@ -21,7 +21,9 @@
                 <img class="responsive-img activator card-profile-image materialboxed" alt="{{ entity.titular }}" src="{{ asset(entity.webPath) }}">
 
                 </div>
-                <p class="justify">{{ entity.texto }}</p>
+                <div id="texto">
+                    <p class="justify">{{ entity.texto | raw }}</p>
+                </div>
                 {% if entity.link %}
                 <br/>
                 <div style="text-align: left !important">
