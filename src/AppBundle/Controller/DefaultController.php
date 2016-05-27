@@ -80,7 +80,7 @@ class DefaultController extends Controller
         $repo = $em->getRepository("BackendBundle:QueEsGlobal");
         $page = $repo->findAll();
 
-        $colaboradores= $em->getRepository('BackendBundle:Colaborador')->findAll();
+        $colaboradores= $em->getRepository('BackendBundle:Colaborador')->findBy(array(), array('name' => 'ASC'));
 
         return $this->render("AppBundle:App:queEsGlobal.html.twig", array("entity"=> $page[0], "colaboradores"=>$colaboradores ));
     }
