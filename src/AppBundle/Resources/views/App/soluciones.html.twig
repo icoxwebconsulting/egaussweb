@@ -17,7 +17,11 @@
                                                 <img src="{{ asset(entity.getWebPath()) }}" class="responsive-img materialboxed" />
                                             </div>
                                                 <p class="justify noticetitle"> {{ entity.titular }}</p>
-                                                <p class="justify">{{ entity.texto | truncate(300) }}</p>
+                                                <p class="justify">
+                                                    <div id="texto">
+                                                        {{ entity.texto | truncate(300) | raw }}
+                                                    </div>
+                                                </p>
                                         <p class="justify alingleft" ><a class="link" href="{{ path("solucion", {"slug": entity.slug}) }}">Leer m&aacute;s</a></p>
 
                                     </div>

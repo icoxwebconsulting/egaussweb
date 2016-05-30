@@ -11,20 +11,20 @@
             {% endif %}
             <li class='has-sub' id="edicion"><a href='#'><span>Ediciones anteriores</span></a>
                 <ul>
-                    {% if active == "2013" %}
-                        <li class="active"><a class="waves-effect waves-light edicion" href='{{ path("globalimast_edicionanterior", {"anio": 2013}) }}'><span>2013</span></a></li>
+                    {% if active == "2015" %}
+                        <li class="active"><a class="waves-effect waves-light edicion" href='{{ path("globalimast_edicionanterior", {"anio": 2015}) }}'><span>2015</span></a></li>
                     {% else %}
-                        <li><a class="waves-effect waves-light edicion" href='{{ path("globalimast_edicionanterior", {"anio": 2013}) }}'><span>2013</span></a></li>
+                        <li><a class="waves-effect waves-light edicion" href='{{ path("globalimast_edicionanterior", {"anio": 2015}) }}'><span>2015</span></a></li>
                     {% endif %}
                     {% if active == "2014" %}
                         <li class="active"><a class="waves-effect waves-light edicion" href='{{ path("globalimast_edicionanterior", {"anio": 2014}) }}'><span>2014</span></a></li>
                     {% else %}
                         <li><a class="waves-effect waves-light edicion" href='{{ path("globalimast_edicionanterior", {"anio": 2014}) }}'><span>2014</span></a></li>
                     {% endif %}
-                    {% if active == "2015" %}
-                        <li class="active"><a class="waves-effect waves-light edicion" href='{{ path("globalimast_edicionanterior", {"anio": 2015}) }}'><span>2015</span></a></li>
+                    {% if active == "2013" %}
+                        <li class="active"><a class="waves-effect waves-light edicion" href='{{ path("globalimast_edicionanterior", {"anio": 2013}) }}'><span>2013</span></a></li>
                     {% else %}
-                        <li><a class="waves-effect waves-light edicion" href='{{ path("globalimast_edicionanterior", {"anio": 2015}) }}'><span>2015</span></a></li>
+                        <li><a class="waves-effect waves-light edicion" href='{{ path("globalimast_edicionanterior", {"anio": 2013}) }}'><span>2013</span></a></li>
                     {% endif %}
                 </ul>
             </li>

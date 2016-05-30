@@ -40,7 +40,11 @@
                 {% for entity in entities %}
                 <tr>
                     <td>{{ entity.name }}</td>
-                    <td>{{ entity.descripcion | truncate(50) }}</td>
+                    <td>
+                        <div id="texto">
+                            {{ entity.descripcion | truncate(50) | raw }}
+                        </div>
+                    </td>
                     <td>
                         <a class="tooltipped btn-floating waves-effect waves-light grey action" data-position="top" data-delay="50" data-tooltip="Modificar" href="#" url="{{ path("_colaboradores_edit", {"id": entity.id}) }}"><i class="mdi-editor-mode-edit"></i></a>
                         <a class="tooltipped btn-floating waves-effect waves-light red delete" data-position="top" data-delay="50" data-tooltip="Eliminar" href="#" url="{{ path("_colaboradores_delete", {"id": entity.id}) }}"><i class="mdi-content-clear"></i></a>

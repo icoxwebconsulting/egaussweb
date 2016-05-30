@@ -12,7 +12,11 @@
             <div class="col s7 m12 l6 left top10">
                 <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">{{ entity.titulo }}</h6>
                 <div class="col s12 m12 l12 ">
-                    <p style="text-align: justify;" >{{ entity.descripcion }}</p>
+                    <p style="text-align: justify;" >
+                        <div id="texto">
+                            {{ entity.descripcion | raw }}
+                        </div>
+                    </p>
                 </div>
                  <div class="col s12 m12 l12">
                 <div class="video-container top10">

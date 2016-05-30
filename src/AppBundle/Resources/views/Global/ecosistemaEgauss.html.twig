@@ -14,7 +14,11 @@
                             <img class="responsive-img activator card-profile-image materialboxed" alt="{{ entity.titulo }}" src="{{ asset(entity.webPath) }}">
 
                         </div>
-                        <p class="justify">{{ entity.texto }}</p>
+                        <p class="justify">
+                            <div id="texto">
+                                {{ entity.texto | raw }}
+                            </div>
+                        </p>
                     </div>
 
 
