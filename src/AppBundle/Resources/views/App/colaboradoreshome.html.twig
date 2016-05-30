@@ -4,7 +4,7 @@
             <img class="responsive-img materialboxed" src="{{ asset(entity.getWebPath) }}"/>
         </div>
         <div class="col s5 m5 l8">
-            <a class="justify noticetitleindex" href=" {{ path("colaborador", {"slug": entity.slug}) }} "> {{ entity.name | slice(0,100) }}</a>
+            <a class="justify noticetitleindex" href=" {{ path("colaborador", {"slug": entity.slug}) }} "> {{ entity.name | truncate(100) }}</a>
         </div>
     </div>
 {% endfor %}

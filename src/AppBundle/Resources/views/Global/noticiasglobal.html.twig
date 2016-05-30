@@ -25,7 +25,7 @@
                                 <p class="justify"> {{ entity.fecha | date("Y-m-d") }}</p>
                                 <p class="justify noticetitle"> {{ entity.titular }}</p>
                                 <div id="texto">
-                                    <p class="justify">{{ entity.texto | striptags | slice(0,300) | raw }}</p>
+                                    <p class="justify">{{ entity.texto | striptags | truncate(300) | raw }}</p>
                                 </div>
                                 <p class=" justify alingleft" ><a class="link" href="{{ path("noticiaglobal", {"slug": entity.slug}) }}">Leer m&aacute;s</a></p>
 

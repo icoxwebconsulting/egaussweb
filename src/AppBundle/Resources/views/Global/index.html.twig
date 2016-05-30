@@ -17,7 +17,7 @@
                                     <div class="description png_bg">
                                         <p class="supertitle"></p>
                                         <p class="title"><a href="{{ banner.link }}">{{ banner.titular }}</a></p>
-                                        <p class="summary"><a href="{{ banner.link }}">{{ banner.texto | slice(0,500) }}</a></p>
+                                        <p class="summary"><a href="{{ banner.link }}">{{ banner.texto | truncate(500) }}</a></p>
                                         <div class="seeall"></div>
                                         <div class="link"><a href="{{ banner.link }}"><span></span></a></div>
                                         <div class="link"><a href="{{ banner.link }}"><span></span></a></div>
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col s5 m5 l8">
                                  <p class="justify"> {{ noticia.fecha | date("Y-m-d")  }}</p>
-                                 <a class="justify noticetitleindex" href=" {{ path("globalimast_noticiaglobal", {"slug": noticia.slug}) }} "> {{ noticia.titular | slice(0,100) }} ...</a>
+                                 <a class="justify noticetitleindex" href=" {{ path("globalimast_noticiaglobal", {"slug": noticia.slug}) }} "> {{ noticia.titular | truncate(100) }}</a>
 
                                 </div>
                                 </div>
@@ -125,7 +125,7 @@
                             <div class="contentHomeBottomNewsBox  png_bg">
                                 <div class="colsHome">
                                 <div id="texto">
-                                    <p class="justify"> {{ global2016.texto | striptags | slice(0,1000) | raw }}</p>
+                                    <p class="justify"> {{ global2016.texto | striptags | truncate(1000) | raw }}</p>
                                 </div>
                                 <p class="justify alingleft" ><a class="link" href="{{ path("globalimast_global2016") }}">Leer m&aacute;s</a></p>
 

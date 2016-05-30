@@ -23,7 +23,7 @@
                                             </div>
                                                 <p class="justify noticetitle"> {{ entity.titular }}</p>
                                                 <div id="texto">
-                                                    <p class="justify">{{ entity.texto | striptags | slice(0,400) | raw }}</p>
+                                                    <p class="justify">{{ entity.texto | striptags | truncate(400) | raw }}</p>
                                                 </div>
                                         <p class="justify alingleft" ><a class="link" href="{{ path("estructura_detalle", {"slug": entity.slug}) }}">Leer m&aacute;s</a></p>
                                     </div>
