@@ -74,10 +74,16 @@ ivory_ck_editor:
     default_config: default
     configs:
         default:
+            extraPlugins: "lineheight"
+            line_height: "1em;1.5em;2em;2.5em;3em;3.5em"
             toolbar: "my_toolbar_1"
+    plugins:
+        lineheight:
+            path:     "/bundles/backend/lineheight/"
+            filename: "plugin.js"
     toolbars:
         configs:
-            my_toolbar_1: [ [ "Bold", "Italic", "Underline", "-", "JustifyLeft", "JustifyCenter" ,"JustifyRight", "JustifyBlock", "TextColor", "BGColor" , "-", "Outdent", "Indent", "-", "Blockquote", "Subscript", "Superscript", "Link", "Unlink" ], "/", [ "Styles", "Format", "Font", "FontSize", "NumberedList", "BulletedList", "Table", "HorizontalRule" ] ]
+            my_toolbar_1: [ [ "Bold", "Italic", "Underline", "-", "JustifyLeft", "JustifyCenter" ,"JustifyRight", "JustifyBlock", "TextColor", "BGColor" , "-", "Outdent", "Indent", "-", "Blockquote", "Subscript", "Superscript", "Link", "Unlink" ], "/", [ "Styles", "Format", "Font", "FontSize", "lineheight", "NumberedList", "BulletedList", "Table", "HorizontalRule" ] ]
 
 
 #ivory_ck_editor:
