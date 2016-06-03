@@ -93,7 +93,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository("BackendBundle:Global2016");
         $page = $repo->findAll();
-        $colaboradores= $em->getRepository('BackendBundle:Colaborador')->findAll();
+        $colaboradores= $em->getRepository('BackendBundle:Colaborador')->findBy(array(), array('name' => 'ASC'));
         return $this->render("AppBundle:App:Global2016.html.twig", array("entity"=> $page[0],"colaboradores"=>$colaboradores ));
     }
 
@@ -116,7 +116,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository("BackendBundle:Noticia");
         $noticias = $repo->findBy(array("owner"=> $owner),array('fecha' => 'DESC'));
-        $colaboradores= $em->getRepository('BackendBundle:Colaborador')->findAll();
+        $colaboradores= $em->getRepository('BackendBundle:Colaborador')->findBy(array(), array('name' => 'ASC'));
         return $this->render("AppBundle:App:noticiasglobal.html.twig", array("entities"=> $noticias,"colaboradores"=>$colaboradores  ));
     }
 
@@ -128,7 +128,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository("BackendBundle:Noticia");
         $noticias = $repo->findOneBy(array("slug"=> $slug));
-        $colaboradores= $em->getRepository('BackendBundle:Colaborador')->findAll();
+        $colaboradores= $em->getRepository('BackendBundle:Colaborador')->findBy(array(), array('name' => 'ASC'));
         return $this->render("AppBundle:App:noticiaglobal.html.twig", array("entity"=> $noticias, "colaboradores"=>$colaboradores  ));
     }
 
@@ -313,7 +313,7 @@ class DefaultController extends Controller
     public function colaboradoresAction(Request $request)
     {
         $dm = $this->getDoctrine()->getManager();
-        $colaboradores= $dm->getRepository('BackendBundle:Colaborador')->findAll();
+        $colaboradores= $dm->getRepository('BackendBundle:Colaborador')->findBy(array(), array('name' => 'ASC'));
         return $this->render("AppBundle:App:colaboradores.html.twig", array(  "colaboradores"=> $colaboradores, "entity"=> $colaboradores[0]));
     }
 
@@ -323,8 +323,8 @@ class DefaultController extends Controller
     public function colaboradorAction(Request $request, $slug)
     {
         $dm = $this->getDoctrine()->getManager();
-        $entity= $dm->getRepository('BackendBundle:Colaborador')->findOneBy(array("slug"=>$slug));
-        $colaboradores= $dm->getRepository('BackendBundle:Colaborador')->findAll();
+        $entity= $dm->getRepository('BackendBundle:Colaborador')->findOneBy(array("slug"=>$slug), array('name' => 'ASC'));
+        $colaboradores= $dm->getRepository('BackendBundle:Colaborador')->findBy(array(), array('name' => 'ASC'));
         return $this->render("AppBundle:App:colaborador.html.twig", array("entity"=> $entity, "colaboradores"=> $colaboradores));
     }
 
@@ -334,8 +334,8 @@ class DefaultController extends Controller
     public function colaboradorInfoAction(Request $request, $slug)
     {
         $dm = $this->getDoctrine()->getManager();
-        $entity= $dm->getRepository('BackendBundle:Colaborador')->findOneBy(array("slug"=>$slug));
-        $colaboradores= $dm->getRepository('BackendBundle:Colaborador')->findAll();
+        $entity= $dm->getRepository('BackendBundle:Colaborador')->findOneBy(array("slug"=>$slug), array('name' => 'ASC'));
+        $colaboradores= $dm->getRepository('BackendBundle:Colaborador')->findBy(array(), array('name' => 'ASC'));
         return $this->render("AppBundle:App:colaboradores.html.twig", array("entity"=> $entity, "colaboradores"=> $colaboradores));
     }
 
@@ -371,7 +371,7 @@ class DefaultController extends Controller
         $dm = $this->getDoctrine()->getManager();
         $imagenes = null;
         $edicion= $dm->getRepository('BackendBundle:EdicionAnterior')->findOneBy(array("anio"=> $anio));
-        $colaboradores= $dm->getRepository('BackendBundle:Colaborador')->findAll();
+        $colaboradores= $dm->getRepository('BackendBundle:Colaborador')->findBy(array(), array('name' => 'ASC'));
 
         if($edicion != null){
         $imagenes= $dm->getRepository('BackendBundle:Imagen')->findBy(array("owner"=> $edicion->generaOwner()));
