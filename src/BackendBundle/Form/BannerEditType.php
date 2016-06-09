@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 class BannerEditType extends AbstractType
 {
@@ -25,10 +26,11 @@ class BannerEditType extends AbstractType
                     'Global ImasT' => "Global ImasT",
                 )))
             ->add('link')
-            ->add('texto',TextareaType::class,array(
+            ->add('texto', CKEditorType::class)
+            /*->add('texto',TextareaType::class,array(
                 'label' => 'Texto',
                 'attr'  => array('class' => 'materialize-textarea')
-            ))
+            ))*/
             ->add('foto',FileType::class, array('label' => 'Foto','required'=>false))
         ;
     }

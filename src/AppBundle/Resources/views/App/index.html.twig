@@ -12,7 +12,7 @@
                          <li style="z-index: 400;" itempos="{{ loop.index }}">
                          {% endif %}
                                 <div class="frame">
-                                    <a href="{{ banner.link }}"><img alt="" thumbsrc="{{ asset(banner.getWebPath)}}" src="{{ asset(banner.getWebPath)}}" border="0" height="300" width="690"></a>
+                                    <a href="{{ banner.link }}"><img alt="" thumbsrc="{{ asset(banner.getThumbnailMedium())}}" src="{{ asset(banner.getThumbnailMedium())}}" border="0" height="300" width="690"></a>
                                     <div class="description png_bg">
                                         <p class="supertitle"></p>
                                         <p class="title"><a href="{{ banner.link }}">{{ banner.titular }}</a></p>
@@ -30,7 +30,7 @@
                         <ul class="navigationGallery">
                         {% for banner in banners %}
                             <li class=""> <div class="navigationGalleryItem">
-                                    <div class="galleryThumbnail"><a href="{{ banner.link }}"><img alt="innovation matters" src="{{ asset(banner.getWebPath)}}"></a></div>
+                                    <div class="galleryThumbnail"><a href="{{ banner.link }}"><img alt="innovation matters" src="{{ asset(banner.getThumbnail())}}"></a></div>
                                     <div class="caption"><a href="{{ banner.link }}"><strong></strong></a><a href="{{ banner.link }}">{{ banner.titular }}</a></div>
                                 </div> </li>
                         {% endfor %}
@@ -100,7 +100,7 @@
                                 {% for noticia in noticias %}
                                 <div class="row">
                                 <div class="col s3 m3 l4">
-                                <img class="responsive-img materialboxed" src="{{ asset(noticia.getWebPath) }}"/>
+                                <img class="responsive-img materialboxed" src="{{ asset(noticia.getThumbnail()) }}"/>
                                 </div>
                                 <div class="col s5 m5 l8">
                                  <p class="justify"> {{ noticia.fecha | date("Y-m-d")  }}</p>

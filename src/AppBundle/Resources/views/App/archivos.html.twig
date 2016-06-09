@@ -2,11 +2,11 @@
 {% for entity in entities %}
     <div class="row">
     {% if entity.type == "image/jpeg" or entity.type == "image/jpg" or entity.type == "image/png" or entity.type == "image/gif"  %}
-        <img class="responsive-img materialboxed" src="{{ asset(entity.webPath) }}" alt="{{ entity.nombre }}"/>
+        <img class="responsive-img materialboxed" src="{{ asset(entity.getThumbnail()) }}" alt="{{ entity.nombre }}"/>
         <h6 class="btnNav" style="text-align: center !important; padding: 0.7em !important;">{{ entity.nombre }}</h6>
     {% else %}
             <h6>{{ entity.nombre }}</h6>
-            <a href="{{ asset(entity.getWebPath()) }}" target="_blank"><img src="{{ asset('bundles/app/images/image_pdf.png') }}"/>  </a>
+            <a href="{{ asset(entity.getThumbnail()) }}" target="_blank"><img src="{{ asset('bundles/app/images/image_pdf.png') }}"/>  </a>
 
     {% endif %}
     </div>

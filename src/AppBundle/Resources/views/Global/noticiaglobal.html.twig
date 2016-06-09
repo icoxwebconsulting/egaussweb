@@ -18,7 +18,7 @@
             <h1 class="titlemenupage" style="margin-left: -10px;">{{ entity.titular }}</h1>
             <div class="top10">
                 <div class="col s5">
-                <img class="responsive-img activator card-profile-image materialboxed" alt="{{ entity.titular }}" src="{{ asset(entity.webPath) }}">
+                <img class="responsive-img activator card-profile-image materialboxed" alt="{{ entity.titular }}" src="{{ asset(entity.getThumbnailMedium()) }}">
 
                 </div>
                 <div id="texto">

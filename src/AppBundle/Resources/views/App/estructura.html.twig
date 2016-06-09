@@ -19,7 +19,7 @@
                                     <div class="row resultSearchItem">
                                     <div class="col s6 m12 l8">
                                             <div class="col s6 m6 l3" style="margin-top: 1em;">
-                                                <img src="{{ asset(entity.getWebPath()) }}" class="responsive-img materialboxed" />
+                                                <img src="{{ asset(entity.getThumbnail()) }}" class="responsive-img materialboxed" />
                                             </div>
                                                 <p class="justify noticetitle"> {{ entity.titular }}</p>
                                                 <div id="texto">
@@ -31,9 +31,9 @@
                             <div class="video-container top10">
                                 {{ entity.urlvideo | raw }}
                             </div>
-                            {% if entity.getWebPathPresentacion() is not null %}
+                            {% if entity.getThumbnailPresentacion() is not null %}
                             <div class="row top10">
-                                <a href="{{ asset(entity.getWebPathPresentacion()) }}" target="_blank"><img src="{{ asset('bundles/app/images/image_pdf.png') }}"/>  </a>
+                                <a href="{{ asset(entity.getThumbnailPresentacion()) }}" target="_blank"><img src="{{ asset('bundles/app/images/image_pdf.png') }}"/>  </a>
 
                             </div>
                             {% endif %}

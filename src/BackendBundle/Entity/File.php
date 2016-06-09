@@ -107,7 +107,21 @@ class File
     }
 
     public function getThumbnail() {
-        return null === $this->path ? null : $this->getUploadDir() . '/crop_' . $this->path;
+        //return null === $this->path ? null : $this->getUploadDir() . '/min_' . $this->path;
+        if (file_exists($this->getUploadDir() . '/min_' . $this->path)){
+            return $this->getUploadDir() . '/min_' . $this->path;
+        }else{
+            return $this->getWebPath();
+        }
+    }
+
+    public function getThumbnailMedium() {
+        //return null === $this->path ? null : $this->getUploadDir() . '/medium_' . $this->path;
+        if (file_exists($this->getUploadDir() . '/medium_' . $this->path)){
+            return $this->getUploadDir() . '/medium_' . $this->path;
+        }else{
+            return $this->getWebPath();
+        }
     }
 
     /**
@@ -129,6 +143,9 @@ class File
         if (null === $this->getFile()) {
             return;
         }
+
+        $mimeType = $this->getFoto()->getMimeType();
+
         if (isset($this->temp)) {
             try {
                 unlink($this->getUploadRootDir() . '/' . $this->temp);
@@ -138,6 +155,13 @@ class File
             $this->temp = null;
         }
         $this->getFile()->move($this->getUploadRootDir(), $this->path);
+
+        $porcentajes = array(0.2, 0.4);
+
+        foreach($porcentajes as $porcentaje){
+            $this->resize($porcentaje, $mimeType);
+        }
+
         $this->file = null;
     }
 
@@ -151,6 +175,49 @@ class File
             } catch (\Exception $e) {
                 //ignore
             }
+        }
+    }
+
+    /**
+     * @param $porcentaje
+     * @param $mimeType
+     */
+
+    public function resize($porcentaje, $mimeType){
+        // Nuevo tamaño
+        if($porcentaje == 0.2){
+            $per = '/min_';
+        }elseif($porcentaje == 0.4){
+            $per = '/medium_';
+        }
+
+        // Obtener los nuevos tamaños
+        list($ancho, $alto) = getimagesize($this->getWebPath());
+        $nuevo_ancho = $ancho * $porcentaje;
+        $nuevo_alto = $alto * $porcentaje;
+
+        // Cargar
+        $thumb = imagecreatetruecolor($nuevo_ancho, $nuevo_alto);
+        $imgString = file_get_contents($this->getWebPath());
+        $origen = imagecreatefromstring($imgString);
+
+        // Cambiar el tamaño
+        imagecopyresized($thumb, $origen, 0, 0, 0, 0, $nuevo_ancho, $nuevo_alto, $ancho, $alto);
+
+        // Imprimir
+        switch ($mimeType) {
+            case 'image/jpeg':
+                imagejpeg($thumb, $this->getUploadRootDir(). $per . $this->path);
+                break;
+            case 'image/png':
+                imagepng($thumb, $this->getUploadRootDir(). $per . $this->path);
+                break;
+            case 'image/gif':
+                imagegif($thumb, $this->getUploadRootDir(). $per . $this->path);
+                break;
+            default:
+                exit;
+                break;
         }
     }
 

@@ -22,7 +22,7 @@
                     </div>
                     <div id="colaboradordatos" class="col s12">
                         <div class="col s3 top10">
-                            <img class="responsive-img activator card-profile-image" alt="" src="{{ asset(entity.webPath) }}">
+                            <img class="responsive-img activator card-profile-image" alt="" src="{{ asset(entity.getThumbnail()) }}">
                         </div>
                         <h5 class="card-title activator grey-text text-darken-4 top10" style="text-align: left; color: #e23337 !important;">{{ entity.name }}</h5>
                         <p class="justify"> {{ entity.descripcion }}</p>

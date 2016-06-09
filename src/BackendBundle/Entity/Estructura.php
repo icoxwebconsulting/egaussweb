@@ -154,7 +154,21 @@ class Estructura
     }
 
     public function getThumbnail() {
-        return null === $this->path ? null : $this->getUploadDir() . '/crop_' . $this->path;
+        //return null === $this->path ? null : $this->getUploadDir() . '/min_' . $this->path;
+        if (file_exists($this->getUploadDir() . '/min_' . $this->path)){
+            return $this->getUploadDir() . '/min_' . $this->path;
+        }else{
+            return $this->getWebPath();
+        }
+    }
+
+    public function getThumbnailMedium() {
+        //return null === $this->path ? null : $this->getUploadDir() . '/medium_' . $this->path;
+        if (file_exists($this->getUploadDir() . '/medium_' . $this->path)){
+            return $this->getUploadDir() . '/medium_' . $this->path;
+        }else{
+            return $this->getWebPath();
+        }
     }
 
     public function getAbsolutePathPresentacion() {
@@ -170,7 +184,21 @@ class Estructura
     }
 
     public function getThumbnailPresentacion() {
-        return null === $this->pathpresentacion ? null : $this->getUploadDir() . '/crop_' . $this->pathpresentacion;
+        //return null === $this->pathpresentacion ? null : $this->getUploadDir() . '/min_' . $this->path;
+        if (file_exists($this->getUploadDir() . '/min_' . $this->pathpresentacion)){
+            return $this->getUploadDir() . '/min_' . $this->pathpresentacion;
+        }else{
+            return $this->getWebPath();
+        }
+    }
+
+    public function getThumbnailPresentacionMedium() {
+        //return null === $this->pathpresentacion ? null : $this->getUploadDir() . '/medium_' . $this->path;
+        if (file_exists($this->getUploadDir() . '/medium_' . $this->pathpresentacion)){
+            return $this->getUploadDir() . '/medium_' . $this->pathpresentacion;
+        }else{
+            return $this->getWebPath();
+        }
     }
 
     /**
@@ -196,6 +224,15 @@ class Estructura
         if (null === $this->getFoto() && null === $this->getPresentacion() ) {
             return;
         }
+
+        if($this->getFoto() != null) {
+            $mimeTypeF = $this->getFoto()->getMimeType();
+        }
+
+        if($this->getPresentacion() != null){
+            $mimeTypeP = $this->getPresentacion()->getMimeType();
+        }
+
         if (isset($this->temp)) {
             try {
                 unlink($this->getUploadRootDir() . '/' . $this->temp);
@@ -204,9 +241,16 @@ class Estructura
             }
             $this->temp = null;
         }
-        if($this->getFoto() != null)
-        $this->getFoto()->move($this->getUploadRootDir(), $this->path);
-        $this->foto = null;
+        if($this->getFoto() != null) {
+            $this->getFoto()->move($this->getUploadRootDir(), $this->path);
+
+            $porcentajes = array(0.2, 0.4);
+
+            foreach ($porcentajes as $porcentaje) {
+                $this->resize($porcentaje, $mimeTypeF, $this->getWebPath(), $this->path);
+            }
+            $this->foto = null;
+        }
 
         if (isset($this->temppresentacion)) {
             try {
@@ -216,9 +260,17 @@ class Estructura
             }
             $this->temppresentacion = null;
         }
-        if($this->getPresentacion() != null)
-        $this->getPresentacion()->move($this->getUploadRootDir(), $this->pathpresentacion);
-        $this->presentacion = null;
+        if($this->getPresentacion() != null) {
+            $this->getPresentacion()->move($this->getUploadRootDir(), $this->pathpresentacion);
+
+            $porcentajesP = array(0.2, 0.4);
+
+            foreach ($porcentajesP as $porcentajep) {
+                $this->resize($porcentajep, $mimeTypeP, $this->getWebPathPresentacion() ,$this->pathpresentacion);
+            }
+
+            $this->presentacion = null;
+        }
     }
 
     /**
@@ -239,6 +291,49 @@ class Estructura
             } catch (\Exception $e) {
                 //ignore
             }
+        }
+    }
+
+    /**
+     * @param $porcentaje
+     * @param $mimeType
+     */
+
+    public function resize($porcentaje, $mimeType, $capture, $valor){
+        // Nuevo tamaño
+        if($porcentaje == 0.2){
+            $per = '/min_';
+        }elseif($porcentaje == 0.4){
+            $per = '/medium_';
+        }
+
+        // Obtener los nuevos tamaños
+        list($ancho, $alto) = getimagesize($capture);
+        $nuevo_ancho = $ancho * $porcentaje;
+        $nuevo_alto = $alto * $porcentaje;
+
+        // Cargar
+        $thumb = imagecreatetruecolor($nuevo_ancho, $nuevo_alto);
+        $imgString = file_get_contents($capture);
+        $origen = imagecreatefromstring($imgString);
+
+        // Cambiar el tamaño
+        imagecopyresized($thumb, $origen, 0, 0, 0, 0, $nuevo_ancho, $nuevo_alto, $ancho, $alto);
+
+        // Imprimir
+        switch ($mimeType) {
+            case 'image/jpeg':
+                imagejpeg($thumb, $this->getUploadRootDir(). $per . $valor);
+                break;
+            case 'image/png':
+                imagepng($thumb, $this->getUploadRootDir(). $per . $valor);
+                break;
+            case 'image/gif':
+                imagegif($thumb, $this->getUploadRootDir(). $per . $valor);
+                break;
+            default:
+                exit;
+                break;
         }
     }
 

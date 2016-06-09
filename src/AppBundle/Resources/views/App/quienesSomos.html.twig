@@ -11,7 +11,7 @@
                     <h6 class="titlemenu" style="text-align: left !important; padding: 0.7em !important;">{{ entity.titulo }}</h6>
 
                         <div class="col s12 m12 l12 left">
-                            <img class="responsive-img materialboxed" src="{{ asset(entity.getWebPath) }}">
+                            <img class="responsive-img materialboxed" src="{{ asset(entity.getThumbnailMedium()) }}">
                             <h6 class="btnNav" style="text-align: left !important; padding: 0.7em !important;">EQUIPO EGAUSS</h6>
                         </div>
 
@@ -24,7 +24,7 @@
                                         <div class="card">
                                             <div class="row" style="margin-bottom: 0px !important;">
                                                 <div class="col s6 m6 l2 left">
-                                                    <img src="{{ asset(member.getWebPath()) }}" class="responsive-img materialboxed" />
+                                                    <img src="{{ asset(member.getThumbnail()) }}" class="responsive-img materialboxed" />
                                                 </div>
                                                 <div class="col s6 m6 l6 left">
                                                     <h6 class="btnNav top10" style="text-align: left !important;">{{ member.getFullName()  }}</h6>

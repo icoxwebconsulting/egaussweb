@@ -117,7 +117,22 @@ class Banner
     }
 
     public function getThumbnail() {
-        return null === $this->path ? null : $this->getUploadDir() . '/crop_' . $this->path;
+        //return null === $this->path ? null : $this->getUploadDir() . '/min_' . $this->path;
+
+        if (file_exists($this->getUploadDir() . '/min_' . $this->path)){
+            return $this->getUploadDir() . '/min_' . $this->path;
+        }else{
+            return $this->getWebPath();
+        }
+    }
+
+    public function getThumbnailMedium() {
+        //return null === $this->path ? null : $this->getUploadDir() . '/medium_' . $this->path;
+        if (file_exists($this->getUploadDir() . '/medium_' . $this->path)){
+            return $this->getUploadDir() . '/medium_' . $this->path;
+        }else{
+            return $this->getWebPath();
+        }
     }
 
     /**
@@ -139,6 +154,9 @@ class Banner
         if (null === $this->getFoto()) {
             return;
         }
+
+        $mimeType = $this->getFoto()->getMimeType();
+
         if (isset($this->temp)) {
             try {
                 unlink($this->getUploadRootDir() . '/' . $this->temp);
@@ -148,6 +166,13 @@ class Banner
             $this->temp = null;
         }
         $this->getFoto()->move($this->getUploadRootDir(), $this->path);
+
+        $sizes = array(700 => 309, 53 => 23);
+
+        foreach ($sizes as $w => $h) {
+            $this->resize($w, $h, $mimeType);
+        }
+
         $this->foto = null;
     }
 
@@ -161,6 +186,55 @@ class Banner
             } catch (\Exception $e) {
                 //ignore
             }
+        }
+    }
+
+    /**
+     * @param $porcentaje
+     * @param $mimeType
+     */
+
+    public function resize($width, $height, $mimeType){
+        // Nuevo tamaño
+        if($width == 53){
+            $per = '/min_';
+        }elseif($width == 700){
+            $per = '/medium_';
+        }
+
+        /* Get original image x y*/
+        list($w, $h) = getimagesize($this->getWebPath());
+        //$nuevo_ancho = $ancho * $porcentaje;
+        //$nuevo_alto = $alto * $porcentaje;
+
+        /* calculate new image size with ratio */
+        /*$ratio = max($width/$w, $height/$h);
+        $h = ceil($height / $ratio);
+        $x = ($w - $width / $ratio) / 2;
+        $w = ceil($width / $ratio);*/
+
+        // Cargar
+        $thumb = imagecreatetruecolor($width, $height);
+        $imgString = file_get_contents($this->getWebPath());
+        $origen = imagecreatefromstring($imgString);
+
+        // Cambiar el tamaño
+        imagecopyresized($thumb, $origen, 0, 0, 0, 0, $width, $height, $w, $h);
+
+        // Imprimir
+        switch ($mimeType) {
+            case 'image/jpeg':
+                imagejpeg($thumb, $this->getUploadRootDir(). $per . $this->path);
+                break;
+            case 'image/png':
+                imagepng($thumb, $this->getUploadRootDir(). $per . $this->path);
+                break;
+            case 'image/gif':
+                imagegif($thumb, $this->getUploadRootDir(). $per . $this->path);
+                break;
+            default:
+                exit;
+                break;
         }
     }
 

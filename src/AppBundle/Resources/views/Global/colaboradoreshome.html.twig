@@ -1,7 +1,7 @@
 {% for entity in colaboradores %}
     <div class="row">
         <div class="col s3 m3 l4">
-            <img class="responsive-img materialboxed" src="{{ asset(entity.getWebPath) }}"/>
+            <img class="responsive-img materialboxed" src="{{ asset(entity.getThumbnail()) }}"/>
         </div>
         <div class="col s5 m5 l8">
             <a class="justify noticetitleindex" href=" {{ path("colaborador", {"slug": entity.slug}) }} "> {{ entity.name | truncate(100) }}</a>
