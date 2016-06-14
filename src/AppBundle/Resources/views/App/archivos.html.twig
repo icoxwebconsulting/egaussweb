@@ -6,7 +6,7 @@
         <h6 class="btnNav" style="text-align: center !important; padding: 0.7em !important;">{{ entity.nombre }}</h6>
     {% else %}
             <h6>{{ entity.nombre }}</h6>
-            <a href="{{ asset(entity.getThumbnail()) }}" target="_blank"><img src="{{ asset('bundles/app/images/image_pdf.png') }}"/>  </a>
+            <a href="{{ asset(entity.getWebPath()) }}" target="_blank"><img src="{{ asset('bundles/app/images/image_pdf.png') }}"/>  </a>
 
     {% endif %}
     </div>
