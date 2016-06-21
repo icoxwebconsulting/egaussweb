@@ -71,7 +71,16 @@ class Estructura
     protected $temppresentacion;
 
     /**
-     * @Assert\File(maxSize ="4M",mimeTypes = {"image/jpg","image/png","image/gif","image/jpeg"})
+     * @Assert\Image(
+     *         minWidth = 1200,
+     *         minHeight = 800,
+     *         maxSize ="4M",
+     *         mimeTypes = {"image/jpg","image/png","image/gif","image/jpeg"},
+     *         minWidthMessage = "El ancho ({{ width }}px) de la imagen es muy pequeño. El Minimo ancho esperado es {{ min_width }}px.",
+     *         minHeightMessage = "El alto ({{ height }}px) de la imagen es muy pequeño. El Minimo alto esperado es {{ min_height }}px.",
+     *         mimeTypesMessage = "Seleccione un archivo tipo jpg, png, gif o jpeg.",
+     *         maxSizeMessage = "El tamaño de la imagen no debe pasar los 4Mb."
+     * )
      *
      */
     protected $foto;
@@ -229,9 +238,9 @@ class Estructura
             $mimeTypeF = $this->getFoto()->getMimeType();
         }
 
-        if($this->getPresentacion() != null){
+        /*if($this->getPresentacion() != null){
             $mimeTypeP = $this->getPresentacion()->getMimeType();
-        }
+        }*/
 
         if (isset($this->temp)) {
             try {
@@ -244,7 +253,7 @@ class Estructura
         if($this->getFoto() != null) {
             $this->getFoto()->move($this->getUploadRootDir(), $this->path);
 
-            $porcentajes = array(0.2, 0.4);
+            $porcentajes = array(0.5, 0.7);
 
             foreach ($porcentajes as $porcentaje) {
                 $this->resize($porcentaje, $mimeTypeF, $this->getWebPath(), $this->path);
@@ -262,12 +271,6 @@ class Estructura
         }
         if($this->getPresentacion() != null) {
             $this->getPresentacion()->move($this->getUploadRootDir(), $this->pathpresentacion);
-
-            $porcentajesP = array(0.2, 0.4);
-
-            foreach ($porcentajesP as $porcentajep) {
-                $this->resize($porcentajep, $mimeTypeP, $this->getWebPathPresentacion() ,$this->pathpresentacion);
-            }
 
             $this->presentacion = null;
         }
@@ -301,9 +304,9 @@ class Estructura
 
     public function resize($porcentaje, $mimeType, $capture, $valor){
         // Nuevo tamaño
-        if($porcentaje == 0.2){
+        if($porcentaje == 0.5){
             $per = '/min_';
-        }elseif($porcentaje == 0.4){
+        }elseif($porcentaje == 0.7){
             $per = '/medium_';
         }
 

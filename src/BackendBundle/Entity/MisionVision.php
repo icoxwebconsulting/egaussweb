@@ -146,7 +146,7 @@ class MisionVision
             return;
         }
 
-        $mimeType = $this->getPresentacion()->getMimeType();
+        //$mimeType = $this->getPresentacion()->getMimeType();
 
         if (isset($this->temp)) {
             try {
@@ -158,11 +158,11 @@ class MisionVision
         }
         $this->getPresentacion()->move($this->getUploadRootDir(), $this->path);
 
-        $porcentajes = array(0.2, 0.4);
+        //$porcentajes = array(0.5, 0.7);
 
-        foreach($porcentajes as $porcentaje){
+        /*foreach($porcentajes as $porcentaje){
             $this->resize($porcentaje, $mimeType);
-        }
+        }*/
 
         $this->presentacion = null;
     }
@@ -187,9 +187,9 @@ class MisionVision
 
     public function resize($porcentaje, $mimeType){
         // Nuevo tamaño
-        if($porcentaje == 0.2){
+        if($porcentaje == 0.5){
             $per = '/min_';
-        }elseif($porcentaje == 0.4){
+        }elseif($porcentaje == 0.7){
             $per = '/medium_';
         }
 

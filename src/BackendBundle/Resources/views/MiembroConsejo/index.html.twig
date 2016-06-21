@@ -93,7 +93,7 @@
                 url: url,
                 success: function(data){
                     var obj = jQuery.parseJSON(data);
-                    Materialize.toast(obj.message, 1000);
+                    Materialize.toast(obj.message, 10000);
                     $("#main-wrapper").load("{{ path('_consejo_administracion') }}",function() {
                         $('.preloader-wrapper').removeClass('active');
                     });

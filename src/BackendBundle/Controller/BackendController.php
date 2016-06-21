@@ -232,7 +232,9 @@ class BackendController extends Controller
             die;
 
         } else {
-            echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            //echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            $string = (string) $form['foto']->getErrors();
+            echo json_encode(array("status"=> false, "message"=> $string ));
             die;
 
         }
@@ -512,12 +514,11 @@ class BackendController extends Controller
             die;
 
         } else {
-            echo json_encode(array("status"=> false, "message"=> "Los datos que envía son incorrectos."));
+            //echo json_encode(array("status"=> false, "message"=> "Los datos que envía son incorrectos."));
+            $string = (string) $form['foto']->getErrors();
+            echo json_encode(array("status"=> false, "message"=> $string ));
             die;
-
         }
-
-
     }
 
 
@@ -661,7 +662,7 @@ class BackendController extends Controller
         $form = $this->createForm(NoticiaType::class, $document);
         $form->handleRequest($request);
 
-
+        if($form->isValid()){
             $document->setOwner($owner);
             $document->setSlug($document->slugify($document->getTitular()));
             $em = $this->getDoctrine()->getManager();
@@ -669,8 +670,11 @@ class BackendController extends Controller
             $em->flush();
             echo json_encode(array("status"=> true, "message"=> "Noticia registrada satisfactoriamente."));
             die;
-
-
+        }
+        //$string = (string) $form->getErrors(true,false);
+        $string = (string) $form['foto']->getErrors();
+        echo json_encode(array("status"=> false, "message"=> $string ));
+        die;
 
 
     }
@@ -816,7 +820,9 @@ class BackendController extends Controller
             die;
 
         } else {
-            echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            //echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            $string = (string) $form['foto']->getErrors();
+            echo json_encode(array("status"=> false, "message"=> $string ));
             die;
 
         }
@@ -1118,9 +1124,6 @@ class BackendController extends Controller
 
     }
 
-
-
-
     /*Colaboradores*/
 
 
@@ -1171,7 +1174,9 @@ class BackendController extends Controller
             die;
 
         } else {
-            echo json_encode(array("status"=> false, "message"=> "Los datos que envía son incorrectos."));
+            //echo json_encode(array("status"=> false, "message"=> "Los datos que envía son incorrectos."));
+            $string = (string) $form['foto']->getErrors();
+            echo json_encode(array("status"=> false, "message"=> $string ));
             die;
 
         }
@@ -1322,16 +1327,18 @@ class BackendController extends Controller
         $form = $this->createForm(EventoType::class, $document);
         $form->handleRequest($request);
 
+        if($form->isValid()) {
+            $document->setOwner($owner);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+            echo json_encode(array("status" => true, "message" => "Evento registrado satisfactoriamente."));
+            die;
+        }
 
-        $document->setOwner($owner);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($document);
-        $em->flush();
-        echo json_encode(array("status"=> true, "message"=> "Evento registrado satisfactoriamente."));
+        $string = (string) $form['foto']->getErrors();
+        echo json_encode(array("status"=> false, "message"=> $string ));
         die;
-
-
-
 
     }
 
@@ -1623,7 +1630,9 @@ class BackendController extends Controller
             echo json_encode(array("status" => true, "message" => "Banner registrado satisfactoriamente."));
             die;
         } else {
-            echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            //echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            $string = (string) $form['foto']->getErrors();
+            echo json_encode(array("status"=> false, "message"=> $string ));
             die;
 
         }
@@ -1785,7 +1794,9 @@ class BackendController extends Controller
             die;
 
         } else {
-            echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            //echo json_encode(array("status" => false, "message" => "Los datos que envía son incorrectos."));
+            $string = (string) $form['foto']->getErrors();
+            echo json_encode(array("status"=> false, "message"=> $string ));
             die;
 
         }
@@ -1901,17 +1912,19 @@ class BackendController extends Controller
         $form = $this->createForm(ServicioType::class, $document);
         $form->handleRequest($request);
 
+        if($form->isValid()) {
+            $document->setOwner($owner);
+            $document->setSlug($document->slugify($document->getTitular()));
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+            echo json_encode(array("status" => true, "message" => "Servicio registrado satisfactoriamente."));
+            die;
+        }
 
-        $document->setOwner($owner);
-        $document->setSlug($document->slugify($document->getTitular()));
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($document);
-        $em->flush();
-        echo json_encode(array("status"=> true, "message"=> "Servicio registrado satisfactoriamente."));
+        $string = (string) $form['foto']->getErrors();
+        echo json_encode(array("status"=> false, "message"=> $string ));
         die;
-
-
-
 
     }
 
@@ -2060,13 +2073,18 @@ class BackendController extends Controller
         $form = $this->createForm(SolucionType::class, $document);
         $form->handleRequest($request);
 
+        if($form->isValid()) {
+            $document->setOwner($owner);
+            $document->setSlug($document->slugify($document->getTitular()));
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+            echo json_encode(array("status" => true, "message" => "Solucion registrado satisfactoriamente."));
+            die;
+        }
 
-        $document->setOwner($owner);
-        $document->setSlug($document->slugify($document->getTitular()));
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($document);
-        $em->flush();
-        echo json_encode(array("status"=> true, "message"=> "Solucion registrado satisfactoriamente."));
+        $string = (string) $form['foto']->getErrors();
+        echo json_encode(array("status"=> false, "message"=> $string ));
         die;
 
 
@@ -2219,15 +2237,19 @@ class BackendController extends Controller
         $form = $this->createForm(EstructuraType::class, $document);
         $form->handleRequest($request);
 
+        if($form->isValid()){
+            $document->setOwner($owner);
+            $document->setSlug($document->slugify($document->getTitular()));
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+            echo json_encode(array("status"=> true, "message"=> "Estructura registrada satisfactoriamente."));
+            die;
+        }
 
-        $document->setOwner($owner);
-        $document->setSlug($document->slugify($document->getTitular()));
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($document);
-        $em->flush();
-        echo json_encode(array("status"=> true, "message"=> "Estructura registrada satisfactoriamente."));
+        $string = (string) $form['foto']->getErrors();
+        echo json_encode(array("status"=> false, "message"=> $string ));
         die;
-
 
 
 
@@ -2552,16 +2574,18 @@ class BackendController extends Controller
         $form = $this->createForm(ImagenType::class, $document);
         $form->handleRequest($request);
 
+        if($form->isValid()){
+            $document->setOwner($owner);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+            echo json_encode(array("status" => true, "message" => "Imagen registrada satisfactoriamente."));
+            die;
+        }
 
-        $document->setOwner($owner);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($document);
-        $em->flush();
-        echo json_encode(array("status"=> true, "message"=> "Imagen registrada satisfactoriamente."));
+        $string = (string) $form['foto']->getErrors();
+        echo json_encode(array("status"=> false, "message"=> $string ));
         die;
-
-
-
 
     }
 

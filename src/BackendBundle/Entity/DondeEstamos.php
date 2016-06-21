@@ -50,7 +50,16 @@ class DondeEstamos
     protected $temp;
 
     /**
-     * @Assert\File(maxSize ="4M",mimeTypes = {"image/jpg","image/png","image/gif","image/jpeg"})
+     * @Assert\Image(
+     *         minWidth = 1200,
+     *         minHeight = 800,
+     *         maxSize ="4M",
+     *         mimeTypes = {"image/jpg","image/png","image/gif","image/jpeg"},
+     *         minWidthMessage = "El ancho ({{ width }}px) de la imagen es muy pequeño. El Minimo ancho esperado es {{ min_width }}px.",
+     *         minHeightMessage = "El alto ({{ height }}px) de la imagen es muy pequeño. El Minimo alto esperado es {{ min_height }}px.",
+     *         mimeTypesMessage = "Seleccione un archivo tipo jpg, png, gif o jpeg.",
+     *         maxSizeMessage = "El tamaño de la imagen no debe pasar los 4Mb."
+     * )
      * @Assert\NotBlank
      */
     protected $foto;

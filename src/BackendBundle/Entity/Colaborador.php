@@ -55,7 +55,16 @@ class Colaborador
     protected $temp;
 
     /**
-     * @Assert\File(maxSize ="4M",mimeTypes = {"image/jpg","image/png","image/gif","image/jpeg"})
+     *  @Assert\Image(
+     *         minWidth = 1200,
+     *         minHeight = 800,
+     *         maxSize ="4M",
+     *         mimeTypes = {"image/jpg","image/png","image/gif","image/jpeg"},
+     *         minWidthMessage = "El ancho ({{ width }}px) de la imagen es muy pequeño. El Minimo ancho esperado es {{ min_width }}px.",
+     *         minHeightMessage = "El alto ({{ height }}px) de la imagen es muy pequeño. El Minimo alto esperado es {{ min_height }}px.",
+     *         mimeTypesMessage = "Seleccione un archivo tipo jpg, png, gif o jpeg.",
+     *         maxSizeMessage = "El tamaño de la imagen no debe pasar los 4Mb."
+     * )
      * @Assert\NotBlank
      */
     protected $foto;
@@ -159,7 +168,7 @@ class Colaborador
         }
         $this->getFoto()->move($this->getUploadRootDir(), $this->path);
 
-        $porcentajes = array(0.2, 0.4);
+        $porcentajes = array(0.5, 0.7);
 
         foreach($porcentajes as $porcentaje){
             $this->resize($porcentaje, $mimeType);
@@ -188,9 +197,9 @@ class Colaborador
 
     public function resize($porcentaje, $mimeType){
         // Nuevo tamaño
-        if($porcentaje == 0.2){
+        if($porcentaje == 0.5){
             $per = '/min_';
-        }elseif($porcentaje == 0.4){
+        }elseif($porcentaje == 0.7){
             $per = '/medium_';
         }
 

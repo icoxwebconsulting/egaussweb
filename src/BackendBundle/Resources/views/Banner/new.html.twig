@@ -65,10 +65,10 @@
          if(obj.status){
              var url = "{{ path("_banner") }}";
              $("#main-wrapper").load(url);
-             Materialize.toast(obj.message, 1000);
+             Materialize.toast(obj.message, 10000);
          }
          else{
-             Materialize.toast(obj.message, 1000);
+             Materialize.toast(obj.message, 10000);
          }
 
      }

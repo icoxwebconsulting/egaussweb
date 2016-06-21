@@ -27,7 +27,7 @@
              <img class="responsive-img activator card-profile-image materialboxed" alt="{{ entity.titular }}" src="{{ asset(entity.getThumbnail()) }}">
                 {% if entity.getThumbnailPresentacion() is not null %}
                     <div class="row top10">
-                        <a href="{{ asset(entity.getThumbnailPresentacion()) }}" target="_blank"><img src="{{ asset('bundles/app/images/image_pdf.png') }}"/>  </a>
+                        <a href="{{ asset(entity.getWebPathPresentacion()) }}" target="_blank"><img src="{{ asset('bundles/app/images/image_pdf.png') }}"/>  </a>
 
                     </div>
                 {% endif %}

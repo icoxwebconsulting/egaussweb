@@ -50,10 +50,10 @@
         if(obj.status){
             var url = "{{ path("_video_colaborador", {"owner": owner}) }}";
             $("#video_colaborador_tab").load(url);
-            Materialize.toast(obj.message, 1000);
+            Materialize.toast(obj.message, 10000);
         }
         else{
-            Materialize.toast(obj.message, 1000);
+            Materialize.toast(obj.message, 10000);
         }
 
     }

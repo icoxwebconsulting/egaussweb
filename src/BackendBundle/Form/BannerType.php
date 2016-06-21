@@ -25,7 +25,7 @@ class BannerType extends AbstractType
                     'Global ImasT' => "Global ImasT",
                 )))
             ->add('link')
-            ->add('texto', CKEditorType::class)
+            ->add('texto', CKEditorType::class, array('required' => true))
             /*->add('texto',TextareaType::class,array(
                 'label' => 'Texto',
                 'attr'  => array('class' => 'materialize-textarea')
