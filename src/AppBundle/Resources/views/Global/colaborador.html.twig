@@ -25,11 +25,11 @@
                             <img class="responsive-img activator card-profile-image" alt="" src="{{ asset(entity.getThumbnail()) }}">
                         </div>
                         <h5 class="card-title activator grey-text text-darken-4 top10" style="text-align: left; color: #e23337 !important;">{{ entity.name }}</h5>
-                        <p class="justify">
+
                             <div id="texto">
-                                {{ entity.descripcion | raw }}
+                                <p class="justify">{{ entity.descripcion | raw }}</p>
                             </div>
-                        </p>
+
                     </div>
                     <div id="colaboradorevento" class="col s12">
 

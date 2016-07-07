@@ -25,7 +25,7 @@
                             <img class="responsive-img activator card-profile-image" alt="" src="{{ asset(entity.getThumbnail()) }}">
                         </div>
                         <h5 class="card-title activator grey-text text-darken-4 top10" style="text-align: left; color: #e23337 !important;">{{ entity.name }}</h5>
-                        <p class="justify"> {{ entity.descripcion | raw }}</p>
+                        <div id="texto"><p class="justify"> {{ entity.descripcion | raw }}</p></div>
                     </div>
                     <div id="colaboradorevento" class="col s12">
                         {{ render(controller('AppBundle:Default:evento', { 'owner': entity.id })) }}
