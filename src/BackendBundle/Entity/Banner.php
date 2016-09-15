@@ -211,40 +211,23 @@ class Banner
             $per = '/medium_';
         }
 
-        /* Get original image x y*/
-        list($w, $h) = getimagesize($this->getWebPath());
-        //$nuevo_ancho = $ancho * $porcentaje;
-        //$nuevo_alto = $alto * $porcentaje;
 
-        /* calculate new image size with ratio */
-        /*$ratio = max($width/$w, $height/$h);
-        $h = ceil($height / $ratio);
-        $x = ($w - $width / $ratio) / 2;
-        $w = ceil($width / $ratio);*/
+        /*********************************************************************************/
 
-        // Cargar
-        $thumb = imagecreatetruecolor($width, $height);
-        $imgString = file_get_contents($this->getWebPath());
-        $origen = imagecreatefromstring($imgString);
+        // Create Imagick object
+        $im = new \Imagick($this->getWebPath());
 
-        // Cambiar el tamaño
-        imagecopyresized($thumb, $origen, 0, 0, 0, 0, $width, $height, $w, $h);
+        // Create thumbnail max of 200x82
+        $im->thumbnailImage($width,$height,true);
 
-        // Imprimir
-        switch ($mimeType) {
-            case 'image/jpeg':
-                imagejpeg($thumb, $this->getUploadRootDir(). $per . $this->path);
-                break;
-            case 'image/png':
-                imagepng($thumb, $this->getUploadRootDir(). $per . $this->path);
-                break;
-            case 'image/gif':
-                imagegif($thumb, $this->getUploadRootDir(). $per . $this->path);
-                break;
-            default:
-                exit;
-                break;
-        }
+        // Add a subtle border
+        $color=new \ImagickPixel();
+        $color->setColor("rgb(220,220,220)");
+        $im->borderImage($color,1,1);
+
+        $im->writeImage( $this->getUploadRootDir(). $per . $this->path );
+
+        /*********************************************************************************/
     }
 
     /**
